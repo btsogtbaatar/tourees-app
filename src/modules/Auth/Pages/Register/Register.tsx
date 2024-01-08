@@ -1,42 +1,37 @@
-import React, {useState} from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import {
   Keyboard,
   KeyboardAvoidingView,
-  ScrollView,
   Text,
-  TextInput,
-  TouchableHighlight,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import styles from './Register.style';
-import AuthInput from '../../../Component/AuthInput/AuthInput';
-import {FieldValues, useForm, Resolver} from 'react-hook-form';
-import {RegisterModule} from '../../entities';
-import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from 'yup';
+import AuthInput from '../../../Component/AuthInput/AuthInput';
 import Steps from '../../../Component/Step/Steps';
-import { useTranslation } from "react-i18next";
+import { RegisterModule } from '../../entities';
+import styles from './Register.style';
 
 export const groupSteps = [
-  {name: 'test'},
-  {name: 'test1'},
-  {name: 'test2'},
-  {name: 'test3'},
-  {name: 'test3'}
-
-]
+  { name: 'test' },
+  { name: 'test1' },
+  { name: 'test2' },
+  { name: 'test3' },
+  { name: 'test3' },
+];
 
 function Register() {
+  const { t } = useTranslation();
 
-  const {t} = useTranslation();
-  
   const [selected, setSelected] = useState<boolean>(false);
 
   const getRequestSchema = yup.object().shape({
     email: yup.string().required('zaaval email'),
-    username: yup.string().required('zaaval username')
+    username: yup.string().required('zaaval username'),
   });
 
   const {
@@ -44,11 +39,10 @@ function Register() {
     control,
     setValue,
     watch,
-    formState: {errors},
+    formState: { errors },
   } = useForm<RegisterModule.RegisterStep>({
     mode: 'onChange',
     resolver: yupResolver(getRequestSchema),
-   
   });
 
   const onContinue = (values: RegisterModule.RegisterStep) => {
@@ -56,11 +50,11 @@ function Register() {
   };
 
   return (
-    <KeyboardAvoidingView style={{flex: 1}}>
+    <KeyboardAvoidingView style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={styles.container}>
           <View>
-            <Steps groupSteps={groupSteps} steps={1}/>
+            <Steps groupSteps={groupSteps} steps={1} />
             <View style={styles.subContainer}>
               <TouchableOpacity
                 style={[
@@ -89,13 +83,13 @@ function Register() {
                 extra={[styles.input, styles.inputExtra]}
               />
             ) : ( */}
-              <AuthInput
-                control={control}
-                name="email"
-                keyboardType="email-address"
-                placeHolder={t('l_email')}
-                extra={[styles.input, styles.inputExtra]}
-              />
+            <AuthInput
+              control={control}
+              name="email"
+              keyboardType="email-address"
+              placeHolder={t('l_email')}
+              extra={[styles.input, styles.inputExtra]}
+            />
             {/* )} */}
             <AuthInput
               control={control}
@@ -121,4 +115,3 @@ function Register() {
 }
 
 export default Register;
-

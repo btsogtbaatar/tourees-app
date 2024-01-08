@@ -1,21 +1,8 @@
-import React, {useState} from 'react';
-import {
-  KeyboardTypeOptions,
-  StyleProp,
-  Text,
-  TextInput,
-  TextProps,
-} from 'react-native';
-import {Colors} from '../../../constants/Colors';
-import {
-  Control,
-  Controller,
-  ControllerFieldState,
-  ControllerRenderProps,
-  FieldValues,
-  UseFormStateReturn,
-} from 'react-hook-form';
-import {RegisterModule} from '../../Auth/entities';
+import React, { useState } from 'react';
+import { Control, Controller } from 'react-hook-form';
+import { KeyboardTypeOptions, StyleProp, Text, TextInput } from 'react-native';
+import { Colors } from '../../../../constants/Colors';
+import { RegisterModule } from '../../Auth/entities';
 
 interface InputProps {
   value?: string;
@@ -46,7 +33,7 @@ export default function AuthInput(props: InputProps) {
       <Controller
         name={props.name}
         control={props.control}
-        render={({field: {onChange, value}, fieldState: {error}}) => {
+        render={({ field: { onChange, value }, fieldState: { error } }) => {
           return (
             <>
               <TextInput
@@ -57,7 +44,7 @@ export default function AuthInput(props: InputProps) {
                 keyboardType={
                   props.keyboardType ? props.keyboardType : 'default'
                 }
-                style={[props.extra, {borderColor: color}]}
+                style={[props.extra, { borderColor: color }]}
                 onChangeText={text => {
                   onChange(text);
                 }}

@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import {Text, View} from 'react-native';
-import {Colors} from '../../../constants/Colors';
+import React, { useState } from 'react';
+import { Text, View } from 'react-native';
+import { Colors } from '../../../../constants/Colors';
 
 interface PropsStep {
   groupSteps?: any;
   steps?: any;
 }
 
-export default function Steps({steps, groupSteps}: PropsStep) {
+export default function Steps({ steps, groupSteps }: PropsStep) {
   const [step, setStep] = useState(1);
 
   return (
@@ -93,7 +93,10 @@ export default function Steps({steps, groupSteps}: PropsStep) {
             fontSize: 14,
             color: Colors.primaryColor,
             fontWeight: '500',
-            marginLeft: (steps ? steps : step) > 1 ? `${(100 / (groupSteps.length + 4) * (steps ? steps : step))}%` : 0
+            marginLeft:
+              (steps ? steps : step) > 1
+                ? `${(100 / (groupSteps.length + 4)) * (steps ? steps : step)}%`
+                : 0,
           },
         ]}>
         {steps ? groupSteps[steps - 1].name : groupSteps[step - 1].name}

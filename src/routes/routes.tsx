@@ -1,4 +1,5 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+/* eslint-disable react/no-unstable-nested-components */
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import Register from '../modules/Auth/Pages/Register/Register';
 import HeaderBack from '../modules/Component/HeaderBack/HeaderBack';
@@ -13,12 +14,12 @@ function Route() {
           options={{
             headerTitle: 'Бүртгүүлэх',
             headerTitleAlign: 'center',
-            headerLeft: () => <HeaderBack title='X'/>,
+            headerLeft: () => <HeaderBack title="X" />,
             gestureEnabled: true,
             gestureDirection: 'horizontal',
             headerStyle: {
-                backgroundColor: 'transparent'
-              }
+              backgroundColor: 'transparent',
+            },
           }}
           name="signUp"
           component={Register}

@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Colors} from '../../../../constants/Colors';
+import { StyleSheet } from 'react-native';
+import { Colors } from '../../../../../constants/Colors';
 
 const styles = StyleSheet.create({
   emailTouch: {
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
   },
   selectedBox: {
     borderColor: Colors.primaryColor,
-    backgroundColor: Colors.placeColor
+    backgroundColor: Colors.placeColor,
   },
   unSelectedBox: {
     borderColor: Colors.brandGray,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     fontWeight: 'bold',
     marginTop: 20,
-    backgroundColor: Colors.textWhite
+    backgroundColor: Colors.textWhite,
   },
   inputExtra: {
     height: 48,
@@ -67,8 +67,8 @@ const styles = StyleSheet.create({
   },
   btnContainer: {
     backgroundColor: Colors.textWhite,
-    width: '100%'
-  }
+    width: '100%',
+  },
 });
 
 export default styles;
