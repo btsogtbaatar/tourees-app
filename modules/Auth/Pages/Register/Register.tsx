@@ -17,6 +17,7 @@ import {RegisterModule} from '../../entities';
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as yup from 'yup';
 import Steps from '../../../Component/Step/Steps';
+import { useTranslation } from "react-i18next";
 
 export const groupSteps = [
   {name: 'test'},
@@ -28,6 +29,9 @@ export const groupSteps = [
 ]
 
 function Register() {
+
+  const {t} = useTranslation();
+  
   const [selected, setSelected] = useState<boolean>(false);
 
   const getRequestSchema = yup.object().shape({
@@ -44,10 +48,7 @@ function Register() {
   } = useForm<RegisterModule.RegisterStep>({
     mode: 'onChange',
     resolver: yupResolver(getRequestSchema),
-    defaultValues: {
-      email: 'test',
-      username: "900000"
-    }
+   
   });
 
   const onContinue = (values: RegisterModule.RegisterStep) => {
@@ -92,14 +93,14 @@ function Register() {
                 control={control}
                 name="email"
                 keyboardType="email-address"
-                placeHolder="email1"
+                placeHolder={t('l_email')}
                 extra={[styles.input, styles.inputExtra]}
               />
             {/* )} */}
             <AuthInput
               control={control}
               name="username"
-              placeHolder="nevtreh ner"
+              placeHolder={t('l_username')}
               extra={[styles.input, styles.inputExtra]}
             />
             <Text style={styles.otherLabel}>
@@ -120,3 +121,4 @@ function Register() {
 }
 
 export default Register;
+
