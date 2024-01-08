@@ -67,8 +67,6 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  const navigationRef = useNavigationContainerRef();
-
   return (
     <NavigationContainer>
       <Route />
