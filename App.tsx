@@ -9,7 +9,7 @@ import {
   NavigationContainer,
   useNavigationContainerRef,
 } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
@@ -29,6 +29,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Route from './routes/routes';
+import './i18n';
+import { useTranslation } from "react-i18next";
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -61,11 +63,19 @@ function Section({children, title}: SectionProps): React.JSX.Element {
 }
 
 function App(): React.JSX.Element {
+  const {i18n} = useTranslation();
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
+
+  const navigationRef = useNavigationContainerRef();
+
+  useEffect(() => {
+    i18n.changeLanguage('mn');
+  }, [])
+  
 
   return (
     <NavigationContainer>
