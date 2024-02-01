@@ -6,35 +6,33 @@
  */
 
 import {
-  NavigationContainer,
-  useNavigationContainerRef,
+  NavigationContainer
 } from '@react-navigation/native';
 import React, { useEffect } from 'react';
-import { useColorScheme } from 'react-native';
 
+import { NativeBaseProvider } from 'native-base';
 import { useTranslation } from 'react-i18next';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import './i18n';
 import Route from './src/routes/routes';
+import { api } from './src/api';
+import { axiosInstance } from './src/api/services/interceptors';
 
+axiosInstance(api);
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const navigationRef = useNavigationContainerRef();
-
   useEffect(() => {
-    i18n.changeLanguage('chn');
+    i18n.changeLanguage('mn');
   }, []);
 
   return (
-    <NavigationContainer>
-      <Route />
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <NativeBaseProvider>
+          <Route />
+        </NativeBaseProvider>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
 export default App;

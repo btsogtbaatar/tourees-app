@@ -1,17 +1,24 @@
 import React from 'react';
-import { Text, TouchableHighlight, View } from 'react-native';
+import { Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
+import ArrowLeftIcon from '../../../assets/svg/dashboard/ArrowLeftIcon';
+import { useNavigation } from '@react-navigation/native';
 
 interface HeaderProps {
   title?: string;
+  color?: string;
 }
 
-function HeaderBack({ title }: HeaderProps) {
+function HeaderBack({ title, color }: HeaderProps) {
+  const navigation = useNavigation();
   return (
-    <TouchableHighlight>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.goBack();
+      }}>
       <View>
-        <Text>{title ? title : ''}</Text>
+        {title ? <Text>{title}</Text> : <ArrowLeftIcon color={color} />}
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
   );
 }
 export default HeaderBack;
