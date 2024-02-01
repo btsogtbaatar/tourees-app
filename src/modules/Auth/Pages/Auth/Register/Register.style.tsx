@@ -1,12 +1,15 @@
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../../../constants/Colors';
+import { Colors } from '../../../../../../constants/Colors';
+import { verticalScale } from '../../../../../uitls/metrics';
 
 const styles = StyleSheet.create({
   emailTouch: {
     width: '45%',
-    borderRadius: 15,
+    borderRadius: 16,
     borderWidth: 1,
     padding: 12,
+    flexDirection: 'row',
+    justifyContent: 'space-evenly'
   },
   subContainer: {
     marginTop: 20,
@@ -16,11 +19,18 @@ const styles = StyleSheet.create({
   textCenter: {
     textAlign: 'center',
   },
+  textStyle: {
+    fontSize: 16,
+    fontWeight: '700',
+    lineHeight: 24,
+    color: '#21272D'
+  },
   selectedBox: {
     borderColor: Colors.primaryColor,
     backgroundColor: Colors.placeColor,
   },
   unSelectedBox: {
+    backgroundColor: 'transparent',
     borderColor: Colors.brandGray,
   },
   input: {
@@ -47,7 +57,10 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
   otherLabel: {
-    color: Colors.brandGray200,
+    color: '#5F676F',
+    fontSize: 12,
+    fontWeight: '500',
+    marginTop: verticalScale(12)
   },
   btn: {
     height: 41,
@@ -66,7 +79,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   btnContainer: {
-    backgroundColor: Colors.textWhite,
+    // backgroundColor: Colors.textWhite,
     width: '100%',
   },
 });

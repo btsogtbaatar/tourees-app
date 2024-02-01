@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // laravel API url
-const defaultUrl = 'http://localhost:8000/v1';
+const defaultUrl = 'http://localhost:8000';
 
 export const getEnv = () => {
   return {
