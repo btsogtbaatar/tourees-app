@@ -1,10 +1,8 @@
 import moment from 'moment';
-import React, { useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
-import { DateData, LocaleConfig } from 'react-native-calendars';
+import React from 'react';
+import { Image, ScrollView, Text, TextInput, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Colors } from '../../../../../../../constants/Colors';
-import { calendarMnLocale } from '../../../../../../constants/DummyData';
 import {
   horizontalScale,
   verticalScale,
@@ -106,6 +104,28 @@ const UserRequest = () => {
               Зураг оруулах
             </Text>
             <ImageUploadButton />
+            <Text style={{ fontWeight: '500', lineHeight: 21 }}>
+              Дэлгэрэнгүй тайлбар
+            </Text>
+            <View
+              style={{
+                flex: 1,
+                paddingHorizontal: horizontalScale(12),
+                marginBottom: verticalScale(16),
+                borderWidth: 1,
+                borderColor: Colors.borderColor,
+                borderRadius: 16,
+                height: 78,
+                paddingVertical: verticalScale(6),
+              }}>
+              <Text>Дэлгэрэнгүй тайлбар</Text>
+              <TextInput
+                multiline={true}
+                numberOfLines={4}
+                placeholder="test oruulna uu"
+                returnKeyType="next"
+              />
+            </View>
           </ScrollView>
         </View>
       </View>

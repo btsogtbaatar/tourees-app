@@ -1,9 +1,7 @@
 import { MMKV } from 'react-native-mmkv';
 import { StateStorage } from 'zustand/middleware';
 
-const storage = new MMKV({
-  id: 'auth-storage',
-});
+const storage = new MMKV();
 
 const zStorage: StateStorage = {
   getItem(name) {

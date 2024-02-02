@@ -1,4 +1,5 @@
 import { api } from '../..';
+import { ClientTokenResponse } from '../../../context/entities';
 import {
   RegisterModule,
   UsernameResponse,
@@ -19,11 +20,10 @@ function sendOtp(data: RegisterModule.RegisterType) {
 }
 
 function checkOtp(data: any) {
-    return api.post('api/check-otp', data);
-
+  return api.post('api/check-otp', data);
 }
 
-function getClientCredentialToken() {
+function getClientCredentialToken(): Promise<ClientTokenResponse> {
   const params = {
     grant_type: 'client_credentials',
     scope: '*',
@@ -48,5 +48,5 @@ export const authService = {
   checkEmail,
   getClientCredentialToken,
   sendOtp,
-  checkOtp
+  checkOtp,
 };

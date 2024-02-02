@@ -18,6 +18,9 @@ import LoginButton from '../Component/LoginButton/LoginButton';
 import Dashboard from './Pages/Home/Dashboard/Dashboard';
 import Profile from './Pages/Home/Profile/Profile';
 import Request from './Pages/Home/Request/Request';
+import { authService } from '../../api/services/auth';
+import moment from 'moment';
+import { authStore } from '../../context/auth/store';
 
 const TabArr = [
   {
@@ -143,6 +146,17 @@ const DashboardStack = () => {
 const DashboardMainStack = () => {
   const isAuth = false;
 
+  // authAction.setClientToken();
+  // const { setToken } = authStore(state => state);
+  // // const bears = useBears();
+
+  // authService.getClientCredentialToken().then((res: any) => {
+  //   const access_token_date: Date = moment(new Date())
+  //     .add(Number(res.expires_in), 'seconds')
+  //     .toDate();
+  //   setToken(res.access_token);
+  // });
+
   return (
     <>
       {isAuth ? (
@@ -163,7 +177,7 @@ const DashboardMainStack = () => {
                 headerLeft: () => {
                   return <LogoIcon />;
                 },
-                headerTitle: ''
+                headerTitle: '',
               }}
             />
           </Stack.Group>

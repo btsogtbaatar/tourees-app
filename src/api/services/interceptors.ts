@@ -5,31 +5,26 @@ import {
   InternalAxiosRequestConfig,
 } from 'axios';
 import { BehaviorSubject } from 'rxjs';
-import { authService } from './auth';
-import { authAction } from '../../context/actions/actions';
-import { authStore } from '../../context/auth/store';
+import { AuthAction } from '../../context/auth/store';
+import { AuthState } from '../../context/entities/auth.model';
 
 const tokenSubject = new BehaviorSubject<any>(null);
-export const axiosInstance = (api: AxiosInstance) => {
-  const token = authStore.getState().token;
+export const axiosInstance = (api: AxiosInstance, store: any) => {
   api.interceptors.request.use(
     (config: InternalAxiosRequestConfig<any>) => {
-      console.log(token, 'tokennnnnn');
+      const state: AuthState & AuthAction = store.getState();
+      const access_token = state.auth?.access_token;
 
-      // const { auth } = store.getState();
-      // const access_token = auth?.access_token;
-      // console.log(auth, 'auth');
-
-      // if (config.headers) {
-      //   if (auth.authenticated && access_token) {
-      //     config.headers['Authorization'] = `Bearer ${access_token}`;
-      //   } else if (!auth.authenticated && auth.clientToken) {
-      //     config.headers[
-      //       'Authorization'
-      //     ] = `Bearer ${auth.clientToken.access_token}`;
-      //   }
-      config.headers['Accep-Language'] = 'mn-MN';
-      // }
+      if (config.headers) {
+        if (state.authenticated && access_token) {
+          config.headers['Authorization'] = `Bearer ${access_token}`;
+        } else if (!state.authenticated && state.clientToken) {
+          config.headers[
+            'Authorization'
+          ] = `Bearer ${state.clientToken.access_token}`;
+        }
+        config.headers['Accep-Language'] = 'mn-MN';
+      }
       return config;
     },
     (error: any) => {

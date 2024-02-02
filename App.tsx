@@ -5,9 +5,7 @@
  * @format
  */
 
-import {
-  NavigationContainer
-} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 
 import { NativeBaseProvider } from 'native-base';
@@ -17,8 +15,9 @@ import './i18n';
 import Route from './src/routes/routes';
 import { api } from './src/api';
 import { axiosInstance } from './src/api/services/interceptors';
+import { authStore } from './src/context/auth/store';
 
-axiosInstance(api);
+axiosInstance(api, authStore);
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
   useEffect(() => {

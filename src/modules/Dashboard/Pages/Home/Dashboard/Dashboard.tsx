@@ -18,8 +18,6 @@ import { horizontalScale, verticalScale } from '../../../../../uitls/metrics';
 import { CategoryModule } from '../../../../Auth/entities';
 import DashboardCard from '../../../../Component/DashboardCard/DashboardCard';
 import LoadingPage from '../../../../Component/Loading/LoadingPage';
-import { authStore } from '../../../../../context/auth/store';
-import { useBears } from '../../../../../context/store';
 
 interface DashboardProps {
   navigation: NavigationProp<DashboardStackParamList>;
@@ -32,12 +30,6 @@ const Dashboard = ({ navigation }: DashboardProps) => {
     setRefreshing(true);
     getCateories('name');
   };
-
-  const bears = useBears(state => state);
-  // const setStoreToken = authStore(state => state.setToken);
-  // useEffect(() => {
-  //   zustandStorage.setItem('test', 'test');
-  // },[])
 
   const getCateories = (value: string) => {
     categoriesService.getCateories(value).then(
@@ -137,14 +129,6 @@ const Dashboard = ({ navigation }: DashboardProps) => {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
               }}>
-              {/* <Text>Counter: {bears.bears}</Text>
-                <TouchableOpacity onPress={() => bears.increaseBreas()}>
-                  <Text>Nemeh</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => bears.removeAllBears()}>
-                  <Text>RemoveAll</Text>
-                </TouchableOpacity>
-                <Text>{zustandStorage.getItem('test')?.toString()}</Text> */}
               <FlatList
                 columnWrapperStyle={{ justifyContent: 'space-between' }}
                 numColumns={2}

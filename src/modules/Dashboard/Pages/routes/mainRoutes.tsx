@@ -1,14 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import LinearGradient from 'react-native-linear-gradient';
+import { Colors } from '../../../../../constants/Colors';
 import { DashboardStackParamList } from '../../../../types/DashboardStackParamList';
-import Register from '../../../Auth/Pages/Auth/Register/Register';
 import HeaderBack from '../../../Component/HeaderBack/HeaderBack';
 import Requests from '../Home/Request/Requests/Requests';
-import { Colors } from '../../../../../constants/Colors';
 import UserRequest from '../Home/Request/UserRequest/UserRequest';
-import LinearGradient from 'react-native-linear-gradient';
-import { horizontalScale } from '../../../../uitls/metrics';
-import { Text, View } from 'react-native';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 

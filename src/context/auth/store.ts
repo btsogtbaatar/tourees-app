@@ -1,30 +1,38 @@
 import { create } from 'zustand';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 import { zStorage } from '../reducers/reducers';
+import { AuthState, ClientTokenResponse } from '../entities/auth.model';
+
+interface Token {
+  accessToken: string;
+  refreshToken?: string;
+  accessTokenDate: Date;
+}
 
 type Store = {
-  token: string;
+  clientToken?: Token;
+  authentication?: boolean;
+  auth?: Token;
 };
 
-type AuthAction = {
-  setToken: (token: string) => void;
-  clearToken: () => void;
-  //   accesstoken?: string;
-  //   tokenType?: string;
-  //   expiresIn?: number;
-
-  //   actions: {
-  //     setAccessToken: (accessToken?: string) => void;
-  //     clearToken: () => void;
-  //   };
+export type AuthAction = {
+  setClentToken: (token: ClientTokenResponse) => void;
+  clearClientToken: () => void;
 };
 
-const authStore = create<Store & AuthAction>()(
+const authStore = create<AuthState & AuthAction>()(
   persist(
-    set => ({
-      token: '',
-      setToken: token => set(state => ({ token: token })),
-      clearToken: () => set({ token: '' }),
+    (set, get) => ({
+      authenticated: false,
+      auth: undefined,
+      clientToken: undefined,
+      setClentToken: token =>
+        set(state => ({
+          clientToken: token,
+          authentication: false,
+          auth: undefined,
+        })),
+      clearClientToken: () => set({ clientToken: undefined }),
     }),
     { name: 'auth-store', storage: createJSONStorage(() => zStorage) },
   ),
