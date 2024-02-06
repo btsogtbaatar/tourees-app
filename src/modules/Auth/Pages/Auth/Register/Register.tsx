@@ -58,9 +58,9 @@ function Register({ navigation }: RegisterProps) {
     authService.checkEmail(values).then(
       (res: UsernameResponse[]) => {
         const type: RegisterModule.RegisterType = {
-          type: selected ? 'sms' : 'email',
           email: values.email,
           phone: values.phone,
+          type: 'user',
         };
         navigation.navigate('SignUp1', { values: res, registerType: type });
       },

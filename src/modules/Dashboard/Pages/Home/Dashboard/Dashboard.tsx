@@ -18,6 +18,8 @@ import { horizontalScale, verticalScale } from '../../../../../uitls/metrics';
 import { CategoryModule } from '../../../../Auth/entities';
 import DashboardCard from '../../../../Component/DashboardCard/DashboardCard';
 import LoadingPage from '../../../../Component/Loading/LoadingPage';
+import { authStore } from '../../../../../context/auth/store';
+import RegisterComponent from '../../../../Component/DashboardCard/RegisterComponent';
 
 interface DashboardProps {
   navigation: NavigationProp<DashboardStackParamList>;
@@ -26,9 +28,13 @@ const Dashboard = ({ navigation }: DashboardProps) => {
   const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [categories, setCatogories] = useState<CategoryModule.Categories[]>();
+  const authState = authStore(state => state);
   const onRefresh = () => {
     setRefreshing(true);
     getCateories('name');
+    // // authState.clearAccessToken();
+    // authState.clearClientToken();
+    // authState.setAuthentication(true);
   };
 
   const getCateories = (value: string) => {
@@ -37,6 +43,7 @@ const Dashboard = ({ navigation }: DashboardProps) => {
         setCatogories(res);
         setLoading(false);
         setRefreshing(false);
+        console.log(res[0], 'category response');
       },
       (err: any) => {
         console.log('erroro', err);
@@ -45,6 +52,7 @@ const Dashboard = ({ navigation }: DashboardProps) => {
   };
 
   useEffect(() => {
+    console.log(authState.clientToken, 'authState, ClientToken');
     getCateories('test');
   }, []);
 
@@ -68,56 +76,9 @@ const Dashboard = ({ navigation }: DashboardProps) => {
               tintColor={Colors.primaryColor}
             />
           }>
-          <LinearGradient
-            colors={['#37414B', '#161A1E']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            locations={[0, 1]}
-            style={{
-              paddingTop: verticalScale(12),
-              paddingBottom: verticalScale(16),
-              paddingHorizontal: horizontalScale(16),
-              borderRadius: horizontalScale(16),
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                width: horizontalScale(240),
-                flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-                gap: 8,
-              }}>
-              <Text
-                style={{
-                  color: Colors.textWhite,
-                  fontSize: 16,
-                  fontWeight: '500',
-                  lineHeight: 24,
-                }}>
-                Хэрвээ та үйлчилгээ үзүүлэгч бол бидэнтэй нэгдээрэй!
-              </Text>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate('AuthStack', {
-                    screen: 'SignUp',
-                  })
-                }
-                style={{
-                  height: verticalScale(32),
-                  paddingHorizontal: horizontalScale(12),
-                  justifyContent: 'center',
-                  backgroundColor: Colors.textWhite,
-                  borderRadius: horizontalScale(12),
-                  gap: 4,
-                }}>
-                <Text>Бүртгүүлэх</Text>
-              </TouchableOpacity>
-            </View>
-            <View>
-              <VectorIcon />
-            </View>
-          </LinearGradient>
+          {!authState.authenticated && (
+            <RegisterComponent navigation={navigation} />
+          )}
           <View style={{ marginTop: verticalScale(20) }}>
             <Text
               style={{ fontSize: 12, fontFamily: 'Nunito', fontWeight: '400' }}>

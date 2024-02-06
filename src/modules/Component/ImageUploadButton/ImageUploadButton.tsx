@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { horizontalScale, verticalScale } from '../../../uitls/metrics';
 import { Colors } from '../../../../constants/Colors';
@@ -10,7 +10,10 @@ type ImageSourse = {
 };
 
 const ImageUploadButton = () => {
-  const [selectedImage, setSelectedImage] = useState<ImageSourse[]>([]);
+  const [selectedImage, setSelectedImage] = useState<ImageSourse[]>([
+    { uri: 'icon' },
+  ]);
+  const flatlistRef = useRef<FlatList | null>(null);
   const chooseFile = () => {
     ImagePicker.launchImageLibrary(
       {
@@ -27,46 +30,55 @@ const ImageUploadButton = () => {
           console.log('image error', response.errorCode);
         } else if (response.assets) {
           const source = { uri: response.assets[0].uri };
+          // if (selectedImage.length === 0) {
+          //   const newSource = { uri: 'icon' };
+          //   setSelectedImage(image => [...image, newSource, source]);
+          // } else {
           setSelectedImage(image => [...image, source]);
+          // }
         }
       },
     );
   };
   return (
     <View style={{ flex: 1 }}>
-      {selectedImage && selectedImage.length > 0 ? (
-        <View
-          style={{
-            flexDirection: 'row',
-            flex: 1,
-            backgroundColor: 'red',
-            // justifyContent: 'space-between',
-          }}>
-          <FlatList
-            data={selectedImage}
-            // columnWrapperStyle={{ justifyContent: 'space-around' }}
-            numColumns={3}
-            // viewabilityConfig={{
-            //   itemVisiblePercentThreshold: 100,
-            // }}
-            renderItem={({ item, index }) => {
-              return (
-                <View
-                  style={{
-                    marginVertical: verticalScale(16),
-                    height: verticalScale(109),
-                    flex: 1,
-                    marginHorizontal: horizontalScale(8),
-                    borderRadius: 16,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    borderWidth: 1,
-                  }}>
-                  {selectedImage.length === 1 && (
-                    <TouchableOpacity onPress={chooseFile}>
-                      <PlusIcon />
-                    </TouchableOpacity>
-                  )}
+      <View>
+        <FlatList
+          ref={flatlistRef}
+          data={selectedImage}
+          // columnWrapperStyle={{ justifyContent: 'space-around' }}
+          numColumns={3}
+          // viewabilityConfig={{
+          //   itemVisiblePercentThreshold: 100,
+          // }}
+          onContentSizeChange={() => {
+            selectedImage.length > 0 &&
+              flatlistRef.current?.scrollToIndex({
+                index: selectedImage.findIndex(image => image.uri == 'icon'),
+                animated: true,
+              });
+          }}
+          initialNumToRender={2}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={({ item, index }) => {
+            return (
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'center',
+                  height: verticalScale(109),
+                  borderRadius: horizontalScale(16),
+                  borderWidth: 1,
+                  borderColor: Colors.borderColor,
+                  marginVertical: verticalScale(8),
+                  marginHorizontal: horizontalScale(8),
+                  justifyContent: 'center',
+                }}>
+                {index === 0 ? (
+                  <TouchableOpacity onPress={chooseFile}>
+                    <PlusIcon />
+                  </TouchableOpacity>
+                ) : (
                   <Image
                     source={item}
                     style={{
@@ -76,29 +88,12 @@ const ImageUploadButton = () => {
                       borderRadius: 16,
                     }}
                   />
-                </View>
-              );
-            }}
-          />
-        </View>
-      ) : (
-        <View
-          style={{
-            flex: 1,
-            padding: horizontalScale(16),
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: verticalScale(109),
-            borderRadius: horizontalScale(16),
-            borderWidth: 1,
-            borderColor: Colors.borderColor,
-            marginVertical: verticalScale(16),
-          }}>
-          <TouchableOpacity onPress={chooseFile}>
-            <PlusIcon />
-          </TouchableOpacity>
-        </View>
-      )}
+                )}
+              </View>
+            );
+          }}
+        />
+      </View>
     </View>
     // <View
     //   style={{

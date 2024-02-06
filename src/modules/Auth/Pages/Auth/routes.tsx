@@ -11,9 +11,9 @@ import { useTranslation } from 'react-i18next';
 const Tab = createNativeStackNavigator<AuthStackParamList>();
 
 const AuthStack = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
-    <Tab.Navigator initialRouteName='SignUp'>
+    <Tab.Navigator initialRouteName="SignUp">
       <Tab.Screen
         name="SignUp"
         component={Register}
@@ -31,7 +31,7 @@ const AuthStack = () => {
       <Tab.Screen
         name="SignUp1"
         component={RegisterUsername}
-        initialParams={{values: [{username: ''}]}}
+        initialParams={{ values: [{ username: '' }] }}
         options={{
           headerTitle: t('l_signup'),
           headerTitleAlign: 'center',
@@ -53,23 +53,25 @@ const AuthStack = () => {
           gestureEnabled: true,
           headerLeft: () => <HeaderBack title="" />,
           gestureDirection: 'horizontal',
-          // headerShown: false,
           headerStyle: {
             backgroundColor: 'transparent',
           },
         }}
       />
-      <Tab.Screen name='SignUpTerm' component={RegisterTerm} options={{
+      <Tab.Screen
+        name="SignUpTerm"
+        component={RegisterTerm}
+        options={{
           headerTitle: t('t_serviceterm'),
           headerTitleAlign: 'center',
           gestureEnabled: true,
           headerLeft: () => <HeaderBack title="" />,
           gestureDirection: 'horizontal',
-          // headerShown: false,
           headerStyle: {
             backgroundColor: 'transparent',
           },
-        }} />
+        }}
+      />
     </Tab.Navigator>
   );
 };

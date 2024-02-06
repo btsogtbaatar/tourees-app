@@ -1,24 +1,24 @@
+import { NavigationProp } from '@react-navigation/native';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
-  Alert,
-  Button,
   KeyboardAvoidingView,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Colors } from '../../../../../../constants/Colors';
+import { authService } from '../../../../../api/services/auth/';
+import useTimer from '../../../../../hooks/useTimer';
+import { AuthStackParamList } from '../../../../../types/AuthStackParamList';
 import { horizontalScale, verticalScale } from '../../../../../uitls/metrics';
 import FooterButton from '../../../../Component/FooterButton/FooterButton';
 import OtpInput from '../../../../Component/OptInput/OtpInput';
 import Steps from '../../../../Component/Step/Steps';
-import { NavigationProp } from '@react-navigation/native';
-import { AuthStackParamList } from '../../../../../types/AuthStackParamList';
-import { RegisterModule } from '../../../entities';
-import { Colors } from '../../../../../../constants/Colors';
-import { useTranslation } from 'react-i18next';
-import { authService } from '../../../../../api/services/auth/';
 import Timer from '../../../../Component/Timer/Timer';
-import useTimer from '../../../../../hooks/useTimer';
+import { RegisterModule } from '../../../entities';
+import { AuthStateToken } from '../../../../../context/entities';
+import { authStore } from '../../../../../context/auth/store';
 
 interface Props {
   route: {
@@ -36,6 +36,7 @@ function RegisterOtp({ route, navigation }: Props) {
   const [otpValue, setOtpValue] = useState<string>('');
   const [counter, setCounter] = useState(10);
   const [disabled, setDisabled] = useState<boolean>(true);
+  const authState = authStore(state => state);
 
   useTimer(
     (count, shouldButtonEnabled) => {
@@ -49,7 +50,7 @@ function RegisterOtp({ route, navigation }: Props) {
   );
 
   const resend = () => {
-    setCounter(20);
+    setCounter(100);
     setDisabled(true);
   };
   const checkOtp = () => {
@@ -57,16 +58,17 @@ function RegisterOtp({ route, navigation }: Props) {
       ...signUp,
       otp: otpValue,
     };
-    console.log(data, 'datas');
 
     authService.checkOtp(data).then(
-      res => {
-        console.log(res);
-        navigation.navigate('SignUpTerm');
+      (res: AuthStateToken) => {
+        authState.setAccessToken(res, false);
+        navigation.navigate('SignUpTerm', {
+          id: res.user.id,
+          username: res.user.name,
+        });
       },
       err => {
-        Alert.alert('test', err.response.data.message);
-        console.log(err.response.data, 'aldaa');
+        console.log(err, 'err');
       },
     );
   };
@@ -120,14 +122,21 @@ function RegisterOtp({ route, navigation }: Props) {
                 justifyContent: 'center',
               }}>
               <Text>Код дахин илгээх:</Text>
-              <View style={{marginLeft: 5}}>
+              <View style={{ marginLeft: 5 }}>
                 {disabled ? (
                   <Timer counter={counter} />
                 ) : (
                   <TouchableOpacity
                     style={{ justifyContent: 'center', alignItems: 'center' }}
                     onPress={() => resend()}>
-                    <Text style={{color: Colors.primaryColor, fontWeight: '700', fontSize: 14}}>dahin elgeeh</Text>
+                    <Text
+                      style={{
+                        color: Colors.primaryColor,
+                        fontWeight: '700',
+                        fontSize: 14,
+                      }}>
+                      dahin elgeeh
+                    </Text>
                   </TouchableOpacity>
                 )}
               </View>
@@ -140,7 +149,7 @@ function RegisterOtp({ route, navigation }: Props) {
           onPress={() => {
             checkOtp();
           }}
-          btnDisabled={(!btnDisabled || !disabled)}
+          btnDisabled={!btnDisabled || !disabled}
         />
       </View>
     </KeyboardAvoidingView>

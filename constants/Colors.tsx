@@ -15,4 +15,5 @@ export const Colors = {
   textHeader: '#21272D',
   iconBackground: 'rgba(70, 220, 157, 0.20)',
   textColor: '#0B0D0F',
+  logoColor: '#FA6432',
 };

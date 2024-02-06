@@ -33,7 +33,6 @@ const Requests = (props: Props) => {
     categoriesService
       .getCateory(requestId)
       .then((res: CategoryModule.Category[]) => {
-        console.log(res, 'test tes');
         setCategories(res);
         setLoading(false);
         setRefreshing(false);

@@ -1,5 +1,5 @@
 import { api } from '../..';
-import { ClientTokenResponse } from '../../../context/entities';
+import { AuthStateToken, ClientTokenResponse } from '../../../context/entities';
 import {
   RegisterModule,
   UsernameResponse,
@@ -8,19 +8,27 @@ import BaseEncryped from '../base64';
 
 const basicAuth =
   'Basic ' +
-  BaseEncryped.btoa('2' + ':' + 'MIRKmwRqpqP5z9dBJVSoYCMzPZpA1EgFLuxVaFrH');
+  BaseEncryped.btoa('2' + ':' + '21gRM7sXSj9RFdsZ9bkhuwvFwDSUxWPVwnJ1ZSEC');
 function checkEmail(
   data: RegisterModule.RegisterStep,
 ): Promise<UsernameResponse[]> {
-  return api.post(`api/check-email`, data);
+  return api.post(`api/generate-username`, data);
 }
 
 function sendOtp(data: RegisterModule.RegisterType) {
   return api.post('api/generate-otp', data);
 }
 
-function checkOtp(data: any) {
+function checkOtp(data: RegisterModule.RegisterType): Promise<AuthStateToken> {
   return api.post('api/check-otp', data);
+}
+
+function updateTerms(data: { id: number; username: string }) {
+  return api.post('api/update/term', data);
+}
+
+function logout() {
+  return api.post('api/logout');
 }
 
 function getClientCredentialToken(): Promise<ClientTokenResponse> {
@@ -49,4 +57,6 @@ export const authService = {
   getClientCredentialToken,
   sendOtp,
   checkOtp,
+  updateTerms,
+  logout,
 };

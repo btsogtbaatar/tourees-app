@@ -12,40 +12,40 @@ import HomeIconDisabled from '../../assets/svg/dashboard/HomeIconDisabled';
 import SmileCircleIcon from '../../assets/svg/dashboard/SmileCircleIcon';
 import UserIcon from '../../assets/svg/dashboard/UserIcon';
 import UserIconActive from '../../assets/svg/dashboard/UserIconActive';
+import { authStore } from '../../context/auth/store';
 import { DashboardStackParamList } from '../../types/DashboardStackParamList';
 import HeaderComponent from '../Component/HeaderBack/HeaderComponent';
 import LoginButton from '../Component/LoginButton/LoginButton';
 import Dashboard from './Pages/Home/Dashboard/Dashboard';
 import Profile from './Pages/Home/Profile/Profile';
 import Request from './Pages/Home/Request/Request';
-import { authService } from '../../api/services/auth';
-import moment from 'moment';
-import { authStore } from '../../context/auth/store';
+import { MenuModule } from '../../context/entities';
+import { useTranslation } from 'react-i18next';
+import HeaderProfile from '../Component/HeaderBack/HeaderProfile';
+import LinearGradient from 'react-native-linear-gradient';
 
-const TabArr = [
+const TabArr: MenuModule.TabModule[] = [
   {
     route: 'Home',
-    label: 'Нүүр',
+    label: 't_home',
     inActiveIcon: <HomeSmile />,
     outActiveIcon: <HomeIconDisabled />,
     component: Dashboard,
   },
   {
     route: 'Request',
-    label: 'Хүсэлтүүд',
+    label: 't_request',
     inActiveIcon: <SmileCircleActiveIcon />,
     outActiveIcon: <SmileCircleIcon />,
     component: Request,
   },
   {
     route: 'Profile',
-    label: 'Миний',
+    label: 't_profile',
     inActiveIcon: <UserIconActive />,
     outActiveIcon: <UserIcon />,
     component: Profile,
   },
-  // { route: 'Search', label: 'Search',   inActiveIcon: 'timeline-plus-outline', component: ColorScreen },
-  // { route: 'Account', label: 'Account',  inActiveIcon: 'user-circle-o', component: ColorScreen },
 ];
 
 type Props = BottomTabBarButtonProps & { item: any };
@@ -57,24 +57,6 @@ const TabButtons = (props: Props) => {
   const { onPress, accessibilityState, item } = props;
   const focused = accessibilityState?.selected;
   const viewRef = useRef<Animatable.View & View>(null);
-  // useEffect(() => {
-  //   if (focused) {
-  //     viewRef.current &&
-  //       typeof viewRef.current.animate({
-  //         0: { scale: 0.5, rotate: '0deg' },
-  //         1: { scale: 1.5, rotate: '360deg' },
-  //       });
-
-  //     // viewRef.current.animate({0: {scale: .5, rotate: '0deg'}, 1: {scale: 1.5, rotate: '360deg'}});
-  //   } else {
-  //     viewRef.current &&
-  //       typeof viewRef.current.animate({
-  //         0: { scale: 1.5, rotate: '360deg' },
-  //         1: { scale: 1, rotate: '0deg' },
-  //       });
-  //   }
-  // }, [focused]);
-
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -88,13 +70,13 @@ const TabButtons = (props: Props) => {
 };
 
 const DashboardStack = () => {
+  const authState = authStore(state => state);
+  const { t } = useTranslation();
   return (
     <>
       <Tab.Navigator
         screenOptions={{
-          tabBarStyle: {
-            // height: verticalScale(60),
-          },
+          tabBarStyle: {},
         }}>
         {TabArr.map((item, index) => {
           return (
@@ -102,38 +84,34 @@ const DashboardStack = () => {
               key={index}
               name={item.route}
               component={item.component}
-              options={({ route }: any) => {
-                return {
-                  headerStyle: {
-                    backgroundColor: 'transparent',
-                  },
-                  headerTitle: props => (
-                    <HeaderComponent
-                      index={index}
-                      isAuth={false}
-                      title={item.label}
-                    />
-                  ),
-                  tabBarLabel: item.label,
-                  tabBarActiveTintColor: Colors.primaryColor,
-                  tabBarInactiveTintColor: '#5F676F',
-                  tabBarLabelStyle: {
-                    fontSize: 10,
-                    fontWeight: '600',
-                  },
-                  tabBarIconStyle: {
-                    // marginTop: verticalScale(20),
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  },
-                  tabBarIcon: ({ color, focused }) => {
-                    // {focused ? item.inActiveIcon : item.outActiveIcon}
-                    return (
-                      <>{focused ? item.inActiveIcon : item.outActiveIcon}</>
-                    );
-                  },
-                  // tabBarButton: props => <TabButtons {...props} item={item} />,
-                };
+              options={{
+                headerShown: item.route !== 'Profile',
+                headerStyle: {
+                  backgroundColor: 'transparent',
+                },
+                headerTitle: () => (
+                  <HeaderComponent
+                    index={index}
+                    isAuth={authState.authenticated}
+                    title={item.label}
+                  />
+                ),
+                tabBarLabel: t(item.label),
+                tabBarActiveTintColor: Colors.primaryColor,
+                tabBarInactiveTintColor: '#5F676F',
+                tabBarLabelStyle: {
+                  fontSize: 10,
+                  fontWeight: '600',
+                },
+                tabBarIconStyle: {
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                },
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <>{focused ? item.inActiveIcon : item.outActiveIcon}</>
+                  );
+                },
               }}
             />
           );
@@ -144,22 +122,10 @@ const DashboardStack = () => {
 };
 
 const DashboardMainStack = () => {
-  const isAuth = false;
-
-  // authAction.setClientToken();
-  // const { setToken } = authStore(state => state);
-  // // const bears = useBears();
-
-  // authService.getClientCredentialToken().then((res: any) => {
-  //   const access_token_date: Date = moment(new Date())
-  //     .add(Number(res.expires_in), 'seconds')
-  //     .toDate();
-  //   setToken(res.access_token);
-  // });
-
+  const isAuth = authStore(state => state);
   return (
     <>
-      {isAuth ? (
+      {isAuth.authenticated ? (
         <DashboardStack />
       ) : (
         <Stack.Navigator>

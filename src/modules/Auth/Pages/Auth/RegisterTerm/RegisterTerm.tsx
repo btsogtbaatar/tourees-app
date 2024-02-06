@@ -1,12 +1,36 @@
+import { useNavigation } from '@react-navigation/native';
 import { Checkbox } from 'native-base';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { Colors } from '../../../../../../constants/Colors';
+import { authService } from '../../../../../api/services/auth';
+import { authStore } from '../../../../../context/auth/store';
+import { MainStackParamList } from '../../../../../types/MainStackParamList';
 import FooterButton from '../../../../Component/FooterButton/FooterButton';
 import styles from './RegisterTerm.style';
 
-const RegisterTerm = () => {
+interface TermProps {
+  id: number;
+  username: string;
+}
+
+const RegisterTerm = ({ id, username }: TermProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const navigation = useNavigation<MainStackParamList>();
+  const state = authStore(stage => stage);
+
+  const onSubmit = () => {
+    const data = { id: id, username: username };
+    authService.updateTerms(data).then(
+      () => {
+        state.setAuthentication(true);
+        navigation.navigate('DashboardStack', {});
+      },
+      err => {
+        console.log(err, 'term');
+      },
+    );
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -65,9 +89,7 @@ const RegisterTerm = () => {
       </View>
       <FooterButton
         text={'Нэвтрэх'}
-        onPress={function (): void {
-          throw new Error('Function not implemented.');
-        }}
+        onPress={onSubmit}
         back={false}
         btnDisabled={!isChecked}
         backColor={true}

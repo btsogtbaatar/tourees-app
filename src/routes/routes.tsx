@@ -21,14 +21,15 @@ const Route = () => {
   // const bears = useBears();
 
   useEffect(() => {
-    console.log(token.clientToken, 'token.clientToken');
     // token.clearClientToken();
-
     authService.getClientCredentialToken().then((res: ClientTokenResponse) => {
       const access_token_date: Date = moment(new Date())
         .add(Number(res.expires_in), 'seconds')
         .toDate();
+
       res.access_token_expires = access_token_date;
+      // token.clearClientToken();
+      console.log('test', res);
       token.setClentToken(res);
     });
   }, []);

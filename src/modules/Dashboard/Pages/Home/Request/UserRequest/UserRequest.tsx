@@ -1,16 +1,32 @@
 import moment from 'moment';
 import React from 'react';
-import { Image, ScrollView, Text, TextInput, View } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Colors } from '../../../../../../../constants/Colors';
+import { LocationCircleIcon, LocationIcon } from '../../../../../../assets/svg';
 import {
   horizontalScale,
   verticalScale,
 } from '../../../../../../uitls/metrics';
 import Calendar from '../../../../../Component/Calendar/Calendar';
 import ImageUploadButton from '../../../../../Component/ImageUploadButton/ImageUploadButton';
+import { useNavigation } from '@react-navigation/native';
+import { DashboardStackParamList } from '../../../../../../types/DashboardStackParamList';
 
-const UserRequest = () => {
+interface UserProps {
+  route: { params: { requestId: number } };
+}
+
+const UserRequest = (props: UserProps) => {
+  const { requestId } = props.route.params;
+  const navigation = useNavigation<DashboardStackParamList>();
   return (
     <LinearGradient
       start={{ x: 0, y: 0 }}
@@ -111,21 +127,121 @@ const UserRequest = () => {
               style={{
                 flex: 1,
                 paddingHorizontal: horizontalScale(12),
-                marginBottom: verticalScale(16),
+                marginVertical: verticalScale(16),
                 borderWidth: 1,
                 borderColor: Colors.borderColor,
                 borderRadius: 16,
-                height: 78,
+                height: 88,
                 paddingVertical: verticalScale(6),
               }}>
-              <Text>Дэлгэрэнгүй тайлбар</Text>
+              <Text style={{ color: '#AFB3B7', lineHeight: 18 }}>
+                Дэлгэрэнгүй тайлбар
+              </Text>
               <TextInput
+                style={{
+                  fontSize: 16,
+                  fontWeight: '600',
+                  lineHeight: 24,
+                  color: Colors.textHeader,
+                }}
                 multiline={true}
                 numberOfLines={4}
                 placeholder="test oruulna uu"
                 returnKeyType="next"
               />
             </View>
+            <Text style={{ fontWeight: '500', lineHeight: 21 }}>
+              Хаяг оруулах
+            </Text>
+            <View style={{ marginVertical: verticalScale(16) }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  height: verticalScale(52),
+                }}>
+                <LocationCircleIcon />
+                <View
+                  style={{
+                    borderWidth: 1,
+                    flex: 1,
+                    marginLeft: horizontalScale(8),
+                    borderColor: Colors.borderColor,
+                    paddingHorizontal: horizontalScale(12),
+                    borderRadius: 16,
+                    height: '100%',
+                    justifyContent: 'space-around',
+                  }}>
+                  <Text
+                    style={{ color: '#878D93', fontSize: 12, lineHeight: 18 }}>
+                    Ачих газар
+                  </Text>
+                  <Text>Ачих газар</Text>
+                </View>
+              </View>
+            </View>
+            <View style={{ marginBottom: verticalScale(16) }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  height: verticalScale(52),
+                }}>
+                <LocationIcon />
+                <View
+                  style={{
+                    borderWidth: 1,
+                    flex: 1,
+                    marginLeft: horizontalScale(8),
+                    borderColor: Colors.borderColor,
+                    paddingHorizontal: horizontalScale(12),
+                    borderRadius: 16,
+                    height: '100%',
+                    justifyContent: 'space-around',
+                  }}>
+                  <Text
+                    style={{ color: '#878D93', fontSize: 12, lineHeight: 18 }}>
+                    Буулгах газар
+                  </Text>
+                  <Text>Ачих газар</Text>
+                </View>
+              </View>
+            </View>
+            <LinearGradient
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              locations={[0, 1]}
+              colors={['#FF9646', '#FA6432']}
+              style={{
+                borderRadius: horizontalScale(12),
+                marginVertical: verticalScale(16),
+              }}>
+              <TouchableOpacity
+                style={{
+                  paddingHorizontal: horizontalScale(12),
+                  height: verticalScale(40),
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  maxHeight: verticalScale(40),
+                }}
+                onPress={() => {
+                  console.log('test');
+                  navigation.navigate('AuthStack', {
+                    screen: 'SignUp',
+                  });
+                }}>
+                <Text
+                  style={{
+                    color: Colors.textWhite,
+                    fontWeight: '700',
+                    lineHeight: 21,
+                  }}>
+                  Үргэлжлүүлэх
+                </Text>
+              </TouchableOpacity>
+            </LinearGradient>
           </ScrollView>
         </View>
       </View>

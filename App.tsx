@@ -16,6 +16,7 @@ import Route from './src/routes/routes';
 import { api } from './src/api';
 import { axiosInstance } from './src/api/services/interceptors';
 import { authStore } from './src/context/auth/store';
+import ModalItem from './src/modules/Component/Modal/Modal';
 
 axiosInstance(api, authStore);
 function App(): React.JSX.Element {
