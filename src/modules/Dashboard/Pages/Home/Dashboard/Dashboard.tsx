@@ -1,25 +1,26 @@
 import { NavigationProp } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
+  Button,
   FlatList,
   RefreshControl,
   SafeAreaView,
   ScrollView,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { Colors } from '../../../../../../constants/Colors';
 import { categoriesService } from '../../../../../api/services';
-import { VectorIcon } from '../../../../../assets/svg';
+import { authStore } from '../../../../../context/auth/store';
+import { ModalContext } from '../../../../../context/modal/modal.context';
+import { actions as modalActions } from '../../../../../context/modal/modal.reducer';
 import { DashboardStackParamList } from '../../../../../types/DashboardStackParamList';
-import { horizontalScale, verticalScale } from '../../../../../uitls/metrics';
+import { verticalScale } from '../../../../../uitls/metrics';
 import { CategoryModule } from '../../../../Auth/entities';
 import DashboardCard from '../../../../Component/DashboardCard/DashboardCard';
-import LoadingPage from '../../../../Component/Loading/LoadingPage';
-import { authStore } from '../../../../../context/auth/store';
 import RegisterComponent from '../../../../Component/DashboardCard/RegisterComponent';
+import LoadingPage from '../../../../Component/Loading/LoadingPage';
+import Modal from '../../../../Component/Modal/Modal';
 
 interface DashboardProps {
   navigation: NavigationProp<DashboardStackParamList>;
@@ -29,12 +30,10 @@ const Dashboard = ({ navigation }: DashboardProps) => {
   const [loading, setLoading] = useState(true);
   const [categories, setCatogories] = useState<CategoryModule.Categories[]>();
   const authState = authStore(state => state);
+
   const onRefresh = () => {
     setRefreshing(true);
     getCateories();
-    // // authState.clearAccessToken();
-    // authState.clearClientToken();
-    // authState.setAuthentication(true);
   };
 
   const getCateories = () => {
@@ -56,7 +55,9 @@ const Dashboard = ({ navigation }: DashboardProps) => {
     getCateories();
   }, []);
 
-  return loading ? (
+  const { dispatch: dispatchModal } = useContext(ModalContext);
+
+  return false ? (
     <LoadingPage />
   ) : (
     <SafeAreaView style={{ flex: 1 }}>
@@ -67,6 +68,24 @@ const Dashboard = ({ navigation }: DashboardProps) => {
           paddingHorizontal: 16,
           paddingTop: 12,
         }}>
+        <Button
+          title="Modal show !"
+          onPress={() => {
+            dispatchModal({
+              type: modalActions.SHOW,
+              component: (
+                <Modal
+                  title="Сайн байна уу?"
+                  text="Та Сийд платформд тавтай морил."
+                  submitButtonText="Лог бичих"
+                  onSubmit={() => {
+                    console.log('Writing log as submitted.');
+                  }}
+                  dismissButtonText="Ойлголоо"
+                />
+              ),
+            });
+          }}></Button>
         <ScrollView
           showsVerticalScrollIndicator={false}
           refreshControl={

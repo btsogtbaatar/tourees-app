@@ -24,4 +24,6 @@ export default {
   l_ebarimt: 'И-Баримт',
   l_help: 'Тусламж',
   l_logout: 'Гарах',
+  l_dismissLabel: 'Ойлголоо',
+  l_submitLabel: 'Ок'
 };

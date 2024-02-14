@@ -1,51 +1,45 @@
-import React from 'react';
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-} from 'react-native';
-import Modal from 'react-native-modal';
+import React, { useContext } from 'react';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { ModalContext } from '../../../context/modal/modal.context';
+import { actions as modalActions } from '../../../context/modal/modal.reducer';
+import { useTranslation } from 'react-i18next';
 
-interface ModalProps {
-  isVisible?: boolean;
-  children?: React.ReactElement;
-  isBackPress?: boolean;
-  hide?: boolean;
-  isLoading?: boolean;
+export interface ModalProps {
+  title: string;
+  text: string;
+  submitButtonText?: string;
+  onSubmit?: () => void;
+  dismissButtonText?: string;
+  onDismiss?: () => void;
 }
 
-const ModalItem = ({
-  isVisible,
-  children,
-  isBackPress,
-  hide,
-  isLoading,
-}: ModalProps) => {
-  const deviceWidth = Dimensions.get('window').width;
-  const deviceHeight = Dimensions.get('window').height;
-  // const provider: ModalCont
+const Modal = (props: ModalProps) => {
+  const { dispatch: dispatchModal } = useContext(ModalContext);
+  const { t } = useTranslation();
+
+  const closeModal = () => {
+    dispatchModal({
+      type: modalActions.HIDE,
+    });
+  };
+
   return (
-    // <View style={styles.innerContainer}>
-    <Modal
-      isVisible={isVisible}
-      deviceWidth={deviceWidth}
-      deviceHeight={deviceHeight}
-      // avoidKeyboard={true}
-      // useNativeDriver={true}
-      // onBackButtonPress={() => isBackPress && hide}
-      // propagateSwipe={true}
-    >
-      {children}
-    </Modal>
-    // </View>
+    <View style={modalStyles.innerContainer}>
+      <Text>{props.title}</Text>
+      <Text>{props.text}</Text>
+      {props.onSubmit && (
+        <Button
+          title={props.submitButtonText ?? t('l_submitLabel')}
+          onPress={props.onSubmit}></Button>
+      )}
+      <Button
+        title={props.dismissButtonText ?? t('l_dismissLabel')}
+        onPress={props.onDismiss ?? closeModal}></Button>
+    </View>
   );
 };
 
-export default ModalItem;
-
-const styles = StyleSheet.create({
+export const modalStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -61,3 +55,5 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
 });
+
+export default Modal;

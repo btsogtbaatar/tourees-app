@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import ModalItem from './Modal';
 import { Colors } from '../../../../constants/Colors';
 import { horizontalScale, verticalScale } from '../../../uitls/metrics';
+import ModalContainer from './ModalContainer';
 
 interface SuccesModalProps {
   isSuccess: boolean;
@@ -13,23 +13,20 @@ interface SuccesModalProps {
 
 const ShowModal = (props: SuccesModalProps) => {
   return (
-    <ModalItem
-      isVisible={props.isVisible}
-      children={
-        <View style={styles.content}>
-          <View>
-            <Text>icon</Text>
-          </View>
-          <Text>{props.title}</Text>
+    <ModalContainer isVisible={props.isVisible}>
+      <View style={styles.content}>
+        <View>
+          <Text>icon</Text>
         </View>
-      }
-    />
+        <Text>{props.title}</Text>
+      </View>
+    </ModalContainer>
   );
 };
 
 export default ShowModal;
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   content: {
     backgroundColor: Colors.textWhite,
     paddingHorizontal: horizontalScale(16),
