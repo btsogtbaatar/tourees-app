@@ -31,14 +31,14 @@ const Dashboard = ({ navigation }: DashboardProps) => {
   const authState = authStore(state => state);
   const onRefresh = () => {
     setRefreshing(true);
-    getCateories('name');
+    getCateories();
     // // authState.clearAccessToken();
     // authState.clearClientToken();
     // authState.setAuthentication(true);
   };
 
-  const getCateories = (value: string) => {
-    categoriesService.getCateories(value).then(
+  const getCateories = () => {
+    categoriesService.getCateories().then(
       (res: CategoryModule.Categories[]) => {
         setCatogories(res);
         setLoading(false);
@@ -53,7 +53,7 @@ const Dashboard = ({ navigation }: DashboardProps) => {
 
   useEffect(() => {
     console.log(authState.clientToken, 'authState, ClientToken');
-    getCateories('test');
+    getCateories();
   }, []);
 
   return loading ? (
@@ -96,13 +96,7 @@ const Dashboard = ({ navigation }: DashboardProps) => {
                 data={categories}
                 keyExtractor={item => item.id.toString()}
                 renderItem={({ item }) => {
-                  return (
-                    <DashboardCard
-                      id={item.id}
-                      title={item.code}
-                      navigation={navigation}
-                    />
-                  );
+                  return <DashboardCard navigation={navigation} item={item} />;
                 }}
               />
             </View>
@@ -118,14 +112,14 @@ const Dashboard = ({ navigation }: DashboardProps) => {
                 justifyContent: 'space-between',
                 flexWrap: 'wrap',
               }}>
-              <DashboardCard
+              {/* <DashboardCard
                 id={2}
                 title="Цэвэрлэгээ"
                 navigation={navigation}
                 color="rgba(92, 177, 255, 0.20)"
                 imageUrl={require('../../../../../assets/svg/dashboard/pngwing2.png')}
               />
-              <DashboardCard id={2} title="Нүүлгэлт" navigation={navigation} />
+              <DashboardCard id={2} title="Нүүлгэлт" navigation={navigation} /> */}
             </View>
           </View>
         </ScrollView>
