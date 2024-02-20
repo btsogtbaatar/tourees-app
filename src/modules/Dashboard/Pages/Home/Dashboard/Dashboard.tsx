@@ -57,7 +57,7 @@ const Dashboard = ({ navigation }: DashboardProps) => {
 
   const { dispatch: dispatchModal } = useContext(ModalContext);
 
-  return false ? (
+  return loading ? (
     <LoadingPage />
   ) : (
     <SafeAreaView style={{ flex: 1 }}>

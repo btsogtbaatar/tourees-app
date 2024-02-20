@@ -1,7 +1,7 @@
 import { RegisterModule } from './register.mode';
 
 export interface AuthState {
-  authenticated: boolean;
+  authenticated?: boolean;
   clientToken?: ClientTokenResponse;
   auth?: AuthStateToken;
 }

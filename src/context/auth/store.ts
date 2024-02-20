@@ -22,19 +22,19 @@ const authStore = create<AuthState & AuthAction>()(
       auth: undefined,
       clientToken: undefined,
       setClentToken: token =>
-        set(state => ({
+        set({
           clientToken: token,
-          authentication: false,
+          authenticated: false,
           auth: undefined,
-        })),
+        }),
       clearClientToken() {
         set({ clientToken: undefined });
       },
       setAccessToken: (token, authincation) =>
-        set(state => ({
+        set({
           auth: token,
           authenticated: authincation,
-        })),
+        }),
       clearAccessToken: () => set({ auth: undefined, authenticated: false }),
       setAuthentication(auth) {
         set({ authenticated: auth });

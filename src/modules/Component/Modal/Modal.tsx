@@ -53,6 +53,7 @@ export const modalStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
+    alignSelf: 'center',
   },
 });
 

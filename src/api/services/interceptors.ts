@@ -1,10 +1,10 @@
 import {
   AxiosError,
-  AxiosHeaders,
   AxiosInstance,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
+import moment from 'moment';
 import { BehaviorSubject, filter, take } from 'rxjs';
 import { AuthAction } from '../../context/auth/store';
 import {
@@ -12,9 +12,6 @@ import {
   ClientTokenResponse,
 } from '../../context/entities/auth.model';
 import { authService } from './auth/auth.service';
-import moment from 'moment';
-import { err } from 'react-native-svg';
-import { ErrorResponse } from '../../context/entities/error';
 
 const tokenSubject = new BehaviorSubject<any>(null);
 export const axiosInstance = (api: AxiosInstance, store: any) => {

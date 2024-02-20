@@ -18,21 +18,21 @@ import { CategoryModule } from '../../../../../Auth/entities';
 import { Colors } from '../../../../../../../constants/Colors';
 
 interface Props {
-  route: { params: { requestId: number } };
+  route: { params: { categoryId: number } };
   navigation: NavigationProp<DashboardStackParamList>;
 }
 
 const Requests = (props: Props) => {
-  const { requestId } = props.route.params;
+  const { categoryId } = props.route.params;
   const [loading, setLoading] = useState<boolean>(true);
-  const [categories, setCategories] = useState<CategoryModule.Category[]>();
+  const [categories, setCategories] = useState<CategoryModule.Categories[]>();
   const [refreshing, setRefreshing] = useState(false);
-  console.log(requestId, 'requestId');
+  console.log(categoryId, 'requestId');
 
   const getSubCategory = () => {
     categoriesService
-      .getCateory(requestId)
-      .then((res: CategoryModule.Category[]) => {
+      .getCateory(categoryId)
+      .then((res: CategoryModule.Categories[]) => {
         setCategories(res);
         setLoading(false);
         setRefreshing(false);

@@ -1,8 +1,10 @@
 export declare module CategoryModule {
   export type Categories = {
     id: number;
-    parent_id: number;
-    code: string;
+    name: string;
+    title: string;
+    image_url: string;
+    description: string;
   };
 
   export type Category = {

@@ -1,21 +1,20 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { TouchableOpacity, View, Image, Text } from 'react-native';
-import RightIcon from '../../../assets/svg/icons/RightIcon';
-import { horizontalScale, verticalScale } from '../../../uitls/metrics';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../../../constants/Colors';
-import { CategoryModule } from '../../Auth/entities';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import RightIcon from '../../../assets/svg/icons/RightIcon';
 import { DashboardStackParamList } from '../../../types/DashboardStackParamList';
+import { horizontalScale, verticalScale } from '../../../uitls/metrics';
+import { CategoryModule } from '../../Auth/entities';
 
 interface PropsCard {
-  item: CategoryModule.Category;
+  item: CategoryModule.Categories;
   index: number;
 }
 
 const RequestsCard = (props: PropsCard) => {
   const { index, item } = props;
   const navigation = useNavigation<DashboardStackParamList>();
-  console.log(navigation, 'nac');
 
   const onPress = () => {
     navigation.navigate('UserRequest', {});
@@ -50,7 +49,9 @@ const RequestsCard = (props: PropsCard) => {
               height: 52,
               borderRadius: 10,
             }}
-            source={require('../../../assets/svg/dashboard/Frame.png')}
+            source={{
+              uri: `http://localhost:8000/storage/${item.image_url}`,
+            }}
           />
         </View>
         <View style={{ marginHorizontal: horizontalScale(12) }}>
@@ -61,7 +62,7 @@ const RequestsCard = (props: PropsCard) => {
               lineHeight: 24,
               color: Colors.textHeader,
             }}>
-            {item.text}
+            {item.title}
           </Text>
           <Text
             style={{
@@ -70,7 +71,7 @@ const RequestsCard = (props: PropsCard) => {
               fontWeight: '500',
               lineHeight: 18,
             }}>
-            {item.value}
+            {item.description}
           </Text>
         </View>
       </View>
