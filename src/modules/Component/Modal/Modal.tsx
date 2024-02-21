@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 export interface ModalProps {
   title: string;
-  text: string;
+  text?: string;
   submitButtonText?: string;
   onSubmit?: () => void;
   dismissButtonText?: string;

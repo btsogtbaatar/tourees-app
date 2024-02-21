@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   Image,
   ScrollView,
@@ -19,6 +19,10 @@ import Calendar from '../../../../../Component/Calendar/Calendar';
 import ImageUploadButton from '../../../../../Component/ImageUploadButton/ImageUploadButton';
 import { useNavigation } from '@react-navigation/native';
 import { DashboardStackParamList } from '../../../../../../types/DashboardStackParamList';
+import { authStore } from '../../../../../../context/auth/store';
+import { ModalContext } from '../../../../../../context/modal/modal.context';
+import { actions as ModalActions } from '../../../../../../context/modal/modal.reducer';
+import Modal from '../../../../../Component/Modal/Modal';
 
 interface UserProps {
   route: { params: { requestId: number } };
@@ -27,6 +31,24 @@ interface UserProps {
 const UserRequest = (props: UserProps) => {
   const { requestId } = props.route.params;
   const navigation = useNavigation<DashboardStackParamList>();
+  const authState = authStore(state => state);
+  const { dispatch: dispatchModal } = useContext(ModalContext);
+
+  const submit = () => {
+    if (authState.authenticated) {
+      dispatchModal({
+        type: ModalActions.SHOW,
+        component: (
+          <Modal title="backend holboh" submitButtonText="Лог бичих" />
+        ),
+      });
+    } else {
+      navigation.navigate('AuthStack', {
+        screen: 'SignUp',
+      });
+    }
+  };
+
   return (
     <LinearGradient
       start={{ x: 0, y: 0 }}
@@ -226,12 +248,7 @@ const UserRequest = (props: UserProps) => {
                   alignItems: 'center',
                   maxHeight: verticalScale(40),
                 }}
-                onPress={() => {
-                  console.log('test');
-                  navigation.navigate('AuthStack', {
-                    screen: 'SignUp',
-                  });
-                }}>
+                onPress={submit}>
                 <Text
                   style={{
                     color: Colors.textWhite,
