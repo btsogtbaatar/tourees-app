@@ -1,11 +1,9 @@
 import React, { useRef, useState } from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import { horizontalScale, verticalScale } from '../../../uitls/metrics';
-import { Colors } from '../../../../constants/Colors';
-import { PlusIcon } from '../../../assets/svg';
+import { FlatList, View } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
+import ImageComponent from './ImageComponent';
 
-type ImageSourse = {
+export type ImageSourse = {
   uri?: string;
 };
 
@@ -48,9 +46,6 @@ const ImageUploadButton = () => {
           data={selectedImage}
           // columnWrapperStyle={{ justifyContent: 'space-around' }}
           numColumns={3}
-          // viewabilityConfig={{
-          //   itemVisiblePercentThreshold: 100,
-          // }}
           onContentSizeChange={() => {
             selectedImage.length > 0 &&
               flatlistRef.current?.scrollToIndex({
@@ -62,87 +57,17 @@ const ImageUploadButton = () => {
           keyExtractor={(_, index) => index.toString()}
           renderItem={({ item, index }) => {
             return (
-              <View
-                style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  height: verticalScale(109),
-                  borderRadius: horizontalScale(16),
-                  borderWidth: 1,
-                  borderColor: Colors.borderColor,
-                  marginVertical: verticalScale(8),
-                  marginHorizontal: horizontalScale(8),
-                  justifyContent: 'center',
-                }}>
-                {index === 0 ? (
-                  <TouchableOpacity onPress={chooseFile}>
-                    <PlusIcon />
-                  </TouchableOpacity>
-                ) : (
-                  <Image
-                    source={item}
-                    style={{
-                      flex: 1,
-                      height: '100%',
-                      width: '100%',
-                      borderRadius: 16,
-                    }}
-                  />
-                )}
-              </View>
+              <ImageComponent
+                item={item}
+                index={index}
+                chooseFile={chooseFile}
+                selectedImage={selectedImage.length}
+              />
             );
           }}
         />
       </View>
     </View>
-    // <View
-    //   style={{
-    //     // flexDirection: 'row',
-    //     justifyContent: 'space-between',
-    //     // flex: 1,
-    //   }}>
-    //   <View
-    //     style={{
-    //       flex: 1,
-    //       padding: horizontalScale(16),
-    //       justifyContent: 'center',
-    //       alignItems: 'center',
-    //       height: verticalScale(109),
-    //       borderRadius: horizontalScale(16),
-    //       borderWidth: 1,
-    //       borderColor: Colors.borderColor,
-    //       marginVertical: verticalScale(16),
-    //       //   width: 109,
-    //     }}>
-    //     <TouchableOpacity onPress={chooseFile}>
-    //       <PlusIcon />
-    //     </TouchableOpacity>
-    //   </View>
-    //   <FlatList
-    //     data={selectedImage}
-    //     columnWrapperStyle={{ justifyContent: 'space-around' }}
-    //     numColumns={2}
-    //     // viewabilityConfig={{
-    //     //   itemVisiblePercentThreshold: 100,
-    //     // }}
-    //     renderItem={({ item }) => {
-    //       return (
-    //         <View
-    //           style={{
-    //             marginVertical: verticalScale(16),
-    //             height: verticalScale(109),
-    //             flex: 1,
-    //             marginHorizontal: horizontalScale(16),
-    //             borderRadius: 16,
-    //             backgroundColor: 'red',
-    //             // alignItems: 'center',
-    //           }}>
-    //           <Image source={item} style={{ flex: 1, borderRadius: 16 }} />
-    //         </View>
-    //       );
-    //     }}
-    //   />
-    // </View>
   );
 };
 
