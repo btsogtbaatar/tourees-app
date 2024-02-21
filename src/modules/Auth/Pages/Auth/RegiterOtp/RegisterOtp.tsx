@@ -1,5 +1,5 @@
 import { NavigationProp } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
@@ -19,6 +19,9 @@ import Timer from '../../../../Component/Timer/Timer';
 import { RegisterModule } from '../../../entities';
 import { AuthStateToken } from '../../../../../context/entities';
 import { authStore } from '../../../../../context/auth/store';
+import { ModalContext } from '../../../../../context/modal/modal.context';
+import { actions } from '../../../../../context/modal/modal.reducer';
+import Modal from '../../../../Component/Modal/Modal';
 
 interface Props {
   route: {
@@ -34,9 +37,10 @@ function RegisterOtp({ route, navigation }: Props) {
   const { t } = useTranslation();
   const [btnDisabled, setBtnDisabled] = useState<boolean>(false);
   const [otpValue, setOtpValue] = useState<string>('');
-  const [counter, setCounter] = useState(10);
+  const [counter, setCounter] = useState(200);
   const [disabled, setDisabled] = useState<boolean>(true);
   const authState = authStore(state => state);
+  const { dispatch: dispatchModal } = useContext(ModalContext);
 
   useTimer(
     (count, shouldButtonEnabled) => {
@@ -67,8 +71,11 @@ function RegisterOtp({ route, navigation }: Props) {
           username: res.user.name,
         });
       },
-      err => {
-        console.log(err, 'err');
+      (err: any) => {
+        dispatchModal({
+          type: actions.SHOW,
+          component: <Modal title={err.message} />,
+        });
       },
     );
   };

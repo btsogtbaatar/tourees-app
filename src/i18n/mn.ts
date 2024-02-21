@@ -25,5 +25,10 @@ export default {
   l_help: 'Тусламж',
   l_logout: 'Гарах',
   l_dismissLabel: 'Ойлголоо',
-  l_submitLabel: 'Ок'
+  l_submitLabel: 'Ок',
+  signUp: {
+    hello: 'Сайн байна уу?',
+    welcome_seed: 'Та Сийд платформд тавтай морил.',
+    understand: 'Ойлголоо',
+  },
 };

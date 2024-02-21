@@ -46,12 +46,12 @@ const Dashboard = ({ navigation }: DashboardProps) => {
       },
       (err: any) => {
         console.log('erroro', err);
+        setLoading(false);
       },
     );
   };
 
   useEffect(() => {
-    console.log(authState.clientToken, 'authState, ClientToken');
     getCateories();
   }, []);
 
@@ -68,24 +68,6 @@ const Dashboard = ({ navigation }: DashboardProps) => {
           paddingHorizontal: 16,
           paddingTop: 12,
         }}>
-        <Button
-          title="Modal show !"
-          onPress={() => {
-            dispatchModal({
-              type: modalActions.SHOW,
-              component: (
-                <Modal
-                  title="Сайн байна уу?"
-                  text="Та Сийд платформд тавтай морил."
-                  submitButtonText="Лог бичих"
-                  onSubmit={() => {
-                    console.log('Writing log as submitted.');
-                  }}
-                  dismissButtonText="Ойлголоо"
-                />
-              ),
-            });
-          }}></Button>
         <ScrollView
           showsVerticalScrollIndicator={false}
           refreshControl={

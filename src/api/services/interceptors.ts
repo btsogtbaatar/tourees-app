@@ -48,6 +48,7 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
       return response.data;
     },
     (error: AxiosError<any>) => {
+      const _error = error.response?.data;
       if (
         error.response === undefined ||
         (error.response && error.response.data === undefined)
@@ -91,7 +92,7 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
             });
         });
       }
-      return Promise.reject(error);
+      return Promise.reject(_error);
     },
   );
 };

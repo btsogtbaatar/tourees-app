@@ -16,4 +16,5 @@ export const Colors = {
   iconBackground: 'rgba(70, 220, 157, 0.20)',
   textColor: '#0B0D0F',
   logoColor: '#FA6432',
+  gray500: '#37414B',
 };

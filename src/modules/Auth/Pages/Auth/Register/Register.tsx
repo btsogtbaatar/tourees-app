@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useHeaderHeight } from '@react-navigation/elements';
 import { NavigationProp } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -24,7 +25,6 @@ import FooterButton from '../../../../Component/FooterButton/FooterButton';
 import Steps from '../../../../Component/Step/Steps';
 import { RegisterModule, UsernameResponse } from '../../../entities';
 import styles from './Register.style';
-import { useHeaderHeight } from '@react-navigation/elements';
 interface RegisterProps {
   navigation: NavigationProp<AuthStackParamList>;
 }
@@ -112,22 +112,6 @@ function Register({ navigation }: RegisterProps) {
                   <Text style={styles.textStyle}>{t('i_phone')}</Text>
                 </TouchableOpacity>
               </View>
-              {/* {selected ? (
-              <AuthInput
-                control={control}
-                name="phone"
-                keyboardType="default"
-                placeHolder="phone"
-                extra={[styles.input, styles.inputExtra]}
-              />
-            ) : ( */}
-              {/* <AuthInput
-              control={control}
-              name="email"
-              keyboardType="email-address"
-              placeHolder={t('l_email')}
-              extra={[styles.input, styles.inputExtra]}
-            /> */}
               {selected ? (
                 <AuthLabelInput
                   control={control}
