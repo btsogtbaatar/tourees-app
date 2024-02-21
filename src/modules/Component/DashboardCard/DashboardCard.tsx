@@ -55,7 +55,7 @@ const DashboardCard = ({ navigation, color, item }: CardProps) => {
           flex: 1,
         }}>
         <Image
-          style={{ width: '100%', height: 100 }}
+          style={{ width: '100%', height: 100, borderRadius: SPACING }}
           source={{
             uri: `http://localhost:8000/storage/${item.image_url}`,
           }}
