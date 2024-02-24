@@ -27,13 +27,14 @@ interface Props {
   route: {
     params: {
       signUp?: RegisterModule.RegisterType;
+      code?: string;
     };
   };
   navigation: NavigationProp<AuthStackParamList>;
 }
 
 function RegisterOtp({ route, navigation }: Props) {
-  const { signUp } = route.params;
+  const { signUp, code } = route.params;
   const { t } = useTranslation();
   const [btnDisabled, setBtnDisabled] = useState<boolean>(false);
   const [otpValue, setOtpValue] = useState<string>('');
@@ -104,7 +105,7 @@ function RegisterOtp({ route, navigation }: Props) {
                   {signUp?.email}
                 </Text>
                 {'\u00A0'}
-                -д илгээсэн 4 оронтой кодыг оруулна уу
+                -д илгээсэн 4 оронтой кодыг оруулна уу {code}
               </Text>
             </View>
             <View

@@ -28,8 +28,8 @@ function RegisterUsername({ route, navigation }: Props) {
 
   const sendOpt = () => {
     const data = { ...registerType, count: 4, username: checkUsername };
-    authService.sendOtp(data).then(res => {
-      navigation.navigate('SignUpOtp', { signUp: data });
+    authService.sendOtp(data).then((res: any) => {
+      navigation.navigate('SignUpOtp', { signUp: data, code: res.code });
     });
   };
 

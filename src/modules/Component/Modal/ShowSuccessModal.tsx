@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Colors } from '../../../../constants/Colors';
 import { horizontalScale, verticalScale } from '../../../uitls/metrics';
 import ModalContainer from './ModalContainer';
+import { ModalContext } from '../../../context/modal/modal.context';
+import { actions } from '../../../context/modal/modal.reducer';
+import Modal from './Modal';
 
 interface SuccesModalProps {
-  isSuccess: boolean;
-  title: string;
+  isSuccess?: boolean;
+  title?: string;
   subTitle?: string;
   isVisible?: boolean;
 }
 
-const ShowModal = (props: SuccesModalProps) => {
+export const ShowModal = () => {
+  const { dispatch: dispatchModal } = useContext(ModalContext);
+  console.log('modal, show ');
+
+  dispatchModal({
+    type: actions.SHOW,
+    component: <Modal title="test" />,
+  });
+};
+
+const SuccessModal = () => {
   return (
-    <ModalContainer isVisible={props.isVisible}>
-      <View style={styles.content}>
-        <View>
-          <Text>icon</Text>
-        </View>
-        <Text>{props.title}</Text>
+    <View style={styles.content}>
+      <View>
+        <Text>test</Text>
       </View>
-    </ModalContainer>
+    </View>
   );
 };
 
-export default ShowModal;
+export default SuccessModal;
 
 export const styles = StyleSheet.create({
   content: {

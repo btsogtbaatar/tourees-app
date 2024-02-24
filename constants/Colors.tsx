@@ -17,4 +17,5 @@ export const Colors = {
   textColor: '#0B0D0F',
   logoColor: '#FA6432',
   gray500: '#37414B',
+  gray300: '#878D93',
 };

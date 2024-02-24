@@ -35,7 +35,6 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
         }
         config.headers['Accep-Language'] = 'mn-MN';
       }
-      console.log(config.headers, 'config, headers');
       return config;
     },
     (error: any) => {
@@ -79,8 +78,6 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
                   'Authorization',
                   `Bearer ${request.token}`,
                 );
-                console.log(error.config?.headers, 'test');
-                console.log(request, 'refreshhshs ');
                 api(error.config)
                   .then((resp: any) => {
                     resolve(resp);

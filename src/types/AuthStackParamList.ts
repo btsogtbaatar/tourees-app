@@ -6,7 +6,7 @@ export type AuthStackParamList = {
   SignUp1:
     | { values: any; registerType: RegisterModule.RegisterType }
     | undefined;
-  SignUpOtp: { signUp: RegisterModule.RegisterType };
+  SignUpOtp: { signUp?: RegisterModule.RegisterType; code?: string };
   SignUpTerm: { id: number; username: string };
   navigate: (screen: string, route: any) => void;
 };

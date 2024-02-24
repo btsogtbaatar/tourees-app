@@ -34,13 +34,24 @@ const GroupedMenuList: React.FC<GroupedMenuListProps> = ({ listItems }) => {
           <TouchableOpacity style={styles.container} onPress={item.onPress}>
             <View style={styles.subContainer}>
               {item.prefix}
-              <Text
-                style={[
-                  styles.menuText,
-                  index === listItems.length - 1 && { color: Colors.logoColor },
-                ]}>
-                {item.values}
-              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  flex: 1,
+                }}>
+                <Text
+                  style={[
+                    styles.menuText,
+                    index === listItems.length - 1 && {
+                      color: Colors.logoColor,
+                    },
+                  ]}>
+                  {item.values[0]}
+                </Text>
+              </View>
+              {item.values[1] && (
+                <Text style={styles.subMenuText}>{item.values[1]}</Text>
+              )}
             </View>
             {item.suffix}
           </TouchableOpacity>
@@ -57,6 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderBottomColor: Colors.otpBorder,
     borderBottomWidth: 1,
+    alignSelf: 'stretch',
   },
   menuText: {
     fontSize: 16,
@@ -65,9 +77,17 @@ const styles = StyleSheet.create({
     color: Colors.textColor,
     marginLeft: horizontalScale(16),
   },
+  subMenuText: {
+    color: Colors.gray300,
+    fontSize: 16,
+    fontWeight: '600',
+    lineHeight: 24,
+    marginRight: horizontalScale(12),
+  },
   subContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
   },
 });
 

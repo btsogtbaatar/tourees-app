@@ -62,7 +62,7 @@ const AuthStack = () => {
         name="SignUpTerm"
         component={RegisterTerm}
         options={{
-          headerTitle: t('t_serviceterm'),
+          headerTitle: t('profile.t_serviceterm'),
           headerTitleAlign: 'center',
           gestureEnabled: true,
           headerLeft: () => <HeaderBack title="" />,

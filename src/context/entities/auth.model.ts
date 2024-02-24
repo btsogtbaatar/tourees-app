@@ -6,6 +6,10 @@ export interface AuthState {
   auth?: AuthStateToken;
 }
 
+export interface LanguageState {
+  language: 'mn' | 'en' | 'chn';
+}
+
 export interface ClientTokenResponse {
   access_token: string;
   expires_in: number;

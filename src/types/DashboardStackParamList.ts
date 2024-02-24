@@ -1,7 +1,7 @@
 export type DashboardStackParamList = {
-  Home: undefined;
-  Request: undefined;
-  Profile: undefined;
+  Home: object;
+  Request: object;
+  Profile: object;
   RequestList: {
     screen: string;
     params: { title: string; categoryId: number };
@@ -11,7 +11,7 @@ export type DashboardStackParamList = {
     params: { title: string; categoryId: number };
   };
   AuthStack: { screen: string; params?: { title: string } };
-  RequestReg: undefined;
-  UserRequest: undefined;
+  RequestReg: object;
+  UserRequest: object;
   navigate: (screen: string, route: any) => void;
 };

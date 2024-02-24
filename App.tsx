@@ -14,18 +14,18 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import './i18n';
 import { api } from './src/api';
 import { axiosInstance } from './src/api/services/interceptors';
-import { authStore } from './src/context/auth/store';
+import { authStore, languageStore } from './src/context/auth/store';
 import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/routes/routes';
 
 axiosInstance(api, authStore);
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
+  const languageState = languageStore(state => state);
 
   useEffect(() => {
-    i18n.changeLanguage('mn');
+    i18n.changeLanguage(languageState.language ? languageState.language : 'mn');
   }, []);
-
 
   return (
     <SafeAreaProvider>

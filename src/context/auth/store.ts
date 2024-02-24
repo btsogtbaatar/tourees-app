@@ -5,6 +5,7 @@ import {
   AuthState,
   AuthStateToken,
   ClientTokenResponse,
+  LanguageState,
 } from '../entities/auth.model';
 
 export type AuthAction = {
@@ -15,9 +16,28 @@ export type AuthAction = {
   setAuthentication: (auth: boolean) => void;
 };
 
+export type LanguageAction = {
+  setLanguage: (language: 'mn' | 'en' | 'chn') => void;
+};
+
+const languageStore = create<LanguageState & LanguageAction>()(
+  persist(
+    set => ({
+      language: 'mn',
+      setLanguage(language) {
+        set({ language: language });
+      },
+    }),
+    {
+      name: 'language-store',
+      storage: createJSONStorage(() => zStorage),
+    },
+  ),
+);
+
 const authStore = create<AuthState & AuthAction>()(
   persist(
-    (set, get) => ({
+    set => ({
       authenticated: false,
       auth: undefined,
       clientToken: undefined,
@@ -44,4 +64,4 @@ const authStore = create<AuthState & AuthAction>()(
   ),
 );
 
-export { authStore };
+export { authStore, languageStore };

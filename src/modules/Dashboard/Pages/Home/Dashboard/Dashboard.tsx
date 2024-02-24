@@ -1,7 +1,6 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { useContext, useEffect, useState } from 'react';
 import {
-  Button,
   FlatList,
   RefreshControl,
   SafeAreaView,
@@ -13,14 +12,12 @@ import { Colors } from '../../../../../../constants/Colors';
 import { categoriesService } from '../../../../../api/services';
 import { authStore } from '../../../../../context/auth/store';
 import { ModalContext } from '../../../../../context/modal/modal.context';
-import { actions as modalActions } from '../../../../../context/modal/modal.reducer';
 import { DashboardStackParamList } from '../../../../../types/DashboardStackParamList';
 import { verticalScale } from '../../../../../uitls/metrics';
 import { CategoryModule } from '../../../../Auth/entities';
 import DashboardCard from '../../../../Component/DashboardCard/DashboardCard';
 import RegisterComponent from '../../../../Component/DashboardCard/RegisterComponent';
 import LoadingPage from '../../../../Component/Loading/LoadingPage';
-import Modal from '../../../../Component/Modal/Modal';
 
 interface DashboardProps {
   navigation: NavigationProp<DashboardStackParamList>;

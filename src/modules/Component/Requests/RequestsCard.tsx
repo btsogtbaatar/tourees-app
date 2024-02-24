@@ -6,6 +6,7 @@ import RightIcon from '../../../assets/svg/icons/RightIcon';
 import { DashboardStackParamList } from '../../../types/DashboardStackParamList';
 import { horizontalScale, verticalScale } from '../../../uitls/metrics';
 import { CategoryModule } from '../../Auth/entities';
+import styles from './RequestsCard.style';
 
 interface PropsCard {
   item: CategoryModule.Categories;
@@ -21,58 +22,21 @@ const RequestsCard = (props: PropsCard) => {
   };
 
   return (
-    <TouchableOpacity
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingLeft: horizontalScale(6),
-        paddingHorizontal: horizontalScale(12),
-        height: verticalScale(64),
-        flexShrink: 0,
-        borderRadius: horizontalScale(16),
-        backgroundColor: Colors.textWhite,
-        marginTop: index > 0 ? verticalScale(16) : 0,
-      }}
-      onPress={onPress}>
-      <View style={{ flexDirection: 'row' }}>
-        <View
-          style={{
-            width: horizontalScale(52),
-            borderRadius: horizontalScale(10),
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+    <TouchableOpacity style={styles.userCardContainer} onPress={onPress}>
+      <View style={styles.flexRow}>
+        <View style={styles.requestImgContainer}>
           <Image
-            style={{
-              width: 52,
-              height: 52,
-              borderRadius: 10,
-            }}
+            style={styles.br10}
+            width={52}
+            height={52}
             source={{
               uri: `http://localhost:8000/storage/${item.image_url}`,
             }}
           />
         </View>
         <View style={{ marginHorizontal: horizontalScale(12) }}>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: '700',
-              lineHeight: 24,
-              color: Colors.textHeader,
-            }}>
-            {item.title}
-          </Text>
-          <Text
-            style={{
-              color: Colors.primaryColor,
-              fontSize: 12,
-              fontWeight: '500',
-              lineHeight: 18,
-            }}>
-            {item.description}
-          </Text>
+          <Text style={styles.titleStyle}>{item.title}</Text>
+          <Text style={styles.descStyle}>{item.description}</Text>
         </View>
       </View>
       <View>

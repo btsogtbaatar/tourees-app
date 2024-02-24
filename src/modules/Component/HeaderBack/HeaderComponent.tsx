@@ -5,7 +5,7 @@ import { Colors } from '../../../../constants/Colors';
 import { LogoIcon } from '../../../assets/svg';
 
 interface HeaderProps {
-  isAuth: boolean;
+  isAuth?: boolean;
   index: number;
   title: string;
 }

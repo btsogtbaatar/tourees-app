@@ -4,6 +4,7 @@ import {
   RefreshControl,
   SafeAreaView,
   ScrollView,
+  View,
 } from 'react-native';
 import {
   horizontalScale,
@@ -71,6 +72,7 @@ const Requests = (props: Props) => {
           renderItem={({ item, index }) => {
             return <RequestsCard item={item} index={index} />;
           }}
+          ItemSeparatorComponent={() => <View style={{ marginTop: 16 }} />}
         />
       </ScrollView>
     </SafeAreaView>
