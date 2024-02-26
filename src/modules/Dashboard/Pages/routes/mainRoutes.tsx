@@ -55,7 +55,14 @@ const MainRouterStack = () => {
       />
       <Stack.Screen
         options={({ route }: any) => {
-          return { header: () => <HeaderRequest title={route.params.title} /> };
+          return {
+            header: () => (
+              <HeaderRequest
+                title={route.params.title}
+                url={route.params.url}
+              />
+            ),
+          };
         }}
         name="RequestDetail"
         component={RequestDetail}

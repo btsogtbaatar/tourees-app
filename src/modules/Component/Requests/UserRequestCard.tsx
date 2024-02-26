@@ -3,6 +3,7 @@ import { Image, Text, TouchableOpacity, View } from 'react-native';
 import styles from './RequestsCard.style';
 import { useNavigation } from '@react-navigation/native';
 import { DashboardStackParamList } from '../../../types/DashboardStackParamList';
+import { getEnv } from '../../../api';
 
 interface UserRequestCardProps {
   item: any;
@@ -11,12 +12,11 @@ interface UserRequestCardProps {
 const UserRequestCard = ({ item }: UserRequestCardProps) => {
   const navigation = useNavigation<DashboardStackParamList>();
   const onDetails = () => {
-    console.log('tets');
-
     navigation.navigate('RequestStack', {
       screen: 'RequestDetail',
       params: {
         title: item.name,
+        url: item.sub_category.image_url,
       },
     });
   };
@@ -28,7 +28,9 @@ const UserRequestCard = ({ item }: UserRequestCardProps) => {
           <Image
             width={33}
             height={18}
-            source={require('../../../assets/svg/dashboard/pngwing5.png')}
+            source={{
+              uri: `${getEnv().IMAGE_URL}${item.sub_category.image_url}`,
+            }}
           />
         </View>
         <View style={styles.mh12}>

@@ -5,12 +5,14 @@ import { CircleIcon } from '../../../assets/svg';
 import { horizontalScale, verticalScale } from '../../../uitls/metrics';
 import HeaderBack from './HeaderBack';
 import { Colors } from '../../../../constants/Colors';
+import { getEnv } from '../../../api';
 
 interface HeaderRequestProps {
   title?: string;
+  url?: string;
 }
 
-const HeaderRequest = ({ title }: HeaderRequestProps) => {
+const HeaderRequest = ({ title, url }: HeaderRequestProps) => {
   const insets = useSafeAreaInsets();
   return (
     <View
@@ -43,7 +45,9 @@ const HeaderRequest = ({ title }: HeaderRequestProps) => {
             <Image
               width={26.2}
               height={22}
-              source={require('../../../assets/svg/dashboard/pngwing5.png')}
+              source={{
+                uri: `${getEnv().IMAGE_URL}${url}`,
+              }}
             />
           </View>
           <View>

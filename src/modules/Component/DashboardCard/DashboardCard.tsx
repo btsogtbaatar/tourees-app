@@ -13,6 +13,7 @@ import { verticalScale } from '../../../uitls/metrics';
 import { NavigationProp } from '@react-navigation/native';
 import { DashboardStackParamList } from '../../../types/DashboardStackParamList';
 import { CategoryModule } from '../../Auth/entities';
+import { getEnv } from '../../../api';
 
 const { width } = Dimensions.get('window');
 
@@ -57,7 +58,7 @@ const DashboardCard = ({ navigation, color, item }: CardProps) => {
         <Image
           style={{ width: '100%', height: 100, borderRadius: SPACING }}
           source={{
-            uri: `http://localhost:8000/storage/${item.image_url}`,
+            uri: `${getEnv().IMAGE_URL}${item.image_url}`,
           }}
         />
       </View>
