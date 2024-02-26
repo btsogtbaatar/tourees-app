@@ -13,5 +13,6 @@ export type DashboardStackParamList = {
   AuthStack: { screen: string; params?: { title: string } };
   RequestReg: object;
   UserRequest: object;
-  navigate: (screen: string, route: any) => void;
+  RequestDetail: object;
+  navigate: (screen: string, route?: any) => void;
 };

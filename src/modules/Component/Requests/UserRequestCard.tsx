@@ -1,20 +1,36 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import styles from './RequestsCard.style';
+import { useNavigation } from '@react-navigation/native';
+import { DashboardStackParamList } from '../../../types/DashboardStackParamList';
+import { getEnv } from '../../../api';
 
 interface UserRequestCardProps {
   item: any;
 }
 
 const UserRequestCard = ({ item }: UserRequestCardProps) => {
+  const navigation = useNavigation<DashboardStackParamList>();
+  const onDetails = () => {
+    navigation.navigate('RequestStack', {
+      screen: 'RequestDetail',
+      params: {
+        title: item.name,
+        url: item.sub_category.image_url,
+      },
+    });
+  };
+
   return (
-    <TouchableOpacity style={styles.userCardContainer}>
+    <TouchableOpacity style={styles.userCardContainer} onPress={onDetails}>
       <View style={styles.flexRow}>
         <View style={styles.imageContainer}>
           <Image
             width={33}
             height={18}
-            source={require('../../../assets/svg/dashboard/pngwing5.png')}
+            source={{
+              uri: `${getEnv().IMAGE_URL}${item.sub_category.image_url}`,
+            }}
           />
         </View>
         <View style={styles.mh12}>

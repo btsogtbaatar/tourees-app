@@ -7,6 +7,7 @@ import { DashboardStackParamList } from '../../../types/DashboardStackParamList'
 import { horizontalScale, verticalScale } from '../../../uitls/metrics';
 import { CategoryModule } from '../../Auth/entities';
 import styles from './RequestsCard.style';
+import { getEnv } from '../../../api';
 
 interface PropsCard {
   item: CategoryModule.Categories;
@@ -18,7 +19,7 @@ const RequestsCard = (props: PropsCard) => {
   const navigation = useNavigation<DashboardStackParamList>();
 
   const onPress = () => {
-    navigation.navigate('UserRequest', {item});
+    navigation.navigate('UserRequest', { item });
   };
 
   return (
@@ -30,7 +31,7 @@ const RequestsCard = (props: PropsCard) => {
             width={52}
             height={52}
             source={{
-              uri: `http://localhost:8000/storage/${item.image_url}`,
+              uri: `${getEnv().IMAGE_URL}${item.image_url}`,
             }}
           />
         </View>

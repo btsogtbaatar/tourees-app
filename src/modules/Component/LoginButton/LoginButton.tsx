@@ -5,10 +5,20 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Colors } from '../../../../constants/Colors';
 import { DashboardStackParamList } from '../../../types/DashboardStackParamList';
 import { horizontalScale, verticalScale } from '../../../uitls/metrics';
+import { useTranslation } from 'react-i18next';
 
+interface LoginButtonProps {
+  title?: string;
+  onClick?: () => void;
+}
 
-const LoginButton = () => {
+const LoginButton = ({ title, onClick }: LoginButtonProps) => {
   const navigation = useNavigation<DashboardStackParamList>();
+  const { t } = useTranslation();
+
+  const onPress = () => {
+    navigation.navigate('AuthStack', { screen: 'SignUp' });
+  };
 
   return (
     <LinearGradient
@@ -26,14 +36,15 @@ const LoginButton = () => {
           justifyContent: 'center',
           maxHeight: verticalScale(32),
         }}
-        onPress={() => navigation.navigate('AuthStack', { screen: 'SignUp' })}>
+        onPress={onClick ? onClick : onPress}>
         <Text
           style={{
             color: Colors.textWhite,
             fontWeight: '700',
             lineHeight: 18,
+            fontSize: 12,
           }}>
-          Нэвтрэх
+          {title ? title : t('signUp.login')}
         </Text>
       </TouchableOpacity>
     </LinearGradient>

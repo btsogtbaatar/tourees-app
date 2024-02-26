@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
 
 interface ModalContainerProps {
@@ -16,7 +16,9 @@ const ModalContainer = ({ isVisible, children }: ModalContainerProps) => {
       isVisible={isVisible}
       deviceWidth={deviceWidth}
       deviceHeight={deviceHeight}>
+      {/* <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}> */}
       {children}
+      {/* </View> */}
     </Modal>
   );
 };
