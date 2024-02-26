@@ -74,6 +74,82 @@ const styles = StyleSheet.create({
   br10: {
     borderRadius: 10,
   },
+  messageContainer: {
+    padding: verticalScale(12),
+    backgroundColor: Colors.placeColor,
+    borderRadius: 16,
+    marginTop: verticalScale(16),
+  },
+  messageHeaderContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  messageLogo: {
+    width: 18,
+    height: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 28,
+  },
+  messageTimeStyle: {
+    color: Colors.gray300,
+    fontSize: 12,
+    fontWeight: '600',
+    lineHeight: 18,
+  },
+  messageStyle: {
+    marginVertical: verticalScale(12),
+    color: Colors.gray600,
+    fontSize: 12,
+    fontWeight: '500',
+    lineHeight: 18,
+    alignSelf: 'stretch',
+  },
+  logoContainer: {
+    flexDirection: 'row',
+    gap: 8,
+  },
+  logoText: {
+    fontSize: 12,
+    lineHeight: 18,
+    fontWeight: '700',
+  },
+  operatorBtn: {
+    paddingLeft: horizontalScale(8),
+    paddingRight: horizontalScale(12),
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: Colors.primaryColor,
+    gap: 4,
+    alignItems: 'center',
+    flexDirection: 'row',
+    height: verticalScale(32),
+    alignSelf: 'flex-start',
+  },
+  operatorTxt: {
+    marginLeft: horizontalScale(4),
+    color: Colors.primaryColor,
+  },
+  operatorContainer: {
+    padding: verticalScale(12),
+    backgroundColor: Colors.textWhite,
+    borderRadius: 12,
+    gap: 12,
+  },
+  profileContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  profile: {
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 21,
+    marginLeft: horizontalScale(12),
+  },
+  alignCenter: {
+    alignItems: 'center',
+  },
 });
 
 export default styles;

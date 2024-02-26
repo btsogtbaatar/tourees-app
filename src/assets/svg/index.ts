@@ -6,7 +6,7 @@ import SmallIcon from '../svg/dashboard/small-icon.svg';
 import PlusIcon from '../svg/icons/PlusIcon.svg';
 import LocationCircleIcon from '../svg/icons/LocationCircleIcon.svg';
 import LocationIcon from '../svg/icons/LocationIcon.svg';
-import MiniLogo from '../svg/logo/miniLogo.svg';
+import CircleIcon from '../svg/icons/IconCircle.svg';
 export {
   HomeSmile,
   SmileCircleActiveIcon,
@@ -16,5 +16,5 @@ export {
   PlusIcon,
   LocationCircleIcon,
   LocationIcon,
-  MiniLogo,
+  CircleIcon,
 };

@@ -18,4 +18,5 @@ export const Colors = {
   logoColor: '#FA6432',
   gray500: '#37414B',
   gray300: '#878D93',
+  gray600: '#2C343C',
 };

@@ -4,8 +4,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Colors } from '../../../../../constants/Colors';
 import { DashboardStackParamList } from '../../../../types/DashboardStackParamList';
 import HeaderBack from '../../../Component/HeaderBack/HeaderBack';
-import Requests from '../Home/Request/Requests/Requests';
+import RequestDetail from '../Home/Request/RequestDetail/RequestDetail';
+import SubCategory from '../Home/Request/SubCategory/SubCategory';
 import UserRequest from '../Home/Request/UserRequest/UserRequest';
+import HeaderRequest from '../../../Component/HeaderBack/HeaderRequest';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 
@@ -29,7 +31,7 @@ const MainRouterStack = () => {
           };
         }}
         name="RequestList"
-        component={Requests}
+        component={SubCategory}
       />
       <Stack.Screen
         options={{
@@ -50,6 +52,13 @@ const MainRouterStack = () => {
         }}
         name="UserRequest"
         component={UserRequest}
+      />
+      <Stack.Screen
+        options={({ route }: any) => {
+          return { header: () => <HeaderRequest title={route.params.title} /> };
+        }}
+        name="RequestDetail"
+        component={RequestDetail}
       />
     </Stack.Navigator>
   );

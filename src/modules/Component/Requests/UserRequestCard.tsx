@@ -1,14 +1,28 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import styles from './RequestsCard.style';
+import { useNavigation } from '@react-navigation/native';
+import { DashboardStackParamList } from '../../../types/DashboardStackParamList';
 
 interface UserRequestCardProps {
   item: any;
 }
 
 const UserRequestCard = ({ item }: UserRequestCardProps) => {
+  const navigation = useNavigation<DashboardStackParamList>();
+  const onDetails = () => {
+    console.log('tets');
+
+    navigation.navigate('RequestStack', {
+      screen: 'RequestDetail',
+      params: {
+        title: item.name,
+      },
+    });
+  };
+
   return (
-    <TouchableOpacity style={styles.userCardContainer}>
+    <TouchableOpacity style={styles.userCardContainer} onPress={onDetails}>
       <View style={styles.flexRow}>
         <View style={styles.imageContainer}>
           <Image

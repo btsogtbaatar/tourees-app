@@ -1,10 +1,10 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { horizontalScale, verticalScale } from '../../../../../uitls/metrics';
 import { Colors } from '../../../../../../constants/Colors';
-import { MiniLogo } from '../../../../../assets/svg';
+import LogoMini from '../../../../../assets/svg/logo/LogoMini';
 import { authStore } from '../../../../../context/auth/store';
+import { horizontalScale, verticalScale } from '../../../../../uitls/metrics';
 import ProfileMenu from './ProfileMenu/ProfileMenu';
 
 const Profile = () => {
@@ -41,7 +41,7 @@ const Profile = () => {
                 locations={[0, 1]}
                 colors={['#FF9646', '#FA6432']}
                 style={styles.seedContainer}>
-                <MiniLogo />
+                <LogoMini />
                 <Text style={styles.seedText}>45000</Text>
               </LinearGradient>
             </View>

@@ -23,7 +23,7 @@ interface Props {
   navigation: NavigationProp<DashboardStackParamList>;
 }
 
-const Requests = (props: Props) => {
+const SubCategory = (props: Props) => {
   const { categoryId } = props.route.params;
   const [loading, setLoading] = useState<boolean>(true);
   const [categories, setCategories] = useState<CategoryModule.Categories[]>();
@@ -79,4 +79,4 @@ const Requests = (props: Props) => {
   );
 };
 
-export default Requests;
+export default SubCategory;
