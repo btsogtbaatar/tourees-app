@@ -1,2 +1,2 @@
-export * from './register.mode';
-export * from './category.model'
+export * from '../../../context/entities/register.mode';
+export * from './category.model';

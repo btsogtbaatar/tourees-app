@@ -8,7 +8,7 @@ import Steps from '../../../../Component/Step/Steps';
 import {
   RegisterModule,
   UsernameResponse,
-} from '../../../entities/register.mode';
+} from '../../../../../context/entities/register.mode';
 import styles from './RegisterUsername.style';
 import { authService } from '../../../../../api/services/auth/auth.service';
 
@@ -27,10 +27,9 @@ function RegisterUsername({ route, navigation }: Props) {
   const { values, registerType } = route?.params;
 
   const sendOpt = () => {
-    const data = { ...registerType, count: 4 };
-    authService.sendOtp(data).then(res => {
-      console.log(res);
-      navigation.navigate('SignUpOtp', {signUp: data});
+    const data = { ...registerType, count: 4, username: checkUsername };
+    authService.sendOtp(data).then((res: any) => {
+      navigation.navigate('SignUpOtp', { signUp: data, code: res.code });
     });
   };
 

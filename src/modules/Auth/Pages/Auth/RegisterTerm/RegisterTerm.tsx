@@ -1,12 +1,58 @@
+import { useNavigation } from '@react-navigation/native';
 import { Checkbox } from 'native-base';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, View } from 'react-native';
 import { Colors } from '../../../../../../constants/Colors';
+import { authService } from '../../../../../api/services/auth';
+import { authStore } from '../../../../../context/auth/store';
+import { MainStackParamList } from '../../../../../types/MainStackParamList';
 import FooterButton from '../../../../Component/FooterButton/FooterButton';
 import styles from './RegisterTerm.style';
+import { actions } from '../../../../../context/modal/modal.reducer';
+import WelcomeModal from '../../../../Component/Modal/WelcomeModal';
+import { ModalContext } from '../../../../../context/modal/modal.context';
+import { useTranslation } from 'react-i18next';
 
-const RegisterTerm = () => {
+interface TermProps {
+  id: number;
+  username: string;
+}
+
+const RegisterTerm = ({ id, username }: TermProps) => {
   const [isChecked, setIsChecked] = useState<boolean>(false);
+  const navigation = useNavigation<MainStackParamList>();
+  const state = authStore(stage => stage);
+  const { t } = useTranslation();
+
+  const { dispatch: dispatchModal } = useContext(ModalContext);
+
+  const onSubmit = () => {
+    const data = { id: id, username: username };
+
+    authService.updateTerms(data).then(
+      () => {
+        state.setAuthentication(true);
+
+        dispatchModal({
+          type: actions.SHOW,
+          component: (
+            <WelcomeModal
+              title={t('signUp.hello')}
+              subTitle={t('signUp.welcome_seed')}
+              onClick={() => {
+                dispatchModal({ type: actions.HIDE });
+                navigation.navigate('DashboardStack', {});
+              }}
+              buttonText={t('signUp.understand')}
+            />
+          ),
+        });
+      },
+      err => {
+        console.log(err, 'term');
+      },
+    );
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -65,9 +111,7 @@ const RegisterTerm = () => {
       </View>
       <FooterButton
         text={'Нэвтрэх'}
-        onPress={function (): void {
-          throw new Error('Function not implemented.');
-        }}
+        onPress={onSubmit}
         back={false}
         btnDisabled={!isChecked}
         backColor={true}

@@ -1,11 +1,24 @@
+import { RegisterModule } from './register.mode';
+
 export interface AuthState {
-    authenticated: boolean,
-    clientToken?: clientTokenResponse,
-    auth?: any
+  authenticated?: boolean;
+  clientToken?: ClientTokenResponse;
+  auth?: AuthStateToken;
 }
 
-export interface clientTokenResponse {
-    access_token: string,
-    expires_in: number,
-    token_type: string
-};
+export interface LanguageState {
+  language: 'mn' | 'en' | 'chn';
+}
+
+export interface ClientTokenResponse {
+  access_token: string;
+  expires_in: number;
+  token_type: string;
+  access_token_expires: Date;
+}
+
+export interface AuthStateToken {
+  token: string;
+  user: RegisterModule.User;
+  checkExpired: false;
+}

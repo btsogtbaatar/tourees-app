@@ -12,28 +12,22 @@ import { Colors } from '../../../../constants/Colors';
 import { verticalScale } from '../../../uitls/metrics';
 import { NavigationProp } from '@react-navigation/native';
 import { DashboardStackParamList } from '../../../types/DashboardStackParamList';
+import { CategoryModule } from '../../Auth/entities';
 
 const { width } = Dimensions.get('window');
 
 const ITEM_WIDTH = width / 2 - SPACING * 3;
 
 interface CardProps {
-  title: string;
+  // title: string;
   navigation: NavigationProp<DashboardStackParamList>;
   image?: any;
   color?: string;
-  imageUrl?: ImageSourcePropType;
-  id: number;
+  // id: number;
+  item: CategoryModule.Categories;
 }
 
-const DashboardCard = ({
-  title,
-  navigation,
-  image,
-  color,
-  imageUrl,
-  id,
-}: CardProps) => {
+const DashboardCard = ({ navigation, color, item }: CardProps) => {
   return (
     <TouchableOpacity
       style={{
@@ -47,8 +41,8 @@ const DashboardCard = ({
         navigation.navigate('RequestStack', {
           screen: 'RequestList',
           params: {
-            title: title,
-            requestId: id,
+            title: item.title,
+            categoryId: item.id,
           },
         });
       }}>
@@ -61,12 +55,10 @@ const DashboardCard = ({
           flex: 1,
         }}>
         <Image
-          alt="image"
-          source={
-            imageUrl
-              ? imageUrl
-              : require('../../../assets/svg/dashboard/pngwing2.png')
-          }
+          style={{ width: '100%', height: 100, borderRadius: SPACING }}
+          source={{
+            uri: `http://localhost:8000/storage/${item.image_url}`,
+          }}
         />
       </View>
       <Text
@@ -78,7 +70,7 @@ const DashboardCard = ({
           fontFamily: 'Nunito',
           color: '#21272D',
         }}>
-        {title}
+        {item.title}
       </Text>
     </TouchableOpacity>
   );

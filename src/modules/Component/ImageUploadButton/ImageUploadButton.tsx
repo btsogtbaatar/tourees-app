@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
-import { horizontalScale, verticalScale } from '../../../uitls/metrics';
-import { Colors } from '../../../../constants/Colors';
-import { PlusIcon } from '../../../assets/svg';
+import React, { useRef, useState } from 'react';
+import { FlatList, View } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
+import ImageComponent from './ImageComponent';
 
-type ImageSourse = {
+export type ImageSource = {
   uri?: string;
 };
-
-const ImageUploadButton = () => {
-  const [selectedImage, setSelectedImage] = useState<ImageSourse[]>([]);
+interface ImageUploadButtonProps {
+  onImageSelection: (selectedImages: ImageSource[]) => void;
+}
+const ImageUploadButton: React.FC<ImageUploadButtonProps>= ({onImageSelection}) => {
+  const [selectedImages, setSelectedImages] = useState<ImageSource[]>([
+    { uri: 'icon' },
+  ]);
+  const flatlistRef = useRef<FlatList | null>(null);
   const chooseFile = () => {
     ImagePicker.launchImageLibrary(
       {
@@ -19,7 +22,7 @@ const ImageUploadButton = () => {
         maxHeight: 200,
         maxWidth: 200,
       },
-      response => {
+      (response) => {
         console.log(response, 'response');
         if (response.didCancel) {
           console.log('image cancelled');
@@ -27,39 +30,46 @@ const ImageUploadButton = () => {
           console.log('image error', response.errorCode);
         } else if (response.assets) {
           const source = { uri: response.assets[0].uri };
-          setSelectedImage(image => [...image, source]);
+          // if (selectedImage.length === 0) {
+          //   const newSource = { uri: 'icon' };
+          //   setSelectedImage(image => [...image, newSource, source]);
+          // } else {
+          setSelectedImages([...selectedImages, source]);
+          onImageSelection([...selectedImages, source]);
+          // }
         }
       },
     );
   };
   return (
-    <View>
-      <View
-        style={{
-          flex: 1,
-          padding: horizontalScale(16),
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: verticalScale(109),
-          borderRadius: horizontalScale(16),
-          borderWidth: 1,
-          borderColor: Colors.borderColor,
-          marginVertical: verticalScale(16),
-        }}>
-        <TouchableOpacity onPress={chooseFile}>
-          <PlusIcon />
-        </TouchableOpacity>
+    <View style={{ flex: 1 }}>
+      <View>
+        <FlatList
+          ref={flatlistRef}
+          data={selectedImages}
+          // columnWrapperStyle={{ justifyContent: 'space-around' }}
+          numColumns={3}
+          onContentSizeChange={() => {
+            selectedImages.length > 1 &&
+              flatlistRef.current?.scrollToIndex({
+                index: selectedImages.findIndex(image => image.uri == 'icon'),
+                animated: true,
+              });
+          }}
+          initialNumToRender={2}
+          keyExtractor={(_, index:any) => index.toString()}
+          renderItem={({ item, index }) => {
+            return (
+              <ImageComponent
+                item={item}
+                index={index}
+                chooseFile={chooseFile}
+                selectedImage={selectedImages.length}
+              />
+            );
+          }}
+        />
       </View>
-      <FlatList
-        data={selectedImage}
-        renderItem={({ item }) => {
-          return (
-            <View style={{ flex: 1, width: 200, height: 200 }}>
-              <Image source={item} style={{ flex: 1, width: 100 }} />
-            </View>
-          );
-        }}
-      />
     </View>
   );
 };
