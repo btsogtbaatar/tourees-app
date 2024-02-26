@@ -18,7 +18,7 @@ const RequestsCard = (props: PropsCard) => {
   const navigation = useNavigation<DashboardStackParamList>();
 
   const onPress = () => {
-    navigation.navigate('UserRequest', {});
+    navigation.navigate('UserRequest', {item});
   };
 
   return (
