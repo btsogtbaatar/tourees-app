@@ -22,12 +22,14 @@ const Calendar = ({
   ...rest
 }: CalendarItemProps) => {
   const [startDate, setStartDate] = useState<string>(initialStartDate);
-  console.log(startDate, 'startDate');
+  console.log(startDate, 'startDate???');
   LocaleConfig.locales['mn'] = calendarMnLocale;
   LocaleConfig.defaultLocale = 'mn';
 
   const onDayPress = (day: DateData) => {
+    const selectedStartDate = day.dateString;
     setStartDate(day.dateString);
+    onSuccess(selectedStartDate);
   };
   return (
     <View

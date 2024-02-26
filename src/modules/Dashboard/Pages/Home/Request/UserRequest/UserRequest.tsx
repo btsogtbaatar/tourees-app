@@ -1,5 +1,5 @@
 import moment from 'moment';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Image,
   ScrollView,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { useForm } from 'react-hook-form';
 import LinearGradient from 'react-native-linear-gradient';
 import { Colors } from '../../../../../../../constants/Colors';
 import { LocationCircleIcon, LocationIcon } from '../../../../../../assets/svg';
@@ -16,32 +17,87 @@ import {
   verticalScale,
 } from '../../../../../../uitls/metrics';
 import Calendar from '../../../../../Component/Calendar/Calendar';
-import ImageUploadButton from '../../../../../Component/ImageUploadButton/ImageUploadButton';
+import ImageUploadButton, {ImageSource} from '../../../../../Component/ImageUploadButton/ImageUploadButton';
 import { useNavigation } from '@react-navigation/native';
 import { DashboardStackParamList } from '../../../../../../types/DashboardStackParamList';
 import { authStore } from '../../../../../../context/auth/store';
 import { ModalContext } from '../../../../../../context/modal/modal.context';
-import { actions as ModalActions } from '../../../../../../context/modal/modal.reducer';
+import { actions as ModalActions, initialState } from '../../../../../../context/modal/modal.reducer';
 import Modal from '../../../../../Component/Modal/Modal';
+import { RequestModule } from '../../../../../../context/entities/request.model';
+import { requestsService } from '../../../../../../api/services/index';
+import { CategoryModule } from '../../../../../Auth/entities/category.model';
+import { actions } from '../../../../../../context/modal/modal.reducer';
 
 interface UserProps {
-  route: { params: { requestId: number } };
+  route: { params: any};
+  files: File|undefined;
 }
 
-const UserRequest = (props: UserProps) => {
-  const { requestId } = props.route.params;
+function UserRequest ({route}: UserProps) {
+  const subCategory=route.params.item;
   const navigation = useNavigation<DashboardStackParamList>();
   const authState = authStore(state => state);
   const { dispatch: dispatchModal } = useContext(ModalContext);
+  const [requestValue, setRequestValue] = useState<RequestModule.Request>({
+    user_id:authState.auth.user.id,
+    name:authState.auth.user.name,
+    status_code:1,
+    sub_category_id:subCategory.id,
+  });
 
-  const submit = () => {
+  // const handleDate = (startDate: string) => {
+  //   setRequestValue({ ...requestValue, ["request_date"]: startDate });
+  // }
+
+  const handleInputChange = (fieldName: keyof RequestModule.Request, value: any) => {
+    
+    if(fieldName==="files"){
+      const imageFile = value;
+      setRequestValue({ ...requestValue, [fieldName]: imageFile });
+      console.log(imageFile);
+      
+    }else{
+      setRequestValue({ ...requestValue, [fieldName]: value });
+    }
+  };
+  
+
+  const submit = () => { 
     if (authState.authenticated) {
-      dispatchModal({
-        type: ModalActions.SHOW,
-        component: (
-          <Modal title="backend holboh" submitButtonText="Лог бичих" />
-        ),
-      });
+      const data= new FormData()
+      data.append('files', requestValue.files as unknown as File);
+      data.append('user_id',requestValue.user_id);
+      data.append('name',requestValue.name);
+      data.append('status_code',requestValue.status_code);
+      data.append('sub_category_id',requestValue.sub_category_id);
+      data.append('request_date',requestValue.request_date);
+      data.append('details',requestValue.details);
+
+      requestsService.createRequest(requestValue).then(
+        (res:any) => {
+          console.log(res);
+          
+          dispatchModal({
+            type: ModalActions.SHOW,
+            component: (
+              <Modal title="Success"
+              />
+
+            ),
+          });
+          navigation.navigate('DashboardStack');
+
+        },
+        (err: any) => {
+          console.log(err, 'errr');
+          dispatchModal({
+            type: actions.SHOW,
+            component: <Modal title={err.message} />,
+          });
+        }, 
+      );
+     
     } else {
       navigation.navigate('AuthStack', {
         screen: 'SignUp',
@@ -76,7 +132,7 @@ const UserRequest = (props: UserProps) => {
                 fontWeight: '800',
                 lineHeight: 30,
               }}>
-              Хот дотор нүүлгэлт
+              {subCategory.name}
             </Text>
             <Text
               style={{
@@ -85,8 +141,7 @@ const UserRequest = (props: UserProps) => {
                 fontWeight: '400',
                 lineHeight: 18,
               }}>
-              Lorem ipsum dolor sit ametconsectetur. Diam quis molestie
-              facilisis aliquet tristique
+              {subCategory.description}
             </Text>
           </View>
           <View
@@ -100,7 +155,9 @@ const UserRequest = (props: UserProps) => {
             }}>
             <Image
               style={{ flex: 1, width: '100%' }}
-              source={require('../../../../../../assets/svg/dashboard/Frame.png')}
+              source={{
+                uri: `http://localhost:8000/storage/${subCategory.image_url}`,
+              }}
             />
           </View>
         </View>
@@ -133,15 +190,14 @@ const UserRequest = (props: UserProps) => {
               Хүргэлт хийх өдөр сонгох
             </Text>
             <Calendar
-              onSuccess={function (startDate: string): void {
-                throw new Error('Function not implemented.');
-              }}
+              onSuccess={(value: string) => handleInputChange('request_date', moment(value).format('YYYY-MM-DD'))}
               initialStartDate={moment().format('YYYY-MM-DD')}
             />
             <Text style={{ fontWeight: '500', lineHeight: 21 }}>
               Зураг оруулах
             </Text>
-            <ImageUploadButton />
+            <ImageUploadButton onImageSelection={(value:ImageSource[])=>handleInputChange("files", value)}
+            />
             <Text style={{ fontWeight: '500', lineHeight: 21 }}>
               Дэлгэрэнгүй тайлбар
             </Text>
@@ -160,6 +216,8 @@ const UserRequest = (props: UserProps) => {
                 Дэлгэрэнгүй тайлбар
               </Text>
               <TextInput
+              value={requestValue?.details}
+                onChangeText={(value: string) => handleInputChange('details', value)}
                 style={{
                   fontSize: 16,
                   fontWeight: '600',

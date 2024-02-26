@@ -3,12 +3,14 @@ import { FlatList, View } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
 import ImageComponent from './ImageComponent';
 
-export type ImageSourse = {
+export type ImageSource = {
   uri?: string;
 };
-
-const ImageUploadButton = () => {
-  const [selectedImage, setSelectedImage] = useState<ImageSourse[]>([
+interface ImageUploadButtonProps {
+  onImageSelection: (selectedImages: ImageSource[]) => void;
+}
+const ImageUploadButton: React.FC<ImageUploadButtonProps>= ({onImageSelection}) => {
+  const [selectedImages, setSelectedImages] = useState<ImageSource[]>([
     { uri: 'icon' },
   ]);
   const flatlistRef = useRef<FlatList | null>(null);
@@ -20,7 +22,7 @@ const ImageUploadButton = () => {
         maxHeight: 200,
         maxWidth: 200,
       },
-      response => {
+      (response) => {
         console.log(response, 'response');
         if (response.didCancel) {
           console.log('image cancelled');
@@ -32,7 +34,8 @@ const ImageUploadButton = () => {
           //   const newSource = { uri: 'icon' };
           //   setSelectedImage(image => [...image, newSource, source]);
           // } else {
-          setSelectedImage(image => [...image, source]);
+          setSelectedImages([...selectedImages, source]);
+          onImageSelection([...selectedImages, source]);
           // }
         }
       },
@@ -43,25 +46,25 @@ const ImageUploadButton = () => {
       <View>
         <FlatList
           ref={flatlistRef}
-          data={selectedImage}
+          data={selectedImages}
           // columnWrapperStyle={{ justifyContent: 'space-around' }}
           numColumns={3}
           onContentSizeChange={() => {
-            selectedImage.length > 0 &&
+            selectedImages.length > 1 &&
               flatlistRef.current?.scrollToIndex({
-                index: selectedImage.findIndex(image => image.uri == 'icon'),
+                index: selectedImages.findIndex(image => image.uri == 'icon'),
                 animated: true,
               });
           }}
           initialNumToRender={2}
-          keyExtractor={(_, index) => index.toString()}
+          keyExtractor={(_, index:any) => index.toString()}
           renderItem={({ item, index }) => {
             return (
               <ImageComponent
                 item={item}
                 index={index}
                 chooseFile={chooseFile}
-                selectedImage={selectedImage.length}
+                selectedImage={selectedImages.length}
               />
             );
           }}

@@ -14,4 +14,12 @@ export declare module CategoryModule {
     text: string;
     image: string;
   };
+
+  export type SubCategory = {
+    id: number;
+    name: string;
+    title: string;
+    description: string;
+    category_id: number;
+  };
 }
