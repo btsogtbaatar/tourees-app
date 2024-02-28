@@ -3,6 +3,8 @@ import { RegisterModule } from '../modules/Auth/entities';
 
 export type AuthStackParamList = {
   AuthStack: undefined;
+  RegisterUsername: any;
+  RegisterTerm: any;
   Login: any;
   LoginOtpCheck: { credentials: LoginModel.Credentials };
   SignUp: undefined;
