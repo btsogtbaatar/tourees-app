@@ -1,3 +1,4 @@
+import { AuthChannel } from '../../modules/Auth/Pages/Auth/Login/Login';
 import { RegisterModule } from './register.mode';
 
 export interface AuthState {
@@ -21,4 +22,16 @@ export interface AuthStateToken {
   token: string;
   user: RegisterModule.User;
   checkExpired: false;
+}
+
+export declare namespace LoginModel {
+  export interface Credentials {
+    channel?: AuthChannel;
+    email?: string;
+    phone?: string;
+  }
+
+  export interface LoginRequest extends Credentials {
+    otp: string;
+  }
 }

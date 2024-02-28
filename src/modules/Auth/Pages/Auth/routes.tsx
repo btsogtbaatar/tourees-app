@@ -7,6 +7,8 @@ import RegisterUsername from './RegisterUsername/RegisterUsername';
 import RegisterOtp from './RegiterOtp/RegisterOtp';
 import RegisterTerm from './RegisterTerm/RegisterTerm';
 import { useTranslation } from 'react-i18next';
+import Login from './Login/Login';
+import LoginOtpCheck from './Login/LoginOtpCheck';
 
 const Tab = createNativeStackNavigator<AuthStackParamList>();
 
@@ -14,6 +16,34 @@ const AuthStack = () => {
   const { t } = useTranslation();
   return (
     <Tab.Navigator initialRouteName="SignUp">
+      <Tab.Screen
+        name="Login"
+        component={Login}
+        options={{
+          headerTitle: t('login.title'),
+          headerTitleAlign: 'center',
+          headerLeft: () => <HeaderBack title="×" />,
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          headerStyle: {
+            backgroundColor: 'transparent',
+          },
+        }}
+      />
+      <Tab.Screen
+        name="LoginOtpCheck"
+        component={LoginOtpCheck}
+        options={{
+          headerTitle: t('login.title'),
+          headerTitleAlign: 'center',
+          headerLeft: () => <HeaderBack title="×" />,
+          gestureEnabled: true,
+          gestureDirection: 'horizontal',
+          headerStyle: {
+            backgroundColor: 'transparent',
+          },
+        }}
+      />
       <Tab.Screen
         name="SignUp"
         component={Register}
