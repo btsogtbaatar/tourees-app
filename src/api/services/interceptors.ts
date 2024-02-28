@@ -15,10 +15,9 @@ import { authService } from './auth/auth.service';
 
 const tokenSubject = new BehaviorSubject<any>(null);
 export const axiosInstance = (api: AxiosInstance, store: any) => {
-  const state: AuthState & AuthAction = store.getState();
-
   api.interceptors.request.use(
     (config: InternalAxiosRequestConfig<any>) => {
+      const state: AuthState & AuthAction = store.getState();
       const access_token = state.auth?.token;
 
       if (config.headers) {

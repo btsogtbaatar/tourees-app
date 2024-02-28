@@ -40,7 +40,9 @@ const Request = () => {
 
   const onRefresh = () => {
     setRefreshing(true);
-    setCurrentPage(1);
+    if (currentPage === 1) {
+      getRequests();
+    } else setCurrentPage(1);
   };
 
   const fetchMore = () => {
