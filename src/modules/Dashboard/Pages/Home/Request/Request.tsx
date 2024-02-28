@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   FlatList,
   RefreshControl,
   SafeAreaView,
-  ScrollView,
+  Text,
   View,
 } from 'react-native';
-import { Colors } from '../../../../../../constants/Colors';
 import { requestsService } from '../../../../../api/services';
-import { horizontalScale, verticalScale } from '../../../../../uitls/metrics';
 import UserRequestCard from '../../../../Component/Requests/UserRequestCard';
 
 const Request = () => {
-  const [requests, setRequests] = useState<any[]>();
+  const [requests, setRequests] = useState<any[]>([]);
   const [refreshing, setRefreshing] = useState<boolean>(false);
+  const [moreLoading, setMoreLoading] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [lastPage, setLastPage] = useState<number>(0);
   useEffect(() => {
-    getRequests();
-  }, []);
+    if (lastPage == 0 || lastPage >= currentPage) getRequests();
+  }, [currentPage]);
 
   const getRequests = () => {
     requestsService
-      .getRequests()
-      .then((res: any[]) => {
-        setRequests(res);
+      .getRequests(currentPage)
+      .then((res: any) => {
+        if (currentPage === 1) {
+          setRequests(res.data);
+        } else setRequests([...requests, ...res.data]);
         setRefreshing(false);
+        setLastPage(res.last_page);
+        setMoreLoading(false);
       })
       .then(() => {
         setRefreshing(false);
@@ -32,30 +38,41 @@ const Request = () => {
 
   const onRefresh = () => {
     setRefreshing(true);
-    getRequests();
+    setCurrentPage(1);
+  };
+
+  const fetchMore = () => {
+    if (lastPage > currentPage) {
+      setCurrentPage(currentPage + 1);
+      setMoreLoading(true);
+    }
+  };
+
+  const footerComponent = () => {
+    return (
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        {moreLoading ? <ActivityIndicator size="large" /> : null}
+        {lastPage <= currentPage && <Text>Өөр хүсэлт байхгүй байна</Text>}
+      </View>
+    );
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView
-        style={{
-          paddingHorizontal: horizontalScale(16),
-          paddingTop: verticalScale(12),
-        }}
+    <SafeAreaView style={{ flex: 1, marginTop: 16 }}>
+      <FlatList
+        data={requests}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({ item }) => <UserRequestCard item={item} />}
+        ItemSeparatorComponent={() => <View style={{ marginTop: 12 }} />}
+        onEndReached={fetchMore}
+        onEndReachedThreshold={0.1}
+        pagingEnabled={true}
+        ListFooterComponent={footerComponent}
+        refreshing={refreshing}
         refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            tintColor={Colors.primaryColor}
-            onRefresh={onRefresh}
-          />
-        }>
-        <FlatList
-          data={requests}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => <UserRequestCard item={item} />}
-          ItemSeparatorComponent={() => <View style={{ marginTop: 12 }} />}
-        />
-      </ScrollView>
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      />
     </SafeAreaView>
   );
 };

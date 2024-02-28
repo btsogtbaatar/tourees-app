@@ -1,4 +1,4 @@
-import { Image } from "../../../node_modules/react-native/types/index";
+import { Image } from '../../../node_modules/react-native/types/index';
 
 export declare module RequestModule {
   export type Request = {
@@ -7,8 +7,9 @@ export declare module RequestModule {
     sub_category_id?: number;
     details?: string;
     request_date?: string;
-    status_code?:number;
-    files?:Image
+    status_code?: number;
+    files?: Image;
+    is_app?: boolean;
   };
 
   export type RequestAdditional = {
