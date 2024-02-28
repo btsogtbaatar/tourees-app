@@ -5,7 +5,7 @@ import { RequestModule } from '../../../context/entities/request.model';
 const headers = {
   'Content-Type': 'multipart/form-data',
 };
-function getRequests(page: number): Promise<any> {
+function getRequests(page: number): Promise<RequestModule.RequestResponse> {
   const params = {
     page: page,
   };

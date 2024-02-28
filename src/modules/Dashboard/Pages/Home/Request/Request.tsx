@@ -9,9 +9,11 @@ import {
 } from 'react-native';
 import { requestsService } from '../../../../../api/services';
 import UserRequestCard from '../../../../Component/Requests/UserRequestCard';
+import { RequestModule } from '../../../../../context/entities/request.model';
+import { Colors } from '../../../../../../constants/Colors';
 
 const Request = () => {
-  const [requests, setRequests] = useState<any[]>([]);
+  const [requests, setRequests] = useState<RequestModule.Request[]>([]);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [moreLoading, setMoreLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -23,7 +25,7 @@ const Request = () => {
   const getRequests = () => {
     requestsService
       .getRequests(currentPage)
-      .then((res: any) => {
+      .then((res: RequestModule.RequestResponse) => {
         if (currentPage === 1) {
           setRequests(res.data);
         } else setRequests([...requests, ...res.data]);
@@ -51,7 +53,9 @@ const Request = () => {
   const footerComponent = () => {
     return (
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-        {moreLoading ? <ActivityIndicator size="large" /> : null}
+        {moreLoading ? (
+          <ActivityIndicator color={Colors.primaryColor} size="large" />
+        ) : null}
         {lastPage <= currentPage && <Text>Өөр хүсэлт байхгүй байна</Text>}
       </View>
     );
@@ -70,8 +74,13 @@ const Request = () => {
         ListFooterComponent={footerComponent}
         refreshing={refreshing}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            tintColor={Colors.primaryColor}
+          />
         }
+        showsVerticalScrollIndicator={false}
       />
     </SafeAreaView>
   );

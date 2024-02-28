@@ -21,6 +21,8 @@ export declare module RequestModule {
   };
   export type RequestResponse = {
     message?: string;
-    data?: string;
+    data: Request[];
+    current_page: number;
+    last_page: number;
   };
 }
