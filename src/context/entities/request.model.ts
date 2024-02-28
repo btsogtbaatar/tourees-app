@@ -1,4 +1,5 @@
 import { Image } from '../../../node_modules/react-native/types/index';
+import { CategoryModule } from '../../modules/Auth/entities';
 
 export declare module RequestModule {
   export type Request = {
@@ -10,6 +11,16 @@ export declare module RequestModule {
     status_code?: number;
     files?: Image;
     is_app?: boolean;
+    sub_category: CategoryModule.Categories;
+    custom_status: StatusType;
+  };
+
+  export type StatusType = {
+    id: number;
+    code: string;
+    name: string;
+    description: string;
+    type: string;
   };
 
   export type RequestAdditional = {
