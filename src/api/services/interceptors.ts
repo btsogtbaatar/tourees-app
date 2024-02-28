@@ -46,6 +46,7 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
       return response.data;
     },
     (error: AxiosError<any>) => {
+      const state: AuthState & AuthAction = store.getState();
       const _error = error.response?.data;
       if (
         error.response === undefined ||
