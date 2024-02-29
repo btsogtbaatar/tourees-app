@@ -19,7 +19,6 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
     (config: InternalAxiosRequestConfig<any>) => {
       const state: AuthState & AuthAction = store.getState();
       const access_token = state.auth?.token;
-      console.log(config.url, 'test');
 
       if (config.headers) {
         if (state.authenticated && access_token) {
