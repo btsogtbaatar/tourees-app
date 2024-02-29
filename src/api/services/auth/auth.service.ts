@@ -1,5 +1,10 @@
 import { api } from '../..';
-import { AuthStateToken, ClientTokenResponse } from '../../../context/entities';
+import {
+  AuthStateToken,
+  ClientTokenResponse,
+  LoginModel,
+} from '../../../context/entities';
+import { AuthChannel } from '../../../modules/Auth/Pages/Auth/Login/Login';
 import {
   RegisterModule,
   UsernameResponse,
@@ -8,7 +13,7 @@ import BaseEncryped from '../base64';
 
 const basicAuth =
   'Basic ' +
-  BaseEncryped.btoa('2' + ':' + '21gRM7sXSj9RFdsZ9bkhuwvFwDSUxWPVwnJ1ZSEC');
+  BaseEncryped.btoa(process.env.CLIENT_ID + ':' + process.env.CLIENT_SECRET);
 function checkEmail(
   data: RegisterModule.RegisterStep,
 ): Promise<UsernameResponse[]> {
@@ -29,6 +34,26 @@ function updateTerms(data: { id: number; username: string }) {
 
 function logout() {
   return api.post('api/logout');
+}
+
+function generateOtpLogin(credentials: LoginModel.Credentials) {
+  let channel = 'email';
+
+  if (credentials.channel === AuthChannel.Phone) {
+    channel = 'phone';
+  }
+
+  return api.post('api/app/generate-login-otp', { ...credentials, channel });
+}
+
+function login(data: LoginModel.LoginRequest): Promise<AuthStateToken> {
+  let channel = 'email';
+
+  if (data.channel === AuthChannel.Phone) {
+    channel = 'phone';
+  }
+
+  return api.post('api/app/login', { ...data, channel });
 }
 
 function getClientCredentialToken(): Promise<ClientTokenResponse> {
@@ -53,6 +78,8 @@ function getClientCredentialToken(): Promise<ClientTokenResponse> {
 }
 
 export const authService = {
+  login,
+  generateOtpLogin,
   checkEmail,
   getClientCredentialToken,
   sendOtp,

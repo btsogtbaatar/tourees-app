@@ -19,6 +19,7 @@ import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/routes/routes';
 
 axiosInstance(api, authStore);
+require('dotenv').config();
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
   const languageState = languageStore(state => state);

@@ -3,13 +3,26 @@ import { Colors } from '../../../../../../constants/Colors';
 import { verticalScale } from '../../../../../uitls/metrics';
 
 const styles = StyleSheet.create({
+  tabContainer: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+  },
+  tabButton: {
+    borderRadius: 16,
+    borderWidth: 1,
+    paddingVertical: 12,
+    flex: 1,
+  },
+  tabText: {
+    textAlign: 'center',
+  },
   emailTouch: {
     width: '45%',
     borderRadius: 16,
     borderWidth: 1,
     padding: 12,
     flexDirection: 'row',
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
   },
   subContainer: {
     marginTop: 20,
@@ -23,7 +36,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     lineHeight: 24,
-    color: '#21272D'
+    color: '#21272D',
   },
   selectedBox: {
     borderColor: Colors.primaryColor,
@@ -60,7 +73,7 @@ const styles = StyleSheet.create({
     color: '#5F676F',
     fontSize: 12,
     fontWeight: '500',
-    marginTop: verticalScale(12)
+    marginTop: verticalScale(12),
   },
   btn: {
     height: 41,

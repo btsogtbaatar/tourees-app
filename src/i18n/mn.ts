@@ -12,9 +12,18 @@ export default {
   r_username: 'Нэвтрэх нэрээ оруулна уу.',
   l_signup: 'Бүртгүүлэх',
   l_confirm: 'Баталгаажуулах',
-  m_email: 'И-мэйл хаягаа зав оруулна уу',
   l_phone: 'Таны утасны дугаар',
-  m_phone: 'Утасны дугаар хаягаа оруулна уу.',
+  t_serviceterm: 'Үйлчилгээний нөхцөл',
+  m_email: 'И-мэйл хаягаа зөв оруулна уу.',
+  m_phone: 'Утасны дугаараа оруулна уу.',
+  t_home: 'Нүүр',
+  t_request: 'Хүсэлтүүд',
+  t_profile: 'Миний',
+  l_register_infomation: 'Бүртгэлийн мэдээлэл',
+  l_history: 'Түүх',
+  l_ebarimt: 'И-Баримт',
+  l_help: 'Тусламж',
+  l_logout: 'Гарах',
   l_dismissLabel: 'Ойлголоо',
   l_submitLabel: 'Ок',
   signUp: {
@@ -46,5 +55,29 @@ export default {
     operatorCall: 'Оператортой холбогдох',
     reuestOperatorMessage:
       'Таны хүсэлт хуваарилагдсан байна. Болд тун удахгүй тантай холбогдох тул та түр хүлээнэ үү.',
+  },
+  login: {
+    title: 'Нэвтрэх',
+    email: {
+      tab: 'И-мэйл',
+      label: 'И-мэйл хаяг',
+      placeholder: 'example@email.com',
+      errors: {
+        required: 'И-мэйл хаягаа оруулна уу.',
+        validation: 'И-мэйл хаягаа зөв оруулна уу.',
+      },
+    },
+    phone: {
+      tab: 'Утас',
+      label: 'Утасны дугаар',
+      placeholder: '88888888',
+      errors: {
+        required: 'Утасны дугаараа оруулна уу.',
+        validation: 'Утасны дугаараа зөв оруулна уу.',
+      },
+    },
+    check: {
+      label: 'Шалгах',
+    },
   },
 };
