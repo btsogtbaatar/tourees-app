@@ -1,17 +1,20 @@
 import { api } from '../..';
 import { AuthStateToken } from '../../../context/entities/auth.model';
-import { RequestModule } from '../../../modules/Auth/entities';
+import { RequestModule } from '../../../context/entities/request.model';
 
 const headers = {
   'Content-Type': 'multipart/form-data',
 };
-function getRequests(): Promise<any[]> {
-  return api.get('api/requests');
+function getRequests(page: number): Promise<RequestModule.RequestResponse> {
+  const params = {
+    page: page,
+  };
+  return api.get('api/requests', { params: params });
 }
 
 function createRequest(data: RequestModule.Request): Promise<AuthStateToken> {
   data.is_app = true;
-  return api.post('/requests', data, {headers});
+  return api.post('/requests', data, { headers });
 }
 
 export const requestsService = {
