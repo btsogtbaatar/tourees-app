@@ -46,8 +46,8 @@ function UserRequest({ route }: UserProps) {
   const authState = authStore(state => state);
   const { dispatch: dispatchModal } = useContext(ModalContext);
   const [requestValue, setRequestValue] = useState<RequestModule.Request>({
-    user_id: authState.auth.user.id,
-    name: authState.auth.user.name,
+    user_id: authState.auth ? authState.auth.user.id : undefined,
+    name: authState.auth ? authState.auth.user.name : '',
     status_code: 1,
     sub_category_id: subCategory.id,
   });

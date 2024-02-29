@@ -1,5 +1,5 @@
 import { NavigationProp } from '@react-navigation/native';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   RefreshControl,
@@ -11,7 +11,6 @@ import {
 import { Colors } from '../../../../../../constants/Colors';
 import { categoriesService } from '../../../../../api/services';
 import { authStore } from '../../../../../context/auth/store';
-import { ModalContext } from '../../../../../context/modal/modal.context';
 import { DashboardStackParamList } from '../../../../../types/DashboardStackParamList';
 import { verticalScale } from '../../../../../uitls/metrics';
 import { CategoryModule } from '../../../../Auth/entities';
@@ -39,7 +38,6 @@ const Dashboard = ({ navigation }: DashboardProps) => {
         setCatogories(res);
         setLoading(false);
         setRefreshing(false);
-        console.log(res[0], 'category response');
       },
       (err: any) => {
         console.log('erroro', err);
@@ -51,8 +49,6 @@ const Dashboard = ({ navigation }: DashboardProps) => {
   useEffect(() => {
     getCateories();
   }, []);
-
-  const { dispatch: dispatchModal } = useContext(ModalContext);
 
   return loading ? (
     <LoadingPage />
@@ -96,6 +92,7 @@ const Dashboard = ({ navigation }: DashboardProps) => {
                 renderItem={({ item }) => {
                   return <DashboardCard navigation={navigation} item={item} />;
                 }}
+                scrollEnabled={false}
               />
             </View>
           </View>

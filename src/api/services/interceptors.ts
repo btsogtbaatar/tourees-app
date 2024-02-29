@@ -24,6 +24,7 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
         if (state.authenticated && access_token) {
           config.headers['Authorization'] = `Bearer ${access_token}`;
         } else if (
+          config.url !== '/oauth/token' &&
           !state.authenticated &&
           state.clientToken &&
           new Date(state?.clientToken?.access_token_expires) >= new Date()
