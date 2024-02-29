@@ -19,11 +19,13 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
     (config: InternalAxiosRequestConfig<any>) => {
       const state: AuthState & AuthAction = store.getState();
       const access_token = state.auth?.token;
+      console.log(config.url, 'test');
 
       if (config.headers) {
         if (state.authenticated && access_token) {
           config.headers['Authorization'] = `Bearer ${access_token}`;
         } else if (
+          config.url !== '/oauth/token' &&
           !state.authenticated &&
           state.clientToken &&
           new Date(state?.clientToken?.access_token_expires) >= new Date()
