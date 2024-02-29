@@ -16,9 +16,7 @@ const ModalContainer = ({ isVisible, children }: ModalContainerProps) => {
       isVisible={isVisible}
       deviceWidth={deviceWidth}
       deviceHeight={deviceHeight}>
-      {/* <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}> */}
-      {children}
-      {/* </View> */}
+      {children ?? <></>}
     </Modal>
   );
 };
