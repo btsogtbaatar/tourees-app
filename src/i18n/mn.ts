@@ -80,4 +80,5 @@ export default {
       label: 'Шалгах',
     },
   },
+  emptyRequest: 'Таньд үүсгэсэн хүсэлт байхгүй байна.',
 };

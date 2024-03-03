@@ -11,6 +11,7 @@ import { requestsService } from '../../../../../api/services';
 import UserRequestCard from '../../../../Component/Requests/UserRequestCard';
 import { RequestModule } from '../../../../../context/entities/request.model';
 import { Colors } from '../../../../../../constants/Colors';
+import { useTranslation } from 'react-i18next';
 
 const Request = () => {
   const [requests, setRequests] = useState<RequestModule.Request[]>([]);
@@ -21,6 +22,7 @@ const Request = () => {
   useEffect(() => {
     if (lastPage == 0 || lastPage >= currentPage) getRequests();
   }, [currentPage]);
+  const { t } = useTranslation();
 
   const getRequests = () => {
     requestsService
@@ -58,7 +60,19 @@ const Request = () => {
         {moreLoading ? (
           <ActivityIndicator color={Colors.primaryColor} size="large" />
         ) : null}
-        {lastPage <= currentPage && <Text>Өөр хүсэлт байхгүй байна</Text>}
+        {lastPage <= currentPage && null}
+      </View>
+    );
+  };
+  const emptyComponent = () => {
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Text>{t('emptyRequest')}</Text>
       </View>
     );
   };
@@ -82,7 +96,9 @@ const Request = () => {
             tintColor={Colors.primaryColor}
           />
         }
+        contentContainerStyle={{ flexGrow: 1 }}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={emptyComponent}
       />
     </SafeAreaView>
   );
