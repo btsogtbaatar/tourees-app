@@ -42,7 +42,7 @@ const LoginButton = ({ title, onClick }: LoginButtonProps) => {
             color: Colors.textWhite,
             fontWeight: '700',
             lineHeight: 18,
-            fontSize: 12,
+            fontSize: 14,
           }}>
           {title ? title : t('signUp.login')}
         </Text>

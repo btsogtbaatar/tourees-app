@@ -37,44 +37,42 @@ export default function AuthLabelInput(props: InputProps) {
     setColor(Colors.brandGray);
   };
   return (
-    <>
-      <Controller
-        name={props.name}
-        control={props.control}
-        render={({ field: { onChange, value }, fieldState: { error } }) => {
-          return (
-            <>
-              <View
-                style={[
-                  styles.container,
-                  props.extra,
-                  {
-                    borderColor: color,
-                  },
-                ]}>
-                <Text style={styles.label}>{props.label}</Text>
-                <TextInput
-                  style={styles.inputStyle}
-                  placeholder={props.placeHolder}
-                  keyboardType={props.keyboardType}
-                  value={value}
-                  onFocus={customOnFocus}
-                  onBlur={customOnBlur}
-                  onChangeText={text => {
-                    if(props.keyboardType == 'phone-pad'){
-                      text = text.replace(validations.digitRev, '');
-                    }
-                    onChange(text);
-                  }}
-                />
-              </View>
-              {error?.message && (
-                <Text style={{ color: '#F15980' }}>{error.message}</Text>
-              )}
-            </>
-          );
-        }}
-      />
-    </>
+    <Controller
+      name={props.name}
+      control={props.control}
+      render={({ field: { onChange, value }, fieldState: { error } }) => {
+        return (
+          <>
+            <View
+              style={[
+                styles.container,
+                props.extra,
+                {
+                  borderColor: color,
+                },
+              ]}>
+              <Text style={styles.label}>{props.label}</Text>
+              <TextInput
+                style={styles.inputStyle}
+                placeholder={props.placeHolder}
+                keyboardType={props.keyboardType}
+                value={value}
+                onFocus={customOnFocus}
+                onBlur={customOnBlur}
+                onChangeText={text => {
+                  if (props.keyboardType == 'phone-pad') {
+                    text = text.replace(validations.digitRev, '');
+                  }
+                  onChange(text);
+                }}
+              />
+            </View>
+            {error?.message && (
+              <Text style={{ color: '#F15980' }}>{error.message}</Text>
+            )}
+          </>
+        );
+      }}
+    />
   );
 }

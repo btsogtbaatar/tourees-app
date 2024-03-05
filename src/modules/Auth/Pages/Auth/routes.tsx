@@ -9,6 +9,7 @@ import RegisterTerm from './RegisterTerm/RegisterTerm';
 import { useTranslation } from 'react-i18next';
 import Login from './Login/Login';
 import LoginOtpCheck from './Login/LoginOtpCheck';
+import HeaderBar from '../../../Component/HeaderBack/HeaderBar';
 
 const Tab = createNativeStackNavigator<AuthStackParamList>();
 
@@ -48,31 +49,34 @@ const AuthStack = () => {
         name="SignUp"
         component={Register}
         options={{
-          headerTitle: t('l_signup'),
-          headerTitleAlign: 'center',
-          headerLeft: () => <HeaderBack title="X" />,
-          gestureEnabled: true,
-          gestureDirection: 'horizontal',
-          headerStyle: {
-            backgroundColor: 'transparent',
-          },
+          header: () => <HeaderBar title={t('l_signup')} />,
+          // headerTitle: t('l_signup'),
+          // headerTitleAlign: 'center',
+          // headerLeft: () => <HeaderBack title="X" />,
+          // gestureEnabled: true,
+          // gestureDirection: 'horizontal',
+          // headerStyle: {
+          //   backgroundColor: 'transparent',
+          // },
         }}
       />
       <Tab.Screen
         name="SignUp1"
         component={RegisterUsername}
         initialParams={{ values: [{ username: '' }] }}
-        options={{
-          headerTitle: t('l_signup'),
-          headerTitleAlign: 'center',
-          headerLeft: () => <HeaderBack title="X" />,
-          gestureEnabled: true,
-          gestureDirection: 'horizontal',
-          // headerShown: false,
-          headerStyle: {
-            backgroundColor: 'transparent',
-          },
-        }}
+        options={
+          {
+            // headerTitle: t('l_signup'),
+            // headerTitleAlign: 'center',
+            // headerLeft: () => <HeaderBack title="X" />,
+            // gestureEnabled: true,
+            // gestureDirection: 'horizontal',
+            // headerShown: false,
+            // headerStyle: {
+            //   backgroundColor: 'transparent',
+            // },
+          }
+        }
       />
       <Tab.Screen
         name="SignUpOtp"

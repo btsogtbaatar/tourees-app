@@ -17,6 +17,7 @@ import Dashboard from './Pages/Home/Dashboard/Dashboard';
 import Profile from './Pages/Home/Profile/Profile';
 import Request from './Pages/Home/Request/Request';
 import { TabBarIndexCommon } from '../../uitls/tabBarCommon';
+import HeaderBar from '../Component/HeaderBack/HeaderBar';
 
 const TabArr: MenuModule.TabModule[] = [
   {
@@ -110,16 +111,16 @@ const DashboardMainStack = () => {
               name="Home"
               component={Dashboard}
               options={{
-                headerStyle: {
-                  backgroundColor: 'transparent',
-                },
-                headerRight: () => {
-                  return <LoginButton />;
-                },
-                headerLeft: () => {
-                  return <LogoIcon />;
-                },
-                headerTitle: '',
+                header: () => <HeaderBar isDashboard={true} />,
+                // headerStyle: {
+                //   backgroundColor: 'transparent',
+                // },
+                // headerRight: () => {
+                //   return <LoginButton />;
+                // },
+                // headerLeft: () => {
+                //   return <LogoIcon />;
+                // },
               }}
             />
           </Stack.Group>

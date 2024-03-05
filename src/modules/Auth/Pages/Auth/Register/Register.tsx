@@ -74,7 +74,7 @@ function Register({ navigation }: RegisterProps) {
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={
-        Platform.OS === 'ios' ? headerHeight : headerHeight * 1.8
+        Platform.OS === 'ios' ? headerHeight : headerHeight * 1.2
       }
       style={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
