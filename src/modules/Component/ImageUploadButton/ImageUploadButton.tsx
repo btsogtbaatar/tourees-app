@@ -9,7 +9,9 @@ export type ImageSource = {
 interface ImageUploadButtonProps {
   onImageSelection: (selectedImages: ImageSource[]) => void;
 }
-const ImageUploadButton: React.FC<ImageUploadButtonProps>= ({onImageSelection}) => {
+const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
+  onImageSelection,
+}) => {
   const [selectedImages, setSelectedImages] = useState<ImageSource[]>([
     { uri: 'icon' },
   ]);
@@ -22,7 +24,7 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps>= ({onImageSelection}) 
         maxHeight: 200,
         maxWidth: 200,
       },
-      (response) => {
+      response => {
         console.log(response, 'response');
         if (response.didCancel) {
           console.log('image cancelled');
@@ -57,7 +59,7 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps>= ({onImageSelection}) 
               });
           }}
           initialNumToRender={2}
-          keyExtractor={(_, index:any) => index.toString()}
+          keyExtractor={(_, index: any) => index.toString()}
           renderItem={({ item, index }) => {
             return (
               <ImageComponent
