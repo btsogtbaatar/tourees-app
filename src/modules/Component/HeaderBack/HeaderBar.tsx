@@ -6,6 +6,7 @@ import LoginButton from '../LoginButton/LoginButton';
 import { LogoIcon } from '../../../assets/svg';
 import { useNavigation } from '@react-navigation/native';
 import ArrowLeftIcon from '../../../assets/svg/dashboard/ArrowLeftIcon';
+import { Colors } from '../../../../constants/Colors';
 
 interface HeaderBarProps {
   title?: string;
@@ -23,7 +24,6 @@ const HeaderBar = ({
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   const canGoBack = backButton && navigation.canGoBack();
-  console.log(canGoBack);
 
   return (
     <View
@@ -34,15 +34,24 @@ const HeaderBar = ({
         flexDirection: 'row',
         justifyContent: 'space-between',
       }}>
-      {canGoBack && (
+      {canGoBack && !isDashboard && (
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <ArrowLeftIcon />
         </TouchableOpacity>
       )}
       {title && (
         <>
-          <Text style={{ textAlign: 'center' }}>test</Text>
-          <Text />
+          <Text
+            style={{
+              textAlign: 'center',
+              color: Colors.textHeader,
+              fontSize: 16,
+              lineHeight: 24,
+              fontWeight: '600',
+            }}>
+            {title}
+          </Text>
+          <View />
         </>
       )}
 

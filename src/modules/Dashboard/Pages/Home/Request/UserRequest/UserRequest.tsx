@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import React, { useContext, useState } from 'react';
 import {
@@ -8,10 +9,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useForm } from 'react-hook-form';
 import LinearGradient from 'react-native-linear-gradient';
 import { Colors } from '../../../../../../../constants/Colors';
+import { getEnv } from '../../../../../../api';
+import { requestsService } from '../../../../../../api/services/index';
 import { LocationCircleIcon, LocationIcon } from '../../../../../../assets/svg';
+import { authStore } from '../../../../../../context/auth/store';
+import { RequestModule } from '../../../../../../context/entities/request.model';
+import { ModalContext } from '../../../../../../context/modal/modal.context';
+import {
+  actions as ModalActions,
+  actions,
+} from '../../../../../../context/modal/modal.reducer';
+import { DashboardStackParamList } from '../../../../../../types/DashboardStackParamList';
 import {
   horizontalScale,
   verticalScale,
@@ -20,20 +30,7 @@ import Calendar from '../../../../../Component/Calendar/Calendar';
 import ImageUploadButton, {
   ImageSource,
 } from '../../../../../Component/ImageUploadButton/ImageUploadButton';
-import { useNavigation } from '@react-navigation/native';
-import { DashboardStackParamList } from '../../../../../../types/DashboardStackParamList';
-import { authStore } from '../../../../../../context/auth/store';
-import { ModalContext } from '../../../../../../context/modal/modal.context';
-import {
-  actions as ModalActions,
-  initialState,
-} from '../../../../../../context/modal/modal.reducer';
 import Modal from '../../../../../Component/Modal/Modal';
-import { RequestModule } from '../../../../../../context/entities/request.model';
-import { requestsService } from '../../../../../../api/services/index';
-import { CategoryModule } from '../../../../../Auth/entities/category.model';
-import { actions } from '../../../../../../context/modal/modal.reducer';
-import { getEnv } from '../../../../../../api';
 
 interface UserProps {
   route: { params: any };

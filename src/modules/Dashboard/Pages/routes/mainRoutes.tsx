@@ -8,6 +8,7 @@ import RequestDetail from '../Home/Request/RequestDetail/RequestDetail';
 import SubCategory from '../Home/Request/SubCategory/SubCategory';
 import UserRequest from '../Home/Request/UserRequest/UserRequest';
 import HeaderRequest from '../../../Component/HeaderBack/HeaderRequest';
+import HeaderBar from '../../../Component/HeaderBack/HeaderBar';
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
 
@@ -17,17 +18,7 @@ const MainRouterStack = () => {
       <Stack.Screen
         options={({ route }: any) => {
           return {
-            headerShown: true,
-            headerLeft: () => <HeaderBack />,
-            headerTitle: route.params.title,
-            headerTitleStyle: {
-              fontSize: 16,
-              fontWeight: '700',
-              color: Colors.textHeader,
-            },
-            headerStyle: {
-              backgroundColor: 'transparent',
-            },
+            header: () => <HeaderBar title={route.params.title} />,
           };
         }}
         name="RequestList"
