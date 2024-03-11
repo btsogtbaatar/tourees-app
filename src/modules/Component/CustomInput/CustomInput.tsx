@@ -16,9 +16,11 @@ import {
   View,
 } from 'react-native';
 import { colors } from '../../../constants/colors';
-import styles from '../AuthInput/AuthInput.style';
+import { CustomInputStyle } from './CustomInput.style';
+import { Typography } from '../../../../constants/Typography';
+import { Colors } from '../../../../constants/Colors';
 
-interface CustomInputProps<T extends FieldValues> {
+export interface CustomInputProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
   labelStyle?: StyleProp<TextStyle>;
@@ -27,12 +29,14 @@ interface CustomInputProps<T extends FieldValues> {
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   keyboardType?: KeyboardTypeOptions;
   placeholder?: string;
+  editable?: boolean;
+  onChange?: (text: string) => void;
 }
 
 export default function CustomInput<T extends FieldValues>(
   props: Readonly<CustomInputProps<T>>,
 ) {
-  const [color, setColor] = useState(colors.brandGray);
+  const [color, setColor] = useState(Colors.gray100);
 
   const form = useFormContext();
 
@@ -62,27 +66,34 @@ export default function CustomInput<T extends FieldValues>(
   };
 
   return (
-    <View
-      style={[
-        styles.container,
-        props.labelStyle,
-        {
-          borderColor: color,
-        },
-      ]}>
-      <Text style={styles.label}>{props.label}</Text>
-      <TextInput
-        value={value}
-        placeholder={props.placeholder}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        keyboardType={props.keyboardType ?? 'default'}
-        style={[props.inputStyle, { borderColor: color }]}
-        onChangeText={onChange}
-      />
-      {error?.message && (
-        <Text style={{ color: colors.danger }}>{error.message}</Text>
-      )}
+    <View style={{ flex: 1 }}>
+      <View
+        style={[
+          CustomInputStyle.container,
+          {
+            borderColor: color,
+          },
+        ]}>
+        <Text style={[props.labelStyle, Typography.textSmallerMedium]}>
+          {props.label}
+        </Text>
+        <TextInput
+          editable={props.editable}
+          value={value}
+          placeholder={props.placeholder}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          keyboardType={props.keyboardType ?? 'default'}
+          style={[Typography.textRegularSemiBold, { borderColor: color }]}
+          onChangeText={(text: string) => {
+            onChange(text);
+            props.onChange && props.onChange(text);
+          }}
+        />
+        {error?.message && (
+          <Text style={{ color: colors.danger }}>{error.message}</Text>
+        )}
+      </View>
     </View>
   );
 }

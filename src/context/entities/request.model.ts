@@ -24,11 +24,10 @@ export declare module RequestModule {
   };
 
   export type RequestAdditional = {
-    user_id: string;
+    latitude: number;
+    longitude: number;
+    address: string;
     name: string;
-    sub_category_id: number;
-    details: string;
-    request_date: Date;
   };
   export type RequestResponse = {
     message?: string;

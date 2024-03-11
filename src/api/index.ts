@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // laravel API url
-const defaultUrl = 'http://127.0.0.1:8000';
-const imageUrl = 'http://localhost:8000/storage/';
+const defaultUrl = 'http:/10.0.2.2:8000';
+const imageUrl = 'http:/10.0.2.2:8000/storage/';
 
 export const getEnv = () => {
   return {

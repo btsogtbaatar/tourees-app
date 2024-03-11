@@ -7,6 +7,7 @@ import { LogoIcon } from '../../../assets/svg';
 import { useNavigation } from '@react-navigation/native';
 import ArrowLeftIcon from '../../../assets/svg/dashboard/ArrowLeftIcon';
 import { Colors } from '../../../../constants/Colors';
+import { AuthStackParamList } from '../../../types/AuthStackParamList';
 
 interface HeaderBarProps {
   title?: string;
@@ -22,7 +23,7 @@ const HeaderBar = ({
   isDashboard = false,
 }: HeaderBarProps) => {
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation();
+  const navigation = useNavigation<AuthStackParamList>();
   const canGoBack = backButton && navigation.canGoBack();
 
   return (
@@ -58,7 +59,7 @@ const HeaderBar = ({
       {isDashboard && (
         <>
           <LogoIcon />
-          <LoginButton />
+          <LoginButton onClick={() => navigation.navigate('AuthStack', {screen: 'Login'})} />
         </>
       )}
     </View>

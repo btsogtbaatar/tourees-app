@@ -31,7 +31,7 @@ const HeaderComponent = (props: HeaderProps) => {
             fontSize: 20,
             fontWeight: '700',
             lineHeight: 30,
-            color: Colors.textHeader,
+            color: Colors.gray700,
           }}>
           {t(title)}
         </Text>

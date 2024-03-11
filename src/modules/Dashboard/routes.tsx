@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '../../../constants/Colors';
-import { HomeSmile, LogoIcon, SmileCircleActiveIcon } from '../../assets/svg';
+import { HomeSmile, SmileCircleActiveIcon } from '../../assets/svg';
 import HomeIconDisabled from '../../assets/svg/dashboard/HomeIconDisabled';
 import SmileCircleIcon from '../../assets/svg/dashboard/SmileCircleIcon';
 import UserIcon from '../../assets/svg/dashboard/UserIcon';
@@ -11,13 +11,12 @@ import UserIconActive from '../../assets/svg/dashboard/UserIconActive';
 import { authStore } from '../../context/auth/store';
 import { MenuModule } from '../../context/entities';
 import { DashboardStackParamList } from '../../types/DashboardStackParamList';
+import { TabBarIndexCommon } from '../../uitls/tabBarCommon';
+import HeaderBar from '../Component/HeaderBack/HeaderBar';
 import HeaderComponent from '../Component/HeaderBack/HeaderComponent';
-import LoginButton from '../Component/LoginButton/LoginButton';
 import Dashboard from './Pages/Home/Dashboard/Dashboard';
 import Profile from './Pages/Home/Profile/Profile';
 import Request from './Pages/Home/Request/Request';
-import { TabBarIndexCommon } from '../../uitls/tabBarCommon';
-import HeaderBar from '../Component/HeaderBack/HeaderBar';
 
 const TabArr: MenuModule.TabModule[] = [
   {

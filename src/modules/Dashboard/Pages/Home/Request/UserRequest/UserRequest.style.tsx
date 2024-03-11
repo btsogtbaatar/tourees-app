@@ -3,10 +3,10 @@ import { Colors } from '../../../../../../../constants/Colors';
 
 export const calendarTheme: Theme = {
   dayTextColor: Colors.textColor,
-  textSectionTitleColor: Colors.textHeader,
+  textSectionTitleColor: Colors.gray700,
   selectedDayTextColor: Colors.textWhite,
   selectedDayBackgroundColor: Colors.primaryColor,
   textMonthFontWeight: 'bold',
-  monthTextColor: Colors.textHeader,
+  monthTextColor: Colors.gray700,
   arrowColor: Colors.primaryColor,
 };

@@ -22,7 +22,7 @@ export const ProfileIndexCommon = () => {
     {
       values: [t('profile.l_register_infomation')],
       prefix: <UserCircleIcon />,
-      suffix: <ChevronRightIcon color={Colors.textHeader} />,
+      suffix: <ChevronRightIcon color={Colors.gray700} />,
       onPress: () => {
         console.log('test');
       },
@@ -30,7 +30,7 @@ export const ProfileIndexCommon = () => {
     {
       values: [t('profile.l_history')],
       prefix: <ClockRewindIcon />,
-      suffix: <ChevronRightIcon color={Colors.textHeader} />,
+      suffix: <ChevronRightIcon color={Colors.gray700} />,
       onPress: () => {
         console.log('test');
       },
@@ -38,7 +38,7 @@ export const ProfileIndexCommon = () => {
     {
       values: [t('profile.l_ebarimt')],
       prefix: <EBarimtIcon />,
-      suffix: <ChevronRightIcon color={Colors.textHeader} />,
+      suffix: <ChevronRightIcon color={Colors.gray700} />,
       onPress: () => {
         console.log('test');
       },
@@ -47,7 +47,7 @@ export const ProfileIndexCommon = () => {
     {
       values: [t('profile.language'), t('profile.mongolia')],
       prefix: <GlobalIcon />,
-      suffix: <ChevronRightIcon color={Colors.textHeader} />,
+      suffix: <ChevronRightIcon color={Colors.gray700} />,
       onPress: () => {
         const language = languageState.language;
         i18n.changeLanguage(language === 'mn' ? 'en' : 'mn').then(() => {
@@ -58,7 +58,7 @@ export const ProfileIndexCommon = () => {
     {
       values: [t('profile.t_serviceterm')],
       prefix: <FileIcon />,
-      suffix: <ChevronRightIcon color={Colors.textHeader} />,
+      suffix: <ChevronRightIcon color={Colors.gray700} />,
       onPress: () => {
         console.log('test');
       },
@@ -66,7 +66,7 @@ export const ProfileIndexCommon = () => {
     {
       values: [t('profile.l_help')],
       prefix: <HelpCircleIcon />,
-      suffix: <ChevronRightIcon color={Colors.textHeader} />,
+      suffix: <ChevronRightIcon color={Colors.gray700} />,
       onPress: () => {
         console.log('test');
       },
