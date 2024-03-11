@@ -50,60 +50,28 @@ const AuthStack = () => {
         component={Register}
         options={{
           header: () => <HeaderBar title={t('l_signup')} />,
-          // headerTitle: t('l_signup'),
-          // headerTitleAlign: 'center',
-          // headerLeft: () => <HeaderBack title="X" />,
-          // gestureEnabled: true,
-          // gestureDirection: 'horizontal',
-          // headerStyle: {
-          //   backgroundColor: 'transparent',
-          // },
         }}
       />
       <Tab.Screen
         name="SignUp1"
         component={RegisterUsername}
         initialParams={{ values: [{ username: '' }] }}
-        options={
-          {
-            // headerTitle: t('l_signup'),
-            // headerTitleAlign: 'center',
-            // headerLeft: () => <HeaderBack title="X" />,
-            // gestureEnabled: true,
-            // gestureDirection: 'horizontal',
-            // headerShown: false,
-            // headerStyle: {
-            //   backgroundColor: 'transparent',
-            // },
-          }
-        }
+        options={{
+          header: () => <HeaderBar title={t('l_signup')} />,
+        }}
       />
       <Tab.Screen
         name="SignUpOtp"
         component={RegisterOtp}
         options={{
-          headerTitle: t('l_confirm'),
-          headerTitleAlign: 'center',
-          gestureEnabled: true,
-          headerLeft: () => <HeaderBack title="" />,
-          gestureDirection: 'horizontal',
-          headerStyle: {
-            backgroundColor: 'transparent',
-          },
+          header: () => <HeaderBar title={t('l_confirm')} />,
         }}
       />
       <Tab.Screen
         name="SignUpTerm"
         component={RegisterTerm}
         options={{
-          headerTitle: t('profile.t_serviceterm'),
-          headerTitleAlign: 'center',
-          gestureEnabled: true,
-          headerLeft: () => <HeaderBack title="" />,
-          gestureDirection: 'horizontal',
-          headerStyle: {
-            backgroundColor: 'transparent',
-          },
+          header: () => <HeaderBar title={t('profile.t_serviceterm')} />,
         }}
       />
     </Tab.Navigator>

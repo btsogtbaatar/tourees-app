@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   KeyboardAvoidingView,
+  Platform,
   Text,
   TouchableOpacity,
   View,
@@ -22,6 +23,7 @@ import { authStore } from '../../../../../context/auth/store';
 import { ModalContext } from '../../../../../context/modal/modal.context';
 import { actions } from '../../../../../context/modal/modal.reducer';
 import Modal from '../../../../Component/Modal/Modal';
+import { useHeaderHeight } from '@react-navigation/elements';
 
 interface Props {
   route: {
@@ -42,6 +44,7 @@ function RegisterOtp({ route, navigation }: Props) {
   const [disabled, setDisabled] = useState<boolean>(true);
   const authState = authStore(state => state);
   const { dispatch: dispatchModal } = useContext(ModalContext);
+  const headerHeight = useHeaderHeight();
 
   useTimer(
     (count, shouldButtonEnabled) => {
@@ -82,8 +85,10 @@ function RegisterOtp({ route, navigation }: Props) {
   };
   return (
     <KeyboardAvoidingView
-      behavior="padding"
-      keyboardVerticalOffset={100}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={
+        Platform.OS === 'ios' ? headerHeight : headerHeight * 1.2
+      }
       style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1, paddingHorizontal: horizontalScale(16) }}>

@@ -73,6 +73,7 @@ const DashboardStack = () => {
                     title={item.label}
                   />
                 ),
+                headerTitleAlign: 'center',
                 tabBarLabel: t(item.label),
                 tabBarActiveTintColor: Colors.primaryColor,
                 tabBarInactiveTintColor: '#5F676F',
@@ -112,15 +113,6 @@ const DashboardMainStack = () => {
               component={Dashboard}
               options={{
                 header: () => <HeaderBar isDashboard={true} />,
-                // headerStyle: {
-                //   backgroundColor: 'transparent',
-                // },
-                // headerRight: () => {
-                //   return <LoginButton />;
-                // },
-                // headerLeft: () => {
-                //   return <LogoIcon />;
-                // },
               }}
             />
           </Stack.Group>
