@@ -21,28 +21,14 @@ const AuthStack = () => {
         name="Login"
         component={Login}
         options={{
-          headerTitle: t('login.title'),
-          headerTitleAlign: 'center',
-          headerLeft: () => <HeaderBack title="×" />,
-          gestureEnabled: true,
-          gestureDirection: 'horizontal',
-          headerStyle: {
-            backgroundColor: 'transparent',
-          },
+          header: () => <HeaderBar title={"Нэвтрэх"} />,
         }}
       />
       <Tab.Screen
         name="LoginOtpCheck"
         component={LoginOtpCheck}
         options={{
-          headerTitle: t('login.title'),
-          headerTitleAlign: 'center',
-          headerLeft: () => <HeaderBack title="×" />,
-          gestureEnabled: true,
-          gestureDirection: 'horizontal',
-          headerStyle: {
-            backgroundColor: 'transparent',
-          },
+          header: () => <HeaderBar title={"Нэвтрэх"} />,
         }}
       />
       <Tab.Screen
