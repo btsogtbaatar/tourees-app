@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     lineHeight: 24,
-    color: Colors.textHeader,
+    color: Colors.gray700,
   },
   descStyle: {
     fontSize: 12,

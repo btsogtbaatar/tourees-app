@@ -1,4 +1,6 @@
-export type DashboardStackParamList = {
+import { BaseStackParamList } from './BaseStackParamList';
+
+type StackType = {
   Home: object;
   Request: object;
   Profile: object;
@@ -14,5 +16,6 @@ export type DashboardStackParamList = {
   RequestReg: object;
   UserRequest: object;
   RequestDetail: object;
-  navigate: (screen: string, route?: any) => void;
 };
+
+export type DashboardStackParamList = StackType & BaseStackParamList;

@@ -12,8 +12,7 @@ function getRequests(page: number): Promise<RequestModule.RequestResponse> {
   return api.get('api/requests', { params: params });
 }
 
-function createRequest(data: RequestModule.Request): Promise<AuthStateToken> {
-  data.is_app = true;
+function createRequest(data: FormData): Promise<AuthStateToken> {
   return api.post('/requests', data, { headers });
 }
 

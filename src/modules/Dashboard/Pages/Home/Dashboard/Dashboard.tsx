@@ -33,17 +33,18 @@ const Dashboard = ({ navigation }: DashboardProps) => {
   };
 
   const getCateories = () => {
-    categoriesService.getCateories().then(
-      (res: CategoryModule.Categories[]) => {
+    categoriesService
+      .getCateories()
+      .then((res: CategoryModule.Categories[]) => {
         setCatogories(res);
         setLoading(false);
         setRefreshing(false);
-      },
-      (err: any) => {
+      })
+      .catch((err: any) => {
         console.log('erroro', err);
         setLoading(false);
-      },
-    );
+        setRefreshing(false);
+      });
   };
 
   useEffect(() => {

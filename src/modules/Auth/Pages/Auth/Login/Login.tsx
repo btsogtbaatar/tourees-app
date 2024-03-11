@@ -8,6 +8,7 @@ import * as yup from 'yup';
 import { authService } from '../../../../../api/services/auth';
 import { LoginModel } from '../../../../../context/entities';
 import { AuthStackParamList } from '../../../../../types/AuthStackParamList';
+import { verticalScale } from '../../../../../uitls/metrics';
 import validations from '../../../../../uitls/validations';
 import ContainerView from '../../../../Component/ContainerView/ContainerView';
 import CustomInput from '../../../../Component/CustomInput/CustomInput';
@@ -70,11 +71,13 @@ export default function Login(props: Readonly<LoginProps>) {
         <FullHeightView>
           <ContainerView>
             <View>
-              <TabController
-                onSelectedTabChange={setAuthChannel}
-                firstTabLabel={t('email.tab')}
-                secondTabLabel={t('phone.tab')}
-              />
+              <View style={{ marginBottom: verticalScale(16) }}>
+                <TabController
+                  onSelectedTabChange={setAuthChannel}
+                  firstTabLabel={t('email.tab')}
+                  secondTabLabel={t('phone.tab')}
+                />
+              </View>
               <FormProvider {...form}>
                 {authChannel === AuthChannel.Email && (
                   <CustomInput

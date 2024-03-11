@@ -56,7 +56,7 @@ const HeaderRequest = ({ title, url }: HeaderRequestProps) => {
                 fontSize: 16,
                 fontWeight: '700',
                 lineHeight: 24,
-                color: Colors.textHeader,
+                color: Colors.gray700,
               }}>
               {title ? title : ''}
             </Text>
