@@ -16,6 +16,8 @@ interface RequestDetailProps {
 
 const RequestDetail = (props: RequestDetailProps) => {
   const { statusType } = props.route.params;
+  console.log("params",props.route.params);
+  
 
   return (
     <View style={styles.container}>

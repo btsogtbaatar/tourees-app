@@ -11,17 +11,20 @@ interface UserRequestCardProps {
   item: RequestModule.Request;
 }
 
+
+
 const UserRequestCard = ({ item }: UserRequestCardProps) => {
+  console.log(item);
   const navigation = useNavigation<DashboardStackParamList>();
   const onDetails = () => {
-    console.log(item.custom_status.code, 'dsds');
+    console.log(item.status_code, 'dsds');
 
     navigation.navigate('RequestStack', {
       screen: 'RequestDetail',
       params: {
         title: item.name,
         url: item.sub_category.image_url,
-        statusType: item.custom_status,
+        statusType: item.status_code,
       },
     });
   };
@@ -48,11 +51,11 @@ const UserRequestCard = ({ item }: UserRequestCardProps) => {
         <View
           style={[
             styles.iconContainer,
-            item.custom_status.code == '3' && {
+            item.status_code == 3 && {
               backgroundColor: 'rgba(70, 220, 157, 0.20)',
             },
           ]}>
-          {item.custom_status.code == '3' ? (
+          {item.status_code == 3 ? (
             <CheckIcon width={10} height={10} color={'#46DC9D'} />
           ) : (
             <Text style={styles.iconText}>1</Text>
