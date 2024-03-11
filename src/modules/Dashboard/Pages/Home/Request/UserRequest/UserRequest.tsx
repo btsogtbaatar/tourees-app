@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { useForm } from 'react-hook-form';
 import LinearGradient from 'react-native-linear-gradient';
 import { Colors } from '../../../../../../../constants/Colors';
 import { LocationCircleIcon, LocationIcon } from '../../../../../../assets/svg';
@@ -45,34 +44,48 @@ function UserRequest({ route }: UserProps) {
   const navigation = useNavigation<DashboardStackParamList>();
   const authState = authStore(state => state);
   const { dispatch: dispatchModal } = useContext(ModalContext);
-  const [requestValue, setRequestValue] = useState<RequestModule.Request>({
+  const [selectedImages, setSelectedImages] = useState<ImageSource[]>([]);
+  const [requestValue, setRequestValue] = useState<any>({
     user_id: authState.auth ? authState.auth.user.id : undefined,
     name: authState.auth ? authState.auth.user.name : '',
     status_code: 1,
     sub_category_id: subCategory.id,
   });
+  // const [requestValue, setRequestValue] = useState<RequestModule.Request>({
+  //   user_id: authState.auth ? authState.auth.user.id : undefined,
+  //   name: authState.auth ? authState.auth.user.name : '',
+  //   status_code: 1,
+  //   sub_category_id: subCategory.id,
+  // });
 
   // const handleDate = (startDate: string) => {
   //   setRequestValue({ ...requestValue, ["request_date"]: startDate });
   // }
 
   const handleInputChange = (
-    fieldName: keyof RequestModule.Request,
-    value: any,
+    fieldName: keyof typeof requestValue,
+    value: any
   ) => {
-    if (fieldName === 'files') {
-      const imageFile = value;
-      setRequestValue({ ...requestValue, [fieldName]: imageFile });
-      console.log(imageFile);
-    } else {
-      setRequestValue({ ...requestValue, [fieldName]: value });
-    }
+    setRequestValue({ ...requestValue, [fieldName]: value });
   };
 
+  const handleImageSelection = (images: ImageSource[]) => {
+    setSelectedImages(images);
+  };
   const submit = () => {
     if (authState.authenticated) {
       const data = new FormData();
-      data.append('files', requestValue.files as unknown as File);
+
+      selectedImages.forEach((image: ImageSource) => {
+        if(image.uri!==undefined){
+        data.append('files[]', {
+          uri: image.uri!,
+          name: image.name,
+          type: image.type,
+        });
+      }
+      });
+
       data.append('user_id', requestValue.user_id);
       data.append('name', requestValue.name);
       data.append('status_code', requestValue.status_code);
@@ -80,7 +93,7 @@ function UserRequest({ route }: UserProps) {
       data.append('request_date', requestValue.request_date);
       data.append('details', requestValue.details);
 
-      requestsService.createRequest(requestValue).then(
+      requestsService.createRequest(data).then(
         (res: any) => {
           console.log(res);
 
@@ -201,11 +214,7 @@ function UserRequest({ route }: UserProps) {
             <Text style={{ fontWeight: '500', lineHeight: 21 }}>
               Зураг оруулах
             </Text>
-            <ImageUploadButton
-              onImageSelection={(value: ImageSource[]) =>
-                handleInputChange('files', value)
-              }
-            />
+            <ImageUploadButton onImageSelection={handleImageSelection} />
             <Text style={{ fontWeight: '500', lineHeight: 21 }}>
               Дэлгэрэнгүй тайлбар
             </Text>

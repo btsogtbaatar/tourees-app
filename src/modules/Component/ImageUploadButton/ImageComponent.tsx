@@ -8,10 +8,10 @@ import {
 } from 'react-native';
 import styles from './ImageComponent.style';
 import { PlusIcon } from '../../../assets/svg';
-import { ImageSourse } from './ImageUploadButton';
+import { ImageSource } from './ImageUploadButton';
 
 interface ImageComponentProps {
-  item: ImageSourse;
+  item: ImageSource;
   index: number;
   chooseFile: () => void;
   selectedImage: number;
