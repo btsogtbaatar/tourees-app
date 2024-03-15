@@ -49,12 +49,23 @@ export default {
     t_profile: 'Миний',
   },
   request: {
-    reuestNewMessage:
+    requestNewMessage:
       'Таны хүсэлт амжилттай бүртгэгдлээ, бид тун удахгүй таны хүсэлтэд таарсан гүйцэтгэгчийг холбох болно. Хэрэв та цуцлах бол яаралтай оператортой холбогдоно уу!',
     logoTitle: 'Seed Bot',
     operatorCall: 'Оператортой холбогдох',
-    reuestOperatorMessage:
+    requestOperatorMessage:
       'Таны хүсэлт хуваарилагдсан байна. Болд тун удахгүй тантай холбогдох тул та түр хүлээнэ үү.',
+    requestDone: 'Болсон',
+    requestDetailMsg: 'Хүсэлтийн дэлгэрэнгүй мэдээлэл',
+    requestDetail: 'Дэлгэрэнгүй тайлбар',
+    requestAddress: 'Хаяг',
+    requestAddressMsg: 'Хаягаа оруулна уу.',
+    requestImages: 'Зураг оруулах',
+    requestEdit:'Засах',
+    requestDestinationAddress: 'Ачих газар',
+    requestDeliveryAddress: 'Буулгах газар',
+    requestCreate: 'Хүсэлт үүсгэх',
+    requestDeliveryDate: 'Хүргэлт хийх өдөр сонгох'
   },
   login: {
     title: 'Нэвтрэх',

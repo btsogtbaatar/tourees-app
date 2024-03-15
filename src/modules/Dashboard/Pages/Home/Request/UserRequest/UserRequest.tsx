@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import React, { useContext, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import {
   Image,
   ScrollView,
@@ -50,6 +51,7 @@ enum AddressType {
 }
 
 function UserRequest({ route }: UserProps) {
+  const { t } = useTranslation();
   const bottomSheetRef = useRef<BottomSheet>(null);
   const subCategory = route.params.item;
   const navigation = useNavigation<DashboardStackParamList>();
@@ -121,12 +123,12 @@ function UserRequest({ route }: UserProps) {
             component: (
               <WelcomeModal
                 title={''}
-                subTitle={'Таны хүсэлт амжилттай бүртгэгдлээ'}
+                subTitle={t('request.requestNewMessage')}
                 onClick={() => {
                   dispatchModal({ type: actions.HIDE });
                   navigation.navigate('DashboardStack');
                 }}
-                buttonText="Болсон"
+                buttonText={t('request.requestDone')}
               />
             ),
           });
@@ -172,6 +174,17 @@ function UserRequest({ route }: UserProps) {
               <Text
                 style={{
                   color: Colors.textWhite,
+                  fontSize: 18,
+                  fontFamily: 'Nunito',
+                  fontWeight: '700',
+                  lineHeight: 27,
+                }}>
+                {t('request.requestCreate')}
+              </Text>
+              <Text
+                style={{
+                  color: Colors.textWhite,
+                  fontFamily: 'Nunito',
                   fontSize: 20,
                   fontWeight: '800',
                   lineHeight: 30,
@@ -181,6 +194,7 @@ function UserRequest({ route }: UserProps) {
               <Text
                 style={{
                   color: Colors.textWhite,
+                  fontFamily: 'Nunito',
                   fontSize: 12,
                   fontWeight: '400',
                   lineHeight: 18,
@@ -217,21 +231,16 @@ function UserRequest({ route }: UserProps) {
                 height: verticalScale(45),
                 justifyContent: 'center',
                 alignItems: 'center',
-              }}>
-              <Text
-                style={{
-                  color: Colors.gray700,
-                  fontSize: 18,
-                  fontWeight: '700',
-                  lineHeight: 27,
-                }}>
-                Хүсэлт үүсгэх
-              </Text>
-            </View>
+              }}></View>
             <ScrollView
               style={{ flex: 1, paddingHorizontal: horizontalScale(16) }}>
-              <Text style={{ fontWeight: '500', lineHeight: 21 }}>
-                Хүргэлт хийх өдөр сонгох
+              <Text
+                style={{
+                  fontFamily: 'Nunito',
+                  fontWeight: '500',
+                  lineHeight: 21,
+                }}>
+                {t('request.requestDeliveryDate')}
               </Text>
               <Calendar
                 onSuccess={(value: string) =>
@@ -242,12 +251,22 @@ function UserRequest({ route }: UserProps) {
                 }
                 initialStartDate={moment().format('YYYY-MM-DD')}
               />
-              <Text style={{ fontWeight: '500', lineHeight: 21 }}>
-                Зураг оруулах
+              <Text
+                style={{
+                  fontFamily: 'Nunito',
+                  fontWeight: '500',
+                  lineHeight: 21,
+                }}>
+                {t('request.requestImages')}
               </Text>
               <ImageUploadButton onImageSelection={handleImageSelection} />
-              <Text style={{ fontWeight: '500', lineHeight: 21 }}>
-                Дэлгэрэнгүй тайлбар
+              <Text
+                style={{
+                  fontFamily: 'Nunito',
+                  fontWeight: '500',
+                  lineHeight: 21,
+                }}>
+                {t('request.requestDetail')}
               </Text>
               <View
                 style={{
@@ -261,7 +280,7 @@ function UserRequest({ route }: UserProps) {
                   paddingVertical: verticalScale(6),
                 }}>
                 <Text style={{ color: '#AFB3B7', lineHeight: 18 }}>
-                  Дэлгэрэнгүй тайлбар
+                  {t('request.requestDetail')}
                 </Text>
                 <TextInput
                   value={requestValue?.details}
@@ -270,25 +289,27 @@ function UserRequest({ route }: UserProps) {
                   }
                   style={{
                     fontSize: 16,
+                    fontFamily: 'Nunito',
                     fontWeight: '600',
                     lineHeight: 24,
                     color: Colors.gray700,
                   }}
                   multiline={true}
                   numberOfLines={4}
-                  placeholder="Дэлгэрэнгүй тайлбар оруулна уу."
+                  placeholder={t('request.requestDetailMsg')}
                   returnKeyType="next"
                 />
               </View>
               <Text style={[Typography.textSmallBold, { marginBottom: 8 }]}>
-                Хаяг оруулах
+                {t('request.requestDestinationAddress')}
               </Text>
               <View style={[AddressFormStyle.container, { marginBottom: 16 }]}>
                 <LocationCircleIcon style={AddressFormStyle.icon} />
                 <Text
                   numberOfLines={2}
                   style={[Typography.textSmallerMedium, { flex: 1 }]}>
-                  {fromAddress?.address ?? 'Хаяг оруулна уу.'}
+                  {fromAddress?.address ??
+                    t('request.requestDestinationAddress')}
                 </Text>
                 <Text
                   onPress={() => {
@@ -299,7 +320,7 @@ function UserRequest({ route }: UserProps) {
                     Typography.textSmallBold,
                     { color: Colors.primaryColor, marginLeft: 8 },
                   ]}>
-                  Засах
+                  {t('request.requestEdit')}
                 </Text>
               </View>
               <View style={AddressFormStyle.container}>
@@ -307,7 +328,7 @@ function UserRequest({ route }: UserProps) {
                 <Text
                   numberOfLines={2}
                   style={[Typography.textSmallerMedium, { flex: 1 }]}>
-                  {toAddress?.address ?? 'Хаяг оруулна уу.'}
+                  {toAddress?.address ?? t('request.requestDeliveryAddress')}
                 </Text>
                 <Text
                   onPress={() => {
@@ -318,7 +339,7 @@ function UserRequest({ route }: UserProps) {
                     Typography.textSmallBold,
                     { color: Colors.primaryColor, marginLeft: 8 },
                   ]}>
-                  Засах
+                  {t('request.requestEdit')}
                 </Text>
               </View>
 
@@ -343,6 +364,7 @@ function UserRequest({ route }: UserProps) {
                   <Text
                     style={{
                       color: Colors.textWhite,
+                      fontFamily: 'Nunito',
                       fontWeight: '700',
                       lineHeight: 21,
                     }}>
@@ -358,7 +380,7 @@ function UserRequest({ route }: UserProps) {
             <AddressBottomSheetView
               value={addressType === AddressType.From ? fromAddress : toAddress}
               onChange={address => {
-                console.log("🚀 ~ UserRequest ~ address:", address)
+                console.log('🚀 ~ UserRequest ~ address:', address);
                 if (addressType === AddressType.From) {
                   setFromAddress(address);
                 } else {
