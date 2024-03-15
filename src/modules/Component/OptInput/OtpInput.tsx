@@ -48,6 +48,7 @@ const OtpInput = (props: OtpProps) => {
             textAlign: 'center',
             fontWeight: '700',
             fontSize: 24,
+            fontFamily: 'Nunito',
           }}
           onFocus={() => {
             if (index < codeLength) {

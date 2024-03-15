@@ -18,12 +18,14 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#878D93',
     marginLeft: horizontalScale(5),
+    fontFamily: 'Nunito',
   },
   inputStyle: {
     color: '#21272D',
     fontWeight: '600',
     fontSize: 15,
     flex: 1,
+    fontFamily: 'Nunito',
   },
 });
 

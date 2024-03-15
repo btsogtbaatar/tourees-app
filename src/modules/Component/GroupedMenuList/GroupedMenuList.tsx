@@ -76,6 +76,7 @@ const styles = StyleSheet.create({
     lineHeight: 18,
     color: Colors.textColor,
     marginLeft: horizontalScale(16),
+    fontFamily: 'Nunito',
   },
   subMenuText: {
     color: Colors.gray300,
@@ -83,6 +84,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 24,
     marginRight: horizontalScale(12),
+    fontFamily: 'Nunito',
   },
   subContainer: {
     flexDirection: 'row',

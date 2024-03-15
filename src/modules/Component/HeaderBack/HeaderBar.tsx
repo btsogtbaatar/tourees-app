@@ -45,10 +45,10 @@ const HeaderBar = ({
           <Text
             style={{
               textAlign: 'center',
-              color: Colors.textHeader,
               fontSize: 16,
               lineHeight: 24,
               fontWeight: '600',
+              fontFamily: 'Nunito',
             }}>
             {title}
           </Text>
@@ -59,7 +59,11 @@ const HeaderBar = ({
       {isDashboard && (
         <>
           <LogoIcon />
-          <LoginButton onClick={() => navigation.navigate('AuthStack', {screen: 'Login'})} />
+          <LoginButton
+            onClick={() =>
+              navigation.navigate('AuthStack', { screen: 'Login' })
+            }
+          />
         </>
       )}
     </View>

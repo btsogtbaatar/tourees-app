@@ -35,6 +35,7 @@ const WelcomeModal = ({
             fontSize: 18,
             fontWeight: '700',
             lineHeight: 27,
+            fontFamily: 'Nunito',
           }}>
           {title}
         </Text>

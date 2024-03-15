@@ -84,6 +84,7 @@ export default function CheckOtp(props: Readonly<CheckOtpProps>) {
                   color: Colors.primaryColor,
                   fontWeight: '700',
                   fontSize: 14,
+                  fontFamily: 'Nunito',
                 }}>
                 дахин илгээх
               </Text>

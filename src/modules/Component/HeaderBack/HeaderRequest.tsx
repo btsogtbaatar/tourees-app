@@ -57,6 +57,7 @@ const HeaderRequest = ({ title, url }: HeaderRequestProps) => {
                 fontWeight: '700',
                 lineHeight: 24,
                 color: Colors.gray700,
+                fontFamily: 'Nunito',
               }}>
               {title ? title : ''}
             </Text>
@@ -65,6 +66,7 @@ const HeaderRequest = ({ title, url }: HeaderRequestProps) => {
                 fontSize: 12,
                 fontWeight: '600',
                 color: Colors.gray300,
+                fontFamily: 'Nunito',
               }}>
               {title ? title : ''}
             </Text>

@@ -43,6 +43,7 @@ const LoginButton = ({ title, onClick }: LoginButtonProps) => {
             fontWeight: '700',
             lineHeight: 18,
             fontSize: 14,
+            fontFamily: 'Nunito',
           }}>
           {title ? title : t('signUp.login')}
         </Text>
