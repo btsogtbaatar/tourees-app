@@ -33,8 +33,8 @@ const RequestMessage = ({ time, newRequest }: RequestMessageProps) => {
       </View>
       <Text style={styles.messageStyle}>
         {newRequest
-          ? t('request.reuestNewMessage')
-          : t('request.reuestOperatorMessage')}
+          ? t('request.requestNewMessage')
+          : t('request.requestOperatorMessage')}
       </Text>
       {newRequest ? (
         <TouchableOpacity style={styles.operatorBtn}>
