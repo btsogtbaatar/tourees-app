@@ -28,6 +28,7 @@ const createStyles = StyleSheet.create({
     color: Colors.textWhite,
     fontSize: 13,
     fontWeight: '700',
+    fontFamily: 'Nunito',
   },
   container: {
     padding: 16,

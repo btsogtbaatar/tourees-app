@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 30,
     marginTop: verticalScale(16),
+    fontFamily: 'Nunito',
   },
   mt16: {
     marginTop: verticalScale(16),
@@ -112,6 +113,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '700',
     lineHeight: 18,
+    fontFamily: 'Nunito',
   },
   alignEnd: {
     alignSelf: 'flex-end',

@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 15,
     fontSize: 11,
+    fontFamily: 'Nunito',
   },
 });
 

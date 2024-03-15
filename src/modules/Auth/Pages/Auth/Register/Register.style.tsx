@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 24,
     color: '#21272D',
+    fontFamily: 'Nunito',
   },
   selectedBox: {
     borderColor: Colors.primaryColor,
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     borderWidth: 1,
     borderRadius: 15,
+    fontFamily: 'Nunito',
   },
   mt10: {
     marginTop: 20,
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '500',
     marginTop: verticalScale(12),
+    fontFamily: 'Nunito',
   },
   btn: {
     height: 41,
@@ -90,6 +93,7 @@ const styles = StyleSheet.create({
     color: Colors.textWhite,
     fontSize: 13,
     fontWeight: '700',
+    fontFamily: 'Nunito',
   },
   btnContainer: {
     // backgroundColor: Colors.textWhite,

@@ -21,6 +21,7 @@ const styles = StyleSheet.create({
     color: '#21272D',
     lineHeight: 21,
     marginBottom: verticalScale(10),
+    fontFamily: 'Nunito',
   },
   subTitle: {
     marginLeft: horizontalScale(10),
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
     color: '#5F676F',
     fontWeight: '400',
     lineHeight: 20,
+    fontFamily: 'Nunito',
   },
   label: {
     marginLeft: 0,
@@ -44,6 +46,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     lineHeight: 21,
     color: '#21272D',
+    fontFamily: 'Nunito',
   },
 });
 

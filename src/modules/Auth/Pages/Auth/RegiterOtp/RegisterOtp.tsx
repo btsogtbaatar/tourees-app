@@ -24,6 +24,7 @@ import { ModalContext } from '../../../../../context/modal/modal.context';
 import { actions } from '../../../../../context/modal/modal.reducer';
 import Modal from '../../../../Component/Modal/Modal';
 import { useHeaderHeight } from '@react-navigation/elements';
+import CustomKeyboardAvoidingView from '../../../../Component/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 
 interface Props {
   route: {
@@ -84,12 +85,7 @@ function RegisterOtp({ route, navigation }: Props) {
     );
   };
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={
-        Platform.OS === 'ios' ? headerHeight : headerHeight * 1.2
-      }
-      style={{ flex: 1 }}>
+    <CustomKeyboardAvoidingView>
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1, paddingHorizontal: horizontalScale(16) }}>
           <View style={{ flex: 1 }}>
@@ -147,6 +143,7 @@ function RegisterOtp({ route, navigation }: Props) {
                         color: Colors.primaryColor,
                         fontWeight: '700',
                         fontSize: 14,
+                        fontFamily: 'Nunito',
                       }}>
                       dahin elgeeh
                     </Text>
@@ -165,7 +162,7 @@ function RegisterOtp({ route, navigation }: Props) {
           btnDisabled={!btnDisabled || !disabled}
         />
       </View>
-    </KeyboardAvoidingView>
+    </CustomKeyboardAvoidingView>
   );
 }
 

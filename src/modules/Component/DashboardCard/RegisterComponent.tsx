@@ -39,6 +39,7 @@ const RegisterComponent = ({ navigation }: Props) => {
             fontSize: 16,
             fontWeight: '500',
             lineHeight: 24,
+            fontFamily: 'Nunito',
           }}>
           Хэрвээ та үйлчилгээ үзүүлэгч бол бидэнтэй нэгдээрэй!
         </Text>

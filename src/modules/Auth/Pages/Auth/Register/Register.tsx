@@ -25,6 +25,7 @@ import FooterButton from '../../../../Component/FooterButton/FooterButton';
 import Steps from '../../../../Component/Step/Steps';
 import { RegisterModule, UsernameResponse } from '../../../entities';
 import styles from './Register.style';
+import CustomKeyboardAvoidingView from '../../../../Component/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 interface RegisterProps {
   navigation: NavigationProp<AuthStackParamList>;
 }
@@ -71,12 +72,7 @@ function Register({ navigation }: RegisterProps) {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={
-        Platform.OS === 'ios' ? headerHeight : headerHeight * 1.2
-      }
-      style={{ flex: 1 }}>
+    <CustomKeyboardAvoidingView>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
         <View style={{ flex: 1 }}>
           <View style={styles.container}>
@@ -147,7 +143,7 @@ function Register({ navigation }: RegisterProps) {
           />
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    </CustomKeyboardAvoidingView>
   );
 }
 
