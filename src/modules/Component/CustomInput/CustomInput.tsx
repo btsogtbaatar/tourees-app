@@ -12,6 +12,7 @@ import {
   Text,
   TextInput,
   TextInputFocusEventData,
+  TextInputProps,
   TextStyle,
   View,
 } from 'react-native';
@@ -20,7 +21,8 @@ import { CustomInputStyle } from './CustomInput.style';
 import { Typography } from '../../../../constants/Typography';
 import { Colors } from '../../../../constants/Colors';
 
-export interface CustomInputProps<T extends FieldValues> {
+export interface CustomInputProps<T extends FieldValues>
+  extends Omit<TextInputProps, 'onChange'> {
   name: Path<T>;
   label: string;
   labelStyle?: StyleProp<TextStyle>;
@@ -84,7 +86,7 @@ export default function CustomInput<T extends FieldValues>(
           onBlur={onBlur}
           onFocus={onFocus}
           keyboardType={props.keyboardType ?? 'default'}
-          style={[Typography.textRegularSemiBold, { borderColor: color }]}
+          style={[Typography.textRegularSemiBold, CustomInputStyle.input]}
           onChangeText={(text: string) => {
             onChange(text);
             props.onChange && props.onChange(text);

@@ -1,7 +1,7 @@
 import { Image } from '../../../node_modules/react-native/types/index';
 import { CategoryModule } from '../../modules/Auth/entities';
 
-export declare module RequestModule {
+export declare namespace RequestModule {
   export type Request = {
     user_id?: string;
     name?: string;
@@ -26,8 +26,8 @@ export declare module RequestModule {
   export type RequestAdditional = {
     latitude: number;
     longitude: number;
-    address: string;
-    name: string;
+    address?: string;
+    name?: string;
   };
   export type RequestResponse = {
     message?: string;

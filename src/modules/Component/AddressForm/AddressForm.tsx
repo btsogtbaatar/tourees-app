@@ -1,19 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
 import { Text, View } from 'react-native';
+import Geocoder from 'react-native-geocoding';
 import {
   GooglePlacesAutocomplete,
   GooglePlacesAutocompleteRef,
 } from 'react-native-google-places-autocomplete';
 import { Colors } from '../../../../constants/Colors';
 import { Typography } from '../../../../constants/Typography';
+import { RequestModule } from '../../../context/entities/request.model';
 import { CustomInputStyle } from '../CustomInput/CustomInput.style';
 import { AddressFormStyle } from './AddressForm.style';
-import Geocoder from 'react-native-geocoding';
 
 export interface AddressFormProps {
-  value?: Geocoder.LatLng;
-  onSubmit: (value: Geocoder.GeocoderResponse) => void;
+  value?: RequestModule.RequestAdditional;
+  onChange: (value: RequestModule.RequestAdditional) => void;
 }
 
 export default function AddressForm(props: Readonly<AddressFormProps>) {
@@ -21,18 +21,10 @@ export default function AddressForm(props: Readonly<AddressFormProps>) {
   const [borderColor, setBorderColor] = useState(Colors.gray100);
 
   useEffect(() => {
-    if (props.value) {
-      Geocoder.from(props.value).then(response => {
-        let places = response.results.filter(types =>
-          types.types.filter(_type => _type === 'route').length > 0,
-        );
+    console.log('🚀 ~ useEffect ~ props.value:', props.value);
 
-        if (places) {
-          suggestionListRef.current?.setAddressText(
-            places[0].formatted_address,
-          );
-        }
-      });
+    if (props.value) {
+      suggestionListRef.current?.setAddressText(props.value.address!);
     } else {
       suggestionListRef.current?.clear();
     }
@@ -50,10 +42,20 @@ export default function AddressForm(props: Readonly<AddressFormProps>) {
           ref={suggestionListRef}
           listViewDisplayed={true}
           keepResultsAfterBlur={true}
+          currentLocationLabel='Current location'
           placeholder="Хаягаа оруулна уу."
           onPress={(data, details = null) => {
+            console.log("🚀 ~ AddressForm ~ data:", data)
+            
             Geocoder.from(data.description).then(response => {
-              props.onSubmit(response);
+              let result = response.results[0];
+              console.log("🚀 ~ Geocoder.from ~ result:", result)
+
+              props.onChange({
+                address: data.description,
+                latitude: result.geometry.location.lat,
+                longitude: result.geometry.location.lng,
+              });
             });
           }}
           enablePoweredByContainer={false}

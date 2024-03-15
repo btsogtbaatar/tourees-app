@@ -11,4 +11,8 @@ export const CustomInputStyle = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center'
   },
+  input: {
+    padding: 0,
+    margin: 0
+  }
 });

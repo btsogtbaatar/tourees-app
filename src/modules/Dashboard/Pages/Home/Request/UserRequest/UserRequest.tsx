@@ -2,9 +2,8 @@ import BottomSheet from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import React, { useContext, useRef, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import {
-  Dimensions,
   Image,
   ScrollView,
   Text,
@@ -19,11 +18,9 @@ import { getEnv } from '../../../../../../api';
 import { requestsService } from '../../../../../../api/services/index';
 import { LocationCircleIcon, LocationIcon } from '../../../../../../assets/svg';
 import { authStore } from '../../../../../../context/auth/store';
+import { RequestModule } from '../../../../../../context/entities/request.model';
 import { ModalContext } from '../../../../../../context/modal/modal.context';
-import {
-  actions as ModalActions,
-  actions,
-} from '../../../../../../context/modal/modal.reducer';
+import { actions } from '../../../../../../context/modal/modal.reducer';
 import { DashboardStackParamList } from '../../../../../../types/DashboardStackParamList';
 import {
   horizontalScale,
@@ -32,17 +29,15 @@ import {
 import AddressBottomSheetView from '../../../../../Component/AddressBottomSheetView/AddressBottomSheetView';
 import { AddressFormStyle } from '../../../../../Component/AddressForm/AddressForm.style';
 import Calendar from '../../../../../Component/Calendar/Calendar';
-import CustomBottomSheet from '../../../../../Component/CustomBottomSheet/CustomBottomSheet';
-import CustomInput from '../../../../../Component/CustomInput/CustomInput';
+import { CustomBottomSheet } from '../../../../../Component/CustomBottomSheet/CustomBottomSheet';
+import CustomBottomScrollViewSheet from '../../../../../Component/CustomBottomSheetScrollView/CustomBottomSheetScrollView';
+import CustomKeyboardAvoidingView from '../../../../../Component/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import FooterButton from '../../../../../Component/FooterButton/FooterButton';
 import ImageUploadButton, {
   ImageSource,
 } from '../../../../../Component/ImageUploadButton/ImageUploadButton';
 import Modal from '../../../../../Component/Modal/Modal';
-import { RequestModule } from '../../../../../../context/entities/request.model';
 import WelcomeModal from '../../../../../Component/Modal/WelcomeModal';
-import { useTranslation } from 'react-i18next';
-import CustomKeyboardAvoidingView from '../../../../../Component/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 
 interface UserProps {
   route: { params: any };
@@ -67,7 +62,6 @@ function UserRequest({ route }: UserProps) {
     status_code: 1,
     sub_category_id: subCategory.id,
   });
-  const { t } = useTranslation();
 
   const [addressType, setAddressType] = useState<AddressType>(AddressType.From);
   const form = useForm();
@@ -289,49 +283,44 @@ function UserRequest({ route }: UserProps) {
               <Text style={[Typography.textSmallBold, { marginBottom: 8 }]}>
                 Хаяг оруулах
               </Text>
-              <FormProvider {...form}>
-                <View
-                  style={[AddressFormStyle.container, { marginBottom: 16 }]}>
-                  <LocationCircleIcon style={AddressFormStyle.icon} />
-                  <CustomInput
-                    editable={false}
-                    placeholder="Ачих газрыг оруулна уу."
-                    name={'fromAddress'}
-                    label={'Ачих газар'}
-                  />
-                  <Text
-                    onPress={() => {
-                      bottomSheetRef.current?.expand();
-                      setAddressType(AddressType.From);
-                    }}
-                    style={[
-                      Typography.textSmallBold,
-                      { color: Colors.primaryColor, marginLeft: 8 },
-                    ]}>
-                    Засах
-                  </Text>
-                </View>
-                <View style={AddressFormStyle.container}>
-                  <LocationIcon style={AddressFormStyle.icon} />
-                  <CustomInput
-                    editable={false}
-                    placeholder="Буулгах газрыг оруулна уу."
-                    name={'toAddress'}
-                    label={'Буулгах газар'}
-                  />
-                  <Text
-                    onPress={() => {
-                      bottomSheetRef.current?.expand();
-                      setAddressType(AddressType.To);
-                    }}
-                    style={[
-                      Typography.textSmallBold,
-                      { color: Colors.primaryColor, marginLeft: 8 },
-                    ]}>
-                    Засах
-                  </Text>
-                </View>
-              </FormProvider>
+              <View style={[AddressFormStyle.container, { marginBottom: 16 }]}>
+                <LocationCircleIcon style={AddressFormStyle.icon} />
+                <Text
+                  numberOfLines={2}
+                  style={[Typography.textSmallerMedium, { flex: 1 }]}>
+                  {fromAddress?.address ?? 'Хаяг оруулна уу.'}
+                </Text>
+                <Text
+                  onPress={() => {
+                    bottomSheetRef.current?.expand();
+                    setAddressType(AddressType.From);
+                  }}
+                  style={[
+                    Typography.textSmallBold,
+                    { color: Colors.primaryColor, marginLeft: 8 },
+                  ]}>
+                  Засах
+                </Text>
+              </View>
+              <View style={AddressFormStyle.container}>
+                <LocationIcon style={AddressFormStyle.icon} />
+                <Text
+                  numberOfLines={2}
+                  style={[Typography.textSmallerMedium, { flex: 1 }]}>
+                  {toAddress?.address ?? 'Хаяг оруулна уу.'}
+                </Text>
+                <Text
+                  onPress={() => {
+                    bottomSheetRef.current?.expand();
+                    setAddressType(AddressType.To);
+                  }}
+                  style={[
+                    Typography.textSmallBold,
+                    { color: Colors.primaryColor, marginLeft: 8 },
+                  ]}>
+                  Засах
+                </Text>
+              </View>
 
               <LinearGradient
                 start={{ x: 0, y: 0 }}
@@ -364,48 +353,19 @@ function UserRequest({ route }: UserProps) {
             </ScrollView>
           </View>
         </View>
-        <BottomSheet
-          android_keyboardInputMode="adjustResize"
-          handleIndicatorStyle={{ width: 100 }}
-          index={-1}
-          style={{
-            shadowColor: '#000',
-            shadowOffset: { width: -2, height: 5 },
-            shadowOpacity: 0.5,
-            shadowRadius: 8,
-          }}
-          ref={bottomSheetRef}
-          enableDynamicSizing={true}
-          maxDynamicContentSize={Dimensions.get('screen').height}
-          enablePanDownToClose={true}>
-          <CustomBottomSheet>
+        <CustomBottomSheet ref={bottomSheetRef}>
+          <CustomBottomScrollViewSheet>
             <AddressBottomSheetView
-              onSubmit={(response: Geocoder.GeocoderResponse) => {
+              value={addressType === AddressType.From ? fromAddress : toAddress}
+              onChange={address => {
+                console.log("🚀 ~ UserRequest ~ address:", address)
                 if (addressType === AddressType.From) {
-                  form.setValue(
-                    'fromAddress',
-                    response.results[0].formatted_address,
-                  );
-
-                  setFromAddress({
-                    address: response.results[0].formatted_address,
-                    latitude: response.results[0].geometry.location.lat,
-                    longitude: response.results[0].geometry.location.lng,
-                    name: 'Ачих',
-                  });
+                  setFromAddress(address);
                 } else {
-                  form.setValue(
-                    'toAddress',
-                    response.results[0].formatted_address,
-                  );
-
-                  setToAddress({
-                    address: response.results[0].formatted_address,
-                    latitude: response.results[0].geometry.location.lat,
-                    longitude: response.results[0].geometry.location.lng,
-                    name: 'Буулгах',
-                  });
+                  setToAddress(address);
                 }
+
+                form.setValue(addressType.toString(), address.address);
               }}
             />
             <View style={{ marginHorizontal: 16 }}>
@@ -424,8 +384,8 @@ function UserRequest({ route }: UserProps) {
                 onBackPress={() => bottomSheetRef.current?.close()}
               />
             </View>
-          </CustomBottomSheet>
-        </BottomSheet>
+          </CustomBottomScrollViewSheet>
+        </CustomBottomSheet>
       </LinearGradient>
     </CustomKeyboardAvoidingView>
   );

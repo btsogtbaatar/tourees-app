@@ -1,43 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
-import AddressForm from '../AddressForm/AddressForm';
-import AddressBottomSheetViewStyle from './AddressBottomSheetView.style';
 import { LocationCircleIcon } from '../../../assets/svg';
-import Geocoder from 'react-native-geocoding';
+import { RequestModule } from '../../../context/entities/request.model';
+import AddressForm from '../AddressForm/AddressForm';
+import AddressBottomSheetViewStyle, {
+  silverMapStyle,
+} from './AddressBottomSheetView.style';
+import { getAddressFromCoordinates } from '../../../uitls/map';
 
 export interface AddressBottomSheetViewProps {
-  onSubmit: (response: Geocoder.GeocoderResponse) => void;
+  value?: RequestModule.RequestAdditional;
+  onChange: (response: RequestModule.RequestAdditional) => void;
 }
 
 export default function AddressBottomSheetView(
-  props: AddressBottomSheetViewProps,
+  props: Readonly<AddressBottomSheetViewProps>,
 ) {
-  const [location, setLocation] = useState<Geocoder.LatLng>();
+  const [location, setLocation] = useState<RequestModule.RequestAdditional>();
 
   useEffect(() => {
-    setLocation(undefined);
-  }, [])
+    if (props.value) {
+      setLocation(props.value);
+    } else {
+      setLocation(undefined);
+    }
+  }, [props.value]);
 
   return (
     <>
       <View style={{ padding: 16, paddingTop: 0 }}>
         <AddressForm
           value={location}
-          onSubmit={response => {
-            setLocation(response.results[0].geometry.location);
-            props.onSubmit(response);
+          onChange={response => {
+            setLocation(response);
+            props.onChange(response);
           }}
         />
       </View>
       <View style={AddressBottomSheetViewStyle.container}>
         <MapView
-          zoomTapEnabled
-          zoomControlEnabled
+          customMapStyle={silverMapStyle}
           style={AddressBottomSheetViewStyle.map}
           region={{
-            latitude: location?.lat ?? 47.92123,
-            longitude: location?.lng ?? 106.918556,
+            latitude: location?.latitude ?? 47.92123,
+            longitude: location?.longitude ?? 106.918556,
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
           }}>
@@ -45,13 +52,16 @@ export default function AddressBottomSheetView(
             <Marker
               draggable
               coordinate={{
-                latitude: location.lat,
-                longitude: location.lng,
+                latitude: location.latitude,
+                longitude: location.longitude,
               }}
               onDragEnd={event => {
-                setLocation({
-                  lat: event.nativeEvent.coordinate.latitude,
-                  lng: event.nativeEvent.coordinate.longitude,
+                getAddressFromCoordinates({
+                  latitude: event.nativeEvent.coordinate.latitude,
+                  longitude: event.nativeEvent.coordinate.longitude,
+                }).then(place => {
+                  setLocation(place);
+                  props.onChange(place);
                 });
               }}>
               <LocationCircleIcon></LocationCircleIcon>
