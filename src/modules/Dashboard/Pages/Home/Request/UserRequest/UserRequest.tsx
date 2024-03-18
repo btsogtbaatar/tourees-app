@@ -1,3 +1,5 @@
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable react-native/no-inline-styles */
 import BottomSheet from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
@@ -86,6 +88,28 @@ function UserRequest({ route }: UserProps) {
     if (authState.authenticated) {
       const data = new FormData();
 
+      const validateAndDispatchModal = (value: any, title: string) => {
+        if (!value) {
+          dispatchModal({
+            type: actions.SHOW,
+            component: <Modal title={title} />,
+          });
+          return true;
+        }
+        return false;
+      };
+
+      if (
+        validateAndDispatchModal(
+          requestValue.details,
+          t('request.requestDetailWarning'),
+        ) ||
+        validateAndDispatchModal(fromAddress, t('request.requestAddressMsg')) ||
+        validateAndDispatchModal(toAddress, t('request.requestAddressMsg'))
+      ) {
+        return;
+      }
+
       selectedImages.forEach((image: ImageSource) => {
         if (image.uri !== undefined) {
           data.append('files[]', {
@@ -103,12 +127,10 @@ function UserRequest({ route }: UserProps) {
       data.append('sub_category_id', requestValue.sub_category_id);
       data.append('request_date', requestValue.request_date);
       data.append('details', requestValue.details);
-
       data.append('additional[].name', fromAddress?.name);
       data.append('additional[].latitude', fromAddress?.latitude);
       data.append('additional[].longitude', fromAddress?.longitude);
       data.append('additional[].address', fromAddress?.address);
-
       data.append('additional[].name', toAddress?.name);
       data.append('additional[].latitude', toAddress?.latitude);
       data.append('additional[].longitude', toAddress?.longitude);
