@@ -36,6 +36,7 @@ const WelcomeModal = ({
             fontWeight: '700',
             lineHeight: 27,
             fontFamily: 'Nunito',
+            textAlign: 'center'
           }}>
           {title}
         </Text>
@@ -44,6 +45,8 @@ const WelcomeModal = ({
             color: Colors.gray500,
             lineHeight: 15,
             marginTop: verticalScale(8),
+            fontFamily: 'Nunito',
+            textAlign: 'center'
           }}>
           {subTitle}
         </Text>

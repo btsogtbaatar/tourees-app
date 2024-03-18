@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable react-native/no-inline-styles */
+import React, { useState, useEffect, useCallback } from 'react';
 import { View } from 'react-native';
 import {
   Calendar as CalendarItem,
@@ -12,8 +13,8 @@ import { calendarMnLocale } from '../../../constants/DummyData';
 import { verticalScale } from '../../../uitls/metrics';
 
 interface CalendarItemProps extends CalendarProps {
-  onSuccess: (startDate: string) => void;
-  initialStartDate: string;
+  onSuccess: (value: string) => void;
+  initialStartDate?: string;
 }
 
 const Calendar = ({
@@ -21,16 +22,41 @@ const Calendar = ({
   initialStartDate,
   ...rest
 }: CalendarItemProps) => {
-  const [startDate, setStartDate] = useState<string>(initialStartDate);
-  console.log(startDate, 'startDate???');
+  const [startDate, setStartDate] = useState<string>('');
+  const [datePicked, setDatePicked] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (initialStartDate && !datePicked) {
+      setStartDate(initialStartDate);
+    }
+  }, [initialStartDate, datePicked]);
+
   LocaleConfig.locales['mn'] = calendarMnLocale;
   LocaleConfig.defaultLocale = 'mn';
 
-  const onDayPress = (day: DateData) => {
-    const selectedStartDate = day.dateString;
-    setStartDate(day.dateString);
-    onSuccess(selectedStartDate);
-  };
+  const handleSuccess = useCallback(
+    (selectedStartDate: string) => {
+      setStartDate(selectedStartDate);
+      setDatePicked(true);
+      onSuccess(selectedStartDate);
+    },
+    [onSuccess],
+  );
+
+  useEffect(() => {
+    if (!datePicked && initialStartDate) {
+      handleSuccess(initialStartDate);
+    }
+  }, [datePicked, initialStartDate, handleSuccess]);
+
+  const onDayPress = useCallback(
+    (day: DateData) => {
+      const selectedStartDate = day.dateString;
+      handleSuccess(selectedStartDate);
+    },
+    [handleSuccess],
+  );
+
   return (
     <View
       style={{
@@ -43,7 +69,7 @@ const Calendar = ({
       <CalendarItem
         firstDay={1}
         hideExtraDays={true}
-        initialDate={startDate}
+        initialDate={startDate || initialStartDate}
         onDayPress={(day: DateData) => {
           onDayPress(day);
         }}
