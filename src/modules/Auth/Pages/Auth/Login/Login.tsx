@@ -17,6 +17,7 @@ import CustomTouchableWithoutFeedback from '../../../../Component/CustomTouchabl
 import FooterButton from '../../../../Component/FooterButton/FooterButton';
 import FullHeightView from '../../../../Component/FullHeightView/FullHeightView';
 import TabController from '../../../../Component/TabController/TabController';
+import LoadingPage from '../../../../Component/Loading/LoadingPage';
 
 interface LoginProps {
   navigation: NavigationProp<AuthStackParamList>;
@@ -28,6 +29,7 @@ export enum AuthChannel {
 }
 
 export default function Login(props: Readonly<LoginProps>) {
+  const [loading, setLoading] = useState<boolean>(false);
   const { t } = useTranslation(undefined, { keyPrefix: 'login' });
   const [authChannel, setAuthChannel] = useState<AuthChannel>(
     AuthChannel.Email,
@@ -56,10 +58,19 @@ export default function Login(props: Readonly<LoginProps>) {
   });
 
   const onSubmit = (credentials: LoginModel.Credentials) => {
-    authService.generateOtpLogin(credentials).then(response => {
-      props.navigation.navigate('LoginOtpCheck', { credentials });
-    });
+    setLoading(true);
+
+    authService
+      .generateOtpLogin(credentials)
+      .then(response => {
+        props.navigation.navigate('LoginOtpCheck', { credentials });
+      })
+      .finally(() => setLoading(false));
   };
+
+  if (loading) {
+    return <LoadingPage />;
+  }
 
   return (
     <CustomKeyboardAvoidingView>

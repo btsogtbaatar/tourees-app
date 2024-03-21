@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Dimensions, Text, View } from 'react-native';
 import Geocoder from 'react-native-geocoding';
 import {
   GooglePlacesAutocomplete,
@@ -45,11 +45,8 @@ export default function AddressForm(props: Readonly<AddressFormProps>) {
           currentLocationLabel='Current location'
           placeholder="Хаягаа оруулна уу."
           onPress={(data, details = null) => {
-            console.log("🚀 ~ AddressForm ~ data:", data)
-            
             Geocoder.from(data.description).then(response => {
               let result = response.results[0];
-              console.log("🚀 ~ Geocoder.from ~ result:", result)
 
               props.onChange({
                 address: data.description,
@@ -77,6 +74,9 @@ export default function AddressForm(props: Readonly<AddressFormProps>) {
               CustomInputStyle.container,
               { paddingTop: 3, borderColor: borderColor },
             ],
+            listView: {
+              height: Dimensions.get('screen').height * 0.25
+            },
             description: {
               fontFamily: 'Nunito',
             },

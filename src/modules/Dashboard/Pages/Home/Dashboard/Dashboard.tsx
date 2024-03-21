@@ -97,27 +97,6 @@ const Dashboard = ({ navigation }: DashboardProps) => {
               />
             </View>
           </View>
-          <View style={{ marginTop: verticalScale(20) }}>
-            <Text
-              style={{ fontSize: 12, fontFamily: 'Nunito', fontWeight: '400' }}>
-              Та юунд үйлчилгээ авхыг хүсэж байна?
-            </Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-              }}>
-              {/* <DashboardCard
-                id={2}
-                title="Цэвэрлэгээ"
-                navigation={navigation}
-                color="rgba(92, 177, 255, 0.20)"
-                imageUrl={require('../../../../../assets/svg/dashboard/pngwing2.png')}
-              />
-              <DashboardCard id={2} title="Нүүлгэлт" navigation={navigation} /> */}
-            </View>
-          </View>
         </ScrollView>
       </View>
     </SafeAreaView>
