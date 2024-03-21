@@ -6,19 +6,15 @@ import { DashboardStackParamList } from '../../../types/DashboardStackParamList'
 import { getEnv } from '../../../api';
 import { RequestModule } from '../../../context/entities/request.model';
 import CheckIcon from '../../../assets/svg/auth/CheckIcon';
+import moment from 'moment';
 
 interface UserRequestCardProps {
   item: RequestModule.Request;
 }
 
-
-
 const UserRequestCard = ({ item }: UserRequestCardProps) => {
-  console.log(item);
   const navigation = useNavigation<DashboardStackParamList>();
   const onDetails = () => {
-    console.log(item.status_code, 'dsds');
-
     navigation.navigate('RequestStack', {
       screen: 'RequestDetail',
       params: {
@@ -27,6 +23,10 @@ const UserRequestCard = ({ item }: UserRequestCardProps) => {
         statusType: item.status_code,
       },
     });
+  };
+
+  const timeFormat = () => {
+    return moment(item.created_at).format('h:mm');
   };
 
   return (
@@ -47,7 +47,7 @@ const UserRequestCard = ({ item }: UserRequestCardProps) => {
         </View>
       </View>
       <View style={styles.timeContainer}>
-        <Text style={styles.timeStyle}>21: 15</Text>
+        <Text style={styles.timeStyle}>{timeFormat()}</Text>
         <View
           style={[
             styles.iconContainer,

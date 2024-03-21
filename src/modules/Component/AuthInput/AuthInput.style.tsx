@@ -5,12 +5,12 @@ import { horizontalScale } from '../../../uitls/metrics';
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.textWhite,
-    height: 58,
-    maxHeight: 58,
+    height: horizontalScale(58),
+    maxHeight: horizontalScale(58),
     borderWidth: 1,
     borderRadius: 16,
     paddingHorizontal: 12,
-    paddingTop: 4,
+    paddingTop: 2,
     marginTop: 16,
   },
   label: {

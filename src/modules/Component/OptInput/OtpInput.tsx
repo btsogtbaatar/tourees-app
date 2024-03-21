@@ -33,14 +33,12 @@ const OtpInput = (props: OtpProps) => {
         style={{
           borderWidth: 1,
           borderColor: focus ? Colors.optFocusBorder : Colors.otpBorder,
-          paddingHorizontal: horizontalScale(22),
-          paddingVertical: verticalScale(15),
           backgroundColor: Colors.textWhite,
           borderRadius: horizontalScale(16),
           alignItems: 'center',
           justifyContent: 'center',
-          minWidth: minWidth,
           width: horizontalScale(64),
+          height: horizontalScale(64),
         }}>
         <TextInput
           selectionColor={Colors.primaryColor}
@@ -71,7 +69,7 @@ const OtpInput = (props: OtpProps) => {
             }
           }}
           maxLength={1}
-          keyboardType="number-pad"
+          keyboardType="phone-pad"
           ref={refArr.current[index]}
         />
       </View>

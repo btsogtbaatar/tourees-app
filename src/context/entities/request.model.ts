@@ -13,6 +13,7 @@ export declare namespace RequestModule {
     is_app?: boolean;
     sub_category: CategoryModule.Categories;
     custom_status: StatusType;
+    created_at: Date;
   };
 
   export type StatusType = {
