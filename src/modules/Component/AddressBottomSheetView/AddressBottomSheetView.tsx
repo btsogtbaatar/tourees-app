@@ -64,7 +64,7 @@ export default function AddressBottomSheetView(
                   props.onChange(place);
                 });
               }}>
-              <LocationCircleIcon></LocationCircleIcon>
+              <LocationCircleIcon width={50} height={50}></LocationCircleIcon>
             </Marker>
           )}
         </MapView>

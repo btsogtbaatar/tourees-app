@@ -51,10 +51,6 @@ export default function Login(props: Readonly<LoginProps>) {
   });
 
   const form = useForm({
-    defaultValues: {
-      email: 'Battushig.tso@gmail.com',
-      phone: '88888888',
-    },
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
