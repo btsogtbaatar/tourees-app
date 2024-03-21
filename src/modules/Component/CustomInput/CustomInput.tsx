@@ -68,7 +68,7 @@ export default function CustomInput<T extends FieldValues>(
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View >
       <View
         style={[
           CustomInputStyle.container,
@@ -92,10 +92,10 @@ export default function CustomInput<T extends FieldValues>(
             props.onChange && props.onChange(text);
           }}
         />
-        {error?.message && (
-          <Text style={{ color: colors.danger }}>{error.message}</Text>
-        )}
       </View>
+      {error?.message && (
+        <Text style={{ color: colors.danger}}>{error.message}</Text>
+      )}
     </View>
   );
 }

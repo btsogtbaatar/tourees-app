@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 // laravel API url
-const defaultUrl = 'http:/localhost:8000';
-const imageUrl = 'http:/localhost:8000/storage/';
+const defaultUrl = `https://tourees-admin-j7ozojf9u-battushig-tsogtbaatars-projects.vercel.app/api`;
+// const defaultUrl = `http://localhost:8000`;
+const imageUrl = `${defaultUrl}/storage/`;
 
 export const getEnv = () => {
   return {
