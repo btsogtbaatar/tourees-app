@@ -21,8 +21,6 @@ export default function AddressForm(props: Readonly<AddressFormProps>) {
   const [borderColor, setBorderColor] = useState(Colors.gray100);
 
   useEffect(() => {
-    console.log('🚀 ~ useEffect ~ props.value:', props.value);
-
     if (props.value) {
       suggestionListRef.current?.setAddressText(props.value.address!);
     } else {
@@ -37,12 +35,9 @@ export default function AddressForm(props: Readonly<AddressFormProps>) {
       </Text>
       <View style={[AddressFormStyle.container]}>
         <GooglePlacesAutocomplete
-          currentLocation
-          enableHighAccuracyLocation
+          debounce={300}
           ref={suggestionListRef}
-          listViewDisplayed={true}
           keepResultsAfterBlur={true}
-          currentLocationLabel='Current location'
           placeholder="Хаягаа оруулна уу."
           onPress={(data, details = null) => {
             Geocoder.from(data.description).then(response => {
@@ -59,6 +54,7 @@ export default function AddressForm(props: Readonly<AddressFormProps>) {
           query={{
             key: process.env.GOOGLE_API_KEY,
             language: 'en',
+            components: 'country:mn',
           }}
           textInputProps={{
             onBlur: () => {
@@ -75,7 +71,7 @@ export default function AddressForm(props: Readonly<AddressFormProps>) {
               { paddingTop: 3, borderColor: borderColor },
             ],
             listView: {
-              height: Dimensions.get('screen').height * 0.25
+              maxHeight: Dimensions.get('screen').height * 0.2
             },
             description: {
               fontFamily: 'Nunito',
