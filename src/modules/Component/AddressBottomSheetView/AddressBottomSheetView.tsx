@@ -3,11 +3,9 @@ import { View } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { LocationCircleIcon } from '../../../assets/svg';
 import { RequestModule } from '../../../context/entities/request.model';
-import AddressForm from '../AddressForm/AddressForm';
-import AddressBottomSheetViewStyle, {
-  silverMapStyle,
-} from './AddressBottomSheetView.style';
 import { getAddressFromCoordinates } from '../../../uitls/map';
+import AddressForm from '../AddressForm/AddressForm';
+import AddressBottomSheetViewStyle from './AddressBottomSheetView.style';
 
 export interface AddressBottomSheetViewProps {
   value?: RequestModule.RequestAdditional;
@@ -40,7 +38,6 @@ export default function AddressBottomSheetView(
       </View>
       <View style={AddressBottomSheetViewStyle.container}>
         <MapView
-          customMapStyle={silverMapStyle}
           style={AddressBottomSheetViewStyle.map}
           region={{
             latitude: location?.latitude ?? 47.92123,

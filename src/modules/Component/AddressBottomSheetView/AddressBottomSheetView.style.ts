@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native';
 
 const AddressBottomSheetViewStyle = StyleSheet.create({
   container: {
-    height: Dimensions.get('screen').height * 0.5,
+    height: Dimensions.get('screen').height * 0.4,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
