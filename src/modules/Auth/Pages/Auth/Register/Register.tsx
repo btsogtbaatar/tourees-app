@@ -1,61 +1,63 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useHeaderHeight } from '@react-navigation/elements';
 import { NavigationProp } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import {
-  Keyboard,
-  KeyboardAvoidingView,
-  Platform,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import * as yup from 'yup';
-import { Colors } from '../../../../../../constants/Colors';
 import { authService } from '../../../../../api/services/auth/auth.service';
-import EmailIcon from '../../../../../assets/svg/Email';
-import PhoneIcon from '../../../../../assets/svg/PhoneIcon';
 import { AuthStackParamList } from '../../../../../types/AuthStackParamList';
+import { verticalScale } from '../../../../../uitls/metrics';
 import validations from '../../../../../uitls/validations';
-import AuthLabelInput from '../../../../Component/AuthInput/AuthLabelInput';
+import CustomInput from '../../../../Component/CustomInput/CustomInput';
+import CustomKeyboardAvoidingView from '../../../../Component/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import FooterButton from '../../../../Component/FooterButton/FooterButton';
 import Steps from '../../../../Component/Step/Steps';
+import TabController from '../../../../Component/TabController/TabController';
 import { RegisterModule, UsernameResponse } from '../../../entities';
+import { AuthChannel } from '../Login/Login';
 import styles from './Register.style';
-import CustomKeyboardAvoidingView from '../../../../Component/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 interface RegisterProps {
   navigation: NavigationProp<AuthStackParamList>;
 }
 function Register({ navigation }: RegisterProps) {
   const { t } = useTranslation();
-  const [selected, setSelected] = useState<boolean>(false);
-  const headerHeight = useHeaderHeight();
-  const getRequestSchema = yup.object().shape({
-    email: selected
-      ? yup.string().notRequired()
-      : yup
-          .string()
-          .required(t('l_email'))
-          .matches(validations.email, t('m_email')),
+  const [authChannel, setAuthChannel] = useState<AuthChannel>(
+    AuthChannel.Email,
+  );
+
+  const schema = yup.object().shape({
+    email:
+      authChannel === AuthChannel.Email
+        ? yup
+            .string()
+            .required(t('login.email.errors.required'))
+            .matches(validations.email, t('login.email.errors.validation'))
+        : yup.string(),
+    phone:
+      authChannel === AuthChannel.Phone
+        ? yup
+            .string()
+            .required(t('login.phone.errors.required'))
+            .matches(
+              validations.phoneNumber,
+              t('login.phone.errors.validation'),
+            )
+        : yup.string(),
     username: yup.string().required(t('r_username')),
-    phone: selected
-      ? yup.string().required(t('l_phone'))
-      : yup.string().notRequired(),
   });
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm<RegisterModule.RegisterStep>({
+  const form = useForm({
     mode: 'onChange',
-    resolver: yupResolver(getRequestSchema),
+    resolver: yupResolver(schema),
   });
 
   const onContinue = (values: RegisterModule.RegisterStep) => {
+    if (AuthChannel.Email === authChannel) {
+      values.phone = '';
+    } else if (AuthChannel.Phone === authChannel) {
+      values.email = '';
+    }
     authService.checkEmail(values).then(
       (res: UsernameResponse[]) => {
         const type: RegisterModule.RegisterType = {
@@ -78,67 +80,43 @@ function Register({ navigation }: RegisterProps) {
           <View style={styles.container}>
             <View>
               <Steps groupSteps={3} steps={1} />
-              <View style={styles.subContainer}>
-                <TouchableOpacity
-                  style={[
-                    styles.emailTouch,
-                    !selected ? styles.selectedBox : styles.unSelectedBox,
-                  ]}
-                  onPress={() => {
-                    control._reset();
-                    setSelected(false);
-                  }}>
-                  <EmailIcon
-                    color={
-                      !selected ? Colors.primaryColor : Colors.brandGray200
-                    }
-                  />
-                  <Text style={styles.textStyle}>{t('i_email')}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[
-                    styles.emailTouch,
-                    selected ? styles.selectedBox : styles.unSelectedBox,
-                  ]}
-                  onPress={() => {
-                    control._reset();
-                    setSelected(true);
-                  }}>
-                  <PhoneIcon
-                    color={selected ? Colors.primaryColor : Colors.brandGray200}
-                  />
-                  <Text style={styles.textStyle}>{t('i_phone')}</Text>
-                </TouchableOpacity>
+              <View style={{ marginVertical: verticalScale(16) }}>
+                <TabController
+                  firstTabLabel={t('i_email')}
+                  secondTabLabel={t('i_phone')}
+                  onSelectedTabChange={setAuthChannel}
+                />
               </View>
-              {selected ? (
-                <AuthLabelInput
-                  control={control}
-                  name="phone"
-                  placeHolder={t('m_phone')}
-                  keyboardType="phone-pad"
-                  label={t('l_phone')}
+              <FormProvider {...form}>
+                {authChannel === AuthChannel.Email && (
+                  <CustomInput
+                    label={t('login.email.label')}
+                    placeholder={t('login.email.placeholder')}
+                    name={'email'}
+                    keyboardType="email-address"
+                  />
+                )}
+                {authChannel === AuthChannel.Phone && (
+                  <CustomInput
+                    label={t('login.phone.label')}
+                    placeholder={t('login.phone.placeholder')}
+                    name={'phone'}
+                    keyboardType="phone-pad"
+                  />
+                )}
+                <CustomInput
+                  placeholder={t('l_username')}
+                  name={'username'}
+                  label={t('l_usernamelabel')}
+                  extra={{ marginTop: verticalScale(16) }}
                 />
-              ) : (
-                <AuthLabelInput
-                  control={control}
-                  name="email"
-                  placeHolder={t('l_email')}
-                  keyboardType="email-address"
-                  label={t('l_emaillabel')}
-                />
-              )}
-              <AuthLabelInput
-                control={control}
-                name="username"
-                placeHolder={t('l_username')}
-                label={t('l_usernamelabel')}
-              />
+              </FormProvider>
               <Text style={styles.otherLabel}>{t('l_usernametitle')}</Text>
             </View>
           </View>
           <FooterButton
             back={false}
-            onPress={handleSubmit(onContinue)}
+            onPress={form.handleSubmit(onContinue)}
             btnDisabled={false}
           />
         </View>

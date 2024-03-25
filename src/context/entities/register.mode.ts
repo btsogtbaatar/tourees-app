@@ -1,8 +1,8 @@
 export declare module RegisterModule {
   export type RegisterStep = {
-    email: string;
-    phone: string;
-    username: string;
+    email?: string;
+    phone?: string;
+    username?: string;
   };
 
   export type RegisterType = {
