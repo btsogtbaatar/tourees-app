@@ -15,6 +15,7 @@ import {
   TextInputProps,
   TextStyle,
   View,
+  ViewStyle,
 } from 'react-native';
 import { colors } from '../../../constants/colors';
 import { CustomInputStyle } from './CustomInput.style';
@@ -33,6 +34,7 @@ export interface CustomInputProps<T extends FieldValues>
   placeholder?: string;
   editable?: boolean;
   onChange?: (text: string) => void;
+  extra?: StyleProp<ViewStyle>;
 }
 
 export default function CustomInput<T extends FieldValues>(
@@ -68,7 +70,7 @@ export default function CustomInput<T extends FieldValues>(
   };
 
   return (
-    <View >
+    <View style={props.extra}>
       <View
         style={[
           CustomInputStyle.container,
@@ -94,7 +96,7 @@ export default function CustomInput<T extends FieldValues>(
         />
       </View>
       {error?.message && (
-        <Text style={{ color: colors.danger}}>{error.message}</Text>
+        <Text style={{ color: colors.danger }}>{error.message}</Text>
       )}
     </View>
   );
