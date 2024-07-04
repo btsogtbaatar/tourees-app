@@ -3,11 +3,7 @@ import { Defs, G, LinearGradient, Path, Stop, Svg } from 'react-native-svg';
 
 const SmileCircleIconActive = () => {
   return (
-    <Svg
-      width="25"
-      height="25"
-      viewBox="0 0 25 25"
-      fill="none">
+    <Svg width="25" height="25" viewBox="0 0 25 25" fill="none">
       <G id="message-smile-circle">
         <Path
           id="Solid"

@@ -1,12 +1,12 @@
 import { create } from 'zustand';
-import { createJSONStorage, devtools, persist } from 'zustand/middleware';
-import { zStorage } from '../reducers/reducers';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import {
   AuthState,
   AuthStateToken,
   ClientTokenResponse,
   LanguageState,
-} from '../entities/auth.model';
+} from '../../modules/auth/entities/auth.model';
+import { zStorage } from '../reducers/reducers';
 
 export type AuthAction = {
   setClentToken: (token: ClientTokenResponse) => void;

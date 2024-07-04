@@ -1,13 +1,9 @@
 import React from 'react';
-import { Path, Svg, G, Circle } from 'react-native-svg';
+import { Circle, G, Svg } from 'react-native-svg';
 
 const CircleIcon = () => {
   return (
-    <Svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none">
+    <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <G id="Radio Button">
         <Circle
           id="Ellipse 51"

@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import translationMn from './src/i18n/mn';
 import translationEn from './src/i18n/en';
-import translationChina from './src/i18n/china';
+import translationChn from './src/i18n/chn';
 
 i18n.use(initReactI18next).init({
   compatibilityJSON: 'v3',
@@ -14,7 +14,7 @@ i18n.use(initReactI18next).init({
       translation: translationEn,
     },
     chn: {
-      translation: translationChina,
+      translation: translationChn,
     },
   },
   lng: 'mn',

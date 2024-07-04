@@ -1,5 +1,13 @@
 import React from 'react';
-import { Defs, G, LinearGradient, Path, Stop, Svg, SvgProps } from 'react-native-svg';
+import {
+  Defs,
+  G,
+  LinearGradient,
+  Path,
+  Stop,
+  Svg,
+  SvgProps,
+} from 'react-native-svg';
 
 const HomeIcon: React.FC<SvgProps> = props => {
   return (

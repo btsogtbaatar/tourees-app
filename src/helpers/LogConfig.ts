@@ -1,6 +1,6 @@
 import reactotron from 'reactotron-react-native';
 
-export function configure(options: any = {}) {
+export function configure(_options: any = {}) {
   configReactotron();
   connectConsoleReactotron();
 }

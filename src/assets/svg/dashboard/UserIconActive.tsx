@@ -3,11 +3,7 @@ import { G, Path, Svg } from 'react-native-svg';
 
 const UserIconActive = () => {
   return (
-    <Svg
-      width="24"
-      height="25"
-      viewBox="0 0 24 25"
-      fill="none">
+    <Svg width="24" height="25" viewBox="0 0 24 25" fill="none">
       <G id="user-02">
         <G id="Solid">
           <Path

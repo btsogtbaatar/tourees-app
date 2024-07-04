@@ -5,7 +5,7 @@ import {
   initialState,
   reducer,
 } from './modal.reducer';
-import ModalContainer from '../../modules/Component/Modal/ModalContainer';
+import ModalContainer from '../../components/Modal/ModalContainer';
 
 export const ModalContext = React.createContext<{
   state: ModalState;

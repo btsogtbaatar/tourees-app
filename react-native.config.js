@@ -4,5 +4,5 @@ module.exports = {
       automaticPodsInstallation: false,
     },
   },
-  assets: ['./assets/fonts']
+  assets: ['./assets/fonts'],
 };

@@ -63,11 +63,11 @@ export default {
     requestAddressMsg: 'Хаягаа оруулна уу.',
     requestImages: 'Зураг оруулах',
     requestImageWarning: 'Зураг оруулна уу',
-    requestEdit:'Засах',
+    requestEdit: 'Засах',
     requestDestinationAddress: 'Ачих газар',
     requestDeliveryAddress: 'Буулгах газар',
     requestCreate: 'Хүсэлт үүсгэх',
-    requestDeliveryDate: 'Хүргэлт хийх өдөр сонгох'
+    requestDeliveryDate: 'Хүргэлт хийх өдөр сонгох',
   },
   login: {
     title: 'Нэвтрэх',

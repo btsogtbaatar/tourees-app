@@ -3,11 +3,7 @@ import { Path, Svg, G, SvgProps } from 'react-native-svg';
 
 const FooterBack: React.FC<SvgProps> = props => {
   return (
-    <Svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none">
+    <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
       <G id="arrow-narrow-left">
         <Path
           id="Icon"

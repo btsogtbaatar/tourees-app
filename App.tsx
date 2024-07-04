@@ -1,10 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 
@@ -12,15 +5,15 @@ import { NativeBaseProvider } from 'native-base';
 import { useTranslation } from 'react-i18next';
 import { LogBox } from 'react-native';
 import Geocoder from 'react-native-geocoding';
+import Geolocation from 'react-native-geolocation-service';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import './i18n';
 import { api } from './src/api';
-import { axiosInstance } from './src/api/services/interceptors';
+import { axiosInstance } from './src/api/interceptors';
 import { authStore, languageStore } from './src/context/auth/store';
 import { ModalProvider } from './src/context/modal/modal.context';
-import Route from './src/routes/routes';
-import Geolocation from 'react-native-geolocation-service';
+import Route from './src/navigation';
 
 navigator.geolocation = require('react-native-geolocation-service');
 axiosInstance(api, authStore);

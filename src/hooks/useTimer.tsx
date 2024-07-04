@@ -1,17 +1,13 @@
 import moment from 'moment';
 import React, { useEffect, useRef, useState } from 'react';
 
-interface TimerProps {
-  start: number;
-}
-
 function useTimer(
   onTick: (count: number, shouldButtonEnabled?: boolean) => void,
   onEnd: () => void,
   start: number,
 ) {
   const [counter, setCounter] = useState(start);
-  const [date, setDate] = useState<Date>(
+  const [_date, setDate] = useState<Date>(
     moment().add(start, 'seconds').toDate(),
   );
 
@@ -30,14 +26,13 @@ function useTimer(
   useEffect(() => {
     refOnTick.current = onTick;
     refOnEnd.current = onEnd;
-  }, [onTick, onEnd])
-  
+  }, [onTick, onEnd]);
 
   useEffect(() => {
     function tick() {
-      if(refOnTick.current) {
-          const shouldButtonEnabled: boolean= resendButton >= counter;
-          refOnTick.current(counter - 1, shouldButtonEnabled);
+      if (refOnTick.current) {
+        const shouldButtonEnabled: boolean = resendButton >= counter;
+        refOnTick.current(counter - 1, shouldButtonEnabled);
       }
       setCounter(counter - 1);
     }
@@ -45,9 +40,9 @@ function useTimer(
       const id = setInterval(tick, 1000);
       return () => clearInterval(id);
     } else {
-        if(refOnEnd.current){
-            refOnEnd.current();
-        }
+      if (refOnEnd.current) {
+        refOnEnd.current();
+      }
     }
   }, [counter]);
 
