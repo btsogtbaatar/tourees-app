@@ -3,7 +3,7 @@ import { NavigationProp } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
@@ -18,6 +18,12 @@ import validations from '../../../../validations';
 import { AuthStackParamList } from '../../navigation/types';
 import { sendOtp } from '../../services';
 import { AuthChannel, AuthModel } from '../../entities';
+import {
+  FbLoginButton,
+  GoogleLoginButton,
+} from '../../../../components/SocialLoginButtons';
+import styles from './Login.style';
+import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
 
 interface LoginProps {
   navigation: NavigationProp<AuthStackParamList>;
@@ -97,6 +103,11 @@ export default function Login(props: Readonly<LoginProps>) {
                   />
                 )}
               </FormProvider>
+              <CustomDivider>{t('or')}</CustomDivider>
+              <View style={styles.socialContainer}>
+                <FbLoginButton />
+                <GoogleLoginButton />
+              </View>
             </View>
           </ContainerView>
           <FooterButton

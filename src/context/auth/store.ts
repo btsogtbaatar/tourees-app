@@ -5,7 +5,7 @@ import {
   AuthStateToken,
   ClientTokenResponse,
   LanguageState,
-} from '../../modules/auth/entities/auth.model';
+} from '../../modules/Auth/entities/auth.model';
 import { zStorage } from '../reducers/reducers';
 
 export type AuthAction = {

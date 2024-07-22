@@ -1,7 +1,7 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
-import { AuthStackParamList } from '../modules/auth/navigation/types';
-import { HomeStackParamList } from '../modules/home/navigation/types';
-import { RequestStackParamList } from '../modules/request/navigation/types';
+import { AuthStackParamList } from '../modules/Auth/navigation/types';
+import { HomeStackParamList } from '../modules/Home/navigation/types';
+import { RequestStackParamList } from '../modules/Request/navigation/types';
 
 export type BaseStackParamList = {
   navigate: (screen: string, route?: any) => void;

@@ -80,6 +80,7 @@ export default {
         validation: 'И-мэйл хаягаа зөв оруулна уу.',
       },
     },
+    or:"эсхүл",
     phone: {
       tab: 'Утас',
       label: 'Утасны дугаар',

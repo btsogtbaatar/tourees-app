@@ -3,6 +3,10 @@
 
 #import <React/RCTBundleURLProvider.h>
 
+#import <AuthenticationServices/AuthenticationServices.h>
+#import <SafariServices/SafariServices.h>
+#import <FBSDKCoreKit/FBSDKCoreKit-Swift.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -14,9 +18,12 @@
 
   [GMSServices provideAPIKey:@"AIzaSyC2lMldNBbbU99OHB9mGoetWdR0v_Liy6A"];
 
+   [[FBSDKApplicationDelegate sharedInstance] application:application
+                       didFinishLaunchingWithOptions:launchOptions];
+                      
+
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
-
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
   return [self getBundleURL];

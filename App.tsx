@@ -15,6 +15,8 @@ import { authStore, languageStore } from './src/context/auth/store';
 import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/navigation';
 
+import { Settings } from 'react-native-fbsdk-next';
+
 navigator.geolocation = require('react-native-geolocation-service');
 axiosInstance(api, authStore);
 function App(): React.JSX.Element {
@@ -39,6 +41,8 @@ function App(): React.JSX.Element {
 
   useEffect(() => {
     Geocoder.init(process.env.GOOGLE_API_KEY!);
+    Settings.setAppID(process.env.FACEBOOK_APP_ID!);
+    Settings.initializeSDK();
     i18n.changeLanguage(languageState.language ? languageState.language : 'mn');
     LogBox.ignoreLogs([
       'In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.',

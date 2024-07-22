@@ -7,6 +7,8 @@ import PlusIcon from '../svg/icons/PlusIcon.svg';
 import LocationCircleIcon from '../svg/icons/LocationCircleIcon.svg';
 import LocationIcon from '../svg/icons/LocationIcon.svg';
 import CircleIcon from '../svg/icons/IconCircle.svg';
+import FacebookIcon from '../svg/icons/FacebookIcon.svg';
+import GoogleIcon from '../svg/icons/GoogleIcon.svg';
 export {
   HomeSmile,
   SmileCircleActiveIcon,
@@ -17,4 +19,6 @@ export {
   LocationCircleIcon,
   LocationIcon,
   CircleIcon,
+  FacebookIcon,
+  GoogleIcon,
 };

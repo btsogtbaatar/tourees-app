@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import HeaderBar from '../components/HeaderBack/HeaderBar';
-import AuthStack from '../modules/auth/navigation';
-import HomeStack from '../modules/home/navigation';
-import RequestStack from '../modules/request/navigation';
+import AuthStack from '../modules/Auth/navigation';
+import HomeStack from '../modules/Home/navigation';
+import RequestStack from '../modules/Request/navigation';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

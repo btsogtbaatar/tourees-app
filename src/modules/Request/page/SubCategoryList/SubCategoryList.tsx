@@ -11,9 +11,9 @@ import LoadingPage from '../../../../components/Loading/LoadingPage';
 import RequestsCard from '../../../../components/Requests/RequestsCard';
 import { colors } from '../../../../constants/colors';
 import { horizontalScale, verticalScale } from '../../../../utilities/metrics';
-import { getSubCategories } from '../../../home/services/category.service';
 import { SharedModel } from '../../../shared/entities/shared.model';
 import { RequestStackParamList } from '../../navigation/types';
+import { getSubCategories } from '../../../Home/services/category.service';
 
 type Props = NativeStackScreenProps<RequestStackParamList, 'SubCategoryList'>;
 
