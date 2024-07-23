@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: colors.brandGray,
   },
-  dividerText: { fontWeight: '700', fontFamily: 'Nunito' },
+  dividerText: { fontWeight: '700', fontFamily: 'Nunito', textAlign:'center' },
 });
 export default styles;

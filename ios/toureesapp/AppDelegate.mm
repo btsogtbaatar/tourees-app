@@ -7,6 +7,8 @@
 #import <SafariServices/SafariServices.h>
 #import <FBSDKCoreKit/FBSDKCoreKit-Swift.h>
 
+#import <GoogleSignIn/GoogleSignIn.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -23,6 +25,9 @@
                       
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
+}
+- (BOOL)application:(UIApplication *)application openURL:(nonnull NSURL *)url options:(nonnull NSDictionary<NSString *,id> *)options {
+  return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url options:options] || [GIDSignIn.sharedInstance handleURL:url];
 }
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {

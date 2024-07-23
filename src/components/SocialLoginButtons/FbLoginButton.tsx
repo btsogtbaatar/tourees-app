@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { LoginManager } from 'react-native-fbsdk-next';
+import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
 import { FacebookIcon } from '../../assets/svg';
 import styles from './SocialLoginButton.style';
 
@@ -8,6 +8,7 @@ export default class FbLoginButton extends Component {
   handleLogin() {
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       function (result) {
+        console.log(result);
         if (result.isCancelled) {
           console.log('Login cancelled');
         } else {
@@ -15,6 +16,9 @@ export default class FbLoginButton extends Component {
             'Login success with permissions: ' +
               result?.grantedPermissions?.toString(),
           );
+          AccessToken.getCurrentAccessToken().then(data => {
+            console.log(data?.accessToken.toString());
+          });
         }
       },
       function (error) {

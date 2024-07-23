@@ -23,7 +23,7 @@ export type LanguageAction = {
 const languageStore = create<LanguageState & LanguageAction>()(
   persist(
     set => ({
-      language: 'mn',
+      language: 'en',
       setLanguage(language) {
         set({ language: language });
       },

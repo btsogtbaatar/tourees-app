@@ -12,6 +12,10 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+	</array>
 	<key>CFBundleName</key>
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
@@ -28,6 +32,12 @@
 				<string>fb507170187173017</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.949997873563-cg09eqnu59uk4leoo2iak61kuelk7h8m</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
@@ -37,6 +47,8 @@
 	<string>e22965146b9ffa24fe32ea9964d0a39f</string>
 	<key>FacebookDisplayName</key>
 	<string>Cargo test</string>
+	<key>GIDClientID</key>
+	<string>com.googleusercontent.apps.949997873563-cg09eqnu59uk4leoo2iak61kuelk7h8m</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
