@@ -26,21 +26,20 @@ export const FontWeight: {
 };
 
 export const Typography = StyleSheet.create({
-  textSmallBold: {
-    fontFamily: 'Nunito',
-    fontSize: 14,
-    fontWeight: FontWeight.bold,
-    lineHeight: 21,
-  },
-  textRegularSemiBold: {
+  textRegular: {
     fontFamily: 'Nunito',
     fontWeight: FontWeight.semiBold,
     fontSize: 16,
     lineHeight: 24,
-    textAlignVertical: 'center',
     color: colors.gray700,
   },
-  textSmallerMedium: {
+  textSmall: {
+    fontFamily: 'Nunito',
+    fontSize: 14,
+    lineHeight: 21,
+    fontWeight: FontWeight.bold,
+  },
+  textSmaller: {
     fontFamily: 'Nunito',
     fontWeight: FontWeight.medium,
     fontSize: 12,

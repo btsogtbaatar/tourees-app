@@ -31,10 +31,12 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Do you allow the app to get your location?</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Your location is required for xyz benefits for you</string>
+	<string>Do you allow the app to get your location?</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Your location is required for xyz benefits for you</string>
+	<string>Do you allow the app to get your location?</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Italic-VariableFont_wght.ttf</string>

@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import Modal from '../../../../components/Modal/Modal';
@@ -121,7 +121,7 @@ function RegisterOtpCheck({
                 {disabled ? (
                   <Timer counter={counter} />
                 ) : (
-                  <TouchableOpacity
+                  <Pressable
                     style={{ justifyContent: 'center', alignItems: 'center' }}
                     onPress={() => resend()}>
                     <Text
@@ -133,7 +133,7 @@ function RegisterOtpCheck({
                       }}>
                       дахин илгээх
                     </Text>
-                  </TouchableOpacity>
+                  </Pressable>
                 )}
               </View>
             </View>

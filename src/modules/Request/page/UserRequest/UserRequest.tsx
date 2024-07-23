@@ -1,11 +1,9 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react-native/no-inline-styles */
-import BottomSheet from '@gorhom/bottom-sheet';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import moment from 'moment';
-import React, { useContext, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Image,
@@ -19,15 +17,12 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import { getEnv } from '../../../../api';
 import { LocationCircleIcon, LocationIcon } from '../../../../assets/svg';
-import AddressBottomSheetView, {
-  Address,
-} from '../../../../components/AddressBottomSheetView/AddressBottomSheetView';
-import { AddressFormStyle } from '../../../../components/AddressForm/AddressForm.style';
 import Calendar from '../../../../components/Calendar/Calendar';
-import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
-import CustomBottomScrollViewSheet from '../../../../components/CustomBottomSheetScrollView/CustomBottomSheetScrollView';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
+import {
+  DEFAULT_LAT,
+  DEFAULT_LNG,
+} from '../../../../components/CustomMapView/CustomMapView';
 import ImageUploadButton, {
   ImageSource,
 } from '../../../../components/ImageUploadButton/ImageUploadButton';
@@ -40,21 +35,18 @@ import { ModalContext } from '../../../../context/modal/modal.context';
 import { actions } from '../../../../context/modal/modal.reducer';
 import { horizontalScale, verticalScale } from '../../../../utilities';
 import { SharedModel } from '../../../shared/entities/shared.model';
+import { Address } from '../../../shared/page/MapViewAddress/AddressMapView';
 import { uploadFile } from '../../../shared/service/shared.service';
 import { TaskModel } from '../../entities/request.model';
 import { RequestStackParamList } from '../../navigation/types';
 import { createTask } from '../../service/request.service';
-
-enum AddressType {
-  From,
-  To,
-}
+import UserRequestStyle from './UserRequest.style';
 
 type Props = NativeStackScreenProps<RequestStackParamList, 'UserRequest'>;
 
 function UserRequest({ route }: Props) {
   const { t } = useTranslation();
-  const bottomSheetRef = useRef<BottomSheet>(null);
+  const rootNavigation = useNavigation();
   const subCategory = route.params.item;
   const navigation = useNavigation<RequestStackParamList>();
   const authState = authStore(state => state);
@@ -67,11 +59,16 @@ function UserRequest({ route }: Props) {
     sub_category_id: subCategory.id,
   });
 
-  const [addressType, setAddressType] = useState<AddressType>(AddressType.From);
-  const form = useForm();
-
-  const [toAddress, setToAddress] = useState<Address>();
-  const [fromAddress, setFromAddress] = useState<Address>();
+  const [toAddress, setToAddress] = useState<Address>({
+    name: 'to',
+    latitude: DEFAULT_LAT,
+    longitude: DEFAULT_LNG,
+  });
+  const [fromAddress, setFromAddress] = useState<Address>({
+    name: 'from',
+    latitude: DEFAULT_LAT,
+    longitude: DEFAULT_LNG,
+  });
 
   const handleInputChange = (
     fieldName: keyof typeof requestValue,
@@ -91,7 +88,6 @@ function UserRequest({ route }: Props) {
         type: image.type,
       }).then((res: SharedModel.File) => {
         setSelectedImages(_selectedImages => [..._selectedImages, res]);
-        console.log('🚀 ~ handleImageSelection ~ res:', res);
       });
     }
   };
@@ -141,10 +137,7 @@ function UserRequest({ route }: Props) {
           id: requestValue.sub_category_id,
         },
         files: selectedImages,
-        addresses: [
-          { ...fromAddress!, name: 'from' },
-          { ...toAddress!, name: 'to' },
-        ],
+        addresses: [{ ...fromAddress }, { ...toAddress }],
       };
 
       createTask(taskRequest).then(
@@ -333,44 +326,51 @@ function UserRequest({ route }: Props) {
                   returnKeyType="next"
                 />
               </View>
-              <Text style={[Typography.textSmallBold, { marginBottom: 8 }]}>
+              <Text style={[Typography.textSmall, { marginBottom: 8 }]}>
                 {t('request.requestDestinationAddress')}
               </Text>
-              <View style={[AddressFormStyle.container, { marginBottom: 16 }]}>
-                <LocationCircleIcon style={AddressFormStyle.icon} />
+              <View style={[UserRequestStyle.container, { marginBottom: 16 }]}>
+                <LocationCircleIcon style={UserRequestStyle.icon} />
                 <Text
                   numberOfLines={2}
-                  style={[Typography.textSmallerMedium, { flex: 1 }]}>
-                  {fromAddress?.addressLine2 ??
+                  style={[Typography.textSmaller, { flex: 1 }]}>
+                  {fromAddress?.address ??
                     t('request.requestDestinationAddress')}
                 </Text>
                 <Text
                   onPress={() => {
-                    bottomSheetRef.current?.expand();
-                    setAddressType(AddressType.From);
+                    rootNavigation.navigate('AddressMapView', {
+                      address: fromAddress,
+                      onGoBack: (address: Address) => {
+                        setFromAddress(address);
+                      },
+                    });
                   }}
                   style={[
-                    Typography.textSmallBold,
+                    Typography.textSmall,
                     { color: colors.primaryColor, marginLeft: 8 },
                   ]}>
                   {t('request.requestEdit')}
                 </Text>
               </View>
-              <View style={AddressFormStyle.container}>
-                <LocationIcon style={AddressFormStyle.icon} />
+              <View style={UserRequestStyle.container}>
+                <LocationIcon style={UserRequestStyle.icon} />
                 <Text
                   numberOfLines={2}
-                  style={[Typography.textSmallerMedium, { flex: 1 }]}>
-                  {toAddress?.addressLine2 ??
-                    t('request.requestDeliveryAddress')}
+                  style={[Typography.textSmaller, { flex: 1 }]}>
+                  {toAddress?.address ?? t('request.requestDeliveryAddress')}
                 </Text>
                 <Text
                   onPress={() => {
-                    bottomSheetRef.current?.expand();
-                    setAddressType(AddressType.To);
+                    rootNavigation.navigate('AddressMapView', {
+                      address: toAddress,
+                      onGoBack: (address: Address) => {
+                        setToAddress(address);
+                      },
+                    });
                   }}
                   style={[
-                    Typography.textSmallBold,
+                    Typography.textSmall,
                     { color: colors.primaryColor, marginLeft: 8 },
                   ]}>
                   {t('request.requestEdit')}
@@ -409,39 +409,6 @@ function UserRequest({ route }: Props) {
             </ScrollView>
           </View>
         </View>
-        <CustomBottomSheet ref={bottomSheetRef}>
-          <CustomBottomScrollViewSheet>
-            <AddressBottomSheetView
-              value={addressType === AddressType.From ? fromAddress : toAddress}
-              onChange={address => {
-                console.log('🚀 ~ UserRequest ~ address:', address);
-                if (addressType === AddressType.From) {
-                  setFromAddress(address);
-                } else {
-                  setToAddress(address);
-                }
-
-                form.setValue(addressType.toString(), address.addressLine2);
-              }}
-            />
-            <View style={{ marginHorizontal: 16 }}>
-              <FooterButton
-                extra={{
-                  position: 'absolute',
-                  bottom: 20,
-                  backgroundColor: 'transparent',
-                  padding: 0,
-                }}
-                backColor
-                back={true}
-                text={'Болсон'}
-                onPress={() => bottomSheetRef.current?.close()}
-                btnDisabled={false}
-                onBackPress={() => bottomSheetRef.current?.close()}
-              />
-            </View>
-          </CustomBottomScrollViewSheet>
-        </CustomBottomSheet>
       </LinearGradient>
     </CustomKeyboardAvoidingView>
   );

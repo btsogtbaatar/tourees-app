@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, Text, View } from 'react-native';
 import { colors } from '../../constants/colors';
 import useTimer from '../../hooks/useTimer';
 import { horizontalScale, verticalScale } from '../../utilities/metrics';
@@ -83,7 +83,7 @@ export default function CheckOtp(props: Readonly<CheckOtpProps>) {
           {disabled ? (
             <Timer counter={counter} />
           ) : (
-            <TouchableOpacity
+            <Pressable
               style={{ justifyContent: 'center', alignItems: 'center' }}
               onPress={() => resend()}>
               <Text
@@ -95,7 +95,7 @@ export default function CheckOtp(props: Readonly<CheckOtpProps>) {
                 }}>
                 дахин илгээх
               </Text>
-            </TouchableOpacity>
+            </Pressable>
           )}
         </View>
       </View>

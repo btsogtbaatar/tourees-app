@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavigationProp } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -15,13 +15,11 @@ import LoadingPage from '../../../../components/Loading/LoadingPage';
 import TabController from '../../../../components/TabController/TabController';
 import { verticalScale } from '../../../../utilities/metrics';
 import validations from '../../../../validations';
+import { AuthChannel, AuthModel } from '../../entities';
 import { AuthStackParamList } from '../../navigation/types';
 import { sendOtp } from '../../services';
-import { AuthChannel, AuthModel } from '../../entities';
 
-interface LoginProps {
-  navigation: NavigationProp<AuthStackParamList>;
-}
+type LoginProps = NativeStackScreenProps<AuthStackParamList, 'Login'>;
 
 export default function Login(props: Readonly<LoginProps>) {
   const [loading, setLoading] = useState<boolean>(false);

@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import {
   FlatList,
   RefreshControl,
@@ -8,12 +9,13 @@ import {
   Text,
   View,
 } from 'react-native';
+import { SearchMd } from '../../../assets/svg';
+import CustomInput from '../../../components/CustomInput/CustomInput';
 import DashboardCard from '../../../components/DashboardCard/DashboardCard';
 import RegisterComponent from '../../../components/DashboardCard/RegisterComponent';
 import LoadingPage from '../../../components/Loading/LoadingPage';
 import { colors } from '../../../constants/colors';
 import { authStore } from '../../../context/auth/store';
-import { verticalScale } from '../../../utilities/metrics';
 import { SharedModel } from '../../shared/entities/shared.model';
 import { getCategories as fetchCategories } from '../services/category.service';
 
@@ -46,6 +48,10 @@ const Home = () => {
     getCateories();
   }, []);
 
+  const form = useForm({
+    mode: 'onChange',
+  });
+
   return loading ? (
     <LoadingPage />
   ) : (
@@ -66,14 +72,36 @@ const Home = () => {
               tintColor={colors.primaryColor}
             />
           }>
+          <Text
+            style={{
+              fontSize: 12,
+              fontFamily: 'Nunito',
+              fontWeight: '400',
+              marginBottom: 10,
+            }}>
+            Та ямар үйлчилгээ авахыг хүсч байна вэ?
+          </Text>
+          <View style={{ marginBottom: 10 }}>
+            <FormProvider {...form}>
+              <CustomInput
+                name={'subCategoryName'}
+                placeholder="Хайх"
+                onPress={() => {
+                  rootNavigation.navigate('RequestStack', {
+                    screen: 'SubCategoryList',
+                    params: {
+                      title: 'Төрлүүд',
+                    },
+                  });
+                }}
+                icon={<SearchMd style={{ color: colors.primaryColor }} />}
+              />
+            </FormProvider>
+          </View>
           {!authState.authenticated && (
             <RegisterComponent navigation={rootNavigation} />
           )}
-          <View style={{ marginTop: verticalScale(20) }}>
-            <Text
-              style={{ fontSize: 12, fontFamily: 'Nunito', fontWeight: '400' }}>
-              Та ямар үйлчилгээ авах гэж байна вэ?
-            </Text>
+          <View>
             <View
               style={{
                 flexDirection: 'row',
@@ -88,11 +116,19 @@ const Home = () => {
                 renderItem={({ item }) => {
                   return (
                     <DashboardCard
-                      navigation={rootNavigation}
                       item={{
                         ...item,
                         title: item.name,
                         imageUrl: item.image?.url,
+                      }}
+                      onPress={() => {
+                        rootNavigation.navigate('RequestStack', {
+                          screen: 'SubCategoryList',
+                          params: {
+                            parentCategoryId: item.id,
+                            title: item.name,
+                          },
+                        });
                       }}
                     />
                   );

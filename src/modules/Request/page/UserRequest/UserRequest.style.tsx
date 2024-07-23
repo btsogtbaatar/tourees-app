@@ -1,3 +1,4 @@
+import { StyleSheet } from 'react-native';
 import { Theme } from 'react-native-calendars/src/types';
 import { colors } from '../../../../constants/colors';
 
@@ -10,3 +11,16 @@ export const calendarTheme: Theme = {
   monthTextColor: colors.gray700,
   arrowColor: colors.primaryColor,
 };
+
+const UserRequestStyle = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  icon: {
+    marginRight: 8,
+  },
+});
+
+export default UserRequestStyle;

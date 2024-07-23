@@ -1,5 +1,5 @@
 import React from 'react';
-import { Path, Svg, G, SvgProps } from 'react-native-svg';
+import { G, Path, Svg, SvgProps } from 'react-native-svg';
 
 const FooterBack: React.FC<SvgProps> = props => {
   return (

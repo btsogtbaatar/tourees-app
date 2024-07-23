@@ -30,10 +30,8 @@ export declare namespace TaskModel {
   };
 
   export type Address = {
-    name: string;
-    addressLine2: string;
-    streetAddress: string;
-    city: string;
+    name?: string;
+    address?: string;
     latitude: number;
     longitude: number;
   };

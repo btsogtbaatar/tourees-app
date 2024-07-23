@@ -17,8 +17,6 @@ const createStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.borderColor,
   },
   disabled: {
     backgroundColor: colors.disabledColor,

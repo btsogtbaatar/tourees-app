@@ -96,12 +96,13 @@ function Register({ navigation }: RegisterProps) {
                     keyboardType="phone-pad"
                   />
                 )}
-                <CustomInput
-                  placeholder={t('l_username')}
-                  name={'username'}
-                  label={t('l_usernamelabel')}
-                  extra={{ marginTop: verticalScale(16) }}
-                />
+                <View style={{ marginTop: verticalScale(16) }}>
+                  <CustomInput
+                    placeholder={t('l_username')}
+                    name={'username'}
+                    label={t('l_usernamelabel')}
+                  />
+                </View>
               </FormProvider>
               <Text style={styles.otherLabel}>{t('l_usernametitle')}</Text>
             </View>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { TabItemStyle } from './TabItem.style';
-import styles from '../../modules/auth/pages/Register/Register.style';
 import { Typography } from '../../constants/typography';
+import styles from '../../modules/auth/pages/Register/Register.style';
+import { TabItemStyle } from './TabItem.style';
 
 export interface TabItemProps {
   label: string;
@@ -18,7 +18,7 @@ export default function TabItem(props: Readonly<TabItemProps>) {
         props.selected ? styles.selectedBox : styles.unSelectedBox,
       ]}
       onPress={props.onSelect}>
-      <Text style={[Typography.textSmallBold]}>{props.label}</Text>
+      <Text style={[Typography.textSmall]}>{props.label}</Text>
     </TouchableOpacity>
   );
 }

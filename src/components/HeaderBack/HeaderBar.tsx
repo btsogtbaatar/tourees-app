@@ -5,7 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LogoIcon } from '../../assets/svg';
 import ArrowLeftIcon from '../../assets/svg/dashboard/ArrowLeftIcon';
 import { AuthStackParamList } from '../../modules/auth/navigation/types';
-import { verticalScale } from '../../utilities/metrics';
+import { horizontalScale, verticalScale } from '../../utilities/metrics';
 import LoginButton from '../LoginButton/LoginButton';
 
 interface HeaderBarProps {
@@ -29,7 +29,7 @@ const HeaderBar = ({
       style={{
         paddingTop:
           insets.top + verticalScale(Platform.OS === 'android' ? 12 : 0),
-        padding: verticalScale(16),
+        paddingHorizontal: horizontalScale(16),
         flexDirection: 'row',
         justifyContent: 'space-between',
       }}>
@@ -38,20 +38,20 @@ const HeaderBar = ({
           <ArrowLeftIcon />
         </TouchableOpacity>
       )}
+
       {title && (
-        <>
-          <Text
-            style={{
-              textAlign: 'center',
-              fontSize: 16,
-              lineHeight: 24,
-              fontWeight: '600',
-              fontFamily: 'Nunito',
-            }}>
-            {title}
-          </Text>
-          <View />
-        </>
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: 16,
+            lineHeight: 24,
+            fontWeight: '600',
+            fontFamily: 'Nunito',
+            flex: 1,
+            marginRight: 20,
+          }}>
+          {title}
+        </Text>
       )}
 
       {isDashboard && (
