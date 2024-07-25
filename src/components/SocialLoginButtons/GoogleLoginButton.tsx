@@ -1,28 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 import { GoogleIcon } from '../../assets/svg';
 import styles from './SocialLoginButton.style';
 
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { AuthModel } from '../../modules/Auth/entities';
 
-export default class GoogleLoginButton extends Component {
-  async handleLogin() {
+interface GoogleLoginButtonProps {
+  onSuccess(socialToken: AuthModel.SocialToken): void;
+}
+
+const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ onSuccess }) => {
+  const handleLogin = async () => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      // const user = await GoogleSignin.getCurrentUser();
-      // console.log('User', user);
-      console.log(userInfo);
+      onSuccess({ token: userInfo.serverAuthCode!, type: 'GOOGLE' });
     } catch (error) {
-      console.log(error);
+      console.log('Google sign in failed detail ', error);
     }
-  }
-  render() {
-    return (
-      <TouchableOpacity onPress={this.handleLogin} style={styles.button}>
-        <GoogleIcon style={styles.icon} />
-        <Text style={styles.text}>Google</Text>
-      </TouchableOpacity>
-    );
-  }
-}
+  };
+
+  return (
+    <TouchableOpacity onPress={handleLogin} style={styles.button}>
+      <GoogleIcon style={styles.icon} />
+      <Text style={styles.text}>Google</Text>
+    </TouchableOpacity>
+  );
+};
+export default GoogleLoginButton;

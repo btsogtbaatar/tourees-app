@@ -30,6 +30,7 @@ function App(): React.JSX.Element {
     GoogleSignin.configure({
       webClientId:
         '949997873563-u4jnhf8j4t5sm6f2skqraat89qgfn7ov.apps.googleusercontent.com',
+      offlineAccess: true,
       scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       iosClientId:
         '949997873563-cg09eqnu59uk4leoo2iak61kuelk7h8m.apps.googleusercontent.com',

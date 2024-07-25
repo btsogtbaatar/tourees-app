@@ -38,6 +38,11 @@ export declare module AuthModel {
     value: string;
   };
 
+  export type SocialToken = {
+    token: string;
+    type: string;
+  };
+
   export type Token = {
     jwt: string;
   };
