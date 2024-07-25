@@ -25,7 +25,7 @@ type Props = NativeStackScreenProps<RequestStackParamList, 'SubCategoryList'>;
 const SubCategoryList = (props: Props) => {
   const { parentCategoryId } = props.route.params;
   const [loading, setLoading] = useState<boolean>(true);
-  const [categories, setCategories] = useState<SharedModel.Category[]>();
+  const [categories, setCategories] = useState<SharedModel.SubCategory[]>();
   const [refreshing, setRefreshing] = useState(false);
   const [filter, setFilter] = useState<SharedModel.SubCategoryFilter>({
     parentCategoryId,
@@ -39,7 +39,7 @@ const SubCategoryList = (props: Props) => {
     setFilter(filter);
 
     fetchSubCategories(filter).then(
-      (response: SharedModel.Pagination<SharedModel.Category>) => {
+      (response: SharedModel.Pagination<SharedModel.SubCategory>) => {
         setCategories(response.content);
         setLoading(false);
         setRefreshing(false);

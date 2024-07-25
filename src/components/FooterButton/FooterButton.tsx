@@ -40,7 +40,11 @@ function FooterButton(props: PropsButton) {
         },
       ]}>
       {props.back && (
-        <View style={{ backgroundColor: colors.textWhite, borderRadius: 12 }}>
+        <View
+          style={{
+            backgroundColor: colors.textWhite,
+            borderRadius: 12,
+          }}>
           <TouchableOpacity
             onPress={props.onBackPress ?? navigation.goBack}
             style={styles.icon}>

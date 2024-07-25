@@ -1,5 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-/* eslint-disable react-native/no-inline-styles */
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import moment from 'moment';
@@ -48,7 +46,7 @@ function UserRequest({ route }: Props) {
   const { t } = useTranslation();
   const rootNavigation = useNavigation();
   const subCategory = route.params.item;
-  const navigation = useNavigation<RequestStackParamList>();
+  const navigation = useNavigation();
   const authState = authStore(state => state);
   const { dispatch: dispatchModal } = useContext(ModalContext);
   const [selectedImages, setSelectedImages] = useState<SharedModel.File[]>([]);
@@ -285,7 +283,8 @@ function UserRequest({ route }: Props) {
                 height: verticalScale(45),
                 justifyContent: 'center',
                 alignItems: 'center',
-              }}></View>
+              }}
+            />
             <ScrollView
               style={{ flex: 1, paddingHorizontal: horizontalScale(16) }}>
               <Text

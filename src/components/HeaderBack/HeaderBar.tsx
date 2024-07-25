@@ -4,7 +4,6 @@ import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LogoIcon } from '../../assets/svg';
 import ArrowLeftIcon from '../../assets/svg/dashboard/ArrowLeftIcon';
-import { AuthStackParamList } from '../../modules/auth/navigation/types';
 import { horizontalScale, verticalScale } from '../../utilities/metrics';
 import LoginButton from '../LoginButton/LoginButton';
 
@@ -21,7 +20,7 @@ const HeaderBar = ({
   isDashboard = false,
 }: HeaderBarProps) => {
   const insets = useSafeAreaInsets();
-  const navigation = useNavigation<AuthStackParamList>();
+  const navigation = useNavigation();
   const canGoBack = backButton && navigation.canGoBack();
 
   return (

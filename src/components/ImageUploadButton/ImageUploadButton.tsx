@@ -45,6 +45,7 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
   return (
     <View style={{ flex: 1 }}>
       <FlatList
+        scrollEnabled={false}
         ref={flatlistRef}
         data={selectedImages}
         numColumns={3}
