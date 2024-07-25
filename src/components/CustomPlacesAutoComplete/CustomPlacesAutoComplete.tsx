@@ -1,6 +1,7 @@
 import { debounce } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { FlatList, View } from 'react-native';
 import { Typography } from '../../constants';
 import { SharedModel } from '../../modules/shared/entities/shared.model';
@@ -28,6 +29,7 @@ export default function CustomPlacesAutoComplete(
     SharedModel.Place | undefined
   >();
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation(undefined, { keyPrefix: 'addressMapView' });
 
   const form = useForm({
     mode: 'onChange',
@@ -59,8 +61,18 @@ export default function CustomPlacesAutoComplete(
 
   const handler = useCallback(debounce(onChangeText, 500), []);
 
+  const renderSeperator = () => (
+    <View style={CustomPlacesAutoCompleteStyle.seperator} />
+  );
+
+  const onItemPressed = (place: SharedModel.Place) => {
+    form.setValue('name', '');
+    setSelectedPlace(place);
+    props.onChange(place);
+  };
+
   return (
-    <View style={CustomPlacesAutoCompleteStyle.wrappingContainer}>
+    <View style={CustomPlacesAutoCompleteStyle.container}>
       <FormProvider {...form}>
         <CustomInput
           numberOfLines={2}
@@ -70,33 +82,26 @@ export default function CustomPlacesAutoComplete(
               : undefined,
             input: Typography.textSmaller,
           }}
-          enableClear
+          clearButton
           name={'name'}
-          placeholder="Хайх хаягаа оруулна уу."
+          placeholder={t('autoComplete.placeholder')}
           onChangeText={handler}
         />
       </FormProvider>
       {selectedPlace === undefined && (
-        <View style={CustomPlacesAutoCompleteStyle.container}>
+        <View style={CustomPlacesAutoCompleteStyle.listContainer}>
           {loading ? (
-            <InfoItem label={'Уншиж байна...'} />
+            <InfoItem label={t('autoComplete.loading')} />
           ) : (
             <FlatList
               scrollEnabled={true}
               data={places}
-              ListEmptyComponent={<InfoItem label={'Хаяг олдсонгүй.'} />}
-              ItemSeparatorComponent={() => (
-                <View style={CustomPlacesAutoCompleteStyle.seperator} />
-              )}
+              ListEmptyComponent={
+                <InfoItem label={t('autoComplete.notFound')} />
+              }
+              ItemSeparatorComponent={renderSeperator}
               renderItem={place => (
-                <SuggestionItem
-                  place={place.item}
-                  onPress={_place => {
-                    form.setValue('name', '');
-                    setSelectedPlace(_place);
-                    props.onChange(_place);
-                  }}
-                />
+                <SuggestionItem place={place.item} onPress={onItemPressed} />
               )}
             />
           )}

@@ -1,12 +1,9 @@
-import { BaseStackParamList } from '../../../navigation/types';
 import { SharedModel } from '../../shared/entities/shared.model';
 
-type StackType = {
+export type RequestStackParamList = {
   SubCategoryList: { parentCategoryId?: number; title: string };
   UserRequest: {
     item: SharedModel.SubCategory;
   };
-  RequestDetail: { title: string; status: number; url: string };
+  RequestDetail: { title: string };
 };
-
-export type RequestStackParamList = StackType & BaseStackParamList;

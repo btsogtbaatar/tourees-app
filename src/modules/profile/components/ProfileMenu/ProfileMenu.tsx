@@ -2,7 +2,6 @@ import { useNavigation } from '@react-navigation/native';
 import { default as React } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native';
-import GroupedMenuList from '../../../../components/GroupedMenuList/GroupedMenuList';
 import i18n from '../../../../../i18n';
 import ChevronRightIcon from '../../../../assets/svg/profile/ChevronRightIcon';
 import ClockRewindIcon from '../../../../assets/svg/profile/ClockRewindIcon';
@@ -12,15 +11,15 @@ import GlobalIcon from '../../../../assets/svg/profile/GlobalIcon';
 import HelpCircleIcon from '../../../../assets/svg/profile/HelpCircleIcon';
 import LogoutIcon from '../../../../assets/svg/profile/LogoutIcon';
 import UserCircleIcon from '../../../../assets/svg/profile/UserCircleIcon';
+import GroupedMenuList from '../../../../components/GroupedMenuList/GroupedMenuList';
 import { colors } from '../../../../constants/colors';
 import { authStore, languageStore } from '../../../../context/auth/store';
-import { RootStackParamList } from '../../../../navigation/types';
 
 const ProfileMenu = () => {
   const { t } = useTranslation();
   const authState = authStore(state => state);
   const languageState = languageStore(state => state);
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation();
   const profileMenus = [
     {
       values: [t('profile.l_register_infomation')],

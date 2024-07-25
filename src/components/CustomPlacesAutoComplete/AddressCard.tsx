@@ -3,43 +3,51 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LocationCircleIcon, LocationIcon } from '../../assets/svg';
-import { colors } from '../../constants';
 import { AddressType } from '../../modules/request/entities/request.model';
 import { Address } from '../../modules/shared/page/MapViewAddress/AddressMapView';
-import { SelectedPlaceStyles } from './SelectedAddress.style';
+import { AddressCardStyles } from './AddressCard.style';
 
-export interface SelectedAddressProps {
+export interface AddressCardProps {
   active: boolean;
   address: Address;
   onPress: (address: Address) => void;
 }
 
-function SelectedAddress(props: SelectedAddressProps) {
+function AddressCard(props: Readonly<AddressCardProps>) {
   const { t } = useTranslation();
 
   return (
     <TouchableOpacity
       onPress={() => props.onPress(props.address)}
       style={[
-        SelectedPlaceStyles.selectedAddressContainer,
-        {
-          borderColor: props.active ? colors.borderPrimaryColor : 'transparent',
-        },
+        AddressCardStyles.card,
+        props.active
+          ? AddressCardStyles.selected
+          : AddressCardStyles.unselected,
       ]}>
-      <View style={SelectedPlaceStyles.iconContainer}>
+      <View style={AddressCardStyles.iconContainer}>
         {props.address.name === AddressType.From ? (
           <LocationCircleIcon width={20} height={20} />
         ) : (
           <LocationIcon width={20} height={20} />
         )}
       </View>
-      <View style={SelectedPlaceStyles.textContainer}>
+      <View style={AddressCardStyles.textContainer}>
         {props.address.displayName ? (
-          <Text numberOfLines={2} style={SelectedPlaceStyles.selectedAddress}>
+          <Text
+            numberOfLines={2}
+            style={[
+              AddressCardStyles.addressText,
+              AddressCardStyles.selectedText,
+            ]}>
             {props.address.displayName}
           </Text>
         ) : (
-          <Text style={SelectedPlaceStyles.unselectedAddress}>
+          <Text
+            style={[
+              AddressCardStyles.addressText,
+              AddressCardStyles.unselectedText,
+            ]}>
             {props.address.name === AddressType.From
               ? t('request.requestDestinationAddress')
               : t('request.requestDeliveryAddress')}
@@ -50,4 +58,4 @@ function SelectedAddress(props: SelectedAddressProps) {
   );
 }
 
-export default SelectedAddress;
+export default AddressCard;

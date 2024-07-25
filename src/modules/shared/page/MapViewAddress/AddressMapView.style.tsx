@@ -9,19 +9,19 @@ const AddressMapViewStyle = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     zIndex: 0,
   },
-  searchContainer: {
+  controllerContainer: {
     paddingHorizontal: 16,
     zIndex: 1,
     position: 'absolute',
     width: '100%',
   },
-  selectedAddressContainer: {
+  addressContainer: {
     flexDirection: 'row',
   },
-  leftSelectedAdress: {
+  left: {
     flex: 1,
   },
-  rightSelectedAdress: {
+  right: {
     flex: 1,
     marginLeft: 10,
   },

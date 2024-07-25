@@ -2,6 +2,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { debounce } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import {
   FlatList,
   RefreshControl,
@@ -32,6 +33,7 @@ const SubCategoryList = (props: Props) => {
   const form = useForm({
     mode: 'onChange',
   });
+  const { t } = useTranslation(undefined, { keyPrefix: 'subCategoryList' });
 
   const getSubCategories = (filter: SharedModel.SubCategoryFilter) => {
     setFilter(filter);
@@ -65,7 +67,7 @@ const SubCategoryList = (props: Props) => {
           <FormProvider {...form}>
             <CustomInput
               name={'subCategoryName'}
-              placeholder="Хайх"
+              placeholder={t('search.placeholder')}
               icon={<SearchMd style={{ color: colors.primaryColor }} />}
               onChangeText={(text: string) => {
                 handler({ ...filter, name: text });

@@ -8,11 +8,10 @@ import WelcomeModal from '../../../../components/Modal/WelcomeModal';
 import { colors } from '../../../../constants/colors';
 import { ModalContext } from '../../../../context/modal/modal.context';
 import { actions } from '../../../../context/modal/modal.reducer';
-import { RootStackParamList } from '../../../../navigation/types';
 import styles from './RegisterTermAndCondition.style';
 
 const RegisterTermAndCondition = () => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation();
   const [isChecked, setIsChecked] = useState<boolean>(false);
   const { t } = useTranslation();
 

@@ -8,7 +8,6 @@ import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvo
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
-import { RootStackParamList } from '../../../../navigation/types';
 import { AuthStateToken } from '../../entities/auth.model';
 import { AuthStackParamList } from '../../navigation/types';
 import { token } from '../../services';
@@ -19,7 +18,7 @@ type LoginOtpCheckProps = NativeStackScreenProps<
 >;
 
 export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation();
   const { t } = useTranslation();
   const [value, setValue] = useState<string>();
 
@@ -39,7 +38,7 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
       <CustomTouchableWithoutFeedback>
         <FullHeightView>
           <ContainerView>
-            <CheckOtp credentials={credentials} onChange={setValue}></CheckOtp>
+            <CheckOtp credentials={credentials} onChange={setValue} />
           </ContainerView>
           <FooterButton
             back={true}

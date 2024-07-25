@@ -1,11 +1,12 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { LatLng, Region } from 'react-native-maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CustomMapView from '../../../../components/CustomMapView/CustomMapView';
+import AddressCard from '../../../../components/CustomPlacesAutoComplete/AddressCard';
 import CustomPlacesAutoComplete from '../../../../components/CustomPlacesAutoComplete/CustomPlacesAutoComplete';
-import SelectedAddress from '../../../../components/CustomPlacesAutoComplete/SelectedAddress';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import { RootStackParamList } from '../../../../navigation/types';
 import { AddressType } from '../../../request/entities/request.model';
@@ -36,6 +37,7 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
   const [addresses, setAddresses] = useState<Addresses>(
     props.route.params.addresses,
   );
+  const { t } = useTranslation(undefined, { keyPrefix: 'addressMapView' });
 
   const getAddress = (_addresses: Addresses) => {
     if (addressType === AddressType.From) {
@@ -120,17 +122,18 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
 
   return (
     <View style={AddressMapViewStyle.container}>
-      <View style={[AddressMapViewStyle.searchContainer, { top: insets.top }]}>
-        <View style={AddressMapViewStyle.selectedAddressContainer}>
-          <View style={AddressMapViewStyle.leftSelectedAdress}>
-            <SelectedAddress
+      <View
+        style={[AddressMapViewStyle.controllerContainer, { top: insets.top }]}>
+        <View style={AddressMapViewStyle.addressContainer}>
+          <View style={AddressMapViewStyle.left}>
+            <AddressCard
               address={addresses.from}
               onPress={() => setAddressType(AddressType.From)}
               active={addressType === AddressType.From}
             />
           </View>
-          <View style={AddressMapViewStyle.rightSelectedAdress}>
-            <SelectedAddress
+          <View style={AddressMapViewStyle.right}>
+            <AddressCard
               address={addresses.to}
               onPress={() => setAddressType(AddressType.To)}
               active={addressType === AddressType.To}
@@ -156,10 +159,9 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         }}
         back={true}
         btnDisabled={isDisabled()}
-        text={'Болсон'}
+        text={t('save')}
         onPress={() => {
           props.route.params.onGoBack(addresses);
-          console.log('🚀 ~ AddressMapView ~ addresses:', addresses);
           props.navigation.goBack();
         }}
         onBackPress={() => props.navigation.goBack()}

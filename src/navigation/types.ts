@@ -5,12 +5,6 @@ import { AddressType } from '../modules/request/entities/request.model';
 import { RequestStackParamList } from '../modules/request/navigation/types';
 import { Addresses } from '../modules/shared/page/MapViewAddress/AddressMapView';
 
-export type BaseStackParamList = {
-  navigate: (screen: string, route?: any) => void;
-  goBack: () => void;
-  canGoBack: () => boolean;
-};
-
 export type RootStackParamList = {
   HomeStack: NavigatorScreenParams<HomeStackParamList>;
   AuthStack: NavigatorScreenParams<AuthStackParamList>;
@@ -20,7 +14,7 @@ export type RootStackParamList = {
     addressType: AddressType;
     onGoBack: (addresses: Addresses) => void;
   };
-} & BaseStackParamList;
+};
 
 declare global {
   namespace ReactNavigation {

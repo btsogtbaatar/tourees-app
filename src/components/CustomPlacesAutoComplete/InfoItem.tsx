@@ -6,7 +6,7 @@ export interface InfoItemProps {
   label: string;
 }
 
-function InfoItem(props: InfoItemProps) {
+function InfoItem(props: Readonly<InfoItemProps>) {
   return (
     <View style={SuggestionItemStyle.container}>
       <Text style={SuggestionItemStyle.infoText}>{props.label}</Text>

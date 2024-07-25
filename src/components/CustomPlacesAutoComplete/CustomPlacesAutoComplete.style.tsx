@@ -2,12 +2,12 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../constants';
 
 export const CustomPlacesAutoCompleteStyle = StyleSheet.create({
-  wrappingContainer: {
+  container: {
     backgroundColor: 'white',
     borderRadius: 12,
     marginTop: 10,
   },
-  container: {
+  listContainer: {
     maxHeight: 150,
     backgroundColor: 'white',
     borderBottomLeftRadius: 12,

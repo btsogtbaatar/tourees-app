@@ -39,8 +39,7 @@ export interface CustomInputProps<T extends FieldValues>
     onPress: () => void;
   };
   onPress?: (event?: GestureResponderEvent) => void;
-  disableForm?: boolean;
-  enableClear?: boolean;
+  clearButton?: boolean;
 }
 
 export default function CustomInput<T extends FieldValues>(
@@ -88,7 +87,7 @@ export default function CustomInput<T extends FieldValues>(
           {props.action.icon}
         </Pressable>
       );
-    } else if (props.enableClear === true) {
+    } else if (props.clearButton === true) {
       return (
         <Pressable onPress={() => textInputRef.current?.clear()}>
           <XCircle

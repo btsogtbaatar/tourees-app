@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import {
   FlatList,
   RefreshControl,
@@ -25,6 +26,7 @@ const Home = () => {
   const [categories, setCatogories] = useState<SharedModel.Category[]>();
   const authState = authStore(state => state);
   const rootNavigation = useNavigation();
+  const { t } = useTranslation(undefined, { keyPrefix: 'home' });
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -79,18 +81,18 @@ const Home = () => {
               fontWeight: '400',
               marginBottom: 10,
             }}>
-            Та ямар үйлчилгээ авахыг хүсч байна вэ?
+            {t('category.question')}
           </Text>
           <View style={{ marginBottom: 10 }}>
             <FormProvider {...form}>
               <CustomInput
                 name={'subCategoryName'}
-                placeholder="Хайх"
+                placeholder={t('category.search')}
                 onPress={() => {
                   rootNavigation.navigate('RequestStack', {
                     screen: 'SubCategoryList',
                     params: {
-                      title: 'Төрлүүд',
+                      title: t('category.title'),
                     },
                   });
                 }}
@@ -99,7 +101,11 @@ const Home = () => {
             </FormProvider>
           </View>
           {!authState.authenticated && (
-            <RegisterComponent navigation={rootNavigation} />
+            <RegisterComponent
+              onPress={() =>
+                rootNavigation.navigate('AuthStack', { screen: 'Login' })
+              }
+            />
           )}
           <View>
             <View

@@ -355,7 +355,7 @@ function UserRequest({ route }: Props) {
                 />
               </View>
               <Text style={[Typography.textSmall, { marginBottom: 8 }]}>
-                {t('request.requestDestinationAddress')}
+                {t('userRequest.address.label')}
               </Text>
               <View style={[UserRequestStyle.container, { marginBottom: 16 }]}>
                 <LocationCircleIcon style={UserRequestStyle.icon} />

@@ -1,11 +1,10 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { colors } from '../../constants/colors';
 import { horizontalScale, verticalScale } from '../../utilities/metrics';
-import { useTranslation } from 'react-i18next';
-import { RootStackParamList } from '../../navigation/types';
 
 interface LoginButtonProps {
   title?: string;
@@ -13,7 +12,7 @@ interface LoginButtonProps {
 }
 
 const LoginButton = ({ title, onClick }: LoginButtonProps) => {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation();
   const { t } = useTranslation();
 
   const onPress = () => {
