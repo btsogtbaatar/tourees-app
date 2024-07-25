@@ -2,9 +2,9 @@ import { debounce } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FlatList, View } from 'react-native';
-import { LatLng } from 'react-native-maps';
 import { Typography } from '../../constants';
 import { SharedModel } from '../../modules/shared/entities/shared.model';
+import { Address } from '../../modules/shared/page/MapViewAddress/AddressMapView';
 import {
   getNearbyPlacesFromCoordinates,
   getPlacesByText,
@@ -16,7 +16,7 @@ import InfoItem from './InfoItem';
 import SuggestionItem from './SuggestionItem';
 
 export interface CustomPlacesAutoCompleteProps {
-  latLng: LatLng;
+  address: Address;
   onChange: (value: SharedModel.Place) => void;
 }
 
@@ -34,18 +34,15 @@ export default function CustomPlacesAutoComplete(
   });
 
   useEffect(() => {
-    if (
-      props.latLng.latitude !== selectedPlace?.location.latitude &&
-      props.latLng.longitude !== selectedPlace?.location.longitude
-    ) {
+    if (props.address.displayName === undefined) {
       setSelectedPlace(undefined);
       setLoading(true);
 
-      getNearbyPlacesFromCoordinates(props.latLng)
+      getNearbyPlacesFromCoordinates(props.address)
         .then(setPlaces)
         .finally(() => setLoading(false));
     }
-  }, [props.latLng]);
+  }, [props.address]);
 
   const onChangeText = (text: string) => {
     if (text.length > 0) {

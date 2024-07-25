@@ -59,24 +59,26 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
           props.onRegionChangeComplete(region);
         }
       }}>
-      {props.addresses?.from.address !== undefined && (
-        <Marker
-          coordinate={{
-            latitude: props.addresses.from.latitude,
-            longitude: props.addresses.from.longitude,
-          }}>
-          <LocationCircleIcon width={25} height={25} />
-        </Marker>
-      )}
-      {props.addresses?.to.address !== undefined && (
-        <Marker
-          coordinate={{
-            latitude: props.addresses.to.latitude,
-            longitude: props.addresses.to.longitude,
-          }}>
-          <LocationIcon width={25} height={25} />
-        </Marker>
-      )}
+      {props.addresses?.from.address !== undefined &&
+        props.addressType !== AddressType.From && (
+          <Marker
+            coordinate={{
+              latitude: props.addresses.from.latitude,
+              longitude: props.addresses.from.longitude,
+            }}>
+            <LocationCircleIcon width={20} height={20} />
+          </Marker>
+        )}
+      {props.addresses?.to.address !== undefined &&
+        props.addressType !== AddressType.To && (
+          <Marker
+            coordinate={{
+              latitude: props.addresses.to.latitude,
+              longitude: props.addresses.to.longitude,
+            }}>
+            <LocationIcon width={20} height={20} />
+          </Marker>
+        )}
       {props.addresses?.from.address !== undefined &&
         props.addresses?.to.address !== undefined && (
           <MapViewDirections

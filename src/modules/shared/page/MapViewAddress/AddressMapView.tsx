@@ -29,10 +29,6 @@ export type Address = {
 } & LatLng;
 
 export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
-  const addressTypeMapping: { [key: string]: AddressType | undefined } = {
-    [AddressType.From]: AddressType.To,
-    [AddressType.To]: undefined,
-  };
   const insets = useSafeAreaInsets();
   const [addressType, setAddressType] = useState<AddressType | undefined>(
     props.route.params.addressType,
@@ -103,8 +99,18 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
       }
 
       setAddressType(_addressType => {
-        if (_addressType !== undefined) {
-          return addressTypeMapping[_addressType.toString()];
+        if (_addressType === AddressType.From) {
+          if (addresses.to.address === undefined) {
+            return AddressType.To;
+          } else {
+            return undefined;
+          }
+        } else if (_addressType === AddressType.To) {
+          if (addresses.from.address === undefined) {
+            return AddressType.From;
+          } else {
+            return undefined;
+          }
         }
       });
 
@@ -132,7 +138,7 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
           </View>
         </View>
         <CustomPlacesAutoComplete
-          latLng={getAddress(addresses)}
+          address={getAddress(addresses)}
           onChange={onPlaceChange}
         />
       </View>
