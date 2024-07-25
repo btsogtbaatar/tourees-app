@@ -87,10 +87,7 @@ function UserRequest({ route }: Props) {
           setAddresses(_addresses => {
             return {
               ..._addresses,
-              from: {
-                ..._addresses.from,
-                address: fromAddress.address,
-              },
+              from: fromAddress,
             };
           });
         }
