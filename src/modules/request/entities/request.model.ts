@@ -30,7 +30,8 @@ export declare namespace TaskModel {
   };
 
   export type Address = {
-    name?: string;
+    name?: AddressType;
+    displayName?: string;
     address?: string;
     latitude: number;
     longitude: number;
@@ -39,4 +40,9 @@ export declare namespace TaskModel {
   export type SubCategory = {
     id: number;
   };
+}
+
+export enum AddressType {
+  From = 'from',
+  To = 'to',
 }

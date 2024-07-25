@@ -5,9 +5,10 @@ export const CustomPlacesAutoCompleteStyle = StyleSheet.create({
   wrappingContainer: {
     backgroundColor: 'white',
     borderRadius: 12,
+    marginTop: 10,
   },
   container: {
-    maxHeight: 200,
+    maxHeight: 150,
     backgroundColor: 'white',
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,

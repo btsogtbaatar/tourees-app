@@ -13,7 +13,6 @@ import CustomInput from '../CustomInput/CustomInput';
 import { CustomInputStyle } from '../CustomInput/CustomInput.style';
 import { CustomPlacesAutoCompleteStyle } from './CustomPlacesAutoComplete.style';
 import InfoItem from './InfoItem';
-import SelectedPlace from './SelectedPlace';
 import SuggestionItem from './SuggestionItem';
 
 export interface CustomPlacesAutoCompleteProps {
@@ -64,55 +63,47 @@ export default function CustomPlacesAutoComplete(
   const handler = useCallback(debounce(onChangeText, 500), []);
 
   return (
-    <View>
-      <View style={CustomPlacesAutoCompleteStyle.wrappingContainer}>
-        <FormProvider {...form}>
-          <CustomInput
-            numberOfLines={2}
-            style={{
-              container: !selectedPlace
-                ? CustomInputStyle.containerWithSuggestion
-                : undefined,
-              input: Typography.textSmaller,
-            }}
-            enableClear
-            name={'name'}
-            placeholder="Хайх хаягаа оруулна уу."
-            onChangeText={handler}
-          />
-        </FormProvider>
-        {selectedPlace === undefined && (
-          <View style={CustomPlacesAutoCompleteStyle.container}>
-            {loading ? (
-              <InfoItem label={'Уншиж байна...'} />
-            ) : (
-              <FlatList
-                scrollEnabled={true}
-                data={places}
-                ListEmptyComponent={<InfoItem label={'Хаяг олдсонгүй.'} />}
-                ItemSeparatorComponent={() => (
-                  <View style={CustomPlacesAutoCompleteStyle.seperator} />
-                )}
-                renderItem={place => (
-                  <SuggestionItem
-                    place={place.item}
-                    onPress={_place => {
-                      form.setValue('name', '');
-                      setSelectedPlace(_place);
-                      props.onChange(_place);
-                    }}
-                  />
-                )}
-              />
-            )}
-          </View>
-        )}
-      </View>
-      {selectedPlace !== undefined && (
-        <SelectedPlace
-          place={selectedPlace}
-          onDelete={() => setSelectedPlace(undefined)}
+    <View style={CustomPlacesAutoCompleteStyle.wrappingContainer}>
+      <FormProvider {...form}>
+        <CustomInput
+          numberOfLines={2}
+          style={{
+            container: !selectedPlace
+              ? CustomInputStyle.containerWithSuggestion
+              : undefined,
+            input: Typography.textSmaller,
+          }}
+          enableClear
+          name={'name'}
+          placeholder="Хайх хаягаа оруулна уу."
+          onChangeText={handler}
         />
+      </FormProvider>
+      {selectedPlace === undefined && (
+        <View style={CustomPlacesAutoCompleteStyle.container}>
+          {loading ? (
+            <InfoItem label={'Уншиж байна...'} />
+          ) : (
+            <FlatList
+              scrollEnabled={true}
+              data={places}
+              ListEmptyComponent={<InfoItem label={'Хаяг олдсонгүй.'} />}
+              ItemSeparatorComponent={() => (
+                <View style={CustomPlacesAutoCompleteStyle.seperator} />
+              )}
+              renderItem={place => (
+                <SuggestionItem
+                  place={place.item}
+                  onPress={_place => {
+                    form.setValue('name', '');
+                    setSelectedPlace(_place);
+                    props.onChange(_place);
+                  }}
+                />
+              )}
+            />
+          )}
+        </View>
       )}
     </View>
   );

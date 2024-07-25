@@ -19,6 +19,7 @@ const UserRequestStyle = StyleSheet.create({
     justifyContent: 'space-between',
   },
   icon: {
+    color: colors.primaryColor,
     marginRight: 8,
   },
 });

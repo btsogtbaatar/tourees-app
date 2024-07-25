@@ -35,9 +35,9 @@ import { ModalContext } from '../../../../context/modal/modal.context';
 import { actions } from '../../../../context/modal/modal.reducer';
 import { horizontalScale, verticalScale } from '../../../../utilities';
 import { SharedModel } from '../../../shared/entities/shared.model';
-import { Address } from '../../../shared/page/MapViewAddress/AddressMapView';
+import { Addresses } from '../../../shared/page/MapViewAddress/AddressMapView';
 import { uploadFile } from '../../../shared/service/shared.service';
-import { TaskModel } from '../../entities/request.model';
+import { AddressType, TaskModel } from '../../entities/request.model';
 import { RequestStackParamList } from '../../navigation/types';
 import { createTask } from '../../service/request.service';
 import UserRequestStyle from './UserRequest.style';
@@ -59,15 +59,17 @@ function UserRequest({ route }: Props) {
     sub_category_id: subCategory.id,
   });
 
-  const [toAddress, setToAddress] = useState<Address>({
-    name: 'to',
-    latitude: DEFAULT_LAT,
-    longitude: DEFAULT_LNG,
-  });
-  const [fromAddress, setFromAddress] = useState<Address>({
-    name: 'from',
-    latitude: DEFAULT_LAT,
-    longitude: DEFAULT_LNG,
+  const [addresses, setAddresses] = useState<Addresses>({
+    from: {
+      name: AddressType.To,
+      latitude: DEFAULT_LAT,
+      longitude: DEFAULT_LNG,
+    },
+    to: {
+      name: AddressType.From,
+      latitude: DEFAULT_LAT,
+      longitude: DEFAULT_LNG,
+    },
   });
 
   const handleInputChange = (
@@ -112,8 +114,11 @@ function UserRequest({ route }: Props) {
           requestValue.details,
           t('request.requestDetailWarning'),
         ) ||
-        validateAndDispatchModal(fromAddress, t('request.requestAddressMsg')) ||
-        validateAndDispatchModal(toAddress, t('request.requestAddressMsg'))
+        validateAndDispatchModal(
+          addresses.from,
+          t('request.requestAddressMsg'),
+        ) ||
+        validateAndDispatchModal(addresses.to, t('request.requestAddressMsg'))
       ) {
         return;
       }
@@ -137,7 +142,7 @@ function UserRequest({ route }: Props) {
           id: requestValue.sub_category_id,
         },
         files: selectedImages,
-        addresses: [{ ...fromAddress }, { ...toAddress }],
+        addresses: [addresses.from, addresses.to],
       };
 
       createTask(taskRequest).then(
@@ -334,16 +339,15 @@ function UserRequest({ route }: Props) {
                 <Text
                   numberOfLines={2}
                   style={[Typography.textSmaller, { flex: 1 }]}>
-                  {fromAddress?.address ??
+                  {addresses.from?.address ??
                     t('request.requestDestinationAddress')}
                 </Text>
                 <Text
                   onPress={() => {
                     rootNavigation.navigate('AddressMapView', {
-                      address: fromAddress,
-                      onGoBack: (address: Address) => {
-                        setFromAddress(address);
-                      },
+                      addresses: addresses,
+                      addressType: AddressType.From,
+                      onGoBack: setAddresses,
                     });
                   }}
                   style={[
@@ -358,15 +362,14 @@ function UserRequest({ route }: Props) {
                 <Text
                   numberOfLines={2}
                   style={[Typography.textSmaller, { flex: 1 }]}>
-                  {toAddress?.address ?? t('request.requestDeliveryAddress')}
+                  {addresses.to?.address ?? t('request.requestDeliveryAddress')}
                 </Text>
                 <Text
                   onPress={() => {
                     rootNavigation.navigate('AddressMapView', {
-                      address: toAddress,
-                      onGoBack: (address: Address) => {
-                        setToAddress(address);
-                      },
+                      addresses: addresses,
+                      addressType: AddressType.To,
+                      onGoBack: setAddresses,
                     });
                   }}
                   style={[

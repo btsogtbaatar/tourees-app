@@ -15,6 +15,16 @@ const AddressMapViewStyle = StyleSheet.create({
     position: 'absolute',
     width: '100%',
   },
+  selectedAddressContainer: {
+    flexDirection: 'row',
+  },
+  leftSelectedAdress: {
+    flex: 1,
+  },
+  rightSelectedAdress: {
+    flex: 1,
+    marginLeft: 10,
+  },
 });
 
 export default AddressMapViewStyle;
