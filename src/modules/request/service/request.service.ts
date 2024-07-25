@@ -4,11 +4,12 @@ import { SharedModel } from '../../shared/entities/shared.model';
 import { TaskModel } from '../entities/request.model';
 
 export function getTasks(
-  page: number,
+  page: number = 1,
+  size = 10,
 ): Promise<SharedModel.Pagination<TaskModel.TaskResponse>> {
   const params = {
     page: page - 1,
-    size: 10,
+    size: size,
   };
   return api.get('/tasks', { params: params });
 }

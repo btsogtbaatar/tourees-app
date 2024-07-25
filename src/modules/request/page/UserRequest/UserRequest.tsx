@@ -3,7 +3,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import moment from 'moment';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Image,
@@ -39,7 +39,7 @@ import { Addresses } from '../../../shared/page/MapViewAddress/AddressMapView';
 import { uploadFile } from '../../../shared/service/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
 import { RequestStackParamList } from '../../navigation/types';
-import { createTask } from '../../service/request.service';
+import { createTask, getTasks } from '../../service/request.service';
 import UserRequestStyle from './UserRequest.style';
 
 type Props = NativeStackScreenProps<RequestStackParamList, 'UserRequest'>;
@@ -71,6 +71,32 @@ function UserRequest({ route }: Props) {
       longitude: DEFAULT_LNG,
     },
   });
+
+  useEffect(() => {
+    getTasks(1, 1).then(page => {
+      if (
+        page.content.length > 0 &&
+        page.content[0].addresses !== undefined &&
+        page.content[0].addresses.length > 0
+      ) {
+        let fromAddress = page.content[0].addresses.find(
+          _address => _address.name === 'from',
+        );
+
+        if (fromAddress) {
+          setAddresses(_addresses => {
+            return {
+              ..._addresses,
+              from: {
+                ..._addresses.from,
+                address: fromAddress.address,
+              },
+            };
+          });
+        }
+      }
+    });
+  }, []);
 
   const handleInputChange = (
     fieldName: keyof typeof requestValue,
