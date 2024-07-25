@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +15,6 @@ import LoadingPage from '../../../../components/Loading/LoadingPage';
 import TabController from '../../../../components/TabController/TabController';
 import { verticalScale } from '../../../../utilities/metrics';
 import validations from '../../../../validations';
-import { AuthStackParamList } from '../../navigation/types';
 import { sendOtp, socialCustomerAuthenticate } from '../../services';
 import { AuthChannel, AuthModel } from '../../entities';
 import {
@@ -67,6 +66,7 @@ export default function Login() {
   };
   const socialAuthentication = (socialToken: AuthModel.SocialToken) => {
     setLoading(true);
+    console.log(socialToken);
     socialCustomerAuthenticate(socialToken)
       .then(() => {
         navigation.navigate('HomeStack', { screen: 'Dashboard' });

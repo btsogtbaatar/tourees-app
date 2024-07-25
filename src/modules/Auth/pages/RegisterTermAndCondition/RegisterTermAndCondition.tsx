@@ -65,8 +65,7 @@ const RegisterTermAndCondition = () => {
               backgroundColor: isChecked ? colors.placeColor : colors.textWhite,
               borderColor: isChecked ? colors.primaryColor : colors.otpBorder,
             },
-          ]}>
-        </View>
+          ]}></View>
       </View>
       <FooterButton
         text={'Нэвтрэх'}

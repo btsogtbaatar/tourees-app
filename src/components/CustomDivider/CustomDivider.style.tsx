@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../constants';
 
-const styles = StyleSheet.create({
+const CustomDividerStyle = StyleSheet.create({
   dividerContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderColor: colors.brandGray,
   },
-  dividerText: { fontWeight: '700', fontFamily: 'Nunito', textAlign:'center' },
+  dividerText: { textAlign: 'center' },
 });
-export default styles;
+export default CustomDividerStyle;

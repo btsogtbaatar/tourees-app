@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next';
 import {
   Image,
   Platform,
-  requireNativeComponent,
   ScrollView,
   Text,
   TextInput,
@@ -45,8 +44,6 @@ import { uploadFile } from '../../../shared/service/shared.service';
 import { TaskModel } from '../../entities/request.model';
 import { RequestStackParamList } from '../../navigation/types';
 import { createTask } from '../../service/request.service';
-import DatePicker from 'react-native-date-picker';
-import CustomDatePicker from '../../../../components/DatePicker/DatePicker';
 
 enum AddressType {
   From,
@@ -75,7 +72,6 @@ function UserRequest({ route }: Props) {
 
   const [toAddress, setToAddress] = useState<Address>();
   const [fromAddress, setFromAddress] = useState<Address>();
-  const [date, setDate] = useState(new Date(Date.now()));
 
   const handleInputChange = (
     fieldName: keyof typeof requestValue,
@@ -271,7 +267,23 @@ function UserRequest({ route }: Props) {
               }}></View>
             <ScrollView
               style={{ flex: 1, paddingHorizontal: horizontalScale(16) }}>
-              <CustomDatePicker date={date} onChange={setDate} />
+              <Text
+                style={{
+                  fontFamily: 'Nunito',
+                  fontWeight: '500',
+                  lineHeight: 21,
+                }}>
+                {t('request.requestDeliveryDate')}
+              </Text>
+              <Calendar
+                onSuccess={(value: string) =>
+                  handleInputChange(
+                    'request_date',
+                    moment(value).format('YYYY-MM-DD'),
+                  )
+                }
+                initialStartDate={moment().format('YYYY-MM-DD')}
+              />
               <Text
                 style={{
                   fontFamily: 'Nunito',

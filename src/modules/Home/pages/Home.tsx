@@ -1,4 +1,3 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import {
   FlatList,
@@ -22,7 +21,6 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [categories, setCatogories] = useState<SharedModel.Category[]>();
   const authState = authStore(state => state);
-  const rootNavigation = useNavigation();
 
   const onRefresh = () => {
     setRefreshing(true);
@@ -66,9 +64,7 @@ const Home = () => {
               tintColor={colors.primaryColor}
             />
           }>
-          {!authState.authenticated && (
-            <RegisterComponent navigation={rootNavigation} />
-          )}
+          {!authState.authenticated && <RegisterComponent />}
           <View style={{ marginTop: verticalScale(20) }}>
             <Text
               style={{ fontSize: 12, fontFamily: 'Nunito', fontWeight: '400' }}>
@@ -88,7 +84,6 @@ const Home = () => {
                 renderItem={({ item }) => {
                   return (
                     <DashboardCard
-                      navigation={rootNavigation}
                       item={{
                         ...item,
                         title: item.name,

@@ -20,7 +20,7 @@ import { Settings } from 'react-native-fbsdk-next';
 axiosInstance(api, authStore);
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
-  const languageState = languageStore(state => state);
+  languageStore(state => state);
 
   useEffect(() => {
     Geocoder.init(process.env.GOOGLE_API_KEY!);
@@ -28,12 +28,10 @@ function App(): React.JSX.Element {
     Settings.setAppID(process.env.FACEBOOK_APP_ID!);
     Settings.initializeSDK();
     GoogleSignin.configure({
-      webClientId:
-        '949997873563-u4jnhf8j4t5sm6f2skqraat89qgfn7ov.apps.googleusercontent.com',
+      webClientId: process.env.GOOGLE_WEB_CLIENT_ID,
       offlineAccess: true,
       scopes: ['https://www.googleapis.com/auth/drive.readonly'],
-      iosClientId:
-        '949997873563-cg09eqnu59uk4leoo2iak61kuelk7h8m.apps.googleusercontent.com',
+      iosClientId: process.env.GOOGLE_IOS_CLIENT_ID,
     });
 
     i18n.changeLanguage('en');
