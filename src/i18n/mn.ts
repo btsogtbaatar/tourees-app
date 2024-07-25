@@ -80,6 +80,7 @@ export default {
         validation: 'И-мэйл хаягаа зөв оруулна уу.',
       },
     },
+    or: 'эсхүл',
     phone: {
       tab: 'Утас',
       label: 'Утасны дугаар',
@@ -88,6 +89,11 @@ export default {
         required: 'Утасны дугаараа оруулна уу.',
         validation: 'Утасны дугаараа зөв оруулна уу.',
       },
+    },
+    socialError: {
+      title: 'Алдаа',
+      waitPrevious: 'Таны өмнөх хүсэлт дуусахыг хүлээнэ үү.',
+      playServiceUnvailable: 'Play service татна уу.',
     },
     check: {
       label: 'Шалгах',

@@ -24,6 +24,17 @@ export async function token(otp: AuthModel.Otp): Promise<AuthStateToken> {
   return { token: token.jwt, user };
 }
 
+export async function socialCustomerAuthenticate(
+  socialToken: AuthModel.SocialToken,
+): Promise<AuthStateToken> {
+  let token: AuthModel.Token = await api.post(
+    `${authBaseUrl}/customers/social`,
+    socialToken,
+  );
+  let user: AuthModel.RegisterResponse = await authenticate(token.jwt);
+  return { token: token.jwt, user };
+}
+
 // TODO: Refactor
 async function authenticate(
   token: string,

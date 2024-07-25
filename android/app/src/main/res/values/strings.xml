@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">toureesapp</string>
+    <string name="facebook_app_id">507170187173017</string>
+    <string name="facebook_client_token">e22965146b9ffa24fe32ea9964d0a39f</string>
 </resources>

@@ -1,4 +1,3 @@
-import { NavigationProp } from '@react-navigation/native';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -6,12 +5,10 @@ import { VectorIcon } from '../../assets/svg';
 import { colors } from '../../constants/colors';
 import { RootStackParamList } from '../../navigation/types';
 import { horizontalScale, verticalScale } from '../../utilities/metrics';
+import { useNavigation } from '@react-navigation/native';
 
-interface Props {
-  navigation: NavigationProp<RootStackParamList>;
-}
-
-const RegisterComponent = ({ navigation }: Props) => {
+const RegisterComponent = () => {
+  const navigation = useNavigation<RootStackParamList>();
   return (
     <LinearGradient
       colors={['#37414B', '#161A1E']}

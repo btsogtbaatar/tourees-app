@@ -1,5 +1,5 @@
 import Geocoder from 'react-native-geocoding';
-import { TaskModel } from '../modules/request/entities/request.model';
+import { TaskModel } from '../modules/Request/entities/request.model';
 
 export const getAddressFromCoordinates = (
   coordinates: TaskModel.RequestAdditional,

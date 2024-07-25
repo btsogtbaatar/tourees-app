@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 import TabItem from '../TabItem/TabItem';
-import styles from '../../modules/auth/pages/Register/Register.style';
+import styles from '../../modules/Auth/pages/Register/Register.style';
 
 export interface TabControllerProps {
   firstTabLabel: string;

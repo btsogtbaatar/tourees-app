@@ -16,4 +16,7 @@ export default {
     t_request: 'Requests',
     t_profile: 'Profile',
   },
+  login: {
+    or: 'or',
+  },
 };

@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* toureesappTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* toureesappTests.m */; };
 		0418A7C270F0431E957A7D9B /* Nunito-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 66175AE74C68474AB091E737 /* Nunito-ExtraBoldItalic.ttf */; };
-		0C80B921A6F3F58F76C31292 /* libPods-toureesapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-toureesapp.a */; };
 		0E68B87AC62640609A63AAA8 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D3B0AE0F71CE4559A0591BF1 /* OFL.txt */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -17,21 +16,23 @@
 		1A397DE140F8445D9102F517 /* Nunito-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5809E6D8FC65425C8759F668 /* Nunito-ExtraLightItalic.ttf */; };
 		28266E6AC2774D23A6384045 /* Nunito-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E460890D5392499084D60E65 /* Nunito-SemiBoldItalic.ttf */; };
 		3A0DFF4E8B534B45AB03E2D6 /* Nunito-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EF0A98514274538A09CA4A5 /* Nunito-ExtraLight.ttf */; };
+		46C47434B968316004BB1F27 /* libPods-toureesapp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 73971AEE8A5DC9316C37728C /* libPods-toureesapp.a */; };
 		4C8211E6102440FABCF7ADE4 /* Nunito-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 065089A405C34F7AA6BF961F /* Nunito-BoldItalic.ttf */; };
 		573BBD9E7A424CA788C2B99D /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02C1565452BA4DADABB2A7C1 /* Nunito-ExtraBold.ttf */; };
 		6E287D4E89B54FDFB001822D /* Nunito-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 19C80150FAF845BB82335AB0 /* Nunito-BlackItalic.ttf */; };
 		727ACF2B2586459B8CE98415 /* Nunito-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 50F7C673061544FCBF2E70AA /* Nunito-MediumItalic.ttf */; };
 		7533FDCDF8024F2997C20A81 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C4D38A639B8346DEA1749F7F /* Nunito-Bold.ttf */; };
-		7699B88040F8A987B510C191 /* libPods-toureesapp-toureesappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-toureesapp-toureesappTests.a */; };
 		7ADD2254548346098D30855D /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8AC2B1F4863C4D73A70B6772 /* Nunito-SemiBold.ttf */; };
 		7E03806F3573439C9A49A65A /* Nunito-Italic-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F2F98E24BBF54D1DB44D28FB /* Nunito-Italic-VariableFont_wght.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8ADD1E3880F54B52A4431B3E /* Nunito-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA534B17CC9E444E9F220760 /* Nunito-LightItalic.ttf */; };
+		9241DED2B08F8AF0F3495BBB /* libPods-toureesapp-toureesappTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A38786B0BC1506CA9A47AD83 /* libPods-toureesapp-toureesappTests.a */; };
 		925980D01CF145C4952D07E1 /* Nunito-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6856F9240C74487AAD70F814 /* Nunito-Light.ttf */; };
 		94A29585430642189980DEB3 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DD8FA7350CA849B8A861EDBB /* Nunito-Regular.ttf */; };
 		A6D3C1A722054D698285DA6D /* Nunito-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 26313F7A323340669E3F0CF5 /* Nunito-Italic.ttf */; };
 		C7B8BA22DA7B470D97BBE59E /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 35925727CDFD4803993ADA3A /* README.txt */; };
 		D25146585DF8446C91FC773D /* Nunito-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6042B597B7074E848426D48B /* Nunito-Medium.ttf */; };
+		DEBE1BFA2C4DD0C70032A408 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEBE1BF92C4DD0C70032A408 /* File.swift */; };
 		E96CB6C38C8E4014B6D5553E /* Nunito-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4C8CCD28B25148E0BA2ED1E2 /* Nunito-Black.ttf */; };
 		F4B54F39EA404FC6ADB37F13 /* Nunito-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5D9E7BDBCFF4D91B0808813 /* Nunito-VariableFont_wght.ttf */; };
 /* End PBXBuildFile section */
@@ -50,40 +51,42 @@
 		00E356EE1AD99517003FC87E /* toureesappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = toureesappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* toureesappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = toureesappTests.m; sourceTree = "<group>"; };
-		02C1565452BA4DADABB2A7C1 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraBold.ttf"; path = "../assets/fonts/Nunito/static/Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
-		065089A405C34F7AA6BF961F /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-BoldItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-BoldItalic.ttf"; sourceTree = "<group>"; };
+		02C1565452BA4DADABB2A7C1 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraBold.ttf"; path = "../assets/fonts/Nunito/static/Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		065089A405C34F7AA6BF961F /* Nunito-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-BoldItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-BoldItalic.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* toureesapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = toureesapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = toureesapp/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = toureesapp/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = toureesapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = toureesapp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = toureesapp/main.m; sourceTree = "<group>"; };
-		19C80150FAF845BB82335AB0 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-BlackItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-toureesapp-toureesappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-toureesapp-toureesappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		26313F7A323340669E3F0CF5 /* Nunito-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Italic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Italic.ttf"; sourceTree = "<group>"; };
-		35925727CDFD4803993ADA3A /* README.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = README.txt; path = ../assets/fonts/Nunito/README.txt; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-toureesapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toureesapp.debug.xcconfig"; path = "Target Support Files/Pods-toureesapp/Pods-toureesapp.debug.xcconfig"; sourceTree = "<group>"; };
-		4C8CCD28B25148E0BA2ED1E2 /* Nunito-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Black.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Black.ttf"; sourceTree = "<group>"; };
-		50F7C673061544FCBF2E70AA /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-MediumItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-toureesapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toureesapp.release.xcconfig"; path = "Target Support Files/Pods-toureesapp/Pods-toureesapp.release.xcconfig"; sourceTree = "<group>"; };
-		5809E6D8FC65425C8759F668 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraLightItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-toureesapp-toureesappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toureesapp-toureesappTests.debug.xcconfig"; path = "Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-toureesapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-toureesapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6042B597B7074E848426D48B /* Nunito-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Medium.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Medium.ttf"; sourceTree = "<group>"; };
-		66175AE74C68474AB091E737 /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraBoldItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		6856F9240C74487AAD70F814 /* Nunito-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Light.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Light.ttf"; sourceTree = "<group>"; };
-		7EF0A98514274538A09CA4A5 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraLight.ttf"; path = "../assets/fonts/Nunito/static/Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
+		19C80150FAF845BB82335AB0 /* Nunito-BlackItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-BlackItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-BlackItalic.ttf"; sourceTree = "<group>"; };
+		26313F7A323340669E3F0CF5 /* Nunito-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Italic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Italic.ttf"; sourceTree = "<group>"; };
+		29170074320A5B8B9C65BB13 /* Pods-toureesapp-toureesappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toureesapp-toureesappTests.debug.xcconfig"; path = "Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests.debug.xcconfig"; sourceTree = "<group>"; };
+		35925727CDFD4803993ADA3A /* README.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = README.txt; path = ../assets/fonts/Nunito/README.txt; sourceTree = "<group>"; };
+		359EAA44C80D0E7D487ACCB5 /* Pods-toureesapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toureesapp.debug.xcconfig"; path = "Target Support Files/Pods-toureesapp/Pods-toureesapp.debug.xcconfig"; sourceTree = "<group>"; };
+		4C8CCD28B25148E0BA2ED1E2 /* Nunito-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Black.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Black.ttf"; sourceTree = "<group>"; };
+		50F7C673061544FCBF2E70AA /* Nunito-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-MediumItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-MediumItalic.ttf"; sourceTree = "<group>"; };
+		5809E6D8FC65425C8759F668 /* Nunito-ExtraLightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraLightItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		59AB046B3347795EEDB6ECA3 /* Pods-toureesapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toureesapp.release.xcconfig"; path = "Target Support Files/Pods-toureesapp/Pods-toureesapp.release.xcconfig"; sourceTree = "<group>"; };
+		6042B597B7074E848426D48B /* Nunito-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Medium.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Medium.ttf"; sourceTree = "<group>"; };
+		66175AE74C68474AB091E737 /* Nunito-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraBoldItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		6856F9240C74487AAD70F814 /* Nunito-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Light.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Light.ttf"; sourceTree = "<group>"; };
+		73971AEE8A5DC9316C37728C /* libPods-toureesapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-toureesapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EF0A98514274538A09CA4A5 /* Nunito-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-ExtraLight.ttf"; path = "../assets/fonts/Nunito/static/Nunito-ExtraLight.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = toureesapp/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-toureesapp-toureesappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toureesapp-toureesappTests.release.xcconfig"; path = "Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests.release.xcconfig"; sourceTree = "<group>"; };
-		8AC2B1F4863C4D73A70B6772 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBold.ttf"; path = "../assets/fonts/Nunito/static/Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
-		C4D38A639B8346DEA1749F7F /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Bold.ttf"; sourceTree = "<group>"; };
-		D3B0AE0F71CE4559A0591BF1 /* OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = OFL.txt; path = ../assets/fonts/Nunito/OFL.txt; sourceTree = "<group>"; };
-		DD8FA7350CA849B8A861EDBB /* Nunito-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Regular.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Regular.ttf"; sourceTree = "<group>"; };
-		E460890D5392499084D60E65 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBoldItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		E5D9E7BDBCFF4D91B0808813 /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-VariableFont_wght.ttf"; path = "../assets/fonts/Nunito/Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		8AC2B1F4863C4D73A70B6772 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBold.ttf"; path = "../assets/fonts/Nunito/static/Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		A38786B0BC1506CA9A47AD83 /* libPods-toureesapp-toureesappTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-toureesapp-toureesappTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4D38A639B8346DEA1749F7F /* Nunito-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Bold.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		D3B0AE0F71CE4559A0591BF1 /* OFL.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = OFL.txt; path = ../assets/fonts/Nunito/OFL.txt; sourceTree = "<group>"; };
+		D82FD1BFD719235B61891672 /* Pods-toureesapp-toureesappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toureesapp-toureesappTests.release.xcconfig"; path = "Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests.release.xcconfig"; sourceTree = "<group>"; };
+		DD8FA7350CA849B8A861EDBB /* Nunito-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Regular.ttf"; path = "../assets/fonts/Nunito/static/Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		DEBE1BF82C4DD0C60032A408 /* toureesapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "toureesapp-Bridging-Header.h"; sourceTree = "<group>"; };
+		DEBE1BF92C4DD0C70032A408 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		E460890D5392499084D60E65 /* Nunito-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-SemiBoldItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		E5D9E7BDBCFF4D91B0808813 /* Nunito-VariableFont_wght.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-VariableFont_wght.ttf"; path = "../assets/fonts/Nunito/Nunito-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		F2F98E24BBF54D1DB44D28FB /* Nunito-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Italic-VariableFont_wght.ttf"; path = "../assets/fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
-		FA534B17CC9E444E9F220760 /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-LightItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
+		F2F98E24BBF54D1DB44D28FB /* Nunito-Italic-VariableFont_wght.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Italic-VariableFont_wght.ttf"; path = "../assets/fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf"; sourceTree = "<group>"; };
+		FA534B17CC9E444E9F220760 /* Nunito-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-LightItalic.ttf"; path = "../assets/fonts/Nunito/static/Nunito-LightItalic.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,7 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-toureesapp-toureesappTests.a in Frameworks */,
+				9241DED2B08F8AF0F3495BBB /* libPods-toureesapp-toureesappTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-toureesapp.a in Frameworks */,
+				46C47434B968316004BB1F27 /* libPods-toureesapp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,8 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-toureesapp.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-toureesapp-toureesappTests.a */,
+				73971AEE8A5DC9316C37728C /* libPods-toureesapp.a */,
+				A38786B0BC1506CA9A47AD83 /* libPods-toureesapp-toureesappTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				DEBE1BF92C4DD0C70032A408 /* File.swift */,
 				13B07FAE1A68108700A75B9A /* toureesapp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* toureesappTests */,
@@ -163,6 +167,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
 				D41DD893910740E7A938A1BC /* Resources */,
+				DEBE1BF82C4DD0C60032A408 /* toureesapp-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -181,10 +186,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-toureesapp.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-toureesapp.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-toureesapp-toureesappTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-toureesapp-toureesappTests.release.xcconfig */,
+				359EAA44C80D0E7D487ACCB5 /* Pods-toureesapp.debug.xcconfig */,
+				59AB046B3347795EEDB6ECA3 /* Pods-toureesapp.release.xcconfig */,
+				29170074320A5B8B9C65BB13 /* Pods-toureesapp-toureesappTests.debug.xcconfig */,
+				D82FD1BFD719235B61891672 /* Pods-toureesapp-toureesappTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -214,7 +219,6 @@
 				35925727CDFD4803993ADA3A /* README.txt */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,12 +228,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "toureesappTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				17DAD306839628E028F6D53C /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				CA37BF0CC8BA91CBD03DC7CD /* [CP] Embed Pods Frameworks */,
+				405E7100BB4D2DA2C0F4858B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -245,13 +249,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "toureesapp" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				8EE28062773957B4C1D5D950 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				6D5721F2AA72BE15ADD40B43 /* [CP] Embed Pods Frameworks */,
+				22B994DF2247516649972585 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -275,7 +279,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1430;
 					};
 				};
 			};
@@ -354,24 +358,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"../node_modules/react-native/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"../node_modules/react-native/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
+		17DAD306839628E028F6D53C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -393,7 +380,58 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		22B994DF2247516649972585 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		405E7100BB4D2DA2C0F4858B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D5721F2AA72BE15ADD40B43 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8EE28062773957B4C1D5D950 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -415,7 +453,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
+		CA37BF0CC8BA91CBD03DC7CD /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -430,40 +468,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-toureesapp/Pods-toureesapp-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-toureesapp-toureesappTests/Pods-toureesapp-toureesappTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -482,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
+				DEBE1BFA2C4DD0C70032A408 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,8 +504,9 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-toureesapp-toureesappTests.debug.xcconfig */;
+			baseConfigurationReference = 29170074320A5B8B9C65BB13 /* Pods-toureesapp-toureesappTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -526,8 +532,9 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-toureesapp-toureesappTests.release.xcconfig */;
+			baseConfigurationReference = D82FD1BFD719235B61891672 /* Pods-toureesapp-toureesappTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = toureesappTests/Info.plist;
@@ -550,7 +557,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-toureesapp.debug.xcconfig */;
+			baseConfigurationReference = 359EAA44C80D0E7D487ACCB5 /* Pods-toureesapp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -569,6 +576,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = toureesapp;
+				SWIFT_OBJC_BRIDGING_HEADER = "toureesapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -577,7 +585,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-toureesapp.release.xcconfig */;
+			baseConfigurationReference = 59AB046B3347795EEDB6ECA3 /* Pods-toureesapp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -595,6 +603,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = toureesapp;
+				SWIFT_OBJC_BRIDGING_HEADER = "toureesapp-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -669,11 +678,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-Wl",
-					"-ld_classic",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -741,11 +746,7 @@
 					"-DFOLLY_USE_LIBCPP=1",
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-Wl",
-					"-ld_classic",
-				);
+				OTHER_LDFLAGS = "$(inherited)";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

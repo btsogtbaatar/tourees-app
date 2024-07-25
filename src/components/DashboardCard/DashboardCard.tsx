@@ -1,4 +1,4 @@
-import { NavigationProp } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 import { getEnv } from '../../api';
@@ -18,12 +18,12 @@ export type CardItem = {
 };
 
 interface CardProps {
-  navigation: NavigationProp<RootStackParamList>;
   color?: string;
   item: CardItem;
 }
 
-const DashboardCard = ({ navigation, color, item }: CardProps) => {
+const DashboardCard = ({ color, item }: CardProps) => {
+  const navigation = useNavigation<RootStackParamList>();
   return (
     <TouchableOpacity
       style={{

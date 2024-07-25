@@ -9,7 +9,7 @@ import {
 } from 'react-native-calendars';
 import { calendarMnLocale } from '../../constants/calendarMnLocale';
 import { colors } from '../../constants/colors';
-import { calendarTheme } from '../../modules/request/page/UserRequest/UserRequest.style';
+import { calendarTheme } from '../../modules/Request/page/UserRequest/UserRequest.style';
 import { verticalScale } from '../../utilities';
 
 interface CalendarItemProps extends CalendarProps {
