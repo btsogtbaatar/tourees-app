@@ -4,7 +4,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { getEnv } from '../../api';
 import CheckIcon from '../../assets/svg/auth/CheckIcon';
-import { TaskModel } from '../../modules/request/entities/request.model';
+import { TaskModel } from '../../modules/Request/entities/request.model';
 import styles from './RequestsCard.style';
 
 interface UserRequestCardProps {

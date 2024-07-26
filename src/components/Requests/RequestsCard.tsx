@@ -3,7 +3,7 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { getEnv } from '../../api';
 import RightIcon from '../../assets/svg/icons/RightIcon';
-import { SharedModel } from '../../modules/shared/entities/shared.model';
+import { SharedModel } from '../../modules/Shared/entities/shared.model';
 import { horizontalScale } from '../../utilities';
 import styles from './RequestsCard.style';
 

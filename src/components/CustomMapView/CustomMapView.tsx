@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import MapView, { LatLng, Marker, Region } from 'react-native-maps';
+import MapView, { Details, LatLng, Marker, Region } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { LocationCircleIcon, LocationIcon } from '../../assets/svg';
 import { colors } from '../../constants';
-import { AddressType } from '../../modules/request/entities/request.model';
-import { Addresses } from '../../modules/shared/page/MapViewAddress/AddressMapView';
-import AddressMapViewStyle from '../../modules/shared/page/MapViewAddress/AddressMapView.style';
+import { AddressType } from '../../modules/Request/entities/request.model';
+import { Addresses } from '../../modules/Shared/page/MapViewAddress/AddressMapView';
+import AddressMapViewStyle from '../../modules/Shared/page/MapViewAddress/AddressMapView.style';
 
 const DELTA = 0.005;
 export const DEFAULT_LAT = 47.92123;
@@ -39,10 +39,10 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
   return (
     <MapView
       style={AddressMapViewStyle.map}
-      mapType="none"
+      mapType="terrain"
       region={{
-        latitude: latLng.latitude,
-        longitude: latLng.longitude,
+        latitude: props.latLng.latitude,
+        longitude: props.latLng.longitude,
         latitudeDelta: DELTA,
         longitudeDelta: DELTA,
       }}
@@ -54,8 +54,8 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
           });
         }
       }}
-      onRegionChangeComplete={(region: Region) => {
-        if (props.addressType !== undefined) {
+      onRegionChangeComplete={(region: Region, details: Details) => {
+        if (props.addressType !== undefined && details.isGesture === true) {
           props.onRegionChangeComplete(region);
         }
       }}>

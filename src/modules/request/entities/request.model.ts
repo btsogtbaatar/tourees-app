@@ -1,5 +1,5 @@
-import { AuthModel } from '../../auth/entities';
-import { SharedModel } from '../../shared/entities/shared.model';
+import { AuthModel } from '../../Auth/entities';
+import { SharedModel } from '../../Shared/entities/shared.model';
 
 export declare namespace TaskModel {
   export enum TaskStatus {

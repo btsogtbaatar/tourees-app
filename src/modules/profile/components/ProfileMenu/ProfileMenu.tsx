@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import { default as React } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ScrollView } from 'react-native';
 import i18n from '../../../../../i18n';
 import ChevronRightIcon from '../../../../assets/svg/profile/ChevronRightIcon';
 import ClockRewindIcon from '../../../../assets/svg/profile/ClockRewindIcon';
@@ -83,11 +82,7 @@ const ProfileMenu = () => {
       },
     },
   ];
-  return (
-    <ScrollView>
-      <GroupedMenuList listItems={profileMenus} />
-    </ScrollView>
-  );
+  return <GroupedMenuList listItems={profileMenus} />;
 };
 
 export default ProfileMenu;

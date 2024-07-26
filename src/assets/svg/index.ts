@@ -11,8 +11,12 @@ import SearchMd from '../svg/icons/search-md.svg';
 import Trash from '../svg/icons/trash-01.svg';
 import XCircle from '../svg/icons/x-circle.svg';
 
+import FacebookIcon from '../svg/icons/FacebookIcon.svg';
+import GoogleIcon from '../svg/icons/GoogleIcon.svg';
 export {
   CircleIcon,
+  FacebookIcon,
+  GoogleIcon,
   HomeSmile,
   LocationCircleIcon,
   LocationIcon,

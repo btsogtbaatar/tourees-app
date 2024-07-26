@@ -4,8 +4,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FlatList, View } from 'react-native';
 import { Typography } from '../../constants';
-import { SharedModel } from '../../modules/shared/entities/shared.model';
-import { Address } from '../../modules/shared/page/MapViewAddress/AddressMapView';
+import { SharedModel } from '../../modules/Shared/entities/shared.model';
+import { Address } from '../../modules/Shared/page/MapViewAddress/AddressMapView';
 import {
   getNearbyPlacesFromCoordinates,
   getPlacesByText,
@@ -36,7 +36,12 @@ export default function CustomPlacesAutoComplete(
   });
 
   useEffect(() => {
-    if (props.address.displayName === undefined) {
+    // TODO: Compare with radius
+
+    if (
+      props.address.latitude !== selectedPlace?.location.latitude &&
+      props.address.longitude !== selectedPlace?.location.longitude
+    ) {
       setSelectedPlace(undefined);
       setLoading(true);
 

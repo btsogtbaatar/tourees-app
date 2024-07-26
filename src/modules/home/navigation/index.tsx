@@ -8,8 +8,8 @@ import UserIconActive from '../../../assets/svg/dashboard/UserIconActive';
 import CustomTabNavigator from '../../../components/CustomTabNavigator/CustomTabNavigator';
 import { TabNavigationItem } from '../../../components/CustomTabNavigator/TabNavigationItem';
 import { authStore } from '../../../context/auth/store';
-import Profile from '../../profile/pages/Profile/Profile';
-import RequestList from '../../request/page/RequestList/RequestList';
+import Profile from '../../Profile/pages/Profile/Profile';
+import RequestList from '../../Request/page/RequestList/RequestList';
 import Home from '../pages/Home';
 
 const HomeStack = () => {

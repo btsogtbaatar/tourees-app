@@ -1,6 +1,6 @@
 import { api } from '../../../api';
-import { AuthStateToken } from '../../auth/entities';
-import { SharedModel } from '../../shared/entities/shared.model';
+import { AuthStateToken } from '../../Auth/entities';
+import { SharedModel } from '../../Shared/entities/shared.model';
 import { TaskModel } from '../entities/request.model';
 
 export function getTasks(

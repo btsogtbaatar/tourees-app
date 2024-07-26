@@ -32,9 +32,9 @@ import { authStore } from '../../../../context/auth/store';
 import { ModalContext } from '../../../../context/modal/modal.context';
 import { actions } from '../../../../context/modal/modal.reducer';
 import { horizontalScale, verticalScale } from '../../../../utilities';
-import { SharedModel } from '../../../shared/entities/shared.model';
-import { Addresses } from '../../../shared/page/MapViewAddress/AddressMapView';
-import { uploadFile } from '../../../shared/service/shared.service';
+import { SharedModel } from '../../../Shared/entities/shared.model';
+import { Addresses } from '../../../Shared/page/MapViewAddress/AddressMapView';
+import { uploadFile } from '../../../Shared/service/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
 import { RequestStackParamList } from '../../navigation/types';
 import { createTask, getTasks } from '../../service/request.service';
@@ -59,12 +59,12 @@ function UserRequest({ route }: Props) {
 
   const [addresses, setAddresses] = useState<Addresses>({
     from: {
-      name: AddressType.To,
+      name: AddressType.From,
       latitude: DEFAULT_LAT,
       longitude: DEFAULT_LNG,
     },
     to: {
-      name: AddressType.From,
+      name: AddressType.To,
       latitude: DEFAULT_LAT,
       longitude: DEFAULT_LNG,
     },

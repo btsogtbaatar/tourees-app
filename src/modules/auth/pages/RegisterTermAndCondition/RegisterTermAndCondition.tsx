@@ -1,5 +1,4 @@
 import { useNavigation } from '@react-navigation/native';
-import { Checkbox } from 'native-base';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
@@ -12,7 +11,7 @@ import styles from './RegisterTermAndCondition.style';
 
 const RegisterTermAndCondition = () => {
   const navigation = useNavigation();
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState<boolean>(true);
   const { t } = useTranslation();
 
   const { dispatch: dispatchModal } = useContext(ModalContext);
@@ -25,7 +24,7 @@ const RegisterTermAndCondition = () => {
           title={t('signUp.hello')}
           subTitle={t('signUp.welcome_seed')}
           onClick={() => {
-            navigation.navigate('HomeStack', { screen: 'Dashboard' });
+            navigation.navigate('HomeStack', { screen: 'Home' });
             dispatchModal({ type: actions.HIDE });
           }}
           buttonText={t('signUp.understand')}
@@ -65,29 +64,8 @@ const RegisterTermAndCondition = () => {
               backgroundColor: isChecked ? colors.placeColor : colors.textWhite,
               borderColor: isChecked ? colors.primaryColor : colors.otpBorder,
             },
-          ]}>
-          <Checkbox
-            isChecked={isChecked}
-            value="term"
-            _icon={{ color: colors.textWhite }}
-            _pressed={{
-              bgColor: colors.primaryColor,
-              borderColor: colors.primaryColor,
-            }}
-            _important={{
-              borderColor: colors.primaryColor,
-            }}
-            _checked={{
-              borderColor: colors.primaryColor,
-              bg: colors.primaryColor,
-            }}
-            borderRadius={7.5}
-            onChange={(value: boolean) => {
-              setIsChecked(value);
-            }}>
-            <Text style={styles.checkText}>Үйлчилгээний нөхцөл зөвшөөрөх</Text>
-          </Checkbox>
-        </View>
+          ]}
+        />
       </View>
       <FooterButton
         text={'Нэвтрэх'}

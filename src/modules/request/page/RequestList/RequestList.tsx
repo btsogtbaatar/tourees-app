@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import UserRequestCard from '../../../../components/Requests/UserRequestCard';
 import { colors } from '../../../../constants/colors';
-import { SharedModel } from '../../../shared/entities/shared.model';
+import { SharedModel } from '../../../Shared/entities/shared.model';
 import { TaskModel } from '../../entities/request.model';
 import { getTasks } from '../../service/request.service';
 

@@ -1,5 +1,5 @@
 import { api } from '../../../api';
-import { SharedModel } from '../../shared/entities/shared.model';
+import { SharedModel } from '../../Shared/entities/shared.model';
 
 export function getCategories(
   page = 0,

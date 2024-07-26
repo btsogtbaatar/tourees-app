@@ -37,7 +37,10 @@ export declare module AuthModel {
     phoneNumber?: string;
     value: string;
   };
-
+  export type SocialToken = {
+    token: string;
+    type: SocialType;
+  };
   export type Token = {
     jwt: string;
   };
@@ -63,4 +66,8 @@ export declare module AuthModel {
       return `${this.firstName} ${this.lastName}`;
     }
   }
+}
+export enum SocialType {
+  GOOGLE = 'GOOGLE',
+  FACEBOOK = 'FACEBOOK',
 }

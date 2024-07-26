@@ -1,28 +1,32 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import LoadingPage from '../../../../components/Loading/LoadingPage';
+import {
+  FbLoginButton,
+  GoogleLoginButton,
+} from '../../../../components/SocialLoginButtons';
 import TabController from '../../../../components/TabController/TabController';
 import { verticalScale } from '../../../../utilities/metrics';
 import validations from '../../../../validations';
 import { AuthChannel, AuthModel } from '../../entities';
-import { AuthStackParamList } from '../../navigation/types';
-import { sendOtp } from '../../services';
+import { sendOtp, socialCustomerAuthenticate } from '../../services';
+import styles from './Login.style';
 
-type LoginProps = NativeStackScreenProps<AuthStackParamList, 'Login'>;
-
-export default function Login(props: Readonly<LoginProps>) {
+export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
+  const navigation = useNavigation();
   const { t } = useTranslation(undefined, { keyPrefix: 'login' });
   const [authChannel, setAuthChannel] = useState<AuthChannel>(
     AuthChannel.Email,
@@ -55,11 +59,19 @@ export default function Login(props: Readonly<LoginProps>) {
 
     sendOtp(credentials)
       .then(() => {
-        props.navigation.navigate('LoginOtpCheck', { credentials });
+        navigation.navigate('LoginOtpCheck', { credentials });
       })
       .finally(() => setLoading(false));
   };
-
+  const socialAuthentication = (socialToken: AuthModel.SocialToken) => {
+    setLoading(true);
+    console.log(socialToken);
+    socialCustomerAuthenticate(socialToken)
+      .then(() => {
+        navigation.navigate('HomeStack', { screen: 'Home' });
+      })
+      .finally(() => setLoading(false));
+  };
   if (loading) {
     return <LoadingPage />;
   }
@@ -95,6 +107,11 @@ export default function Login(props: Readonly<LoginProps>) {
                   />
                 )}
               </FormProvider>
+              <CustomDivider>{t('or')}</CustomDivider>
+              <View style={styles.socialContainer}>
+                <FbLoginButton onSuccess={socialAuthentication} />
+                <GoogleLoginButton onSuccess={socialAuthentication} />
+              </View>
             </View>
           </ContainerView>
           <FooterButton

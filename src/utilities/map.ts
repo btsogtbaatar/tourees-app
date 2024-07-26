@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { LatLng } from 'react-native-maps';
-import { SharedModel } from '../modules/shared/entities/shared.model';
+import { SharedModel } from '../modules/Shared/entities/shared.model';
 
 export const excludedTypes = [
   'administrative_area_level_1',

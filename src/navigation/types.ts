@@ -1,9 +1,9 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
-import { AuthStackParamList } from '../modules/auth/navigation/types';
-import { HomeStackParamList } from '../modules/home/navigation/types';
-import { AddressType } from '../modules/request/entities/request.model';
-import { RequestStackParamList } from '../modules/request/navigation/types';
-import { Addresses } from '../modules/shared/page/MapViewAddress/AddressMapView';
+import { AuthStackParamList } from '../modules/Auth/navigation/types';
+import { HomeStackParamList } from '../modules/Home/navigation/types';
+import { AddressType } from '../modules/Request/entities/request.model';
+import { RequestStackParamList } from '../modules/Request/navigation/types';
+import { Addresses } from '../modules/Shared/page/MapViewAddress/AddressMapView';
 
 export type RootStackParamList = {
   HomeStack: NavigatorScreenParams<HomeStackParamList>;

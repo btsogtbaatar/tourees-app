@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { SharedModel } from '../../modules/shared/entities/shared.model';
+import { SharedModel } from '../../modules/Shared/entities/shared.model';
 import { SuggestionItemStyle } from './SuggestionItem.style';
 
 export interface SuggestionItemProps {

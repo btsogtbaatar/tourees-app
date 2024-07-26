@@ -17,7 +17,7 @@ import RegisterComponent from '../../../components/DashboardCard/RegisterCompone
 import LoadingPage from '../../../components/Loading/LoadingPage';
 import { colors } from '../../../constants/colors';
 import { authStore } from '../../../context/auth/store';
-import { SharedModel } from '../../shared/entities/shared.model';
+import { SharedModel } from '../../Shared/entities/shared.model';
 import { getCategories as fetchCategories } from '../services/category.service';
 
 const Home = () => {
