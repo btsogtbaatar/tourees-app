@@ -3,7 +3,7 @@ import { colors } from '../../constants/colors';
 
 export const CustomInputStyle = StyleSheet.create({
   container: {
-    backgroundColor: colors.textWhite,
+    backgroundColor: colors.white,
     borderWidth: 1,
     borderRadius: 12,
     paddingHorizontal: 12,

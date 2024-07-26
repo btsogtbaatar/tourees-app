@@ -33,7 +33,7 @@ import { ModalContext } from '../../../../context/modal/modal.context';
 import { actions } from '../../../../context/modal/modal.reducer';
 import { horizontalScale, verticalScale } from '../../../../utilities';
 import { SharedModel } from '../../../Shared/entities/shared.model';
-import { Addresses } from '../../../Shared/page/MapViewAddress/AddressMapView';
+import { Addresses } from '../../../Shared/page/AddressMapView/AddressMapView';
 import { uploadFile } from '../../../Shared/service/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
 import { RequestStackParamList } from '../../navigation/types';
@@ -225,7 +225,7 @@ function UserRequest({ route }: Props) {
               }}>
               <Text
                 style={{
-                  color: colors.textWhite,
+                  color: colors.white,
                   fontSize: 18,
                   fontFamily: 'Nunito',
                   fontWeight: '700',
@@ -235,7 +235,7 @@ function UserRequest({ route }: Props) {
               </Text>
               <Text
                 style={{
-                  color: colors.textWhite,
+                  color: colors.white,
                   fontFamily: 'Nunito',
                   fontSize: 20,
                   fontWeight: '800',
@@ -245,7 +245,7 @@ function UserRequest({ route }: Props) {
               </Text>
               <Text
                 style={{
-                  color: colors.textWhite,
+                  color: colors.white,
                   fontFamily: 'Nunito',
                   fontSize: 12,
                   fontWeight: '400',
@@ -274,7 +274,7 @@ function UserRequest({ route }: Props) {
           <View
             style={{
               flex: 1,
-              backgroundColor: colors.textWhite,
+              backgroundColor: colors.white,
               borderTopEndRadius: 16,
               borderTopStartRadius: 16,
             }}>
@@ -349,7 +349,7 @@ function UserRequest({ route }: Props) {
                   }}
                   multiline={true}
                   numberOfLines={4}
-                  placeholder={t('request.requestDetailMsg')}
+                  placeholder={subCategory.instruction}
                   returnKeyType="next"
                 />
               </View>
@@ -422,7 +422,7 @@ function UserRequest({ route }: Props) {
                   onPress={submit}>
                   <Text
                     style={{
-                      color: colors.textWhite,
+                      color: colors.white,
                       fontFamily: 'Nunito',
                       fontWeight: '700',
                       lineHeight: 21,

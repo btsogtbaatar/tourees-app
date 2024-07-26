@@ -36,13 +36,13 @@ function FooterButton(props: PropsButton) {
         {
           backgroundColor: props.backColor
             ? colors.transparent
-            : colors.textWhite,
+            : colors.white,
         },
       ]}>
       {props.back && (
         <View
           style={{
-            backgroundColor: colors.textWhite,
+            backgroundColor: colors.white,
             borderRadius: 12,
           }}>
           <TouchableOpacity

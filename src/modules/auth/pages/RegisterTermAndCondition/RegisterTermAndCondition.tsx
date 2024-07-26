@@ -61,7 +61,7 @@ const RegisterTermAndCondition = () => {
           style={[
             styles.checkContainer,
             {
-              backgroundColor: isChecked ? colors.placeColor : colors.textWhite,
+              backgroundColor: isChecked ? colors.placeColor : colors.white,
               borderColor: isChecked ? colors.primaryColor : colors.otpBorder,
             },
           ]}

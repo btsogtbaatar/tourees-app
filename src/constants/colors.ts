@@ -4,7 +4,7 @@ export const colors = {
   brandGray: '#D4D8DB',
   brandGray200: '#AAB1B7',
   textDark: '#343434',
-  textWhite: '#FFF',
+  white: '#FFF',
   disabledColor: '#FFEADA',
   borderPrimaryColor: '#FFAB6B',
   borderColor: '#D7D9DB',

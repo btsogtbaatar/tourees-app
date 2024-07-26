@@ -4,7 +4,7 @@ import HeaderBar from '../components/HeaderBack/HeaderBar';
 import AuthStack from '../modules/Auth/navigation';
 import HomeStack from '../modules/Home/navigation';
 import RequestStack from '../modules/Request/navigation';
-import AddressMapView from '../modules/Shared/page/MapViewAddress/AddressMapView';
+import AddressMapView from '../modules/Shared/page/AddressMapView/AddressMapView';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

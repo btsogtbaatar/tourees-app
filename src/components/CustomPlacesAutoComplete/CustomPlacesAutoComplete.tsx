@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, View } from 'react-native';
 import { Typography } from '../../constants';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
-import { Address } from '../../modules/Shared/page/MapViewAddress/AddressMapView';
+import { Address } from '../../modules/Shared/page/AddressMapView/AddressMapView';
 import {
   getNearbyPlacesFromCoordinates,
   getPlacesByText,
@@ -36,6 +36,8 @@ export default function CustomPlacesAutoComplete(
   });
 
   useEffect(() => {
+    console.log('🚀 ~ props.address:', props.address);
+
     // TODO: Compare with radius
 
     if (

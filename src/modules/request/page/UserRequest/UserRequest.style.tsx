@@ -5,7 +5,7 @@ import { colors } from '../../../../constants/colors';
 export const calendarTheme: Theme = {
   dayTextColor: colors.textColor,
   textSectionTitleColor: colors.gray700,
-  selectedDayTextColor: colors.textWhite,
+  selectedDayTextColor: colors.white,
   selectedDayBackgroundColor: colors.primaryColor,
   textMonthFontWeight: 'bold',
   monthTextColor: colors.gray700,

@@ -38,7 +38,7 @@ const LoginButton = ({ title, onClick }: LoginButtonProps) => {
         onPress={onClick ? onClick : onPress}>
         <Text
           style={{
-            color: colors.textWhite,
+            color: colors.white,
             fontWeight: '700',
             lineHeight: 18,
             fontSize: 14,

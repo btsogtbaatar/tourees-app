@@ -40,7 +40,7 @@ const RequestStack = () => {
             );
           },
           headerTitle: '',
-          headerLeft: () => <HeaderBack color={colors.textWhite} />,
+          headerLeft: () => <HeaderBack color={colors.white} />,
         }}
         name="UserRequest"
         component={UserRequest}

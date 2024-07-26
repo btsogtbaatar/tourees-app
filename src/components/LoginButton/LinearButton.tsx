@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  TouchableOpacity,
-  Text,
-  ViewStyle,
   StyleProp,
+  Text,
   TextStyle,
+  TouchableOpacity,
+  ViewStyle,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { colors } from '../../constants/colors';
@@ -50,7 +50,7 @@ const LinearButton = ({
           style={[
             textExtra,
             {
-              color: colors.textWhite,
+              color: colors.white,
               fontWeight: '700',
               lineHeight: 18,
             },

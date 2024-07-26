@@ -21,7 +21,7 @@ const WelcomeModal = ({
   return (
     <View
       style={{
-        backgroundColor: colors.textWhite,
+        backgroundColor: colors.white,
         borderRadius: horizontalScale(24),
         alignItems: 'center',
         paddingHorizontal: horizontalScale(24),

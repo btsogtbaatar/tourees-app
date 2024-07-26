@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { horizontalScale, verticalScale } from '../../utilities/metrics';
 import { colors } from '../../constants/colors';
+import { horizontalScale, verticalScale } from '../../utilities/metrics';
 
 const styles = StyleSheet.create({
   userCardContainer: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     height: verticalScale(64),
     flexShrink: 0,
     borderRadius: horizontalScale(16),
-    backgroundColor: colors.textWhite,
+    backgroundColor: colors.white,
   },
   flexRow: {
     flexDirection: 'row',
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   iconText: {
     textAlign: 'center',
-    color: colors.textWhite,
+    color: colors.white,
     fontWeight: '700',
     lineHeight: 15,
     fontSize: 10,
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   operatorContainer: {
     padding: verticalScale(12),
-    backgroundColor: colors.textWhite,
+    backgroundColor: colors.white,
     borderRadius: 12,
     gap: 12,
   },

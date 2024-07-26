@@ -10,7 +10,7 @@ import { TabNavigationItem } from '../../../components/CustomTabNavigator/TabNav
 import { authStore } from '../../../context/auth/store';
 import Profile from '../../Profile/pages/Profile/Profile';
 import RequestList from '../../Request/page/RequestList/RequestList';
-import Home from '../pages/Home';
+import Home from '../pages/Home/Home';
 
 const HomeStack = () => {
   const { t } = useTranslation();

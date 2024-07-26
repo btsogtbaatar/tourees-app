@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '../../constants/colors';
 import FooterBack from '../../assets/svg/FooterBack';
+import { colors } from '../../constants/colors';
 
 function FooterIconButton() {
   return (
@@ -9,7 +9,7 @@ function FooterIconButton() {
       style={{
         padding: 16,
         alignItems: 'flex-start',
-        backgroundColor: colors.textWhite,
+        backgroundColor: colors.white,
         gap: 16,
         borderTopStartRadius: 28,
         borderTopEndRadius: 28,

@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     fontWeight: 'bold',
     marginTop: 20,
-    backgroundColor: colors.textWhite,
+    backgroundColor: colors.white,
   },
   inputExtra: {
     height: 48,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnTextStyle: {
-    color: colors.textWhite,
+    color: colors.white,
     fontSize: 13,
     fontWeight: '700',
     fontFamily: 'Nunito',

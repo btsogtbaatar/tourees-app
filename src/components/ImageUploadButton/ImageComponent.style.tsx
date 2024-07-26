@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   imageTitle: {
-    color: colors.textWhite,
+    color: colors.white,
     fontSize: 24,
     lineHeight: 33,
     fontWeight: '700',

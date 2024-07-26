@@ -48,6 +48,7 @@ export namespace SharedModel {
     image: SharedModel.File;
     parentCategory: Category;
     description?: string;
+    instruction: string;
   };
 
   export type SubCategoryFilter = {

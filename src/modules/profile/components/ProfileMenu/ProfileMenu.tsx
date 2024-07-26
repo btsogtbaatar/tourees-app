@@ -78,7 +78,7 @@ const ProfileMenu = () => {
       suffix: <ChevronRightIcon color={colors.logoColor} />,
       onPress: () => {
         authState.clearAccessToken();
-        navigation.navigate('HomeStack', { screen: 'Dashboard' });
+        navigation.navigate('HomeStack', { screen: 'Home' });
       },
     },
   ];

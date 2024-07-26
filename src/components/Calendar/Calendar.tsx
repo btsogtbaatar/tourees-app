@@ -76,7 +76,7 @@ const Calendar = ({ onSuccess, initialStartDate }: CalendarItemProps) => {
           [startDate]: {
             selected: true,
             selectedColor: colors.primaryColor,
-            selectedTextColor: colors.textWhite,
+            selectedTextColor: colors.white,
             disableTouchEvent: true,
           },
         }}

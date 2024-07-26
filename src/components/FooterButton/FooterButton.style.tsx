@@ -22,7 +22,7 @@ const createStyles = StyleSheet.create({
     backgroundColor: colors.disabledColor,
   },
   btnTextStyle: {
-    color: colors.textWhite,
+    color: colors.white,
     fontSize: 13,
     fontWeight: '700',
     fontFamily: 'Nunito',

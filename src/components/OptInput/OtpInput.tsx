@@ -34,7 +34,7 @@ const OtpInput = (props: OtpProps) => {
         style={{
           borderWidth: 1,
           borderColor: focus ? colors.optFocusBorder : colors.otpBorder,
-          backgroundColor: colors.textWhite,
+          backgroundColor: colors.white,
           borderRadius: horizontalScale(16),
           alignItems: 'center',
           justifyContent: 'center',

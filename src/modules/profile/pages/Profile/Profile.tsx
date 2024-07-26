@@ -2,10 +2,10 @@ import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import LogoMini from '../../../../assets/svg/logo/LogoMini';
+import { colors } from '../../../../constants/colors';
 import { authStore } from '../../../../context/auth/store';
 import { horizontalScale, verticalScale } from '../../../../utilities/metrics';
 import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
-import { colors } from '../../../../constants/colors';
 
 const Profile = () => {
   const authState = authStore(state => state);
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleUsername: {
-    color: colors.textWhite,
+    color: colors.white,
     fontSize: 20,
     fontWeight: '700',
     lineHeight: 30,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   titleMail: {
     marginBottom: verticalScale(12),
-    color: colors.textWhite,
+    color: colors.white,
     textAlign: 'center',
   },
   seedContainer: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   seedText: {
-    color: colors.textWhite,
+    color: colors.white,
     fontSize: 12,
     fontWeight: '700',
     lineHeight: 18,

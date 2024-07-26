@@ -33,7 +33,7 @@ const DashboardCard = ({ color, item, onPress }: CardProps) => {
     <TouchableOpacity
       style={{
         borderRadius: 16,
-        backgroundColor: colors.textWhite,
+        backgroundColor: colors.white,
         width: ITEM_WIDTH,
         marginBottom: verticalScale(16),
         padding: 8,

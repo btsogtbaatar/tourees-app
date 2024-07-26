@@ -4,7 +4,7 @@ import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { LocationCircleIcon, LocationIcon } from '../../assets/svg';
 import { AddressType } from '../../modules/Request/entities/request.model';
-import { Address } from '../../modules/Shared/page/MapViewAddress/AddressMapView';
+import { Address } from '../../modules/Shared/page/AddressMapView/AddressMapView';
 import { AddressCardStyles } from './AddressCard.style';
 
 export interface AddressCardProps {

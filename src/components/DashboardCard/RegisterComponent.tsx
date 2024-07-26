@@ -33,7 +33,7 @@ const RegisterComponent = (props: Props) => {
         }}>
         <Text
           style={{
-            color: colors.textWhite,
+            color: colors.white,
             fontSize: 16,
             fontWeight: '500',
             lineHeight: 24,
@@ -47,7 +47,7 @@ const RegisterComponent = (props: Props) => {
             height: verticalScale(32),
             paddingHorizontal: horizontalScale(12),
             justifyContent: 'center',
-            backgroundColor: colors.textWhite,
+            backgroundColor: colors.white,
             borderRadius: horizontalScale(12),
             gap: 4,
           }}>
