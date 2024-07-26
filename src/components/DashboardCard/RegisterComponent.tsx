@@ -3,12 +3,13 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { VectorIcon } from '../../assets/svg';
 import { colors } from '../../constants/colors';
-import { RootStackParamList } from '../../navigation/types';
 import { horizontalScale, verticalScale } from '../../utilities/metrics';
-import { useNavigation } from '@react-navigation/native';
 
-const RegisterComponent = () => {
-  const navigation = useNavigation<RootStackParamList>();
+interface Props {
+  onPress: () => void;
+}
+
+const RegisterComponent = (props: Props) => {
   return (
     <LinearGradient
       colors={['#37414B', '#161A1E']}
@@ -41,11 +42,7 @@ const RegisterComponent = () => {
           Хэрвээ та үйлчилгээ үзүүлэгч бол бидэнтэй нэгдээрэй!
         </Text>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate('AuthStack', {
-              screen: 'Login',
-            })
-          }
+          onPress={props.onPress}
           style={{
             height: verticalScale(32),
             paddingHorizontal: horizontalScale(12),

@@ -4,6 +4,7 @@ import HeaderBar from '../components/HeaderBack/HeaderBar';
 import AuthStack from '../modules/Auth/navigation';
 import HomeStack from '../modules/Home/navigation';
 import RequestStack from '../modules/Request/navigation';
+import AddressMapView from '../modules/Shared/page/MapViewAddress/AddressMapView';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -23,6 +24,7 @@ const Route = () => {
         />
         <Stack.Screen name="RequestStack" component={RequestStack} />
         <Stack.Screen name="AuthStack" component={AuthStack} />
+        <Stack.Screen name="AddressMapView" component={AddressMapView} />
       </Stack.Group>
     </Stack.Navigator>
   );

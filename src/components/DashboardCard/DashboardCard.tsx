@@ -1,10 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  GestureResponderEvent,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { getEnv } from '../../api';
 import { colors } from '../../constants/colors';
 import { SPACING } from '../../constants/spacing';
-import { RootStackParamList } from '../../navigation/types';
 import { verticalScale } from '../../utilities/metrics';
 
 const { width } = Dimensions.get('window');
@@ -20,28 +25,20 @@ export type CardItem = {
 interface CardProps {
   color?: string;
   item: CardItem;
+  onPress: (event: GestureResponderEvent) => void;
 }
 
-const DashboardCard = ({ color, item }: CardProps) => {
-  const navigation = useNavigation<RootStackParamList>();
+const DashboardCard = ({ color, item, onPress }: CardProps) => {
   return (
     <TouchableOpacity
       style={{
         borderRadius: 16,
         backgroundColor: colors.textWhite,
         width: ITEM_WIDTH,
-        marginTop: verticalScale(16),
+        marginBottom: verticalScale(16),
         padding: 8,
       }}
-      onPress={() => {
-        navigation.navigate('RequestStack', {
-          screen: 'SubCategoryList',
-          params: {
-            title: item.title,
-            categoryId: item.id,
-          },
-        });
-      }}>
+      onPress={onPress}>
       <View
         style={{
           borderRadius: SPACING,

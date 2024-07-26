@@ -49,4 +49,30 @@ export namespace SharedModel {
     parentCategory: Category;
     description?: string;
   };
+
+  export type SubCategoryFilter = {
+    name?: string;
+    parentCategoryId?: number;
+  };
+
+  export type NearbyPlacesResponse = {
+    places: Place[];
+  };
+
+  export type Place = {
+    id: string;
+    types: string[];
+    location: Location;
+    shortFormattedAddress: string;
+    displayName: DisplayName;
+  };
+
+  export type DisplayName = {
+    text: string;
+  };
+
+  export type Location = {
+    latitude: number;
+    longitude: number;
+  };
 }

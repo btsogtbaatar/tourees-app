@@ -8,10 +8,10 @@ import {
   isErrorWithCode,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import { AuthModel, SocialType } from '../../modules/Auth/entities';
-import { notifyMessage } from '../CustomToast/CustomToast';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '../../constants';
+import { AuthModel, SocialType } from '../../modules/Auth/entities';
+import { notifyMessage } from '../CustomToast/CustomToast';
 
 interface GoogleLoginButtonProps {
   onSuccess(socialToken: AuthModel.SocialToken): void;
@@ -53,7 +53,7 @@ const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ onSuccess }) => {
   return (
     <TouchableOpacity onPress={handleLogin} style={styles.button}>
       <GoogleIcon style={styles.icon} />
-      <Text style={Typography.textSmallBold}>Google</Text>
+      <Text style={Typography.textSmall}>Google</Text>
     </TouchableOpacity>
   );
 };

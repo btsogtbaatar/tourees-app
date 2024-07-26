@@ -48,6 +48,26 @@ export default {
     t_request: 'Хүсэлтүүд',
     t_profile: 'Миний',
   },
+  home: {
+    category: {
+      question: 'Та ямар үйлчилгээ авахыг хүсч байна вэ?',
+      title: 'Үйлчилгээний төрлүүд',
+      search: 'Хайх',
+    },
+  },
+  subCategoryList: {
+    search: {
+      placeholder: 'Хайх',
+    },
+  },
+  addressMapView: {
+    autoComplete: {
+      placeholder: 'Хайх хаягаа оруулна уу.',
+      loading: 'Уншиж байна...',
+      notFound: 'Хаяг олдсонгүй.',
+    },
+    save: 'Хадгалах',
+  },
   request: {
     requestNewMessage:
       'Таны хүсэлт амжилттай бүртгэгдлээ, бид тун удахгүй таны хүсэлтэд таарсан гүйцэтгэгчийг холбох болно. Хэрэв та цуцлах бол яаралтай оператортой холбогдоно уу!',
@@ -68,6 +88,11 @@ export default {
     requestDeliveryAddress: 'Буулгах газар',
     requestCreate: 'Хүсэлт үүсгэх',
     requestDeliveryDate: 'Хүргэлт хийх өдөр сонгох',
+  },
+  userRequest: {
+    address: {
+      label: 'Хаяг оруулах',
+    },
   },
   login: {
     title: 'Нэвтрэх',

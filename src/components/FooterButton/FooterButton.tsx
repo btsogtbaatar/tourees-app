@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/core';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   StyleProp,
   Text,
@@ -9,9 +10,8 @@ import {
   ViewStyle,
 } from 'react-native';
 import FooterBack from '../../assets/svg/FooterBack';
-import styles from './FooterButton.style';
 import { colors } from '../../constants/colors';
-import { useTranslation } from 'react-i18next';
+import styles from './FooterButton.style';
 
 interface PropsButton {
   extra?: StyleProp<ViewStyle>;
@@ -20,7 +20,7 @@ interface PropsButton {
   text?: string;
   onPress: () => void;
   back: boolean;
-  btnDisabled: boolean;
+  btnDisabled?: boolean;
   backColor?: boolean;
   onBackPress?: () => void;
 }
@@ -40,7 +40,11 @@ function FooterButton(props: PropsButton) {
         },
       ]}>
       {props.back && (
-        <View style={{ backgroundColor: colors.textWhite, borderRadius: 12 }}>
+        <View
+          style={{
+            backgroundColor: colors.textWhite,
+            borderRadius: 12,
+          }}>
           <TouchableOpacity
             onPress={props.onBackPress ?? navigation.goBack}
             style={styles.icon}>
