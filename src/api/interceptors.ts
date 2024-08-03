@@ -6,7 +6,7 @@ import {
 } from 'axios';
 import { BehaviorSubject } from 'rxjs';
 import { AuthAction } from '../context/auth/store';
-import { AuthState } from '../modules/Auth/entities/auth.model';
+import { AuthState } from '../modules/auth/entities/auth.model';
 
 const tokenSubject = new BehaviorSubject<any>(null);
 export const axiosInstance = (api: AxiosInstance, store: any) => {

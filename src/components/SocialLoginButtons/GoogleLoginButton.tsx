@@ -10,7 +10,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '../../constants';
-import { AuthModel, SocialType } from '../../modules/Auth/entities';
+import { AuthModel, SocialType } from '../../modules/auth/entities';
 import { notifyMessage } from '../CustomToast/CustomToast';
 
 interface GoogleLoginButtonProps {

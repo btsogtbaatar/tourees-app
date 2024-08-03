@@ -10,7 +10,10 @@ import PlusIcon from '../svg/icons/PlusIcon.svg';
 import SearchMd from '../svg/icons/search-md.svg';
 import Trash from '../svg/icons/trash-01.svg';
 import XCircle from '../svg/icons/x-circle.svg';
-
+import Sun from '../svg/weather/sun.svg';
+import SunRise from '../svg/weather/sunrise.svg';
+import SunSet from '../svg/weather/sunset.svg';
+import Moon from '../svg/weather/moon.svg';
 import FacebookIcon from '../svg/icons/FacebookIcon.svg';
 import GoogleIcon from '../svg/icons/GoogleIcon.svg';
 export {
@@ -27,6 +30,9 @@ export {
   SmileCircleActiveIcon,
   Trash,
   VectorIcon,
-  XCircle
+  XCircle,
+  Sun,
+  SunRise,
+  SunSet,
+  Moon,
 };
-

@@ -1,87 +1,238 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, { useCallback, useEffect, useState } from 'react';
-import { View } from 'react-native';
-import {
-  Calendar as CalendarItem,
-  CalendarProps,
-  DateData,
-  LocaleConfig,
-} from 'react-native-calendars';
-import { calendarMnLocale } from '../../constants/calendarMnLocale';
-import { colors } from '../../constants/colors';
-import { calendarTheme } from '../../modules/Request/page/UserRequest/UserRequest.style';
-import { verticalScale } from '../../utilities';
+import React, { useEffect, useState } from 'react';
+import { Text, View } from 'react-native';
+import CalendarStyle from './Calendar.style';
+import { Typography } from '../../constants';
+import DatePicker from 'react-native-date-picker';
+import CalendarButton from './CalendarButton';
+import { useTranslation } from 'react-i18next';
+import { Moon, Sun, SunRise, SunSet } from '../../assets/svg';
+import moment from 'moment';
+import { languageStore } from '../../context/auth/store';
 
-interface CalendarItemProps extends CalendarProps {
-  onSuccess: (value: string) => void;
-  initialStartDate?: string;
+interface ReturnValue {
+  start: moment.Moment;
+  end: moment.Moment;
 }
 
-const Calendar = ({ onSuccess, initialStartDate }: CalendarItemProps) => {
-  const [startDate, setStartDate] = useState<string>('');
-  const [datePicked, setDatePicked] = useState<boolean>(false);
+interface CalendarItemProps {
+  onSuccess: (value: ReturnValue) => void;
+}
+enum TimeChoices {
+  MORNING = 'Morning',
+  MIDDAY = 'Midday',
+  AFTERNOON = 'Afternoon',
+  EVENING = 'Evening',
+}
 
-  useEffect(() => {
-    if (initialStartDate && !datePicked) {
-      setStartDate(initialStartDate);
-    }
-  }, [initialStartDate, datePicked]);
+const getToday = () => {
+  return new Date(Date.now());
+};
+const getTomorrow = () => {
+  const date = new Date(Date.now());
+  date.setDate(date.getDate() + 1);
+  return date;
+};
+const isEqualDate = (a: Date, b: Date) => {
+  if (
+    a.getDate() === b.getDate() &&
+    a.getMonth() === b.getMonth() &&
+    a.getFullYear() === b.getFullYear()
+  ) {
+    return true;
+  }
+  return false;
+};
+const getLocalKey = (key: TimeChoices) => {
+  switch (key) {
+    case TimeChoices.AFTERNOON:
+      return 'calendar.afternoon';
+    case TimeChoices.MIDDAY:
+      return 'calendar.midday';
+    case TimeChoices.EVENING:
+      return 'calendar.evening';
+    case TimeChoices.MORNING:
+      return 'calendar.morning';
+  }
+};
+const isTodayActive = (givenDate: Date) => {
+  const today = getToday();
+  return isEqualDate(today, givenDate);
+};
+const isTomorrowActive = (givenDate: Date) => {
+  const tomorrow = getTomorrow();
+  return isEqualDate(tomorrow, givenDate);
+};
+const isSelectedDate = (currentDate: Date) => {
+  if (isTodayActive(currentDate) || isTomorrowActive(currentDate)) {
+    return false;
+  }
+  return true;
+};
 
-  LocaleConfig.locales.mn = calendarMnLocale;
-  LocaleConfig.defaultLocale = 'mn';
-
-  const handleSuccess = useCallback(
-    (selectedStartDate: string) => {
-      setStartDate(selectedStartDate);
-      setDatePicked(true);
-      onSuccess(selectedStartDate);
-    },
-    [onSuccess],
+const Calendar = ({ onSuccess }: CalendarItemProps) => {
+  const [activeTime, setActiveTime] = useState<TimeChoices>(
+    TimeChoices.MORNING,
   );
-
+  const { t } = useTranslation();
+  const language = languageStore.getState().language;
+  const [activeDate, setActiveDate] = useState<Date>(getToday());
   useEffect(() => {
-    if (!datePicked && initialStartDate) {
-      handleSuccess(initialStartDate);
+    const date = moment(activeDate);
+    const result: ReturnValue = {
+      start: date.clone().startOf('day'),
+      end: date.clone().startOf('day'),
+    };
+
+    switch (activeTime) {
+      case TimeChoices.AFTERNOON:
+        result.start.hour(14).minute(0).second(0);
+        result.end.hour(18).minute(0).second(0);
+        break;
+      case TimeChoices.MIDDAY:
+        result.start.hour(10).minute(0).second(0);
+        result.end.hour(14).minute(0).second(0);
+        break;
+      case TimeChoices.EVENING:
+        result.start.hour(18).minute(0).second(0);
+        result.end.hour(22).minute(0).second(0);
+        break;
+      case TimeChoices.MORNING:
+        result.start.hour(6).minute(0).second(0);
+        result.end.hour(10).minute(0).second(0);
     }
-  }, [datePicked, initialStartDate, handleSuccess]);
-
-  const onDayPress = useCallback(
-    (day: DateData) => {
-      const selectedStartDate = day.dateString;
-      handleSuccess(selectedStartDate);
-    },
-    [handleSuccess],
-  );
-
+    onSuccess(result);
+  }, [activeDate, activeTime]);
+  const [modal, setModal] = useState<boolean>(false);
+  const updateTime = (updatedTime: TimeChoices) => {
+    if (activeTime === updatedTime) {
+      return;
+    }
+    setActiveTime(updatedTime);
+  };
+  const getTranslatedDate = (currentDate: Date) => {
+    if (isTodayActive(currentDate)) {
+      return t('calendar.today');
+    }
+    if (isTomorrowActive(currentDate)) {
+      return t('calendar.tomorrow');
+    }
+    return currentDate.toLocaleDateString(language);
+  };
   return (
-    <View
-      style={{
-        borderRadius: 16,
-        borderWidth: 1,
-        padding: 16,
-        borderColor: colors.borderColor,
-        marginVertical: verticalScale(16),
-      }}>
-      <CalendarItem
-        firstDay={1}
-        hideExtraDays={true}
-        initialDate={startDate || initialStartDate}
-        onDayPress={(day: DateData) => {
-          onDayPress(day);
+    <View style={CalendarStyle.container}>
+      <DatePicker
+        date={activeDate}
+        mode="date"
+        modal
+        locale={language}
+        open={modal}
+        onConfirm={e => {
+          setActiveDate(e);
+          setModal(false);
         }}
-        onDayLongPress={(day: DateData) => {
-          console.log(day, 'long Day');
+        onCancel={() => {
+          setModal(false);
         }}
-        markedDates={{
-          [startDate]: {
-            selected: true,
-            selectedColor: colors.primaryColor,
-            selectedTextColor: colors.textWhite,
-            disableTouchEvent: true,
-          },
-        }}
-        theme={calendarTheme}
       />
+      <View style={CalendarStyle.dateSection}>
+        <CalendarButton
+          style={CalendarStyle.dateButtons}
+          active={isTodayActive(activeDate)}
+          onPress={() => {
+            setActiveDate(getToday());
+          }}>
+          <Text style={Typography.textSmallMediumWeight}>
+            {t('calendar.today')}
+          </Text>
+        </CalendarButton>
+        <CalendarButton
+          style={CalendarStyle.dateButtons}
+          active={isTomorrowActive(activeDate)}
+          onPress={() => {
+            setActiveDate(getTomorrow());
+          }}>
+          <Text style={Typography.textSmallMediumWeight}>
+            {t('calendar.tomorrow')}
+          </Text>
+        </CalendarButton>
+        <CalendarButton
+          style={CalendarStyle.dateButtons}
+          active={isSelectedDate(activeDate)}
+          onPress={() => {
+            setModal(true);
+          }}>
+          <Text style={Typography.textSmallMediumWeight}>
+            {t('calendar.selectDate')}
+          </Text>
+        </CalendarButton>
+      </View>
+      <View style={CalendarStyle.infoSection}>
+        <Text style={Typography.textSmallMediumWeight}>
+          {getTranslatedDate(activeDate)} | {t(getLocalKey(activeTime))}
+        </Text>
+      </View>
+      <View style={CalendarStyle.timeSection}>
+        <View style={CalendarStyle.timeSectionRow}>
+          <CalendarButton
+            style={CalendarStyle.timeButton}
+            active={TimeChoices.MORNING === activeTime}
+            onPress={() => {
+              updateTime(TimeChoices.MORNING);
+            }}>
+            <SunRise />
+            <Text style={Typography.textSmallMediumWeight}>
+              {t(getLocalKey(TimeChoices.MORNING))}
+            </Text>
+            <Text style={Typography.textSmallMediumWeight}>
+              {t('calendar.morningText')}
+            </Text>
+          </CalendarButton>
+          <CalendarButton
+            style={CalendarStyle.timeButton}
+            active={TimeChoices.MIDDAY === activeTime}
+            onPress={() => {
+              updateTime(TimeChoices.MIDDAY);
+            }}>
+            <Sun />
+            <Text style={Typography.textSmallMediumWeight}>
+              {t(getLocalKey(TimeChoices.MIDDAY))}
+            </Text>
+            <Text style={Typography.textSmallMediumWeight}>
+              {t('calendar.middayText')}
+            </Text>
+          </CalendarButton>
+        </View>
+        <View style={CalendarStyle.timeSectionRow}>
+          <CalendarButton
+            style={CalendarStyle.timeButton}
+            active={TimeChoices.AFTERNOON === activeTime}
+            onPress={() => {
+              updateTime(TimeChoices.AFTERNOON);
+            }}>
+            <SunSet />
+            <Text style={Typography.textSmallMediumWeight}>
+              {t(getLocalKey(TimeChoices.AFTERNOON))}
+            </Text>
+            <Text style={Typography.textSmallMediumWeight}>
+              {t('calendar.eveningText')}
+            </Text>
+          </CalendarButton>
+          <CalendarButton
+            style={CalendarStyle.timeButton}
+            active={TimeChoices.EVENING === activeTime}
+            onPress={() => {
+              updateTime(TimeChoices.EVENING);
+            }}>
+            <Moon />
+            <Text style={Typography.textSmallMediumWeight}>
+              {t(getLocalKey(TimeChoices.EVENING))}
+            </Text>
+            <Text style={Typography.textSmallMediumWeight}>
+              {t('calendar.afternoonText')}
+            </Text>
+          </CalendarButton>
+        </View>
+      </View>
     </View>
   );
 };

@@ -46,4 +46,9 @@ export const Typography = StyleSheet.create({
     lineHeight: 18,
     color: colors.gray300,
   },
+  textSmallMediumWeight: {
+    fontFamily: 'Nunito',
+    fontWeight: FontWeight.medium,
+    lineHeight: 21,
+  },
 });

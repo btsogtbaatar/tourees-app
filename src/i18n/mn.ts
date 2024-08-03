@@ -124,5 +124,18 @@ export default {
       label: 'Шалгах',
     },
   },
+  calendar: {
+    today: 'Өнөөдөр',
+    tomorrow: 'Маргааш',
+    selectDate: 'Сонгох',
+    afternoon: 'Үдийн дараа',
+    morningText: '10AM-н өмнө',
+    midday: 'Үдийн өмнө',
+    middayText: '10AM - 2PM',
+    evening: 'Орой',
+    eveningText: '2PM - 6PM',
+    morning: 'Өглөө',
+    afternoonText: '6PM-н дараа',
+  },
   emptyRequest: 'Таньд үүсгэсэн хүсэлт байхгүй байна.',
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ViewProps } from 'react-native';
-import styles from '../../modules/Auth/pages/Register/Register.style';
+import styles from '../../modules/auth/pages/Register/Register.style';
 
 export interface ContainerViewProps extends ViewProps {}
 export default function ContainerView(props: Readonly<ContainerViewProps>) {

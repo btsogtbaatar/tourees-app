@@ -4,9 +4,9 @@ import MapView, { Details, LatLng, Marker, Region } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { LocationCircleIcon, LocationIcon } from '../../assets/svg';
 import { colors } from '../../constants';
-import { AddressType } from '../../modules/Request/entities/request.model';
-import { Addresses } from '../../modules/Shared/page/MapViewAddress/AddressMapView';
-import AddressMapViewStyle from '../../modules/Shared/page/MapViewAddress/AddressMapView.style';
+import { AddressType } from '../../modules/request/entities/request.model';
+import { Addresses } from '../../modules/shared/page/MapViewAddress/AddressMapView';
+import AddressMapViewStyle from '../../modules/shared/page/MapViewAddress/AddressMapView.style';
 
 const DELTA = 0.005;
 export const DEFAULT_LAT = 47.92123;

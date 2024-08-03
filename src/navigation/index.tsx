@@ -1,10 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import HeaderBar from '../components/HeaderBack/HeaderBar';
-import AuthStack from '../modules/Auth/navigation';
-import HomeStack from '../modules/Home/navigation';
-import RequestStack from '../modules/Request/navigation';
-import AddressMapView from '../modules/Shared/page/MapViewAddress/AddressMapView';
+import AuthStack from '../modules/auth/navigation';
+import HomeStack from '../modules/home/navigation';
+import RequestStack from '../modules/request/navigation';
+import AddressMapView from '../modules/shared/page/MapViewAddress/AddressMapView';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();

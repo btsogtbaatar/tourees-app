@@ -16,7 +16,7 @@ import CustomInput from '../../../../components/CustomInput/CustomInput';
 import LoadingPage from '../../../../components/Loading/LoadingPage';
 import RequestsCard from '../../../../components/Requests/RequestsCard';
 import { colors } from '../../../../constants/colors';
-import { getSubCategories as fetchSubCategories } from '../../../Home/services/category.service';
+import { getSubCategories as fetchSubCategories } from '../../../home/services/category.service';
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { RequestStackParamList } from '../../navigation/types';
 

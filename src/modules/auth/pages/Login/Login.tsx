@@ -65,7 +65,6 @@ export default function Login() {
   };
   const socialAuthentication = (socialToken: AuthModel.SocialToken) => {
     setLoading(true);
-    console.log(socialToken);
     socialCustomerAuthenticate(socialToken)
       .then(() => {
         navigation.navigate('HomeStack', { screen: 'Home' });

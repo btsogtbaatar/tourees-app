@@ -4,7 +4,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
 import { FacebookIcon } from '../../assets/svg';
 import { Typography } from '../../constants';
-import { AuthModel, SocialType } from '../../modules/Auth/entities';
+import { AuthModel, SocialType } from '../../modules/auth/entities';
 import { notifyMessage } from '../CustomToast/CustomToast';
 import styles from './SocialLoginButton.style';
 
@@ -19,8 +19,6 @@ const FbLoginButton: React.FC<FBLoginButtonProps> = ({ onSuccess }) => {
       result => {
         if (!result.isCancelled) {
           AccessToken.getCurrentAccessToken().then(data => {
-            console.log('🚀 ~ AccessToken.getCurrentAccessToken ~ data:', data);
-
             if (data) {
               onSuccess({
                 token: data.accessToken,

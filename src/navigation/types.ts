@@ -1,5 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
-import { AuthStackParamList } from '../modules/Auth/navigation/types';
+import { AuthStackParamList } from '../modules/auth/navigation/types';
 import { HomeStackParamList } from '../modules/Home/navigation/types';
 import { AddressType } from '../modules/Request/entities/request.model';
 import { RequestStackParamList } from '../modules/Request/navigation/types';
