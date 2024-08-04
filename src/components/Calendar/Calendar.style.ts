@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constants';
 import { horizontalScale, verticalScale } from '../../utilities';
+import { colors } from '../../theme';
 
 const CalendarStyle = StyleSheet.create({
   container: {

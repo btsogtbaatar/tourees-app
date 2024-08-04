@@ -9,7 +9,7 @@ import AddressCard from '../../../../components/CustomPlacesAutoComplete/Address
 import CustomPlacesAutoComplete from '../../../../components/CustomPlacesAutoComplete/CustomPlacesAutoComplete';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import { RootStackParamList } from '../../../../navigation/types';
-import { AddressType } from '../../../request/entities/request.model';
+import { AddressType } from '../../../Request/entities/request.model';
 import { SharedModel } from '../../entities/shared.model';
 import AddressMapViewStyle from './AddressMapView.style';
 

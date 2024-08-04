@@ -139,6 +139,8 @@ export default {
     eveningTimeRange: '2PM - 6PM',
     morning: 'Өглөө',
     afternoonTimeRange: '6PM-н дараа',
+    cancel: 'Цуцлах',
+    title: 'Өдөр сонгох',
   },
   emptyRequest: 'Таньд үүсгэсэн хүсэлт байхгүй байна.',
 };

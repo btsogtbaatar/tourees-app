@@ -9,6 +9,13 @@ import { languageStore } from '../../context/auth/store';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
 import { Typography } from '../../theme';
 import { MoonIcon, SunIcon, SunRiseIcon, SunSetIcon } from '../Icon';
+import {
+  getToday,
+  getTomorrow,
+  isSelectedDate,
+  isTodayActive,
+  isTomorrowActive,
+} from '../../utilities/date';
 
 interface CalendarItemProps {
   onSuccess: (value: SharedModel.TimeRange) => void;
@@ -19,25 +26,6 @@ enum TimeChoices {
   AFTERNOON = 'Afternoon',
   EVENING = 'Evening',
 }
-
-const getToday = () => {
-  return new Date(Date.now());
-};
-const getTomorrow = () => {
-  const date = new Date(Date.now());
-  date.setDate(date.getDate() + 1);
-  return date;
-};
-const isEqualDate = (a: Date, b: Date) => {
-  if (
-    a.getDate() === b.getDate() &&
-    a.getMonth() === b.getMonth() &&
-    a.getFullYear() === b.getFullYear()
-  ) {
-    return true;
-  }
-  return false;
-};
 const getLocalKey = (key: TimeChoices) => {
   switch (key) {
     case TimeChoices.AFTERNOON:
@@ -49,20 +37,6 @@ const getLocalKey = (key: TimeChoices) => {
     case TimeChoices.MORNING:
       return 'calendar.morning';
   }
-};
-const isTodayActive = (givenDate: Date) => {
-  const today = getToday();
-  return isEqualDate(today, givenDate);
-};
-const isTomorrowActive = (givenDate: Date) => {
-  const tomorrow = getTomorrow();
-  return isEqualDate(tomorrow, givenDate);
-};
-const isSelectedDate = (currentDate: Date) => {
-  if (isTodayActive(currentDate) || isTomorrowActive(currentDate)) {
-    return false;
-  }
-  return true;
 };
 
 const Calendar = ({ onSuccess }: CalendarItemProps) => {
@@ -121,6 +95,9 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
         date={activeDate}
         mode="date"
         modal
+        title={t('calendar.title')}
+        confirmText={t('calendar.selectDate')}
+        cancelText={t('calendar.cancel')}
         locale={language}
         open={modal}
         onConfirm={e => {
