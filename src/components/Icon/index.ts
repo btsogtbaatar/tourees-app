@@ -31,6 +31,10 @@ import UserCircleIcon from '../../../assets/icons/user-circle.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
+import SunIcon from '../../../assets/icons/sun.svg';
+import SunRiseIcon from '../../../assets/icons/sunrise.svg';
+import SunSetIcon from '../../../assets/icons/sunset.svg';
+import MoonIcon from '../../../assets/icons/moon.svg';
 
 export {
   ArrowLeftIcon,
@@ -65,6 +69,9 @@ export {
   UserCircleIcon,
   UserIcon,
   VectorIcon,
-  XCircleIcon
+  XCircleIcon,
+  SunIcon,
+  SunRiseIcon,
+  SunSetIcon,
+  MoonIcon,
 };
-
