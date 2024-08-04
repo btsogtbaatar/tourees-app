@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import CalendarStyle from './Calendar.style';
-import { Typography } from '../../constants';
 import DatePicker from 'react-native-date-picker';
 import CalendarButton from './CalendarButton';
 import { useTranslation } from 'react-i18next';
-import { Moon, Sun, SunRise, SunSet } from '../../assets/svg';
 import moment from 'moment';
 import { languageStore } from '../../context/auth/store';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
+import { Typography } from '../../theme';
+import { MoonIcon, SunIcon, SunRiseIcon, SunSetIcon } from '../Icon';
 
 interface CalendarItemProps {
   onSuccess: (value: SharedModel.TimeRange) => void;
@@ -176,7 +176,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             onPress={() => {
               updateTime(TimeChoices.MORNING);
             }}>
-            <SunRise />
+            <SunRiseIcon />
             <Text style={Typography.textSmallMediumWeight}>
               {t(getLocalKey(TimeChoices.MORNING))}
             </Text>
@@ -190,7 +190,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             onPress={() => {
               updateTime(TimeChoices.MIDDAY);
             }}>
-            <Sun />
+            <SunIcon />
             <Text style={Typography.textSmallMediumWeight}>
               {t(getLocalKey(TimeChoices.MIDDAY))}
             </Text>
@@ -206,7 +206,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             onPress={() => {
               updateTime(TimeChoices.AFTERNOON);
             }}>
-            <SunSet />
+            <SunSetIcon />
             <Text style={Typography.textSmallMediumWeight}>
               {t(getLocalKey(TimeChoices.AFTERNOON))}
             </Text>
@@ -220,7 +220,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             onPress={() => {
               updateTime(TimeChoices.EVENING);
             }}>
-            <Moon />
+            <MoonIcon />
             <Text style={Typography.textSmallMediumWeight}>
               {t(getLocalKey(TimeChoices.EVENING))}
             </Text>

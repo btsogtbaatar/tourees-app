@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity } from 'react-native';
 import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
-import { FacebookIcon } from '../../assets/svg';
-import { Typography } from '../../constants';
-import { AuthModel, SocialType } from '../../modules/auth/entities';
+import { AuthModel, SocialType } from '../../modules/Auth/entities';
+import { Typography } from '../../theme';
 import { notifyMessage } from '../CustomToast/CustomToast';
+import { FacebookIcon } from '../Icon';
 import styles from './SocialLoginButton.style';
 
 interface FBLoginButtonProps {

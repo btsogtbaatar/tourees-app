@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const defaultUrl = 'http://localhost:8080';
-const imageUrl = `${defaultUrl}/storage/`;
+const imageUrl = `${defaultUrl}/file/resource/`;
 
 export const getEnv = () => {
   return {

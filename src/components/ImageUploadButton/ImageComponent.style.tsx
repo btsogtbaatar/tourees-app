@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities';
 
 const styles = StyleSheet.create({
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
   },
   imageTitle: {
-    color: colors.textWhite,
+    color: colors.white,
     fontSize: 24,
     lineHeight: 33,
     fontWeight: '700',

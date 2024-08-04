@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
-import { colors } from '../../constants/colors';
 import useTimer from '../../hooks/useTimer';
+import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities/metrics';
 import OtpInputGroup from '../OtpInputGroup/OtpInputGroup';
 import Timer from '../Timer/Timer';
 
 export type Credentials = {
-  email: string;
+  email?: string;
 };
 
 export interface CheckOtpProps {
@@ -63,7 +63,7 @@ export default function CheckOtp(props: Readonly<CheckOtpProps>) {
           {'\u00A0'}
           <Text
             style={{
-              color: colors.primaryColor,
+              color: colors.primary500,
             }}>
             {props.credentials.email}
           </Text>
@@ -88,7 +88,7 @@ export default function CheckOtp(props: Readonly<CheckOtpProps>) {
               onPress={() => resend()}>
               <Text
                 style={{
-                  color: colors.primaryColor,
+                  color: colors.primary500,
                   fontWeight: '700',
                   fontSize: 14,
                   fontFamily: 'Nunito',

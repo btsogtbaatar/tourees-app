@@ -1,22 +1,22 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 
 export const CustomInputStyle = StyleSheet.create({
   container: {
-    backgroundColor: colors.textWhite,
+    backgroundColor: colors.white,
     borderWidth: 1,
     borderRadius: 12,
-    paddingHorizontal: 12,
-    minHeight: 52,
+    paddingHorizontal: 10,
+    minHeight: 40,
     flexDirection: 'column',
     justifyContent: 'center',
   },
   input: {
+    color: colors.gray700,
     textAlignVertical: 'center',
     flex: 1,
     padding: 0,
     margin: 0,
-    paddingBottom: 5,
   },
   inputContainer: { flexDirection: 'row', alignItems: 'center' },
   containerWithSuggestion: {

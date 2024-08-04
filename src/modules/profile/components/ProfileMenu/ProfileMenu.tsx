@@ -2,17 +2,19 @@ import { useNavigation } from '@react-navigation/native';
 import { default as React } from 'react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../../../../i18n';
-import ChevronRightIcon from '../../../../assets/svg/profile/ChevronRightIcon';
-import ClockRewindIcon from '../../../../assets/svg/profile/ClockRewindIcon';
-import EBarimtIcon from '../../../../assets/svg/profile/EBarimtIcon';
-import FileIcon from '../../../../assets/svg/profile/FileIcon';
-import GlobalIcon from '../../../../assets/svg/profile/GlobalIcon';
-import HelpCircleIcon from '../../../../assets/svg/profile/HelpCircleIcon';
-import LogoutIcon from '../../../../assets/svg/profile/LogoutIcon';
-import UserCircleIcon from '../../../../assets/svg/profile/UserCircleIcon';
 import GroupedMenuList from '../../../../components/GroupedMenuList/GroupedMenuList';
-import { colors } from '../../../../constants/colors';
+import {
+  ChevronRightIcon,
+  ClockRewindIcon,
+  EBarimtIcon,
+  FileIcon,
+  GlobalIcon,
+  HelpCircleIcon,
+  LogoutIcon,
+  UserCircleIcon,
+} from '../../../../components/Icon';
 import { authStore, languageStore } from '../../../../context/auth/store';
+import { colors } from '../../../../theme/colors';
 
 const ProfileMenu = () => {
   const { t } = useTranslation();
@@ -78,7 +80,7 @@ const ProfileMenu = () => {
       suffix: <ChevronRightIcon color={colors.logoColor} />,
       onPress: () => {
         authState.clearAccessToken();
-        navigation.navigate('HomeStack', { screen: 'Dashboard' });
+        navigation.navigate('HomeTab', { screen: 'Home' });
       },
     },
   ];

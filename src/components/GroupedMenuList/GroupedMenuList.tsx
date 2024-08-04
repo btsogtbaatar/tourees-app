@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 import { horizontalScale } from '../../utilities/metrics';
 
 export type FilledListProps = {

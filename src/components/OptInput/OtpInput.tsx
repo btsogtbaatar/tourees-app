@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { TextInput, View } from 'react-native';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 import { horizontalScale } from '../../utilities/metrics';
 
 interface OtpProps {
@@ -34,7 +34,7 @@ const OtpInput = (props: OtpProps) => {
         style={{
           borderWidth: 1,
           borderColor: focus ? colors.optFocusBorder : colors.otpBorder,
-          backgroundColor: colors.textWhite,
+          backgroundColor: colors.white,
           borderRadius: horizontalScale(16),
           alignItems: 'center',
           justifyContent: 'center',
@@ -42,7 +42,7 @@ const OtpInput = (props: OtpProps) => {
           height: horizontalScale(64),
         }}>
         <TextInput
-          selectionColor={colors.primaryColor}
+          selectionColor={colors.primary500}
           style={{
             textAlign: 'center',
             fontWeight: '700',

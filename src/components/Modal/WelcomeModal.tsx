@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { LogoIcon } from '../../assets/svg';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities';
+import { LogoIcon } from '../Icon';
 import LinearButton from '../LoginButton/LinearButton';
 
 interface WelcomeModalProps {
@@ -21,7 +21,7 @@ const WelcomeModal = ({
   return (
     <View
       style={{
-        backgroundColor: colors.textWhite,
+        backgroundColor: colors.white,
         borderRadius: horizontalScale(24),
         alignItems: 'center',
         paddingHorizontal: horizontalScale(24),
@@ -31,7 +31,7 @@ const WelcomeModal = ({
       <View style={{ marginTop: verticalScale(16), alignItems: 'center' }}>
         <Text
           style={{
-            color: colors.primaryColor,
+            color: colors.primary500,
             fontSize: 18,
             fontWeight: '700',
             lineHeight: 27,
