@@ -36,7 +36,7 @@ function CustomFlatListItem(props: Readonly<CustomFlatListItemProps>) {
           </Text>
         </View>
       </View>
-      <ChevronRightIcon color={colors.dark700} />
+      <ChevronRightIcon color={colors.gray700} />
     </TouchableOpacity>
   );
 }

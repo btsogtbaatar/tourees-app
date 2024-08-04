@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, FontWeight, Typography } from '../../theme';
+import { colors, FontWeight, getFontWeight, Typography } from '../../theme';
 
 export const CustomFlatListItemStyles = StyleSheet.create({
   container: {
@@ -22,12 +22,11 @@ export const CustomFlatListItemStyles = StyleSheet.create({
   },
   title: {
     ...Typography.textRegular,
-    fontWeight: FontWeight.bold,
+    ...getFontWeight(FontWeight.bold),
     lineHeight: 20,
   },
   subtitle: {
     ...Typography.textSmaller,
-    fontWeight: FontWeight.medium,
     color: colors.primary500,
   },
 });

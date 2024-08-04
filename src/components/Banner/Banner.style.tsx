@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, FontWeight, Typography } from '../../theme';
+import { colors, FontWeight, getFontWeight, Typography } from '../../theme';
 
 const BannerStyle = StyleSheet.create({
   container: {
@@ -11,7 +11,7 @@ const BannerStyle = StyleSheet.create({
   title: {
     ...Typography.textSmall,
     color: colors.white,
-    fontWeight: FontWeight.bold,
+    ...getFontWeight(FontWeight.bold),
     flex: 1,
   },
 });

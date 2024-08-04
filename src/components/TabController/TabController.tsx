@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import TabItem from '../TabItem/TabItem';
 import styles from '../../modules/Auth/pages/Register/Register.style';
+import TabItem from '../TabItem/TabItem';
 
 export interface TabControllerProps {
   firstTabLabel: string;
@@ -24,7 +24,7 @@ export default function TabController(props: Readonly<TabControllerProps>) {
         label={props.firstTabLabel}
         selected={tabIndex === 0}
       />
-      <View style={{ width: styles.container.paddingHorizontal }}></View>
+      <View style={{ width: styles.container.paddingHorizontal }} />
       <TabItem
         onSelect={() => {
           if (tabIndex !== 1) {

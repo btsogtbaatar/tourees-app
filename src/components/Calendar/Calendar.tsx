@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
-import CalendarStyle from './Calendar.style';
-import DatePicker from 'react-native-date-picker';
-import CalendarButton from './CalendarButton';
-import { useTranslation } from 'react-i18next';
 import moment from 'moment';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
+import DatePicker from 'react-native-date-picker';
 import { languageStore } from '../../context/auth/store';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
 import { Typography } from '../../theme';
-import { MoonIcon, SunIcon, SunRiseIcon, SunSetIcon } from '../Icon';
 import {
   getToday,
   getTomorrow,
@@ -16,6 +13,9 @@ import {
   isTodayActive,
   isTomorrowActive,
 } from '../../utilities/date';
+import { MoonIcon, SunIcon, SunRiseIcon, SunSetIcon } from '../Icon';
+import CalendarStyle from './Calendar.style';
+import CalendarButton from './CalendarButton';
 
 interface CalendarItemProps {
   onSuccess: (value: SharedModel.TimeRange) => void;
@@ -115,9 +115,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
           onPress={() => {
             setActiveDate(getToday());
           }}>
-          <Text style={Typography.textSmallMediumWeight}>
-            {t('calendar.today')}
-          </Text>
+          <Text style={Typography.textSmall}>{t('calendar.today')}</Text>
         </CalendarButton>
         <CalendarButton
           style={CalendarStyle.dateButtons}
@@ -125,9 +123,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
           onPress={() => {
             setActiveDate(getTomorrow());
           }}>
-          <Text style={Typography.textSmallMediumWeight}>
-            {t('calendar.tomorrow')}
-          </Text>
+          <Text style={Typography.textSmall}>{t('calendar.tomorrow')}</Text>
         </CalendarButton>
         <CalendarButton
           style={CalendarStyle.dateButtons}
@@ -135,13 +131,11 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
           onPress={() => {
             setModal(true);
           }}>
-          <Text style={Typography.textSmallMediumWeight}>
-            {t('calendar.selectDate')}
-          </Text>
+          <Text style={Typography.textSmall}>{t('calendar.selectDate')}</Text>
         </CalendarButton>
       </View>
       <View style={CalendarStyle.infoSection}>
-        <Text style={Typography.textSmallMediumWeight}>
+        <Text style={Typography.textSmall}>
           {getTranslatedDate(activeDate)} | {t(getLocalKey(activeTime))}
         </Text>
       </View>
@@ -154,11 +148,11 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
               updateTime(TimeChoices.MORNING);
             }}>
             <SunRiseIcon />
-            <Text style={Typography.textSmallMediumWeight}>
+            <Text style={Typography.textSmall}>
               {t(getLocalKey(TimeChoices.MORNING))}
             </Text>
-            <Text style={Typography.textSmallMediumWeight}>
-              {t('calendar.morningTimeRange')}
+            <Text style={Typography.textSmall}>
+              {t('calendar.morningText')}
             </Text>
           </CalendarButton>
           <CalendarButton
@@ -168,12 +162,10 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
               updateTime(TimeChoices.MIDDAY);
             }}>
             <SunIcon />
-            <Text style={Typography.textSmallMediumWeight}>
+            <Text style={Typography.textSmall}>
               {t(getLocalKey(TimeChoices.MIDDAY))}
             </Text>
-            <Text style={Typography.textSmallMediumWeight}>
-              {t('calendar.middayTimeRange')}
-            </Text>
+            <Text style={Typography.textSmall}>{t('calendar.middayText')}</Text>
           </CalendarButton>
         </View>
         <View style={CalendarStyle.timeSectionRow}>
@@ -184,11 +176,11 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
               updateTime(TimeChoices.AFTERNOON);
             }}>
             <SunSetIcon />
-            <Text style={Typography.textSmallMediumWeight}>
+            <Text style={Typography.textSmall}>
               {t(getLocalKey(TimeChoices.AFTERNOON))}
             </Text>
-            <Text style={Typography.textSmallMediumWeight}>
-              {t('calendar.eveningTimeRange')}
+            <Text style={Typography.textSmall}>
+              {t('calendar.eveningText')}
             </Text>
           </CalendarButton>
           <CalendarButton
@@ -198,11 +190,11 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
               updateTime(TimeChoices.EVENING);
             }}>
             <MoonIcon />
-            <Text style={Typography.textSmallMediumWeight}>
+            <Text style={Typography.textSmall}>
               {t(getLocalKey(TimeChoices.EVENING))}
             </Text>
-            <Text style={Typography.textSmallMediumWeight}>
-              {t('calendar.afternoonTimeRange')}
+            <Text style={Typography.textSmall}>
+              {t('calendar.afternoonText')}
             </Text>
           </CalendarButton>
         </View>

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, FontWeight, Typography } from '../../theme';
+import { colors, Typography } from '../../theme';
 
 export const AddressCardStyles = StyleSheet.create({
   card: {
@@ -29,7 +29,6 @@ export const AddressCardStyles = StyleSheet.create({
   },
   addressText: {
     ...Typography.textSmaller,
-    fontWeight: FontWeight.medium,
   },
   selectedText: {
     color: colors.gray600,

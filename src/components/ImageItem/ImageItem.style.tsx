@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, FontWeight, Typography } from '../../theme';
+import { colors, FontWeight, getFontWeight, Typography } from '../../theme';
 
 const ImageItemStyle = StyleSheet.create({
   container: {
@@ -15,9 +15,10 @@ const ImageItemStyle = StyleSheet.create({
   },
   title: {
     ...Typography.textSmaller,
-    fontWeight: FontWeight.bold,
+    ...getFontWeight(FontWeight.bold),
     color: colors.textColor,
     textAlign: 'center',
+    height: Typography.textSmaller.lineHeight * 2,
   },
 });
 
