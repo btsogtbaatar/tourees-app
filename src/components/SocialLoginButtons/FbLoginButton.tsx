@@ -19,8 +19,6 @@ const FbLoginButton: React.FC<FBLoginButtonProps> = ({ onSuccess }) => {
       result => {
         if (!result.isCancelled) {
           AccessToken.getCurrentAccessToken().then(data => {
-            console.log('🚀 ~ AccessToken.getCurrentAccessToken ~ data:', data);
-
             if (data) {
               onSuccess({
                 token: data.accessToken,

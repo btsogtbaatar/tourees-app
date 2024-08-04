@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { default as React } from 'react';
 import { Text } from 'react-native';
-import { FontWeight, Typography } from '../../theme';
+import { FontWeight, getFontWeight, Typography } from '../../theme';
 import { colors } from '../../theme/colors';
 import { LogoIcon } from '../Icon';
 
@@ -30,7 +30,7 @@ const CustomTabNavigator = (props: CustomTabNavigatorProps) => {
         <Text
           style={{
             ...Typography.textRegular,
-            fontWeight: FontWeight.bold,
+            ...getFontWeight(FontWeight.bold),
           }}>
           {item.label}
         </Text>
@@ -53,7 +53,7 @@ const CustomTabNavigator = (props: CustomTabNavigatorProps) => {
             component={item.component}
             options={{
               headerStyle: {
-                backgroundColor: 'transparent',
+                backgroundColor: colors.silver,
               },
               headerShown: item.showHeader,
               headerTitle: () => headerTitle(item),

@@ -1,5 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { colors, FontWeight, Typography } from '../../../../theme';
+import {
+  colors,
+  FontWeight,
+  getFontWeight,
+  Typography,
+} from '../../../../theme';
 
 const HomeStyle = StyleSheet.create({
   container: {
@@ -10,7 +15,7 @@ const HomeStyle = StyleSheet.create({
   },
   title: {
     ...Typography.textSmall,
-    fontWeight: FontWeight.bold,
+    ...getFontWeight(FontWeight.bold),
     color: colors.gray700,
     marginBottom: 8,
   },

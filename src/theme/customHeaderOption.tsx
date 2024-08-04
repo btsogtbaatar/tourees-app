@@ -5,7 +5,7 @@ import React from 'react';
 import CustomHeaderBackButton from '../components/CustomHeader/CustomHeaderBackButton';
 import { RootStackParamList } from '../navigation/types';
 import { colors } from './colors';
-import { FontWeight, Typography } from './typography';
+import { FontWeight, getFontWeight, Typography } from './typography';
 
 const getTextColor = (routeName: string) => {
   switch (routeName) {
@@ -32,15 +32,23 @@ const customScreenOption:
     }) => NativeStackNavigationOptions)
   | undefined = ({ route, navigation }) => ({
   headerShown: route.name !== 'HomeTab',
-  headerShadowVisible: false,
   headerStyle: {
+    elevation: 0,
+    shadowOpacity: 0,
+    shadowOffset: {
+      height: 0,
+    },
+    shadowRadius: 0,
     backgroundColor: getBackgroundColor(route.name),
   },
+  animationDuration: 0,
+  headerShadowVisible: false,
   headerTitleStyle: {
     ...Typography.textRegular,
     color: getTextColor(route.name),
-    fontWeight: FontWeight.bold,
+    ...getFontWeight(FontWeight.bold),
   },
+  headerTitleAlign: 'center',
   headerBackTitleVisible: false,
   headerLeft: (props: HeaderBackButtonProps) =>
     props.canGoBack ? (

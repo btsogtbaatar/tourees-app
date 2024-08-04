@@ -1,7 +1,6 @@
 import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import moment from 'moment';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -57,6 +56,7 @@ function UserRequest({ route }: Props) {
     name: authState.auth ? authState.auth.user?.fullName : '',
     status_code: 1,
     sub_category_id: subCategory.id,
+    timeRange: {},
   });
 
   const [addresses, setAddresses] = useState<Addresses>({
@@ -163,9 +163,11 @@ function UserRequest({ route }: Props) {
 
       let taskRequest: TaskModel.TaskRequest = {
         description: requestValue.details,
+        timeRange: requestValue.timeRange,
         subCategory: {
           id: requestValue.sub_category_id,
         },
+
         files: selectedImages,
         addresses: [addresses.from, addresses.to],
       };
@@ -233,13 +235,9 @@ function UserRequest({ route }: Props) {
                 {t('request.requestDeliveryDate')}
               </Text>
               <Calendar
-                onSuccess={(value: string) =>
-                  handleInputChange(
-                    'request_date',
-                    moment(value).format('YYYY-MM-DD'),
-                  )
+                onSuccess={(value: any) =>
+                  handleInputChange('timeRange', value)
                 }
-                initialStartDate={moment().format('YYYY-MM-DD')}
               />
               <Text
                 style={{

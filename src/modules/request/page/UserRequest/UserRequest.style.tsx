@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { Theme } from 'react-native-calendars/src/types';
-import { FontWeight, Typography } from '../../../../theme';
+import { FontWeight, getFontWeight, Typography } from '../../../../theme';
 import { colors } from '../../../../theme/colors';
 
 export const calendarTheme: Theme = {
@@ -26,7 +26,7 @@ const UserRequestStyle = StyleSheet.create({
   },
   title: {
     ...Typography.textLarge,
-    fontWeight: FontWeight.extraBold,
+    ...getFontWeight(FontWeight.extraBold),
     color: colors.white,
   },
   subtitle: {
