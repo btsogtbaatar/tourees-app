@@ -152,7 +152,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
               {t(getLocalKey(TimeChoices.MORNING))}
             </Text>
             <Text style={Typography.textSmall}>
-              {t('calendar.morningText')}
+              {t('calendar.morningTimeRange')}
             </Text>
           </CalendarButton>
           <CalendarButton
@@ -165,7 +165,9 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             <Text style={Typography.textSmall}>
               {t(getLocalKey(TimeChoices.MIDDAY))}
             </Text>
-            <Text style={Typography.textSmall}>{t('calendar.middayText')}</Text>
+            <Text style={Typography.textSmall}>
+              {t('calendar.middayTimeRange')}
+            </Text>
           </CalendarButton>
         </View>
         <View style={CalendarStyle.timeSectionRow}>
@@ -180,7 +182,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
               {t(getLocalKey(TimeChoices.AFTERNOON))}
             </Text>
             <Text style={Typography.textSmall}>
-              {t('calendar.eveningText')}
+              {t('calendar.eveningTimeRange')}
             </Text>
           </CalendarButton>
           <CalendarButton
@@ -194,7 +196,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
               {t(getLocalKey(TimeChoices.EVENING))}
             </Text>
             <Text style={Typography.textSmall}>
-              {t('calendar.afternoonText')}
+              {t('calendar.afternoonTimeRange')}
             </Text>
           </CalendarButton>
         </View>
