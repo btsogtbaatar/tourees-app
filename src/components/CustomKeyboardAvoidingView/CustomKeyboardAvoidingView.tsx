@@ -18,7 +18,8 @@ export default function CustomKeyboardAvoidingView(
     <KeyboardAvoidingView
       behavior={Platform.OS !== 'ios' ? 'padding' : 'height'}
       keyboardVerticalOffset={Platform.OS === 'ios' ? headerHeight : 0}
-      style={{ flex: 1 }}>
+      {...props}
+      style={[props.style, { flex: 1 }]}>
       {props.children}
     </KeyboardAvoidingView>
   );

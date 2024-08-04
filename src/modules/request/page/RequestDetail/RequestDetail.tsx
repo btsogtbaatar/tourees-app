@@ -2,10 +2,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React from 'react';
 import { View } from 'react-native';
 import RequestMessage from '../../../../components/Requests/RequestMessage';
-import { RequestStackParamList } from '../../navigation/types';
+import { RootStackParamList } from '../../../../navigation/types';
 import styles from './RequestDetail.style';
 
-type Props = NativeStackScreenProps<RequestStackParamList, 'RequestDetail'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'RequestDetail'>;
 
 const RequestDetail = (props: Props) => {
   const { status } = props.route.params;

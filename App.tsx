@@ -1,8 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useTranslation } from 'react-i18next';
 import { LogBox } from 'react-native';
+import { Settings } from 'react-native-fbsdk-next';
 import Geocoder from 'react-native-geocoding';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -13,10 +15,6 @@ import { authStore, languageStore } from './src/context/auth/store';
 import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/navigation';
 
-//social login imports
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { Settings } from 'react-native-fbsdk-next';
-
 axiosInstance(api, authStore);
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
@@ -24,7 +22,6 @@ function App(): React.JSX.Element {
 
   useEffect(() => {
     Geocoder.init(process.env.GOOGLE_API_KEY!);
-    //Social init
     Settings.setAppID(process.env.FACEBOOK_APP_ID!);
     Settings.initializeSDK();
     GoogleSignin.configure({

@@ -2,9 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { LocationCircleIcon, LocationIcon } from '../../assets/svg';
 import { AddressType } from '../../modules/Request/entities/request.model';
-import { Address } from '../../modules/Shared/page/MapViewAddress/AddressMapView';
+import { Address } from '../../modules/Shared/page/AddressMapView/AddressMapView';
+import { LocationCircleIcon, LocationIcon } from '../Icon';
 import { AddressCardStyles } from './AddressCard.style';
 
 export interface AddressCardProps {

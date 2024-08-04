@@ -8,12 +8,11 @@ import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvo
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
-import { AuthStateToken } from '../../entities/auth.model';
-import { AuthStackParamList } from '../../navigation/types';
+import { RootStackParamList } from '../../../../navigation/types';
 import { token } from '../../services';
 
 type LoginOtpCheckProps = NativeStackScreenProps<
-  AuthStackParamList,
+  RootStackParamList,
   'LoginOtpCheck'
 >;
 
@@ -26,9 +25,8 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
 
   const checkOtp = () => {
     if (value) {
-      token({ ...credentials, value }).then((response: AuthStateToken) => {
-        console.log('🚀 ~ token ~ response:', response);
-        navigation.navigate('HomeStack', { screen: 'Dashboard' });
+      token({ ...credentials, value }).then(() => {
+        navigation.navigate('HomeTab', { screen: 'Home' });
       });
     }
   };

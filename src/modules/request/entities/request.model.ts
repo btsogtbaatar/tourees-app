@@ -33,6 +33,9 @@ export declare namespace TaskModel {
     name?: AddressType;
     displayName?: string;
     address?: string;
+    unit: number;
+    floor: number;
+    apartment: number;
     latitude: number;
     longitude: number;
   };

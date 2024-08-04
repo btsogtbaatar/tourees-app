@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities/metrics';
-import { colors } from '../../constants/colors';
 
 const styles = StyleSheet.create({
   userCardContainer: {
@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     height: verticalScale(64),
     flexShrink: 0,
     borderRadius: horizontalScale(16),
-    backgroundColor: colors.textWhite,
+    backgroundColor: colors.white,
   },
   flexRow: {
     flexDirection: 'row',
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   descStyle: {
     fontSize: 12,
     fontWeight: '700',
-    color: colors.primaryColor,
+    color: colors.primary500,
     lineHeight: 18,
   },
   timeContainer: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: 16,
     height: 16,
-    backgroundColor: colors.primaryColor,
+    backgroundColor: colors.primary500,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   iconText: {
     textAlign: 'center',
-    color: colors.textWhite,
+    color: colors.white,
     fontWeight: '700',
     lineHeight: 15,
     fontSize: 10,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     paddingRight: horizontalScale(12),
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: colors.primaryColor,
+    borderColor: colors.primary500,
     gap: 4,
     alignItems: 'center',
     flexDirection: 'row',
@@ -128,11 +128,11 @@ const styles = StyleSheet.create({
   },
   operatorTxt: {
     marginLeft: horizontalScale(4),
-    color: colors.primaryColor,
+    color: colors.primary500,
   },
   operatorContainer: {
     padding: verticalScale(12),
-    backgroundColor: colors.textWhite,
+    backgroundColor: colors.white,
     borderRadius: 12,
     gap: 12,
   },

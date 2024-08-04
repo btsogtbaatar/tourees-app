@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
+import { colors } from '../../theme/colors';
 import { horizontalScale } from '../../utilities/metrics';
-import { colors } from '../../constants/colors';
 
 const styles = StyleSheet.create({
   ratingH: {

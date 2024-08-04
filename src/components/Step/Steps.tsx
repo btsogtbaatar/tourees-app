@@ -1,8 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import CheckIcon from '../../assets/svg/auth/CheckIcon';
-import StepCircleIcon from '../../assets/svg/auth/StepCircleIcon';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
+import { CheckIcon, StepCircleIcon } from '../Icon';
 
 interface PropsStep {
   groupSteps: number;
@@ -46,20 +45,18 @@ export default function Steps({ steps, groupSteps }: PropsStep) {
                 backgroundColor: 'rgba(255, 150, 70, 0.2)',
                 zIndex: -1,
               }}>
-              <StepCircleIcon color={colors.primaryColor} />
+              <StepCircleIcon color={colors.primary500} />
             </View>
           ) : (
             <StepCircleIcon
-              color={oldStep ? colors.successsColor : colors.borderColor}
+              color={oldStep ? colors.success : colors.borderColor}
             />
           )}
           {index + 1 < groupSteps && (
             <View
               style={{
                 width: '100%',
-                borderColor: oldStep
-                  ? colors.successsColor
-                  : colors.borderColor,
+                borderColor: oldStep ? colors.success : colors.borderColor,
                 borderWidth: 0.5,
                 alignSelf: 'center',
                 alignItems: 'center',

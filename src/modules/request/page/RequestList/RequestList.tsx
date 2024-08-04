@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import UserRequestCard from '../../../../components/Requests/UserRequestCard';
-import { colors } from '../../../../constants/colors';
+import { colors } from '../../../../theme/colors';
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { TaskModel } from '../../entities/request.model';
 import { getTasks } from '../../service/request.service';
@@ -64,7 +64,7 @@ const Request = () => {
     return (
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         {moreLoading ? (
-          <ActivityIndicator color={colors.primaryColor} size="large" />
+          <ActivityIndicator color={colors.primary500} size="large" />
         ) : null}
         {lastPage <= currentPage && null}
       </View>
@@ -86,7 +86,7 @@ const Request = () => {
   return (
     <SafeAreaView style={{ flex: 1, marginTop: 16 }}>
       <FlatList
-        data={requests}
+        data={requests.filter(item => item.subCategory !== null)}
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => <UserRequestCard item={item} />}
         ItemSeparatorComponent={() => <View style={{ marginTop: 12 }} />}
@@ -99,7 +99,7 @@ const Request = () => {
           <RefreshControl
             refreshing={refreshing}
             onRefresh={onRefresh}
-            tintColor={colors.primaryColor}
+            tintColor={colors.primary500}
           />
         }
         contentContainerStyle={{ flexGrow: 1 }}

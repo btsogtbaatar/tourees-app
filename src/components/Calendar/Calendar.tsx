@@ -1,4 +1,3 @@
-/* eslint-disable react-native/no-inline-styles */
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import {
@@ -7,9 +6,9 @@ import {
   DateData,
   LocaleConfig,
 } from 'react-native-calendars';
-import { calendarMnLocale } from '../../constants/calendarMnLocale';
-import { colors } from '../../constants/colors';
 import { calendarTheme } from '../../modules/Request/page/UserRequest/UserRequest.style';
+import { calendarMnLocale } from '../../theme/calendarMnLocale';
+import { colors } from '../../theme/colors';
 import { verticalScale } from '../../utilities';
 
 interface CalendarItemProps extends CalendarProps {
@@ -75,8 +74,8 @@ const Calendar = ({ onSuccess, initialStartDate }: CalendarItemProps) => {
         markedDates={{
           [startDate]: {
             selected: true,
-            selectedColor: colors.primaryColor,
-            selectedTextColor: colors.textWhite,
+            selectedColor: colors.primary500,
+            selectedTextColor: colors.white,
             disableTouchEvent: true,
           },
         }}

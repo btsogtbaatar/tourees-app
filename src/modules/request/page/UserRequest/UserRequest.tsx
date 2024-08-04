@@ -1,10 +1,10 @@
+import BottomSheet from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheet/BottomSheet';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import moment from 'moment';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Image,
   Platform,
   ScrollView,
   Text,
@@ -13,34 +13,35 @@ import {
   View,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { getEnv } from '../../../../api';
-import { LocationCircleIcon, LocationIcon } from '../../../../assets/svg';
 import Calendar from '../../../../components/Calendar/Calendar';
-import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
+import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomImage from '../../../../components/CustomImage/CustomImage';
 import {
   DEFAULT_LAT,
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapView';
+import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
+import { LocationCircleIcon, LocationIcon } from '../../../../components/Icon';
 import ImageUploadButton, {
   ImageSource,
 } from '../../../../components/ImageUploadButton/ImageUploadButton';
 import Modal from '../../../../components/Modal/Modal';
 import WelcomeModal from '../../../../components/Modal/WelcomeModal';
-import { colors } from '../../../../constants/colors';
-import { Typography } from '../../../../constants/typography';
 import { authStore } from '../../../../context/auth/store';
 import { ModalContext } from '../../../../context/modal/modal.context';
 import { actions } from '../../../../context/modal/modal.reducer';
+import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme/colors';
+import { Typography } from '../../../../theme/typography';
 import { horizontalScale, verticalScale } from '../../../../utilities';
 import { SharedModel } from '../../../Shared/entities/shared.model';
-import { Addresses } from '../../../Shared/page/MapViewAddress/AddressMapView';
+import { Addresses } from '../../../Shared/page/AddressMapView/AddressMapView';
 import { uploadFile } from '../../../Shared/service/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
-import { RequestStackParamList } from '../../navigation/types';
 import { createTask, getTasks } from '../../service/request.service';
 import UserRequestStyle from './UserRequest.style';
 
-type Props = NativeStackScreenProps<RequestStackParamList, 'UserRequest'>;
+type Props = NativeStackScreenProps<RootStackParamList, 'UserRequest'>;
 
 function UserRequest({ route }: Props) {
   const { t } = useTranslation();
@@ -48,6 +49,7 @@ function UserRequest({ route }: Props) {
   const subCategory = route.params.item;
   const navigation = useNavigation();
   const authState = authStore(state => state);
+  const bottomSheetRef = useRef<BottomSheet>(null);
   const { dispatch: dispatchModal } = useContext(ModalContext);
   const [selectedImages, setSelectedImages] = useState<SharedModel.File[]>([]);
   const [requestValue, setRequestValue] = useState<any>({
@@ -71,26 +73,28 @@ function UserRequest({ route }: Props) {
   });
 
   useEffect(() => {
-    getTasks(1, 1).then(page => {
-      if (
-        page.content.length > 0 &&
-        page.content[0].addresses !== undefined &&
-        page.content[0].addresses.length > 0
-      ) {
-        let fromAddress = page.content[0].addresses.find(
-          _address => _address.name === 'from',
-        );
+    if (authState.authenticated) {
+      getTasks(1, 1).then(page => {
+        if (
+          page.content.length > 0 &&
+          page.content[0].addresses !== undefined &&
+          page.content[0].addresses.length > 0
+        ) {
+          let fromAddress = page.content[0].addresses.find(
+            _address => _address.name === 'from',
+          );
 
-        if (fromAddress) {
-          setAddresses(_addresses => {
-            return {
-              ..._addresses,
-              from: fromAddress,
-            };
-          });
+          if (fromAddress) {
+            setAddresses(_addresses => {
+              return {
+                ..._addresses,
+                from: fromAddress,
+              };
+            });
+          }
         }
-      }
-    });
+      });
+    }
   }, []);
 
   const handleInputChange = (
@@ -178,14 +182,14 @@ function UserRequest({ route }: Props) {
                 subTitle={t('request.requestNewMessage')}
                 onClick={() => {
                   dispatchModal({ type: actions.HIDE });
-                  navigation.navigate('HomeStack', { screen: 'Home' });
+                  navigation.navigate('HomeTab', { screen: 'Home' });
                 }}
                 buttonText={t('request.requestDone')}
               />
             ),
           });
 
-          navigation.navigate('HomeStack', { screen: 'Home' });
+          navigation.navigate('HomeTab', { screen: 'Home' });
         },
         (err: any) => {
           console.log(err, 'errr');
@@ -196,97 +200,30 @@ function UserRequest({ route }: Props) {
         },
       );
     } else {
-      navigation.navigate('AuthStack', {
-        screen: 'Login',
-      });
+      navigation.navigate('Login');
     }
   };
 
   return (
-    <CustomKeyboardAvoidingView>
-      <LinearGradient
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 0 }}
-        locations={[0, 1]}
-        colors={['#37414B', '#161A1E']}
-        style={{ flex: 1 }}>
-        <View style={{ flex: 1 }}>
-          <View
-            style={{
-              paddingHorizontal: horizontalScale(16),
-              paddingBottom: verticalScale(16),
-              flexDirection: 'row',
-            }}>
-            <View
-              style={{
-                paddingRight: 16,
-                alignItems: 'flex-start',
-                width: '70%',
-              }}>
-              <Text
-                style={{
-                  color: colors.textWhite,
-                  fontSize: 18,
-                  fontFamily: 'Nunito',
-                  fontWeight: '700',
-                  lineHeight: 27,
-                }}>
-                {t('request.requestCreate')}
-              </Text>
-              <Text
-                style={{
-                  color: colors.textWhite,
-                  fontFamily: 'Nunito',
-                  fontSize: 20,
-                  fontWeight: '800',
-                  lineHeight: 30,
-                }}>
-                {subCategory.name}
-              </Text>
-              <Text
-                style={{
-                  color: colors.textWhite,
-                  fontFamily: 'Nunito',
-                  fontSize: 12,
-                  fontWeight: '400',
-                  lineHeight: 18,
-                }}>
-                {subCategory.description}
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 1,
-                borderRadius: 10,
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                backgroundColor: 'red',
-              }}>
-              <Image
-                style={{ flex: 1, width: '100%' }}
-                source={{
-                  uri: `${getEnv().IMAGE_URL}${subCategory.image?.url ?? ''}`,
-                }}
-              />
-            </View>
+    <View style={UserRequestStyle.container}>
+      <FullHeightView>
+        <ContainerView style={{ flexDirection: 'row', gap: 20 }}>
+          <View style={{ flex: 2 }}>
+            <Text style={UserRequestStyle.title}>{subCategory.name}</Text>
+            <Text style={UserRequestStyle.subtitle}>
+              {subCategory.description}
+            </Text>
           </View>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: colors.textWhite,
-              borderTopEndRadius: 16,
-              borderTopStartRadius: 16,
-            }}>
-            <View
-              style={{
-                height: verticalScale(45),
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            />
-            <ScrollView
-              style={{ flex: 1, paddingHorizontal: horizontalScale(16) }}>
+          <CustomImage
+            style={UserRequestStyle.image}
+            source={{
+              uri: subCategory.image.url,
+            }}
+          />
+        </ContainerView>
+        <View style={UserRequestStyle.bodyContainer}>
+          <ScrollView>
+            <ContainerView>
               <Text
                 style={{
                   fontFamily: 'Nunito',
@@ -349,14 +286,18 @@ function UserRequest({ route }: Props) {
                   }}
                   multiline={true}
                   numberOfLines={4}
-                  placeholder={t('request.requestDetailMsg')}
+                  placeholder={subCategory.instruction}
                   returnKeyType="next"
                 />
               </View>
               <Text style={[Typography.textSmall, { marginBottom: 8 }]}>
                 {t('userRequest.address.label')}
               </Text>
-              <View style={[UserRequestStyle.container, { marginBottom: 16 }]}>
+              <View
+                style={[
+                  UserRequestStyle.addressContainer,
+                  { marginBottom: 16 },
+                ]}>
                 <LocationCircleIcon style={UserRequestStyle.icon} />
                 <Text
                   numberOfLines={2}
@@ -374,12 +315,12 @@ function UserRequest({ route }: Props) {
                   }}
                   style={[
                     Typography.textSmall,
-                    { color: colors.primaryColor, marginLeft: 8 },
+                    { color: colors.primary500, marginLeft: 8 },
                   ]}>
                   {t('request.requestEdit')}
                 </Text>
               </View>
-              <View style={UserRequestStyle.container}>
+              <View style={UserRequestStyle.addressContainer}>
                 <LocationIcon style={UserRequestStyle.icon} />
                 <Text
                   numberOfLines={2}
@@ -388,15 +329,16 @@ function UserRequest({ route }: Props) {
                 </Text>
                 <Text
                   onPress={() => {
-                    rootNavigation.navigate('AddressMapView', {
-                      addresses: addresses,
-                      addressType: AddressType.To,
-                      onGoBack: setAddresses,
-                    });
+                    bottomSheetRef.current?.expand();
+                    // rootNavigation.navigate('AddressMapView', {
+                    //   addresses: addresses,
+                    //   addressType: AddressType.To,
+                    //   onGoBack: setAddresses,
+                    // });
                   }}
                   style={[
                     Typography.textSmall,
-                    { color: colors.primaryColor, marginLeft: 8 },
+                    { color: colors.primary500, marginLeft: 8 },
                   ]}>
                   {t('request.requestEdit')}
                 </Text>
@@ -422,7 +364,7 @@ function UserRequest({ route }: Props) {
                   onPress={submit}>
                   <Text
                     style={{
-                      color: colors.textWhite,
+                      color: colors.white,
                       fontFamily: 'Nunito',
                       fontWeight: '700',
                       lineHeight: 21,
@@ -431,11 +373,11 @@ function UserRequest({ route }: Props) {
                   </Text>
                 </TouchableOpacity>
               </LinearGradient>
-            </ScrollView>
-          </View>
+            </ContainerView>
+          </ScrollView>
         </View>
-      </LinearGradient>
-    </CustomKeyboardAvoidingView>
+      </FullHeightView>
+    </View>
   );
 }
 

@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 
 const createStyles = StyleSheet.create({
   btn: {
     borderRadius: 12,
-    backgroundColor: colors.primaryColor,
+    backgroundColor: colors.primary500,
     paddingHorizontal: 16,
     height: 40,
     justifyContent: 'center',
@@ -22,7 +22,7 @@ const createStyles = StyleSheet.create({
     backgroundColor: colors.disabledColor,
   },
   btnTextStyle: {
-    color: colors.textWhite,
+    color: colors.white,
     fontSize: 13,
     fontWeight: '700',
     fontFamily: 'Nunito',

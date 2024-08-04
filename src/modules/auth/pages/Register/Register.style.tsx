@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '../../../../constants/colors';
+import { colors } from '../../../../theme/colors';
 import { verticalScale } from '../../../../utilities/metrics';
 
 const styles = StyleSheet.create({
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito',
   },
   selectedBox: {
-    borderColor: colors.primaryColor,
+    borderColor: colors.primary500,
     backgroundColor: colors.placeColor,
   },
   unSelectedBox: {
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     fontWeight: 'bold',
     marginTop: 20,
-    backgroundColor: colors.textWhite,
+    backgroundColor: colors.white,
   },
   inputExtra: {
     height: 48,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     height: 41,
     paddingVertical: 6,
     borderRadius: 15,
-    backgroundColor: colors.primaryColor,
+    backgroundColor: colors.primary500,
     color: colors.textDark,
     width: '100%',
     flexDirection: 'row',
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnTextStyle: {
-    color: colors.textWhite,
+    color: colors.white,
     fontSize: 13,
     fontWeight: '700',
     fontFamily: 'Nunito',

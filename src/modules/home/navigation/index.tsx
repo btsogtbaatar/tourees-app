@@ -1,53 +1,53 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { HomeSmile, SmileCircleActiveIcon } from '../../../assets/svg';
-import HomeIconDisabled from '../../../assets/svg/dashboard/HomeIconDisabled';
-import SmileCircleIcon from '../../../assets/svg/dashboard/SmileCircleIcon';
-import UserIcon from '../../../assets/svg/dashboard/UserIcon';
-import UserIconActive from '../../../assets/svg/dashboard/UserIconActive';
-import CustomTabNavigator from '../../../components/CustomTabNavigator/CustomTabNavigator';
-import { TabNavigationItem } from '../../../components/CustomTabNavigator/TabNavigationItem';
+import CustomTabNavigator, {
+  TabNavigationItem,
+} from '../../../components/CustomTabNavigator/CustomTabNavigator';
+import {
+  HomeActiveIcon,
+  HomeIcon,
+  SmileCircleActiveIcon,
+  SmileCircleIcon,
+  UserActiveIcon,
+  UserIcon,
+} from '../../../components/Icon';
 import { authStore } from '../../../context/auth/store';
 import Profile from '../../Profile/pages/Profile/Profile';
 import RequestList from '../../Request/page/RequestList/RequestList';
-import Home from '../pages/Home';
+import Home from '../pages/Home/Home';
 
-const HomeStack = () => {
+const HomeTabNavigator = () => {
   const { t } = useTranslation();
-  const isAuth = authStore(state => state);
+  const isLoggedIn = authStore(state => state.authenticated);
 
   const items: TabNavigationItem[] = [
     {
       route: 'Home',
       label: t('tab.t_home'),
-      inActiveIcon: <HomeSmile />,
-      outActiveIcon: <HomeIconDisabled />,
+      activeIcon: <HomeActiveIcon />,
+      inactiveIcon: <HomeIcon />,
       component: Home,
       showHeader: true,
     },
     {
       route: 'Request',
       label: t('tab.t_request'),
-      inActiveIcon: <SmileCircleActiveIcon />,
-      outActiveIcon: <SmileCircleIcon />,
+      activeIcon: <SmileCircleActiveIcon />,
+      inactiveIcon: <SmileCircleIcon />,
       component: RequestList,
       showHeader: true,
     },
     {
       route: 'Profile',
       label: t('tab.t_profile'),
-      inActiveIcon: <UserIconActive />,
-      outActiveIcon: <UserIcon />,
+      activeIcon: <UserActiveIcon />,
+      inactiveIcon: <UserIcon />,
       component: Profile,
       showHeader: false,
     },
   ];
 
-  if (isAuth.authenticated) {
-    return <CustomTabNavigator items={items} />;
-  } else {
-    return <Home />;
-  }
+  return <CustomTabNavigator tabBarShown={isLoggedIn} items={items} />;
 };
 
-export default HomeStack;
+export default HomeTabNavigator;

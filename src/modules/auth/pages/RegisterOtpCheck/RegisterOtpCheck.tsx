@@ -8,17 +8,17 @@ import Modal from '../../../../components/Modal/Modal';
 import OtpInput from '../../../../components/OptInput/OtpInput';
 import Steps from '../../../../components/Step/Steps';
 import Timer from '../../../../components/Timer/Timer';
-import { colors } from '../../../../constants/colors';
 import { ModalContext } from '../../../../context/modal/modal.context';
 import { actions } from '../../../../context/modal/modal.reducer';
 import useTimer from '../../../../hooks/useTimer';
+import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme/colors';
 import { horizontalScale, verticalScale } from '../../../../utilities';
 import { AuthStateToken } from '../../entities/auth.model';
-import { AuthStackParamList } from '../../navigation/types';
 import { activate } from '../../services';
 
 type RegisterOtpCheckProps = NativeStackScreenProps<
-  AuthStackParamList,
+  RootStackParamList,
   'RegisterOtpCheck'
 >;
 
@@ -87,7 +87,7 @@ function RegisterOtpCheck({
                 {'\u00A0'}
                 <Text
                   style={{
-                    color: colors.primaryColor,
+                    color: colors.primary500,
                   }}>
                   {registration?.email ?? registration?.phoneNumber}
                 </Text>
@@ -126,7 +126,7 @@ function RegisterOtpCheck({
                     onPress={() => resend()}>
                     <Text
                       style={{
-                        color: colors.primaryColor,
+                        color: colors.primary500,
                         fontWeight: '700',
                         fontSize: 14,
                         fontFamily: 'Nunito',

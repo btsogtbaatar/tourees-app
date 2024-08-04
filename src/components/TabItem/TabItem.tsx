@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { Typography } from '../../constants/typography';
 import styles from '../../modules/Auth/pages/Register/Register.style';
+import { Typography } from '../../theme/typography';
 import { TabItemStyle } from './TabItem.style';
 
 export interface TabItemProps {
