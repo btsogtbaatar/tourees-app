@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, TouchableOpacity } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities/metrics';
 
 interface LoginButtonProps {
@@ -16,7 +16,7 @@ const LoginButton = ({ title, onClick }: LoginButtonProps) => {
   const { t } = useTranslation();
 
   const onPress = () => {
-    navigation.navigate('AuthStack', { screen: 'SignUp' });
+    navigation.navigate('Login');
   };
 
   return (

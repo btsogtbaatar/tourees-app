@@ -2,11 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import LogoMini from '../../assets/svg/logo/LogoMini';
-import styles from './RequestsCard.style';
-import PhoneIcon from '../../assets/svg/icons/PhoneIcon';
+import { LogoMini, PhoneIcon } from '../Icon';
 import LoginButton from '../LoginButton/LoginButton';
 import RatingList from '../Rating/RatingList';
+import styles from './RequestsCard.style';
 
 interface RequestMessageProps {
   time: string;
@@ -48,7 +47,7 @@ const RequestMessage = ({ time, newRequest }: RequestMessageProps) => {
           <View style={styles.profileContainer}>
             <View style={[styles.flexRow, styles.alignCenter]}>
               <Image
-                source={require('../../assets/image/ProfilePicture.png')}
+                source={require('../../../assets/images/profile-picture.png')}
               />
               <Text style={styles.profile}>{time}</Text>
             </View>

@@ -10,14 +10,14 @@ import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvo
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import Steps from '../../../../components/Step/Steps';
 import TabController from '../../../../components/TabController/TabController';
+import { RootStackParamList } from '../../../../navigation/types';
 import { verticalScale } from '../../../../utilities';
 import validations from '../../../../validations';
 import { AuthChannel, AuthModel } from '../../entities';
-import { AuthStackParamList } from '../../navigation/types';
 import { signUp } from '../../services';
 import styles from './Register.style';
 
-type RegisterProps = NativeStackScreenProps<AuthStackParamList, 'Register'>;
+type RegisterProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
 function Register({ navigation }: RegisterProps) {
   const { t } = useTranslation();

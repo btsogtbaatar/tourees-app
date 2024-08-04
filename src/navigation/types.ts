@@ -1,14 +1,25 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
-import { AuthStackParamList } from '../modules/Auth/navigation/types';
-import { HomeStackParamList } from '../modules/Home/navigation/types';
+import { AuthModel } from '../modules/Auth/entities';
+import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigation/types';
 import { AddressType } from '../modules/Request/entities/request.model';
-import { RequestStackParamList } from '../modules/Request/navigation/types';
+import { SharedModel } from '../modules/Shared/entities/shared.model';
 import { Addresses } from '../modules/Shared/page/AddressMapView/AddressMapView';
 
 export type RootStackParamList = {
-  HomeStack: NavigatorScreenParams<HomeStackParamList>;
-  AuthStack: NavigatorScreenParams<AuthStackParamList>;
-  RequestStack: NavigatorScreenParams<RequestStackParamList>;
+  HomeTab: NavigatorScreenParams<HomeTabParamList>;
+  Login: undefined;
+  LoginOtpCheck: { credentials: AuthModel.Credentials };
+  Register: undefined;
+  RegisterTermAndCondition: undefined;
+  RegisterOtpCheck: { registration: AuthModel.RegisterResponse };
+  SubCategoryList: { parentCategoryId?: number; title: string };
+  UserRequest: {
+    item: SharedModel.SubCategory;
+  };
+  RequestDetail: {
+    title: string;
+    status?: number;
+  };
   AddressMapView: {
     addresses: Addresses;
     addressType: AddressType;

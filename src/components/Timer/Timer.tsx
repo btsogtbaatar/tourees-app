@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Text } from 'react-native';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 
 interface TimerProps {
   counter: number;
@@ -20,7 +20,7 @@ const Timer: React.FC<TimerProps> = props => {
   };
 
   return (
-    <Text style={{ color: colors.primaryColor, fontWeight: '700' }}>
+    <Text style={{ color: colors.primary500, fontWeight: '700' }}>
       {padDuration(Math.floor(otpTimer / 60))} : {padDuration(otpTimer % 60)}
     </Text>
   );

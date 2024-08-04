@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities';
 
 interface LinearButtonProps {

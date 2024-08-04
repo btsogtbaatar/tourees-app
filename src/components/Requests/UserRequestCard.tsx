@@ -3,8 +3,8 @@ import moment from 'moment';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { getEnv } from '../../api';
-import CheckIcon from '../../assets/svg/auth/CheckIcon';
 import { TaskModel } from '../../modules/Request/entities/request.model';
+import { CheckIcon } from '../Icon';
 import styles from './RequestsCard.style';
 
 interface UserRequestCardProps {
@@ -15,18 +15,14 @@ interface UserRequestCardProps {
 const UserRequestCard = ({ item }: UserRequestCardProps) => {
   const navigation = useNavigation();
   const onDetails = () => {
-    navigation.navigate('RequestStack', {
-      screen: 'RequestDetail',
-      params: {
-        title: item.subCategory.name,
-        url: item.subCategory.image?.url,
-        status: item.status,
-      },
+    navigation.navigate('RequestDetail', {
+      title: item.subCategory.name,
+      status: item.status,
     });
   };
 
   const timeFormat = () => {
-    return moment(item.createdAt).format('h:mm');
+    return moment().format('h:mm');
   };
 
   return (

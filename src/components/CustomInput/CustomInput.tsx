@@ -18,9 +18,9 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { XCircle } from '../../assets/svg';
-import { colors } from '../../constants/colors';
-import { Typography } from '../../constants/typography';
+import { colors } from '../../theme/colors';
+import { Typography } from '../../theme/typography';
+import { XCircleIcon } from '../Icon';
 import { CustomInputStyle } from './CustomInput.style';
 
 export interface CustomInputProps<T extends FieldValues>
@@ -65,7 +65,7 @@ export default function CustomInput<T extends FieldValues>(
       props.onFocus(e);
     }
 
-    setColor(colors.primaryColor);
+    setColor(colors.primary500);
   };
 
   const onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
@@ -90,11 +90,10 @@ export default function CustomInput<T extends FieldValues>(
     } else if (props.clearButton === true) {
       return (
         <Pressable onPress={() => textInputRef.current?.clear()}>
-          <XCircle
+          <XCircleIcon
             height={20}
             style={{
-              color: colors.borderColor,
-              height: 20,
+              color: colors.gray200,
             }}
           />
         </Pressable>
@@ -143,6 +142,8 @@ export default function CustomInput<T extends FieldValues>(
             {renderIcon()}
             <TextInput
               {...props}
+              cursorColor={colors.primary500}
+              selectionColor={colors.primary500}
               ref={textInputRef}
               textBreakStrategy="simple"
               value={value}
@@ -150,7 +151,7 @@ export default function CustomInput<T extends FieldValues>(
               onFocus={onFocus}
               multiline={props.numberOfLines ? true : false}
               style={[
-                Typography.textRegular,
+                Typography.textSmall,
                 CustomInputStyle.input,
                 props.style?.input,
               ]}

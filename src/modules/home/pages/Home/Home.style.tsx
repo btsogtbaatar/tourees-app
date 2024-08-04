@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { colors, FontWeight, Typography } from '../../../../theme';
 
 const HomeStyle = StyleSheet.create({
   container: {
@@ -8,15 +9,13 @@ const HomeStyle = StyleSheet.create({
     paddingTop: 12,
   },
   title: {
-    fontSize: 12,
-    fontFamily: 'Nunito',
-    fontWeight: '400',
-    marginBottom: 10,
+    ...Typography.textSmall,
+    fontWeight: FontWeight.bold,
+    color: colors.gray700,
+    marginBottom: 8,
   },
   listContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    flexWrap: 'wrap',
+    marginBottom: 8,
   },
 });
 

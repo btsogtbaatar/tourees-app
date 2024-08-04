@@ -2,48 +2,34 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import {
-  FlatList,
-  RefreshControl,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
-import { SearchMd } from '../../../../assets/svg';
+import { FlatList, Text, View } from 'react-native';
+import Banner from '../../../../components/Banner/Banner';
+import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
-import RegisterComponent from '../../../../components/DashboardCard/RegisterComponent';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
+import { SearchMdIcon } from '../../../../components/Icon';
 import ImageItem from '../../../../components/ImageItem/ImageItem';
-import LoadingPage from '../../../../components/Loading/LoadingPage';
-import { colors } from '../../../../constants/colors';
+import Loading from '../../../../components/Loading/Loading';
 import { authStore } from '../../../../context/auth/store';
+import { colors } from '../../../../theme/colors';
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { getCategories as fetchCategories } from '../../services/category.service';
 import HomeStyle from './Home.style';
 
 const Home = () => {
-  const [refreshing, setRefreshing] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [categories, setCatogories] = useState<SharedModel.Category[]>();
+  const [categories, setCategories] = useState<SharedModel.Category[]>();
   const authState = authStore(state => state);
-  const rootNavigation = useNavigation();
+  const navigation = useNavigation();
   const { t } = useTranslation(undefined, { keyPrefix: 'home' });
-
-  const onRefresh = () => {
-    setRefreshing(true);
-    getCateories();
-  };
 
   const getCateories = () => {
     fetchCategories()
       .then((response: SharedModel.Pagination<SharedModel.Category>) => {
-        setCatogories(response.content);
-        setLoading(false);
-        setRefreshing(false);
+        setCategories(response.content);
       })
-      .catch((_err: any) => {
+      .finally(() => {
         setLoading(false);
-        setRefreshing(false);
       });
   };
 
@@ -55,78 +41,60 @@ const Home = () => {
     mode: 'onChange',
   });
 
-  const renderSeparator = () => <View style={{ width: 15 }} />;
+  const renderSeparator = () => <View style={{ width: 16 }} />;
 
   return loading ? (
-    <LoadingPage />
+    <Loading />
   ) : (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={HomeStyle.container}>
+    <CustomSafeAreaView>
+      <ContainerView>
         <Text style={HomeStyle.title}>{t('category.question')}</Text>
-        <View style={{ marginBottom: 10 }}>
+        <View style={{ marginBottom: 8 }}>
           <FormProvider {...form}>
             <CustomInput
               name={'subCategoryName'}
               placeholder={t('category.search')}
               onPress={() => {
-                rootNavigation.navigate('RequestStack', {
-                  screen: 'SubCategoryList',
-                  params: {
-                    title: t('category.title'),
-                  },
+                navigation.navigate('SubCategoryList', {
+                  title: t('category.title'),
                 });
               }}
-              icon={<SearchMd style={{ color: colors.primaryColor }} />}
+              icon={<SearchMdIcon style={{ color: colors.primary500 }} />}
             />
           </FormProvider>
         </View>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              tintColor={colors.primaryColor}
-            />
-          }>
-          {!authState.authenticated && (
-            <RegisterComponent
-              onPress={() =>
-                rootNavigation.navigate('AuthStack', { screen: 'Login' })
-              }
-            />
-          )}
-          <View style={HomeStyle.listContainer}>
-            <FlatList
-              horizontal
-              contentContainerStyle={{ marginBottom: 15 }}
-              data={categories}
-              keyExtractor={item => item.id.toString()}
-              ItemSeparatorComponent={renderSeparator}
-              renderItem={({ item }) => {
-                return (
-                  <ImageItem
-                    item={{
-                      imageUrl: item.image?.url,
-                      title: item.name,
-                    }}
-                    onPress={() =>
-                      rootNavigation.navigate('RequestStack', {
-                        screen: 'SubCategoryList',
-                        params: {
-                          parentCategoryId: item.id,
-                          title: item.name,
-                        },
-                      })
-                    }
-                  />
-                );
-              }}
-            />
-          </View>
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+        <View style={HomeStyle.listContainer}>
+          <FlatList
+            horizontal={true}
+            scrollEnabled={true}
+            showsVerticalScrollIndicator={false}
+            data={categories}
+            keyExtractor={item => item.id.toString()}
+            ItemSeparatorComponent={renderSeparator}
+            renderItem={({ item }) => (
+              <ImageItem
+                item={{
+                  imageUrl: item.image?.url,
+                  title: item.name,
+                }}
+                onPress={() =>
+                  navigation.navigate('SubCategoryList', {
+                    parentCategoryId: item.id,
+                    title: item.name,
+                  })
+                }
+              />
+            )}
+          />
+        </View>
+        {!authState.authenticated && (
+          <Banner
+            title={'Үйлчилгээ үзүүлэгчээр бүртгүүлэх'}
+            onPress={() => navigation.navigate('Login')}
+          />
+        )}
+      </ContainerView>
+    </CustomSafeAreaView>
   );
 };
 

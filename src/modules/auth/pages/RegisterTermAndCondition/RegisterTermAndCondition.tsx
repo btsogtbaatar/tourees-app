@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import WelcomeModal from '../../../../components/Modal/WelcomeModal';
-import { colors } from '../../../../constants/colors';
 import { ModalContext } from '../../../../context/modal/modal.context';
 import { actions } from '../../../../context/modal/modal.reducer';
+import { colors } from '../../../../theme/colors';
 import styles from './RegisterTermAndCondition.style';
 
 const RegisterTermAndCondition = () => {
@@ -24,7 +24,7 @@ const RegisterTermAndCondition = () => {
           title={t('signUp.hello')}
           subTitle={t('signUp.welcome_seed')}
           onClick={() => {
-            navigation.navigate('HomeStack', { screen: 'Home' });
+            navigation.navigate('HomeTab', { screen: 'Home' });
             dispatchModal({ type: actions.HIDE });
           }}
           buttonText={t('signUp.understand')}
@@ -62,7 +62,7 @@ const RegisterTermAndCondition = () => {
             styles.checkContainer,
             {
               backgroundColor: isChecked ? colors.placeColor : colors.white,
-              borderColor: isChecked ? colors.primaryColor : colors.otpBorder,
+              borderColor: isChecked ? colors.primary500 : colors.otpBorder,
             },
           ]}
         />

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
-import { GoogleIcon } from '../../assets/svg';
 import styles from './SocialLoginButton.style';
 
 import {
@@ -9,9 +8,10 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '../../constants';
 import { AuthModel, SocialType } from '../../modules/Auth/entities';
+import { Typography } from '../../theme';
 import { notifyMessage } from '../CustomToast/CustomToast';
+import { GoogleIcon } from '../Icon';
 
 interface GoogleLoginButtonProps {
   onSuccess(socialToken: AuthModel.SocialToken): void;

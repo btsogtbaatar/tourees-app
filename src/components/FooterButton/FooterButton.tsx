@@ -9,8 +9,8 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import FooterBack from '../../assets/svg/FooterBack';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
+import { FooterBack } from '../Icon';
 import styles from './FooterButton.style';
 
 interface PropsButton {
@@ -34,9 +34,7 @@ function FooterButton(props: PropsButton) {
         styles.container,
         props.extra,
         {
-          backgroundColor: props.backColor
-            ? colors.transparent
-            : colors.white,
+          backgroundColor: props.backColor ? colors.transparent : colors.white,
         },
       ]}>
       {props.back && (

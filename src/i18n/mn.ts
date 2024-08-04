@@ -59,6 +59,9 @@ export default {
     search: {
       placeholder: 'Хайх',
     },
+    subtitle: {
+      placeholder: 'Тайлбар бичих',
+    },
   },
   addressMapView: {
     autoComplete: {
@@ -91,7 +94,7 @@ export default {
   },
   userRequest: {
     address: {
-      label: 'Хаяг оруулах',
+      label: 'Хаягийн мэдээлэл',
     },
   },
   login: {

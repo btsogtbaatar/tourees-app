@@ -1,8 +1,7 @@
 import React from 'react';
 import { FlatList, Text, View } from 'react-native';
-import LogoMini from '../../assets/svg/logo/LogoMini';
-import LogoMiniBorder from '../../assets/svg/logo/LogoMiniBorder';
-import { colors } from '../../constants/colors';
+import { colors } from '../../theme/colors';
+import { LogoMini, LogoMiniBorder } from '../Icon';
 import styles from './RatingList.style';
 
 interface RatingListProps {
@@ -19,7 +18,7 @@ const RatingList = ({ rating }: RatingListProps) => {
         data={numbers}
         renderItem={({ item }) =>
           item <= Math.round(rating) ? (
-            <LogoMini color={colors.primaryColor} width={16} height={16} />
+            <LogoMini color={colors.primary500} width={16} height={16} />
           ) : (
             <LogoMiniBorder width={16} height={16} />
           )

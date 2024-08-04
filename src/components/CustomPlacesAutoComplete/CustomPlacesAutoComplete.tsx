@@ -3,9 +3,9 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FlatList, View } from 'react-native';
-import { Typography } from '../../constants';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
 import { Address } from '../../modules/Shared/page/AddressMapView/AddressMapView';
+import { Typography } from '../../theme';
 import {
   getNearbyPlacesFromCoordinates,
   getPlacesByText,

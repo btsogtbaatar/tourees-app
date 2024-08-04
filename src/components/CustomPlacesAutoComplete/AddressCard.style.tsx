@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, FontWeight, Typography } from '../../constants';
+import { colors, FontWeight, Typography } from '../../theme';
 
 export const AddressCardStyles = StyleSheet.create({
   card: {
@@ -12,7 +12,7 @@ export const AddressCardStyles = StyleSheet.create({
     borderWidth: 1,
   },
   selected: {
-    borderColor: colors.primaryColor,
+    borderColor: colors.primary500,
   },
   unselected: {
     borderColor: 'transparent',

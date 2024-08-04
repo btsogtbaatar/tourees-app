@@ -1,9 +1,9 @@
 import React from 'react';
 import { Image, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import LogoMini from '../../../../assets/svg/logo/LogoMini';
-import { colors } from '../../../../constants/colors';
+import { LogoMini } from '../../../../components/Icon';
 import { authStore } from '../../../../context/auth/store';
+import { colors } from '../../../../theme/colors';
 import { horizontalScale, verticalScale } from '../../../../utilities/metrics';
 import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
 
@@ -20,20 +20,20 @@ const Profile = () => {
         <View style={styles.headerContainer}>
           <View style={{}}>
             <Image
-              source={require('../../../../assets/svg/profile/Rectangle.png')}
+              source={require('../../../../../assets/images/rectangle.png')}
             />
           </View>
           <View style={styles.headerUsername}>
             <View style={styles.subHeaderContainer}>
               <Text style={styles.titleUsername}>
-                {authState.auth?.user.name}
+                {authState.auth?.user?.username}
               </Text>
             </View>
             <View style={styles.mt16}>
               <Text style={styles.titleMail}>
-                {authState.auth?.user.email
-                  ? authState.auth.user.email
-                  : authState.auth?.user.phone}
+                {authState.auth?.user?.email
+                  ? authState.auth.user?.email
+                  : authState.auth?.user?.phoneNumber}
               </Text>
               <LinearGradient
                 start={{ x: 0, y: 0 }}
@@ -48,7 +48,7 @@ const Profile = () => {
           </View>
           <View style={styles.alignEnd}>
             <Image
-              source={require('../../../../assets/svg/profile/RectangleProfile.png')}
+              source={require('../../../../../assets/images/rectangle-profile.png')}
             />
           </View>
         </View>

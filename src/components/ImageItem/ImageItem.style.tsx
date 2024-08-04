@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { colors, FontWeight, Typography } from '../../constants';
+import { colors, FontWeight, Typography } from '../../theme';
 
 const ImageItemStyle = StyleSheet.create({
   container: {
@@ -7,7 +7,6 @@ const ImageItemStyle = StyleSheet.create({
     padding: 10,
     width: 100,
     borderRadius: 12,
-    flex: 1,
   },
   image: {
     width: '100%',

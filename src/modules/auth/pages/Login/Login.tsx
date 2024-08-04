@@ -12,7 +12,7 @@ import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvo
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
-import LoadingPage from '../../../../components/Loading/LoadingPage';
+import Loading from '../../../../components/Loading/Loading';
 import {
   FbLoginButton,
   GoogleLoginButton,
@@ -68,12 +68,14 @@ export default function Login() {
     console.log(socialToken);
     socialCustomerAuthenticate(socialToken)
       .then(() => {
-        navigation.navigate('HomeStack', { screen: 'Home' });
+        navigation.navigate('HomeTab', {
+          screen: 'Home',
+        });
       })
       .finally(() => setLoading(false));
   };
   if (loading) {
-    return <LoadingPage />;
+    return <Loading />;
   }
 
   return (

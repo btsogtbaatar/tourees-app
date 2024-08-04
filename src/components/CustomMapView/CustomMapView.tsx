@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Platform } from 'react-native';
 import MapView, { Details, LatLng, Marker, Region } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
-import { LocationCircleIcon, LocationIcon } from '../../assets/svg';
-import { colors } from '../../constants';
 import { AddressType } from '../../modules/Request/entities/request.model';
 import { Addresses } from '../../modules/Shared/page/AddressMapView/AddressMapView';
 import AddressMapViewStyle from '../../modules/Shared/page/AddressMapView/AddressMapView.style';
+import { colors } from '../../theme';
+import { LocationCircleIcon, LocationIcon } from '../Icon';
 
 const DELTA = 0.005;
 export const DEFAULT_LAT = 47.92123;
@@ -94,7 +94,7 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
             origin={props.addresses.from}
             destination={props.addresses.to}
             apikey={process.env.GOOGLE_API_KEY!}
-            strokeColor={colors.primaryColor}
+            strokeColor={colors.primary500}
             strokeWidth={2}
           />
         )}

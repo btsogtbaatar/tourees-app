@@ -1,59 +1,68 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { default as React } from 'react';
-import { useTranslation } from 'react-i18next';
-import { colors } from '../../constants/colors';
-import { authStore } from '../../context/auth/store';
-import HeaderComponent from '../HeaderBack/HeaderComponent';
-import { TabNavigationItem } from './TabNavigationItem';
+import { Text } from 'react-native';
+import { FontWeight, Typography } from '../../theme';
+import { colors } from '../../theme/colors';
+import { LogoIcon } from '../Icon';
 
 const Tab = createBottomTabNavigator();
 
+export interface TabNavigationItem {
+  route: string;
+  component: ({ navigation, route }: any) => JSX.Element;
+  label: string;
+  activeIcon: React.ReactNode;
+  inactiveIcon: React.ReactNode;
+  showHeader: boolean;
+}
+
 export interface CustomTabNavigatorProps {
+  tabBarShown?: boolean;
   items: TabNavigationItem[];
 }
 
 const CustomTabNavigator = (props: CustomTabNavigatorProps) => {
-  const { t } = useTranslation();
-  const authState = authStore(state => state);
+  const headerTitle = (item: TabNavigationItem) => {
+    if (item.route === 'Home') {
+      return <LogoIcon />;
+    } else {
+      return (
+        <Text
+          style={{
+            ...Typography.textRegular,
+            fontWeight: FontWeight.bold,
+          }}>
+          {item.label}
+        </Text>
+      );
+    }
+  };
 
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarStyle: {},
+        tabBarStyle: {
+          display: props.tabBarShown === true ? 'flex' : 'none',
+        },
       }}>
-      {props.items.map((item, index) => {
+      {props.items.map(item => {
         return (
           <Tab.Screen
             key={item.route}
             name={item.route}
             component={item.component}
             options={{
-              headerShown: item.showHeader,
               headerStyle: {
                 backgroundColor: 'transparent',
               },
-              headerTitle: () => (
-                <HeaderComponent
-                  index={index}
-                  isAuth={authState.authenticated}
-                  title={item.label}
-                />
-              ),
-              headerTitleAlign: 'center',
-              tabBarLabel: t(item.label),
-              tabBarActiveTintColor: colors.primaryColor,
-              tabBarInactiveTintColor: '#5F676F',
-              tabBarLabelStyle: {
-                fontSize: 10,
-                fontWeight: '600',
-              },
-              tabBarIconStyle: {
-                justifyContent: 'center',
-                alignItems: 'center',
-              },
-              tabBarIcon: ({ focused }) => {
-                return <>{focused ? item.inActiveIcon : item.outActiveIcon}</>;
-              },
+              headerShown: item.showHeader,
+              headerTitle: () => headerTitle(item),
+              tabBarLabel: item.label,
+              tabBarActiveTintColor: colors.primary500,
+              tabBarInactiveTintColor: colors.gray400,
+              tabBarLabelStyle: { ...Typography.textSmallest },
+              tabBarIcon: ({ focused }) =>
+                focused ? item.activeIcon : item.inactiveIcon,
             }}
           />
         );

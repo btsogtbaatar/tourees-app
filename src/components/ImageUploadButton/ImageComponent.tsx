@@ -6,8 +6,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { PlusIcon } from '../Icon';
 import styles from './ImageComponent.style';
-import { PlusIcon } from '../../assets/svg';
 import { ImageSource } from './ImageUploadButton';
 
 interface ImageComponentProps {

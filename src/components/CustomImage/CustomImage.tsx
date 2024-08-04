@@ -19,7 +19,9 @@ const CustomImage = (props: CustomImageProps) => {
   const getSource = () => {
     if (uriSource.uri !== undefined) {
       return {
-        headers: { Authorization: `Bearer ${authState?.token}` },
+        headers: authState?.token
+          ? { Authorization: `Bearer ${authState?.token}` }
+          : undefined,
         uri: getImageUrl(uriSource.uri),
       };
     } else {
