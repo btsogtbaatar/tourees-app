@@ -54,6 +54,7 @@ function UserRequest({ route }: Props) {
     name: authState.auth ? authState.auth.user?.fullName : '',
     status_code: 1,
     sub_category_id: subCategory.id,
+    timeRange: {},
   });
 
   const [addresses, setAddresses] = useState<Addresses>({
@@ -158,9 +159,11 @@ function UserRequest({ route }: Props) {
 
       let taskRequest: TaskModel.TaskRequest = {
         description: requestValue.details,
+        timeRange: requestValue.timeRange,
         subCategory: {
           id: requestValue.sub_category_id,
         },
+
         files: selectedImages,
         addresses: [addresses.from, addresses.to],
       };
@@ -296,7 +299,7 @@ function UserRequest({ route }: Props) {
               </Text>
               <Calendar
                 onSuccess={(value: any) =>
-                  handleInputChange('request_date', value)
+                  handleInputChange('timeRange', value)
                 }
               />
               <Text

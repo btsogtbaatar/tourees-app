@@ -8,7 +8,7 @@ const CustomDivider: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <View style={CustomDividerStyle.dividerContainer}>
       <View style={CustomDividerStyle.dividerLine} />
-      <Text style={Typography.textSmallBold}>{children}</Text>
+      <Text style={Typography.textSmall}>{children}</Text>
       <View style={CustomDividerStyle.dividerLine} />
     </View>
   );

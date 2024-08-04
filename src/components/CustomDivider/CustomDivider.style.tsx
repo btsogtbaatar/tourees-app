@@ -6,7 +6,8 @@ const CustomDividerStyle = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 6,
-    margin: 16,
+    marginTop: 16,
+    marginBottom: 16,
   },
   dividerLine: {
     flex: 1,

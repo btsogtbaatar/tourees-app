@@ -26,6 +26,7 @@ export declare namespace TaskModel {
     description: string;
     subCategory: SubCategory;
     files: SharedModel.File[];
+    timeRange: SharedModel.TimeRange;
     addresses: Address[];
   };
 

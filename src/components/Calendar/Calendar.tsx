@@ -8,14 +8,10 @@ import { useTranslation } from 'react-i18next';
 import { Moon, Sun, SunRise, SunSet } from '../../assets/svg';
 import moment from 'moment';
 import { languageStore } from '../../context/auth/store';
-
-interface ReturnValue {
-  start: moment.Moment;
-  end: moment.Moment;
-}
+import { SharedModel } from '../../modules/Shared/entities/shared.model';
 
 interface CalendarItemProps {
-  onSuccess: (value: ReturnValue) => void;
+  onSuccess: (value: SharedModel.TimeRange) => void;
 }
 enum TimeChoices {
   MORNING = 'Morning',
@@ -78,7 +74,8 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
   const [activeDate, setActiveDate] = useState<Date>(getToday());
   useEffect(() => {
     const date = moment(activeDate);
-    const result: ReturnValue = {
+    date.utcOffset(0, true);
+    const result: SharedModel.TimeRange = {
       start: date.clone().startOf('day'),
       end: date.clone().startOf('day'),
     };
