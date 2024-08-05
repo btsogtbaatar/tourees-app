@@ -24,7 +24,9 @@ export const ModalProvider = (props: ProviderProps) => {
 
   return (
     <ModalContext.Provider value={{ state, dispatch }}>
-      <ModalContainer isVisible={state.show}>{state.component}</ModalContainer>
+      <ModalContainer isVisible={state.show} direction={state.direction}>
+        {state.component}
+      </ModalContainer>
       {props.children}
     </ModalContext.Provider>
   );

@@ -5,6 +5,7 @@ import i18n from '../../../../../i18n';
 import GroupedMenuList from '../../../../components/GroupedMenuList/GroupedMenuList';
 import {
   ChevronRightIcon,
+  ClockIcon,
   ClockRewindIcon,
   EBarimtIcon,
   FileIcon,
@@ -72,6 +73,14 @@ const ProfileMenu = () => {
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
         console.log('test');
+      },
+    },
+    {
+      values: [t('profile.l_set_time')],
+      prefix: <ClockIcon />,
+      suffix: <ChevronRightIcon color={colors.gray700} />,
+      onPress: () => {
+        navigation.navigate('TimeSettings', {});
       },
     },
     {
