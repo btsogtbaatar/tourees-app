@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { colors } from '../../theme/colors';
-import { horizontalScale } from '../../utilities/metrics';
+import { FlatList } from 'react-native';
+import GroupedMenuListStyle from './GroupedMenuList.style';
+import GroupedMenuItem from './GroupedMenuItem';
 
 export type FilledListProps = {
   onPress: () => void;
@@ -23,74 +17,22 @@ const GroupedMenuList: React.FC<GroupedMenuListProps> = ({ listItems }) => {
   return (
     <FlatList
       data={listItems}
-      contentContainerStyle={{
-        backgroundColor: 'white',
-        justifyContent: 'space-between',
-        borderRadius: 8,
-      }}
+      contentContainerStyle={GroupedMenuListStyle.container}
       keyExtractor={(_, index) => index.toString()}
       renderItem={({ item, index }) => {
         return (
-          <TouchableOpacity style={styles.container} onPress={item.onPress}>
-            <View style={styles.subContainer}>
-              {item.prefix}
-              <View
-                style={{
-                  flexDirection: 'row',
-                  flex: 1,
-                }}>
-                <Text
-                  style={[
-                    styles.menuText,
-                    index === listItems.length - 1 && {
-                      color: colors.logoColor,
-                    },
-                  ]}>
-                  {item.values[0]}
-                </Text>
-              </View>
-              {item.values[1] && (
-                <Text style={styles.subMenuText}>{item.values[1]}</Text>
-              )}
-            </View>
-            {item.suffix}
-          </TouchableOpacity>
+          <GroupedMenuItem
+            index={index}
+            length={listItems.length}
+            onPress={item.onPress}
+            values={item.values}
+            prefix={item.prefix}
+            suffix={item.suffix}
+          />
         );
       }}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    padding: horizontalScale(16),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderBottomColor: colors.otpBorder,
-    borderBottomWidth: 1,
-    alignSelf: 'stretch',
-  },
-  menuText: {
-    fontSize: 16,
-    fontWeight: '500',
-    lineHeight: 18,
-    color: colors.textColor,
-    marginLeft: horizontalScale(16),
-    fontFamily: 'Nunito',
-  },
-  subMenuText: {
-    color: colors.gray300,
-    fontSize: 16,
-    fontWeight: '600',
-    lineHeight: 24,
-    marginRight: horizontalScale(12),
-    fontFamily: 'Nunito',
-  },
-  subContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-});
 
 export default GroupedMenuList;

@@ -1,28 +1,67 @@
-import React, { useEffect, useState } from 'react';
-import { Text } from 'react-native';
-import { colors } from '../../theme/colors';
+import React, { useState } from 'react';
+import { Pressable, Text } from 'react-native';
+import useTimer from '../../hooks/useTimer';
+import { FontWeight, getFontWeight, Typography } from '../../theme';
+import { useTranslation } from 'react-i18next';
+import TimerStyle from './Timer.style';
 
 interface TimerProps {
-  counter: number;
+  startFrom: number;
+  restartFrom: number;
+  onResend: () => void;
 }
 
-const Timer: React.FC<TimerProps> = props => {
-  const [otpTimer, setOtpTimer] = useState(0);
-  const { counter } = props;
+const Timer: React.FC<TimerProps> = ({ startFrom, restartFrom, onResend }) => {
+  const [otpTimer, setOtpTimer] = useState(startFrom);
+  const [disabled, setDisabled] = useState<boolean>(true);
+  const { t } = useTranslation();
 
-  useEffect(() => {
-    setOtpTimer(counter);
-    return () => setOtpTimer(0);
-  }, [counter]);
+  const resend = () => {
+    setDisabled(true);
+    setOtpTimer(restartFrom);
+    onResend();
+  };
+  useTimer(
+    (timer, disableResend) => {
+      setOtpTimer(timer);
+      if (disableResend) {
+        setDisabled(false);
+      }
+    },
+    () => {
+      setDisabled(false);
+    },
+    otpTimer,
+  );
 
   const padDuration = (count: number) => {
     return ('0' + count).slice(-2);
   };
 
+  if (disabled) {
+    return (
+      <Text
+        style={[
+          Typography.textSmall,
+          getFontWeight(FontWeight.bold),
+          TimerStyle.highlight,
+        ]}>
+        {padDuration(Math.floor(otpTimer / 60))} : {padDuration(otpTimer % 60)}
+      </Text>
+    );
+  }
+
   return (
-    <Text style={{ color: colors.primary500, fontWeight: '700' }}>
-      {padDuration(Math.floor(otpTimer / 60))} : {padDuration(otpTimer % 60)}
-    </Text>
+    <Pressable onPress={() => resend()}>
+      <Text
+        style={[
+          Typography.textSmall,
+          getFontWeight(FontWeight.bold),
+          TimerStyle.highlight,
+        ]}>
+        {t('otp.resend')}
+      </Text>
+    </Pressable>
   );
 };
 

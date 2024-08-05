@@ -130,9 +130,6 @@ export default function CustomInput<T extends FieldValues>(
           style={[
             {
               borderColor: color,
-              minHeight: props.label
-                ? CustomInputStyle.container.minHeight
-                : 40,
             },
             CustomInputStyle.container,
             props.style?.container,

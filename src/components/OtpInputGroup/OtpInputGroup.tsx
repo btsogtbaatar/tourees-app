@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
-import { verticalScale } from '../../utilities/metrics';
-import OtpInput from '../OptInput/OtpInput';
+import { OtpInput } from 'react-native-otp-entry';
+import { colors } from '../../theme';
+import OtpInputGroupStyle from './OtpInputGroup.style';
 
 export interface OtpInputGroupProps {
   onChange: (value: string) => void;
@@ -9,17 +10,14 @@ export interface OtpInputGroupProps {
 
 export default function OtpInputGroup(props: Readonly<OtpInputGroupProps>) {
   return (
-    <View
-      style={{
-        marginVertical: verticalScale(50),
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-      }}>
+    <View style={OtpInputGroupStyle.container}>
       <OtpInput
-        codeLength={4}
-        minWidth={50}
-        onChange={value => {
-          props.onChange(value.join(''));
+        numberOfDigits={4}
+        focusColor={colors.primary500}
+        onTextChange={e => props.onChange(e)}
+        theme={{
+          containerStyle: OtpInputGroupStyle.wrapper,
+          pinCodeContainerStyle: OtpInputGroupStyle.digits,
         }}
       />
     </View>

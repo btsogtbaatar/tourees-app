@@ -9,7 +9,7 @@ import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchab
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { RootStackParamList } from '../../../../navigation/types';
-import { token } from '../../services';
+import { sendOtp, token } from '../../services';
 
 type LoginOtpCheckProps = NativeStackScreenProps<
   RootStackParamList,
@@ -30,13 +30,20 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
       });
     }
   };
+  const resendOtp = () => {
+    sendOtp(credentials);
+  };
 
   return (
     <CustomKeyboardAvoidingView>
       <CustomTouchableWithoutFeedback>
         <FullHeightView>
           <ContainerView>
-            <CheckOtp credentials={credentials} onChange={setValue} />
+            <CheckOtp
+              credentials={credentials}
+              onChange={setValue}
+              onResend={resendOtp}
+            />
           </ContainerView>
           <FooterButton
             back={true}

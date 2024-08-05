@@ -41,7 +41,6 @@ async function authenticate(
 ): Promise<AuthModel.RegisterResponse> {
   authStore.getState().setAuthentication(true);
   authStore.getState().setAccessToken({ token: token }, true);
-  console.log('🚀 ~ token:', token);
 
   let user: AuthModel.RegisterResponse = await introspect();
   authStore.getState().setAccessToken({ token: token, user }, true);
