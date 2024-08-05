@@ -49,7 +49,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
   useEffect(() => {
     const date = moment(activeDate);
     date.utcOffset(0, true);
-    const result: SharedModel.TimeRange = {
+    const result = {
       start: date.clone().startOf('day'),
       end: date.clone().startOf('day'),
     };
@@ -71,7 +71,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
         result.start.hour(6).minute(0).second(0);
         result.end.hour(10).minute(0).second(0);
     }
-    onSuccess(result);
+    onSuccess({ start: result.start.toDate(), end: result.end.toDate() });
   }, [activeDate, activeTime]);
   const [modal, setModal] = useState<boolean>(false);
   const updateTime = (updatedTime: TimeChoices) => {

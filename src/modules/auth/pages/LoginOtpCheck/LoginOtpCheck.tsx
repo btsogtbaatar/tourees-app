@@ -46,10 +46,10 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
             />
           </ContainerView>
           <FooterButton
-            back={true}
+            showBackButton={true}
             text={t('l_confirm')}
             onPress={checkOtp}
-            btnDisabled={value?.length !== 4}
+            disabled={value?.length !== 4}
           />
         </FullHeightView>
       </CustomTouchableWithoutFeedback>

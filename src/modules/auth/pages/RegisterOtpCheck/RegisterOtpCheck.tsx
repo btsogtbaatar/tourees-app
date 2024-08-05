@@ -140,12 +140,12 @@ function RegisterOtpCheck({
           </View>
         </View>
         <FooterButton
-          back={true}
+          showBackButton={true}
           text={t('l_confirm')}
           onPress={() => {
             checkOtp();
           }}
-          btnDisabled={!btnDisabled || !disabled}
+          disabled={!btnDisabled || !disabled}
         />
       </View>
     </CustomKeyboardAvoidingView>

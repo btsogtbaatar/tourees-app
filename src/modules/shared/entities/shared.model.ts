@@ -77,7 +77,7 @@ export namespace SharedModel {
     longitude: number;
   };
   export interface TimeRange {
-    start: moment.Moment;
-    end: moment.Moment;
+    start: Date;
+    end: Date;
   }
 }

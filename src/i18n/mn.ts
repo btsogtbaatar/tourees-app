@@ -69,7 +69,13 @@ export default {
       loading: 'Уншиж байна...',
       notFound: 'Хаяг олдсонгүй.',
     },
-    save: 'Хадгалах',
+    continue: 'Үргэлжлүүлэх',
+  },
+  addressDetail: {
+    label: 'Дэлгэрэнгүй мэдээлэл',
+    from: 'Ачих байршлын дэлгэрэнгүй мэдээлэл',
+    to: 'Буулгах байршлын дэлгэрэнгүй мэдээлэл',
+    continue: 'Үргэлжлүүлэх',
   },
   request: {
     requestNewMessage:
@@ -93,8 +99,26 @@ export default {
     requestDeliveryDate: 'Хүргэлт хийх өдөр сонгох',
   },
   userRequest: {
+    success: {
+      title: 'Амжилттай',
+      message: 'Таны хүсэлт амжилттай үүслээ.',
+    },
     address: {
       label: 'Хаягийн мэдээлэл',
+      from: 'Ачих газар',
+      to: 'Буулгах газар',
+      edit: 'Засах',
+    },
+    messages: {
+      description: {
+        required: 'Тайлбар оруулна уу.',
+      },
+      files: {
+        required: 'Дор хаяж 1 зураг оруулна уу.',
+      },
+      addresses: {
+        required: 'Хаягуудыг оруулна уу.',
+      },
     },
   },
   login: {
@@ -143,6 +167,14 @@ export default {
     title: 'Өдөр сонгох',
   },
   emptyRequest: 'Таньд үүсгэсэн хүсэлт байхгүй байна.',
+  headers: {
+    home: 'Нүүр',
+    login: 'Нэвтрэх',
+    register: 'Бүртгүүлэх',
+    category: 'Үйлчилгээний төрлүүд',
+    address: 'Хаяг сонгох',
+    request: 'Хүсэлт',
+  },
   otp: {
     your: 'Таны',
     requestCode: '-д илгээсэн 4 оронтой кодыг оруулна уу',

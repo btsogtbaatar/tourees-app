@@ -11,50 +11,44 @@ import {
 } from 'react-native';
 import { colors } from '../../theme/colors';
 import { FooterBack } from '../Icon';
-import styles from './FooterButton.style';
+import FooterButtonStyle from './FooterButton.style';
 
-interface PropsButton {
-  extra?: StyleProp<ViewStyle>;
-  btnExtra?: StyleProp<ViewStyle>;
-  textExtra?: StyleProp<TextStyle>;
+interface FooterButtonPropsButton {
+  style?: {
+    container?: StyleProp<ViewStyle>;
+    button?: StyleProp<ViewStyle>;
+    text?: StyleProp<TextStyle>;
+  };
   text?: string;
   onPress: () => void;
-  back: boolean;
-  btnDisabled?: boolean;
-  backColor?: boolean;
+  showBackButton?: boolean;
+  disabled?: boolean;
   onBackPress?: () => void;
 }
 
-function FooterButton(props: PropsButton) {
+function FooterButton(props: Readonly<FooterButtonPropsButton>) {
   const { t } = useTranslation();
   const navigation = useNavigation();
   return (
-    <View
-      style={[
-        styles.container,
-        props.extra,
-        {
-          backgroundColor: props.backColor ? colors.transparent : colors.white,
-        },
-      ]}>
-      {props.back && (
-        <View
-          style={{
-            backgroundColor: colors.white,
-            borderRadius: 12,
-          }}>
+    <View style={[FooterButtonStyle.container, props.style?.container]}>
+      {props.showBackButton === true && (
+        <View style={FooterButtonStyle.backButton}>
           <TouchableOpacity
             onPress={props.onBackPress ?? navigation.goBack}
-            style={styles.icon}>
-            <FooterBack color="#21272D" />
+            style={FooterButtonStyle.icon}>
+            <FooterBack color={colors.gray700} />
           </TouchableOpacity>
         </View>
       )}
       <TouchableOpacity
         onPress={props.onPress}
-        disabled={props.btnDisabled}
-        style={[styles.btn, props.btnDisabled && styles.disabled]}>
-        <Text style={[props.textExtra, styles.btnTextStyle]}>
+        disabled={props.disabled}
+        style={[
+          FooterButtonStyle.btn,
+          props.disabled && FooterButtonStyle.disabled,
+          props.style?.button,
+        ]}>
+        <Text style={[FooterButtonStyle.btnTextStyle, props.style?.text]}>
           {props.text ? props.text : t('b_continue')}
         </Text>
       </TouchableOpacity>

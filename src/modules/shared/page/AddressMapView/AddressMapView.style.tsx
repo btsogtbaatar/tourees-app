@@ -9,6 +9,7 @@ const AddressMapViewStyle = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     zIndex: 0,
   },
+
   controllerContainer: {
     paddingHorizontal: 16,
     zIndex: 1,

@@ -1,6 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FlatList, Text, View } from 'react-native';
 import Banner from '../../../../components/Banner/Banner';
@@ -37,11 +36,7 @@ const Home = () => {
     getCateories();
   }, []);
 
-  const form = useForm({
-    mode: 'onChange',
-  });
-
-  const renderSeparator = () => <View style={{ width: 16 }} />;
+  const renderSeparator = () => <View style={HomeStyle.divider} />;
 
   return loading ? (
     <Loading />
@@ -49,19 +44,16 @@ const Home = () => {
     <CustomSafeAreaView>
       <ContainerView>
         <Text style={HomeStyle.title}>{t('category.question')}</Text>
-        <View style={{ marginBottom: 8 }}>
-          <FormProvider {...form}>
-            <CustomInput
-              name={'subCategoryName'}
-              placeholder={t('category.search')}
-              onPress={() => {
-                navigation.navigate('SubCategoryList', {
-                  title: t('category.title'),
-                });
-              }}
-              icon={<SearchMdIcon style={{ color: colors.primary500 }} />}
-            />
-          </FormProvider>
+        <View style={HomeStyle.inputContainer}>
+          <CustomInput
+            placeholder={t('category.search')}
+            onPress={() => {
+              navigation.navigate('SubCategoryList', {
+                title: t('category.title'),
+              });
+            }}
+            icon={<SearchMdIcon style={{ color: colors.primary500 }} />}
+          />
         </View>
         <View style={HomeStyle.listContainer}>
           <FlatList

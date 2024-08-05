@@ -23,7 +23,6 @@ export const colors = {
   gray600: '#2C343C',
   gray700: '#21272D',
   danger: '#F15980',
-  dark600: '#21272D',
   dark700: '#161A1E',
   silver: '#F2F2F2',
 };

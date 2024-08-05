@@ -1,15 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CustomTabNavigator, {
-  TabNavigationItem,
+    TabNavigationItem,
 } from '../../../components/CustomTabNavigator/CustomTabNavigator';
 import {
-  HomeActiveIcon,
-  HomeIcon,
-  SmileCircleActiveIcon,
-  SmileCircleIcon,
-  UserActiveIcon,
-  UserIcon,
+    HomeActiveIcon,
+    HomeIcon,
+    SmileCircleActiveIcon,
+    SmileCircleIcon,
+    UserActiveIcon,
+    UserIcon,
 } from '../../../components/Icon';
 import { authStore } from '../../../context/auth/store';
 import Profile from '../../Profile/pages/Profile/Profile';
@@ -47,7 +47,7 @@ const HomeTabNavigator = () => {
     },
   ];
 
-  return <CustomTabNavigator tabBarShown={isLoggedIn} items={items} />;
+  return <CustomTabNavigator showTabBar={isLoggedIn} items={items} />;
 };
 
 export default HomeTabNavigator;

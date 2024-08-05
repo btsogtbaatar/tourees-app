@@ -14,6 +14,22 @@ export function getTasks(
   return api.get('/tasks', { params: params });
 }
 
+export async function getLastTaskFromAddress(): Promise<
+  TaskModel.Address | undefined
+> {
+  let page = await getTasks(1, 1);
+
+  if (
+    page.content.length > 0 &&
+    page.content[0].addresses !== undefined &&
+    page.content[0].addresses.length > 0
+  ) {
+    return page.content[0].addresses.find(_address => _address.name === 'from');
+  }
+
+  return undefined;
+}
+
 export function createTask(
   task: TaskModel.TaskRequest,
 ): Promise<AuthStateToken> {

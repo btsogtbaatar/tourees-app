@@ -19,11 +19,16 @@ const getTextColor = (routeName: string) => {
 const getBackgroundColor = (routeName: string) => {
   switch (routeName) {
     case 'UserRequest':
-      return colors.dark600;
+      return colors.gray700;
+    case 'AddressMapView':
+      return colors.transparent;
     default:
       return colors.silver;
   }
 };
+
+const hidingHeaderScreens = ['HomeTab'];
+const transparentHeaderScreens = ['AddressMapView'];
 
 const customScreenOption:
   | ((props: {
@@ -31,7 +36,8 @@ const customScreenOption:
       navigation: any;
     }) => NativeStackNavigationOptions)
   | undefined = ({ route, navigation }) => ({
-  headerShown: route.name !== 'HomeTab',
+  headerShown: !hidingHeaderScreens.includes(route.name),
+  headerTransparent: transparentHeaderScreens.includes(route.name),
   headerStyle: {
     elevation: 0,
     shadowOpacity: 0,

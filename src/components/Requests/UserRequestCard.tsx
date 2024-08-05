@@ -31,7 +31,7 @@ const UserRequestCard = ({ item }: UserRequestCardProps) => {
         <View style={styles.imageContainer}>
           <Image
             width={33}
-            height={18}
+            height={33}
             source={{
               uri: `${getEnv().IMAGE_URL}${item.subCategory.image?.url ?? ''}`,
             }}

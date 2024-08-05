@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     borderRadius: horizontalScale(22),
     backgroundColor: 'rgba(70, 220, 157, 0.20)',
-    width: horizontalScale(44),
+    width: verticalScale(44),
     height: verticalScale(44),
     justifyContent: 'center',
     alignItems: 'center',
