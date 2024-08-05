@@ -1,17 +1,22 @@
 export interface ModalState {
   show: boolean;
   component?: React.ReactElement;
+  direction?: 'bottom' | 'center' | 'off';
+  closeOnBackButtonPress?: boolean;
 }
 
 export interface ModalAction {
   type: string;
   component?: React.ReactElement;
+  direction?: 'bottom' | 'center' | 'off';
+  closeOnBackButtonPress?: boolean;
 }
 
 export const initialState = {
   show: false,
   component: undefined,
   closable: true,
+  closeOnBackButtonPress: true,
 };
 
 export const actions = {

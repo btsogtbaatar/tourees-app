@@ -14,6 +14,7 @@ import AddressDetail from '../modules/Shared/page/AddressDetail/AddressDetail';
 import AddressMapView from '../modules/Shared/page/AddressMapView/AddressMapView';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import TimeSettings from '../modules/Profile/pages/TimeSettings/TimeSettings';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -70,6 +71,10 @@ const Route = () => {
           name="RequestDetail"
           component={RequestDetail}
         />
+        <Stack.Screen 
+          options={{ title: t('headers.timeSettings') }} 
+          name="TimeSettings" 
+          component={TimeSettings} />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
@@ -82,6 +87,7 @@ const Route = () => {
           name="AddressDetail"
           component={AddressDetail}
         />
+        
       </Stack.Group>
     </Stack.Navigator>
   );

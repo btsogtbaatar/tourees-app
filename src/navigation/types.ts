@@ -29,6 +29,7 @@ export type RootStackParamList = {
     addresses: Addresses;
     onGoBack: (addresses: Addresses) => void;
   };
+  TimeSettings: object;
 };
 
 declare global {

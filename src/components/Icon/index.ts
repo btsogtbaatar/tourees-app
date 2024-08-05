@@ -35,6 +35,9 @@ import SunIcon from '../../../assets/icons/sun.svg';
 import SunRiseIcon from '../../../assets/icons/sunrise.svg';
 import SunSetIcon from '../../../assets/icons/sunset.svg';
 import MoonIcon from '../../../assets/icons/moon.svg';
+import ClockIcon from '../../../assets/icons/clock.svg';
+import UnCheckIcon from '../../../assets/icons/unCheck-icon.svg';
+import CheckSelectedIcon from '../../../assets/icons/check-icon.svg';
 
 export {
   ArrowLeftIcon,
@@ -74,4 +77,7 @@ export {
   SunRiseIcon,
   SunSetIcon,
   MoonIcon,
+  ClockIcon,
+  UnCheckIcon,
+  CheckSelectedIcon,
 };
