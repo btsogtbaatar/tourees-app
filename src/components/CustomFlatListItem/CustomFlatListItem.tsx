@@ -26,7 +26,7 @@ function CustomFlatListItem(props: Readonly<CustomFlatListItemProps>) {
             uri: props.imageUrl,
           }}
         />
-        <View style={{ flex: 1 }}>
+        <View style={CustomFlatListItemStyles.titleContainer}>
           <Text style={CustomFlatListItemStyles.title}>{props.title}</Text>
           <Text
             style={CustomFlatListItemStyles.subtitle}

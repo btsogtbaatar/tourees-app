@@ -15,6 +15,9 @@ export const CustomFlatListItemStyles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
   },
+  titleContainer: {
+    flex: 1,
+  },
   image: {
     borderRadius: 10,
     marginRight: 10,
