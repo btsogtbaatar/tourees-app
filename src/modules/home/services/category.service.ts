@@ -17,7 +17,7 @@ export function getSubCategories(
     params: {
       page,
       size,
-      'parentGategory.id': filter?.parentCategoryId,
+      'parentCategory.id': filter?.parentCategoryId,
       name: filter?.name,
     },
   });
