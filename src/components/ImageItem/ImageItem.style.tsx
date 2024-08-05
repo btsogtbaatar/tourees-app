@@ -5,20 +5,23 @@ const ImageItemStyle = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     padding: 10,
-    width: 100,
+    alignItems: 'center',
     borderRadius: 12,
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 8,
   },
   image: {
-    width: '100%',
-    height: 40,
+    height: 20,
+    width: 20,
     marginVertical: 5,
   },
   title: {
     ...Typography.textSmaller,
     ...getFontWeight(FontWeight.bold),
+    alignSelf: 'center',
     color: colors.textColor,
     textAlign: 'center',
-    height: Typography.textSmaller.lineHeight * 2,
   },
 });
 

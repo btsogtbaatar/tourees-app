@@ -9,6 +9,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities';
+import { useTranslation } from 'react-i18next';
 
 interface LinearButtonProps {
   extra?: StyleProp<ViewStyle>;
@@ -23,12 +24,13 @@ const LinearButton = ({
   onClick,
   buttonText,
 }: LinearButtonProps) => {
+  const { t } = useTranslation();
   return (
     <LinearGradient
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       locations={[0, 1]}
-      colors={['#FF9646', '#FA6432']}
+      colors={[colors.primary500, colors.logoColor]}
       style={[
         extra,
         {
@@ -55,7 +57,7 @@ const LinearButton = ({
               lineHeight: 18,
             },
           ]}>
-          {buttonText ? buttonText : 'Нэвтрэх'}
+          {buttonText ? buttonText : t('signUp.login')}
         </Text>
       </TouchableOpacity>
     </LinearGradient>

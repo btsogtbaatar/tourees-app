@@ -175,4 +175,10 @@ export default {
     address: 'Хаяг сонгох',
     request: 'Хүсэлт',
   },
+  otp: {
+    your: 'Таны',
+    requestCode: '-д илгээсэн 4 оронтой кодыг оруулна уу',
+    resendCode: 'Код дахин илгээх',
+    resend: 'дахин илгээх',
+  },
 };

@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Pressable, Text, View } from 'react-native';
-import useTimer from '../../hooks/useTimer';
-import { colors } from '../../theme/colors';
-import { horizontalScale, verticalScale } from '../../utilities/metrics';
+import React from 'react';
+import { Text, View } from 'react-native';
+
 import OtpInputGroup from '../OtpInputGroup/OtpInputGroup';
 import Timer from '../Timer/Timer';
+import CheckOtpStyle from './CheckOtp.style';
+import { useTranslation } from 'react-i18next';
 
 export type Credentials = {
   email?: string;
@@ -13,90 +13,26 @@ export type Credentials = {
 export interface CheckOtpProps {
   credentials: Credentials;
   onChange: (value: string) => void;
+  onResend: () => void;
 }
 
 export default function CheckOtp(props: Readonly<CheckOtpProps>) {
-  const [counter, setCounter] = useState(200);
-  const [disabled, setDisabled] = useState<boolean>(true);
-
-  useTimer(
-    (count, shouldButtonEnabled) => {
-      setCounter(count);
-      if (shouldButtonEnabled) {
-        setDisabled(false);
-      }
-    },
-    () => {
-      setDisabled(false);
-    },
-    counter,
-  );
-
-  const resend = () => {
-    setCounter(100);
-    setDisabled(true);
-  };
-
-  useTimer(
-    (count, shouldButtonEnabled) => {
-      setCounter(count);
-      if (shouldButtonEnabled) {
-        setDisabled(false);
-      }
-    },
-    () => {
-      setDisabled(false);
-    },
-    counter,
-  );
+  const { t } = useTranslation();
 
   return (
     <>
-      <View
-        style={{
-          paddingHorizontal: horizontalScale(14),
-          alignItems: 'center',
-          marginTop: verticalScale(30),
-        }}>
-        <Text style={{ textAlign: 'center' }}>
-          Таны
-          {'\u00A0'}
-          <Text
-            style={{
-              color: colors.primary500,
-            }}>
-            {props.credentials.email}
-          </Text>
-          {'\u00A0'}
-          -д илгээсэн 4 оронтой кодыг оруулна уу
+      <View style={CheckOtpStyle.title}>
+        <Text style={CheckOtpStyle.email}>
+          {t('otp.your')}{' '}
+          <Text style={CheckOtpStyle.highlight}>{props.credentials.email}</Text>{' '}
+          {t('otp.requestCode')}
         </Text>
       </View>
       <OtpInputGroup onChange={props.onChange} />
-      <View
-        style={{
-          alignItems: 'center',
-          flexDirection: 'row',
-          justifyContent: 'center',
-        }}>
-        <Text>Код дахин илгээх:</Text>
-        <View style={{ marginLeft: 5 }}>
-          {disabled ? (
-            <Timer counter={counter} />
-          ) : (
-            <Pressable
-              style={{ justifyContent: 'center', alignItems: 'center' }}
-              onPress={() => resend()}>
-              <Text
-                style={{
-                  color: colors.primary500,
-                  fontWeight: '700',
-                  fontSize: 14,
-                  fontFamily: 'Nunito',
-                }}>
-                дахин илгээх
-              </Text>
-            </Pressable>
-          )}
+      <View style={CheckOtpStyle.footer}>
+        <Text>{t('otp.resendCode')}:</Text>
+        <View>
+          <Timer startFrom={200} restartFrom={100} onResend={props.onResend} />
         </View>
       </View>
     </>
