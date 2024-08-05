@@ -67,13 +67,7 @@ const RegisterTermAndCondition = () => {
           ]}
         />
       </View>
-      <FooterButton
-        text={'Нэвтрэх'}
-        onPress={onSubmit}
-        back={false}
-        btnDisabled={!isChecked}
-        backColor={true}
-      />
+      <FooterButton text={'Нэвтрэх'} onPress={onSubmit} disabled={!isChecked} />
     </View>
   );
 };

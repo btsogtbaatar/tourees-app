@@ -5,7 +5,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Keyboard, Text, TouchableWithoutFeedback, View } from 'react-native';
 import * as yup from 'yup';
-import CustomInput from '../../../../components/CustomInput/CustomInput';
+import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import Steps from '../../../../components/Step/Steps';
@@ -81,7 +81,7 @@ function Register({ navigation }: RegisterProps) {
               </View>
               <FormProvider {...form}>
                 {authChannel === AuthChannel.Email && (
-                  <CustomInput
+                  <CustomFormInput
                     label={t('login.email.label')}
                     placeholder={t('login.email.placeholder')}
                     name={'email'}
@@ -89,7 +89,7 @@ function Register({ navigation }: RegisterProps) {
                   />
                 )}
                 {authChannel === AuthChannel.Phone && (
-                  <CustomInput
+                  <CustomFormInput
                     label={t('login.phone.label')}
                     placeholder={t('login.phone.placeholder')}
                     name={'phone'}
@@ -97,7 +97,7 @@ function Register({ navigation }: RegisterProps) {
                   />
                 )}
                 <View style={{ marginTop: verticalScale(16) }}>
-                  <CustomInput
+                  <CustomFormInput
                     placeholder={t('l_username')}
                     name={'username'}
                     label={t('l_usernamelabel')}
@@ -107,11 +107,7 @@ function Register({ navigation }: RegisterProps) {
               <Text style={styles.otherLabel}>{t('l_usernametitle')}</Text>
             </View>
           </View>
-          <FooterButton
-            back={false}
-            onPress={form.handleSubmit(onContinue)}
-            btnDisabled={false}
-          />
+          <FooterButton onPress={form.handleSubmit(onContinue)} />
         </View>
       </TouchableWithoutFeedback>
     </CustomKeyboardAvoidingView>

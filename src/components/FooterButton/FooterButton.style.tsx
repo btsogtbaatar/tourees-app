@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../theme/colors';
 
-const createStyles = StyleSheet.create({
+const FooterButtonStyle = StyleSheet.create({
   btn: {
     borderRadius: 12,
     backgroundColor: colors.primary500,
@@ -11,6 +11,12 @@ const createStyles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     gap: 8,
+  },
+  backButton: {
+    backgroundColor: colors.white,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: colors.borderColor,
   },
   icon: {
     padding: 10,
@@ -28,7 +34,7 @@ const createStyles = StyleSheet.create({
     fontFamily: 'Nunito',
   },
   container: {
-    padding: 16,
+    paddingHorizontal: 16,
     alignItems: 'flex-start',
     gap: 16,
     borderTopStartRadius: 28,
@@ -37,4 +43,4 @@ const createStyles = StyleSheet.create({
   },
 });
 
-export default createStyles;
+export default FooterButtonStyle;

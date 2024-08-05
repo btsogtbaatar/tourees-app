@@ -30,15 +30,23 @@ export declare namespace TaskModel {
     addresses: Address[];
   };
 
+  export type Addresses = {
+    from: Address;
+    to: Address;
+  };
+
   export type Address = {
     name?: AddressType;
     displayName?: string;
     address?: string;
-    unit: number;
-    floor: number;
-    apartment: number;
     latitude: number;
     longitude: number;
+  } & AddressDetail;
+
+  export type AddressDetail = {
+    unit?: string;
+    floor?: string;
+    apartment?: string;
   };
 
   export type SubCategory = {

@@ -67,7 +67,6 @@ const SubCategoryList = (props: Props) => {
         <FormProvider {...form}>
           <CustomInput
             clearButton
-            name={'subCategoryName'}
             placeholder={t('search.placeholder')}
             icon={
               <SearchMdIcon style={{ color: colors.primary500 }} height={20} />

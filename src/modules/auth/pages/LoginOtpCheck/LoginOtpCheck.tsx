@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import CheckOtp from '../../../../components/CheckOtp/CheckOtp';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
@@ -32,20 +33,22 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
   };
 
   return (
-    <CustomKeyboardAvoidingView>
-      <CustomTouchableWithoutFeedback>
-        <FullHeightView>
-          <ContainerView>
-            <CheckOtp credentials={credentials} onChange={setValue} />
-          </ContainerView>
-          <FooterButton
-            back={true}
-            text={t('l_confirm')}
-            onPress={checkOtp}
-            btnDisabled={value?.length !== 4}
-          />
-        </FullHeightView>
-      </CustomTouchableWithoutFeedback>
-    </CustomKeyboardAvoidingView>
+    <CustomSafeAreaView>
+      <CustomKeyboardAvoidingView>
+        <CustomTouchableWithoutFeedback>
+          <FullHeightView>
+            <ContainerView>
+              <CheckOtp credentials={credentials} onChange={setValue} />
+            </ContainerView>
+            <FooterButton
+              showBackButton={true}
+              text={t('l_confirm')}
+              onPress={checkOtp}
+              disabled={value?.length !== 4}
+            />
+          </FullHeightView>
+        </CustomTouchableWithoutFeedback>
+      </CustomKeyboardAvoidingView>
+    </CustomSafeAreaView>
   );
 }

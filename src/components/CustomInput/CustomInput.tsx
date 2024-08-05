@@ -1,10 +1,9 @@
-import React, { useRef, useState } from 'react';
-import {
-  FieldValues,
-  Path,
-  useController,
-  useFormContext,
-} from 'react-hook-form';
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 import {
   GestureResponderEvent,
   NativeSyntheticEvent,
@@ -23,9 +22,8 @@ import { Typography } from '../../theme/typography';
 import { XCircleIcon } from '../Icon';
 import { CustomInputStyle } from './CustomInput.style';
 
-export interface CustomInputProps<T extends FieldValues>
+export interface CustomInputProps
   extends Omit<TextInputProps, 'onChange' | 'style'> {
-  name: Path<T>;
   label?: string;
   style?: {
     label?: StyleProp<TextStyle>;
@@ -42,131 +40,133 @@ export interface CustomInputProps<T extends FieldValues>
   clearButton?: boolean;
 }
 
-export default function CustomInput<T extends FieldValues>(
-  props: Readonly<CustomInputProps<T>>,
-) {
-  const [color, setColor] = useState(colors.gray100);
-  const textInputRef = useRef<TextInput>(null);
+export interface CustomInputRef {
+  focus: () => void;
+  clear: () => void;
+}
 
-  const form = useFormContext();
+const CustomInput = forwardRef<CustomInputRef, CustomInputProps>(
+  (props, ref) => {
+    const [color, setColor] = useState(colors.gray100);
+    const textInputRef = useRef<TextInput>(null);
 
-  const { control } = form;
+    const onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      if (props.onFocus) {
+        props.onFocus(e);
+      }
 
-  const {
-    field: { value, onChange },
-    fieldState: { error },
-  } = useController({
-    name: props.name,
-    control,
-  });
+      setColor(colors.primary500);
+    };
 
-  const onFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-    if (props.onFocus) {
-      props.onFocus(e);
-    }
+    const onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+      if (props.onBlur) {
+        props.onBlur(e);
+      }
 
-    setColor(colors.primary500);
-  };
+      setColor(colors.brandGray);
+    };
 
-  const onBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
-    if (props.onBlur) {
-      props.onBlur(e);
-    }
+    const focus = () => {
+      textInputRef?.current?.focus();
+    };
 
-    setColor(colors.brandGray);
-  };
+    const clear = () => {
+      textInputRef?.current?.clear();
+    };
 
-  const focus = () => {
-    textInputRef.current?.focus();
-  };
+    useImperativeHandle(ref, () => ({
+      focus,
+      clear,
+    }));
 
-  const renderAction = () => {
-    if (props.action) {
-      return (
-        <Pressable onPress={props.action.onPress}>
-          {props.action.icon}
-        </Pressable>
-      );
-    } else if (props.clearButton === true) {
-      return (
-        <Pressable onPress={() => textInputRef.current?.clear()}>
-          <XCircleIcon
-            height={20}
-            style={{
-              color: colors.gray200,
-            }}
-          />
-        </Pressable>
-      );
-    } else {
-      return <></>;
-    }
-  };
-
-  const renderIcon = () => {
-    if (props.icon) {
-      return <View style={CustomInputStyle.icon}>{props.icon}</View>;
-    } else {
-      return <></>;
-    }
-  };
-
-  const renderLabel = () => {
-    if (props.label) {
-      return (
-        <Text style={[props.style?.label, Typography.textSmaller]}>
-          {props.label}
-        </Text>
-      );
-    } else {
-      return;
-    }
-  };
-
-  return (
-    <Pressable onPress={props.onPress ?? focus}>
-      <View pointerEvents={props.onPress ? 'none' : 'auto'}>
-        <View
-          style={[
-            {
-              borderColor: color,
-              minHeight: props.label
-                ? CustomInputStyle.container.minHeight
-                : 40,
-            },
-            CustomInputStyle.container,
-            props.style?.container,
-          ]}>
-          {renderLabel()}
-          <View style={CustomInputStyle.inputContainer}>
-            {renderIcon()}
-            <TextInput
-              {...props}
-              cursorColor={colors.primary500}
-              selectionColor={colors.primary500}
-              ref={textInputRef}
-              textBreakStrategy="simple"
-              value={value}
-              onBlur={onBlur}
-              onFocus={onFocus}
-              multiline={props.numberOfLines ? true : false}
-              style={[
-                Typography.textSmall,
-                CustomInputStyle.input,
-                props.style?.input,
-              ]}
-              onChangeText={(text: string) => {
-                onChange(text);
-                props.onChangeText && props.onChangeText(text);
+    const renderAction = () => {
+      if (props.action) {
+        return (
+          <Pressable onPress={props.action.onPress}>
+            {props.action.icon}
+          </Pressable>
+        );
+      } else if (props.clearButton === true) {
+        return (
+          <Pressable onPress={() => clear()}>
+            <XCircleIcon
+              height={20}
+              style={{
+                color: colors.gray200,
               }}
             />
+          </Pressable>
+        );
+      } else {
+        return <></>;
+      }
+    };
+
+    const renderIcon = () => {
+      if (props.icon) {
+        return <View style={CustomInputStyle.icon}>{props.icon}</View>;
+      } else {
+        return <></>;
+      }
+    };
+
+    const renderLabel = () => {
+      if (props.label) {
+        return (
+          <Text
+            style={[
+              props.style?.label,
+              Typography.textSmaller,
+              { color: colors.gray200 },
+            ]}>
+            {props.label}
+          </Text>
+        );
+      } else {
+        return;
+      }
+    };
+
+    return (
+      <Pressable onPress={props.onPress ?? focus}>
+        <View pointerEvents={props.onPress ? 'none' : 'auto'}>
+          <View
+            style={[
+              {
+                borderColor: color,
+              },
+              CustomInputStyle.container,
+              props.style?.container,
+            ]}>
+            <View style={{ flex: 1 }}>
+              {renderLabel()}
+              <View style={CustomInputStyle.inputContainer}>
+                {renderIcon()}
+                <TextInput
+                  {...props}
+                  cursorColor={colors.primary500}
+                  selectionColor={colors.primary500}
+                  ref={textInputRef}
+                  onBlur={onBlur}
+                  onFocus={onFocus}
+                  multiline={props.numberOfLines ? true : false}
+                  style={[
+                    CustomInputStyle.input,
+                    props.style?.input,
+                    props.numberOfLines ? { minHeight: 100 } : {},
+                  ]}
+                  onChangeText={(text: string) => {
+                    props.onChangeText && props.onChangeText(text);
+                  }}
+                />
+              </View>
+            </View>
             <View style={CustomInputStyle.action}>{renderAction()}</View>
           </View>
         </View>
-        {error?.message && (
-          <Text style={{ color: colors.danger }}>{error.message}</Text>
-        )}
-      </View>
-    </Pressable>
-  );
-}
+      </Pressable>
+    );
+  },
+);
+
+export default CustomInput;

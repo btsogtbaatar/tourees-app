@@ -1,6 +1,5 @@
 import { debounce } from 'lodash';
-import React, { useCallback, useEffect, useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, View } from 'react-native';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
@@ -10,7 +9,7 @@ import {
   getNearbyPlacesFromCoordinates,
   getPlacesByText,
 } from '../../utilities';
-import CustomInput from '../CustomInput/CustomInput';
+import CustomInput, { CustomInputRef } from '../CustomInput/CustomInput';
 import { CustomInputStyle } from '../CustomInput/CustomInput.style';
 import { CustomPlacesAutoCompleteStyle } from './CustomPlacesAutoComplete.style';
 import InfoItem from './InfoItem';
@@ -30,14 +29,10 @@ export default function CustomPlacesAutoComplete(
   >();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation(undefined, { keyPrefix: 'addressMapView' });
-
-  const form = useForm({
-    mode: 'onChange',
-  });
+  const textInputRef = useRef<CustomInputRef>(null);
 
   useEffect(() => {
     console.log('🚀 ~ props.address:', props.address);
-
     // TODO: Compare with radius
 
     if (
@@ -73,28 +68,25 @@ export default function CustomPlacesAutoComplete(
   );
 
   const onItemPressed = (place: SharedModel.Place) => {
-    form.setValue('name', '');
+    textInputRef.current?.clear();
     setSelectedPlace(place);
     props.onChange(place);
   };
 
   return (
     <View style={CustomPlacesAutoCompleteStyle.container}>
-      <FormProvider {...form}>
-        <CustomInput
-          numberOfLines={2}
-          style={{
-            container: !selectedPlace
-              ? CustomInputStyle.containerWithSuggestion
-              : undefined,
-            input: Typography.textSmaller,
-          }}
-          clearButton
-          name={'name'}
-          placeholder={t('autoComplete.placeholder')}
-          onChangeText={handler}
-        />
-      </FormProvider>
+      <CustomInput
+        ref={textInputRef}
+        style={{
+          container: !selectedPlace
+            ? CustomInputStyle.containerWithSuggestion
+            : undefined,
+          input: Typography.textSmaller,
+        }}
+        clearButton
+        placeholder={t('autoComplete.placeholder')}
+        onChangeText={handler}
+      />
       {selectedPlace === undefined && (
         <View style={CustomPlacesAutoCompleteStyle.listContainer}>
           {loading ? (

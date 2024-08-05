@@ -7,8 +7,9 @@ import { View } from 'react-native';
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
-import CustomInput from '../../../../components/CustomInput/CustomInput';
+import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
@@ -40,7 +41,7 @@ export default function Login() {
             .required(t('email.errors.required'))
             .matches(validations.email, t('email.errors.validation'))
         : yup.string(),
-    phone:
+    phoneNumber:
       authChannel === AuthChannel.Phone
         ? yup
             .string()
@@ -63,6 +64,7 @@ export default function Login() {
       })
       .finally(() => setLoading(false));
   };
+
   const socialAuthentication = (socialToken: AuthModel.SocialToken) => {
     setLoading(true);
     socialCustomerAuthenticate(socialToken)
@@ -73,56 +75,58 @@ export default function Login() {
       })
       .finally(() => setLoading(false));
   };
+
   if (loading) {
     return <Loading />;
   }
 
   return (
-    <CustomKeyboardAvoidingView>
-      <CustomTouchableWithoutFeedback>
-        <FullHeightView>
-          <ContainerView>
-            <View>
-              <View style={{ marginBottom: verticalScale(16) }}>
-                <TabController
-                  onSelectedTabChange={setAuthChannel}
-                  firstTabLabel={t('email.tab')}
-                  secondTabLabel={t('phone.tab')}
-                />
-              </View>
-              <FormProvider {...form}>
-                {authChannel === AuthChannel.Email && (
-                  <CustomInput
-                    label={t('email.label')}
-                    placeholder={t('email.placeholder')}
-                    name={'email'}
-                    keyboardType="email-address"
+    <CustomSafeAreaView>
+      <CustomKeyboardAvoidingView>
+        <CustomTouchableWithoutFeedback>
+          <FullHeightView>
+            <ContainerView>
+              <View>
+                <View style={{ marginBottom: verticalScale(16) }}>
+                  <TabController
+                    onSelectedTabChange={setAuthChannel}
+                    firstTabLabel={t('email.tab')}
+                    secondTabLabel={t('phone.tab')}
                   />
-                )}
-                {authChannel === AuthChannel.Phone && (
-                  <CustomInput
-                    label={t('phone.label')}
-                    placeholder={t('phone.placeholder')}
-                    name={'phone'}
-                    keyboardType="phone-pad"
-                  />
-                )}
-              </FormProvider>
-              <CustomDivider>{t('or')}</CustomDivider>
-              <View style={styles.socialContainer}>
-                <FbLoginButton onSuccess={socialAuthentication} />
-                <GoogleLoginButton onSuccess={socialAuthentication} />
+                </View>
+                <FormProvider {...form}>
+                  {authChannel === AuthChannel.Email && (
+                    <CustomFormInput
+                      label={t('email.label')}
+                      placeholder={t('email.placeholder')}
+                      name={'email'}
+                      keyboardType="email-address"
+                    />
+                  )}
+                  {authChannel === AuthChannel.Phone && (
+                    <CustomFormInput
+                      label={t('phone.label')}
+                      placeholder={t('phone.placeholder')}
+                      name={'phoneNumber'}
+                      keyboardType="phone-pad"
+                    />
+                  )}
+                </FormProvider>
+                <CustomDivider>{t('or')}</CustomDivider>
+                <View style={styles.socialContainer}>
+                  <FbLoginButton onSuccess={socialAuthentication} />
+                  <GoogleLoginButton onSuccess={socialAuthentication} />
+                </View>
               </View>
-            </View>
-          </ContainerView>
-          <FooterButton
-            back={false}
-            text={t('check.label')}
-            onPress={form.handleSubmit(onSubmit)}
-            btnDisabled={!form.formState.isValid}
-          />
-        </FullHeightView>
-      </CustomTouchableWithoutFeedback>
-    </CustomKeyboardAvoidingView>
+            </ContainerView>
+            <FooterButton
+              text={t('check.label')}
+              onPress={form.handleSubmit(onSubmit)}
+              disabled={!form.formState.isValid}
+            />
+          </FullHeightView>
+        </CustomTouchableWithoutFeedback>
+      </CustomKeyboardAvoidingView>
+    </CustomSafeAreaView>
   );
 }

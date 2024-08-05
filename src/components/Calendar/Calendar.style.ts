@@ -10,7 +10,6 @@ const CalendarStyle = StyleSheet.create({
     borderWidth: 1,
     padding: horizontalScale(16),
     borderColor: colors.borderColor,
-    marginVertical: verticalScale(16),
   },
   button: {
     justifyContent: 'center',

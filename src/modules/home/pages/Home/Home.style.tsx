@@ -22,6 +22,12 @@ const HomeStyle = StyleSheet.create({
   listContainer: {
     marginBottom: 8,
   },
+  inputContainer: {
+    marginBottom: 8,
+  },
+  divider: {
+    width: 16,
+  },
 });
 
 export default HomeStyle;

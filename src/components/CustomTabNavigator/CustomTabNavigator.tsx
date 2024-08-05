@@ -17,7 +17,7 @@ export interface TabNavigationItem {
 }
 
 export interface CustomTabNavigatorProps {
-  tabBarShown?: boolean;
+  showTabBar?: boolean;
   items: TabNavigationItem[];
 }
 
@@ -42,8 +42,9 @@ const CustomTabNavigator = (props: CustomTabNavigatorProps) => {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {
-          display: props.tabBarShown === true ? 'flex' : 'none',
+          display: props.showTabBar === true ? 'flex' : 'none',
         },
+        headerShadowVisible: false,
       }}>
       {props.items.map(item => {
         return (

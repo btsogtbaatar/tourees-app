@@ -4,10 +4,11 @@ import {
   ActivityIndicator,
   FlatList,
   RefreshControl,
-  SafeAreaView,
   Text,
-  View,
+  View
 } from 'react-native';
+import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import UserRequestCard from '../../../../components/Requests/UserRequestCard';
 import { colors } from '../../../../theme/colors';
 import { SharedModel } from '../../../Shared/entities/shared.model';
@@ -84,29 +85,31 @@ const Request = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 16 }}>
-      <FlatList
-        data={requests.filter(item => item.subCategory !== null)}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={({ item }) => <UserRequestCard item={item} />}
-        ItemSeparatorComponent={() => <View style={{ marginTop: 12 }} />}
-        onEndReached={fetchMore}
-        onEndReachedThreshold={0.1}
-        pagingEnabled={true}
-        ListFooterComponent={footerComponent}
-        refreshing={refreshing}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={onRefresh}
-            tintColor={colors.primary500}
-          />
-        }
-        contentContainerStyle={{ flexGrow: 1 }}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={emptyComponent}
-      />
-    </SafeAreaView>
+    <CustomSafeAreaView>
+      <ContainerView>
+        <FlatList
+          data={requests.filter(item => item.subCategory !== null)}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={({ item }) => <UserRequestCard item={item} />}
+          ItemSeparatorComponent={() => <View style={{ marginTop: 12 }} />}
+          onEndReached={fetchMore}
+          onEndReachedThreshold={0.1}
+          pagingEnabled={true}
+          ListFooterComponent={footerComponent}
+          refreshing={refreshing}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={onRefresh}
+              tintColor={colors.primary500}
+            />
+          }
+          contentContainerStyle={{ flexGrow: 1 }}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={emptyComponent}
+        />
+      </ContainerView>
+    </CustomSafeAreaView>
   );
 };
 

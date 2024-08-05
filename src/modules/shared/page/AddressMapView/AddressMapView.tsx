@@ -27,6 +27,9 @@ export type Address = {
   name?: AddressType;
   displayName?: string;
   address?: string;
+  unit?: string;
+  floor?: string;
+  apartment?: string;
 } & LatLng;
 
 export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
@@ -152,19 +155,23 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         onRegionChangeComplete={onRegionChangeComplete}
       />
       <FooterButton
-        backColor
-        extra={{
-          position: 'absolute',
-          bottom: insets.bottom,
+        style={{
+          container: {
+            position: 'absolute',
+            bottom: insets.bottom,
+          },
         }}
-        back={true}
-        btnDisabled={isDisabled()}
-        text={t('save')}
-        onPress={() => {
-          props.route.params.onGoBack(addresses);
-          props.navigation.goBack();
-        }}
-        onBackPress={() => props.navigation.goBack()}
+        disabled={isDisabled()}
+        text={t('continue')}
+        onPress={() =>
+          props.navigation.navigate('AddressDetail', {
+            addresses: addresses,
+            onGoBack: (_addresses: Addresses) => {
+              props.route.params.onGoBack({ ..._addresses });
+              props.navigation.goBack();
+            },
+          })
+        }
       />
     </View>
   );

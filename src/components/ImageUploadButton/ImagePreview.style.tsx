@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities';
 
-const styles = StyleSheet.create({
+const ImagePreviewStyle = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
@@ -10,8 +10,6 @@ const styles = StyleSheet.create({
     borderRadius: horizontalScale(16),
     borderWidth: 1,
     borderColor: colors.borderColor,
-    marginVertical: verticalScale(8),
-    marginHorizontal: horizontalScale(8),
     justifyContent: 'center',
   },
   imageContainer: {
@@ -38,4 +36,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default ImagePreviewStyle;

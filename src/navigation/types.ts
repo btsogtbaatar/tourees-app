@@ -25,6 +25,10 @@ export type RootStackParamList = {
     addressType: AddressType;
     onGoBack: (addresses: Addresses) => void;
   };
+  AddressDetail: {
+    addresses: Addresses;
+    onGoBack: (addresses: Addresses) => void;
+  };
 };
 
 declare global {
