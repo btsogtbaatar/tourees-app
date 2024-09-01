@@ -27,7 +27,7 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        console.log('clear');
       },
     },
     {
