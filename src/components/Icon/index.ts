@@ -35,6 +35,7 @@ import SunIcon from '../../../assets/icons/sun.svg';
 import SunRiseIcon from '../../../assets/icons/sunrise.svg';
 import SunSetIcon from '../../../assets/icons/sunset.svg';
 import MoonIcon from '../../../assets/icons/moon.svg';
+import BuildingIcon from '../../../assets/icons/building.svg';
 
 export {
   ArrowLeftIcon,
@@ -74,4 +75,5 @@ export {
   SunRiseIcon,
   SunSetIcon,
   MoonIcon,
+  BuildingIcon,
 };

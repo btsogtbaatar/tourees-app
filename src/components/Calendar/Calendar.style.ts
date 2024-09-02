@@ -11,21 +11,6 @@ const CalendarStyle = StyleSheet.create({
     padding: horizontalScale(16),
     borderColor: colors.borderColor,
   },
-  button: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    display: 'flex',
-    flexDirection: 'column',
-    borderRadius: 16,
-    borderWidth: 1,
-  },
-  inActive: {
-    borderColor: colors.borderColor,
-  },
-  active: {
-    borderColor: colors.borderPrimaryColor,
-    backgroundColor: colors.placeColor,
-  },
   dateSection: {
     display: 'flex',
     flexDirection: 'row',

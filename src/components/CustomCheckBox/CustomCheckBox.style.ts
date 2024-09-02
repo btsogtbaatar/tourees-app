@@ -7,8 +7,9 @@ const CustomCheckBoxStyle = StyleSheet.create({
     flexDirection: 'row',
     gap: 8,
     alignContent: 'center',
-    height: verticalScale(16),
-    width: verticalScale(16),
+  },
+  button: {
+    paddingVertical: verticalScale(2),
   },
   active: {
     backgroundColor: colors.primary500,

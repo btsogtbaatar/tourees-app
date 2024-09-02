@@ -15,7 +15,7 @@ import {
 } from '../../utilities/date';
 import { MoonIcon, SunIcon, SunRiseIcon, SunSetIcon } from '../Icon';
 import CalendarStyle from './Calendar.style';
-import CalendarButton from './CalendarButton';
+import CustomSelection from '../CustomSelection/CustomSelection';
 
 interface CalendarItemProps {
   onSuccess: (value: SharedModel.TimeRange) => void;
@@ -109,30 +109,30 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
         }}
       />
       <View style={CalendarStyle.dateSection}>
-        <CalendarButton
+        <CustomSelection
           style={CalendarStyle.dateButtons}
           active={isTodayActive(activeDate)}
           onPress={() => {
             setActiveDate(getToday());
           }}>
           <Text style={Typography.textSmall}>{t('calendar.today')}</Text>
-        </CalendarButton>
-        <CalendarButton
+        </CustomSelection>
+        <CustomSelection
           style={CalendarStyle.dateButtons}
           active={isTomorrowActive(activeDate)}
           onPress={() => {
             setActiveDate(getTomorrow());
           }}>
           <Text style={Typography.textSmall}>{t('calendar.tomorrow')}</Text>
-        </CalendarButton>
-        <CalendarButton
+        </CustomSelection>
+        <CustomSelection
           style={CalendarStyle.dateButtons}
           active={isSelectedDate(activeDate)}
           onPress={() => {
             setModal(true);
           }}>
           <Text style={Typography.textSmall}>{t('calendar.selectDate')}</Text>
-        </CalendarButton>
+        </CustomSelection>
       </View>
       <View style={CalendarStyle.infoSection}>
         <Text style={Typography.textSmall}>
@@ -141,7 +141,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
       </View>
       <View style={CalendarStyle.timeSection}>
         <View style={CalendarStyle.timeSectionRow}>
-          <CalendarButton
+          <CustomSelection
             style={CalendarStyle.timeButton}
             active={TimeChoices.MORNING === activeTime}
             onPress={() => {
@@ -154,8 +154,8 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             <Text style={Typography.textSmall}>
               {t('calendar.morningTimeRange')}
             </Text>
-          </CalendarButton>
-          <CalendarButton
+          </CustomSelection>
+          <CustomSelection
             style={CalendarStyle.timeButton}
             active={TimeChoices.MIDDAY === activeTime}
             onPress={() => {
@@ -168,10 +168,10 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             <Text style={Typography.textSmall}>
               {t('calendar.middayTimeRange')}
             </Text>
-          </CalendarButton>
+          </CustomSelection>
         </View>
         <View style={CalendarStyle.timeSectionRow}>
-          <CalendarButton
+          <CustomSelection
             style={CalendarStyle.timeButton}
             active={TimeChoices.AFTERNOON === activeTime}
             onPress={() => {
@@ -184,8 +184,8 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             <Text style={Typography.textSmall}>
               {t('calendar.eveningTimeRange')}
             </Text>
-          </CalendarButton>
-          <CalendarButton
+          </CustomSelection>
+          <CustomSelection
             style={CalendarStyle.timeButton}
             active={TimeChoices.EVENING === activeTime}
             onPress={() => {
@@ -198,7 +198,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
             <Text style={Typography.textSmall}>
               {t('calendar.afternoonTimeRange')}
             </Text>
-          </CalendarButton>
+          </CustomSelection>
         </View>
       </View>
     </View>

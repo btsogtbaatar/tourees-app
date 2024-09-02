@@ -15,6 +15,7 @@ export default function CustomCheckBox(props: CustomCheckBox) {
   return (
     <View style={CustomCheckBoxStyle.container}>
       <TouchableOpacity
+        style={CustomCheckBoxStyle.button}
         onPress={() => {
           props.onPress();
         }}>
