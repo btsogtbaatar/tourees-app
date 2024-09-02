@@ -49,6 +49,9 @@ export declare module AuthModel {
     email?: string;
     phoneNumber?: string;
   };
+  export type Contractor = {
+    id: number;
+  };
 
   export class RegisterResponse {
     id?: number;
@@ -57,6 +60,7 @@ export declare module AuthModel {
     username: string;
     firstName?: string;
     lastName?: string;
+    contractor?: Contractor;
 
     constructor(username: string) {
       this.username = username;

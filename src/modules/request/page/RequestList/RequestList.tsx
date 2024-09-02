@@ -5,7 +5,7 @@ import {
   FlatList,
   RefreshControl,
   Text,
-  View
+  View,
 } from 'react-native';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';

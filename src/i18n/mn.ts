@@ -174,6 +174,7 @@ export default {
     category: 'Үйлчилгээний төрлүүд',
     address: 'Хаяг сонгох',
     request: 'Хүсэлт',
+    taskerRegister: 'Таскэр бүртгэх',
   },
   otp: {
     your: 'Таны',

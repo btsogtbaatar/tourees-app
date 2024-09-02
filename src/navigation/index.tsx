@@ -14,6 +14,7 @@ import AddressDetail from '../modules/Shared/page/AddressDetail/AddressDetail';
 import AddressMapView from '../modules/Shared/page/AddressMapView/AddressMapView';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import TaskerRegister from '../modules/Profile/pages/TaskerRegister/TaskerRegister';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -69,6 +70,11 @@ const Route = () => {
           options={{ title: t('headers.request') }}
           name="RequestDetail"
           component={RequestDetail}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.taskerRegister') }}
+          name="TaskerRegister"
+          component={TaskerRegister}
         />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
