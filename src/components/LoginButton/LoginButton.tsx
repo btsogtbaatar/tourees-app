@@ -24,7 +24,7 @@ const LoginButton = ({ title, onClick }: LoginButtonProps) => {
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       locations={[0, 1]}
-      colors={[colors.primary500, colors.logoColor]}
+      colors={[colors.primaryGradient, colors.primary500]}
       style={{
         borderRadius: horizontalScale(12),
       }}>

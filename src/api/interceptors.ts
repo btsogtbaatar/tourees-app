@@ -1,37 +1,21 @@
-import {
-  AxiosError,
-  AxiosInstance,
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-} from 'axios';
-import { BehaviorSubject } from 'rxjs';
-import { AuthAction } from '../context/auth/store';
-import { AuthState } from '../modules/Auth/entities/auth.model';
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import store from '../context/app/store';
+import { AuthState } from '../modules/Auth/slice/authSlice';
 
-const tokenSubject = new BehaviorSubject<any>(null);
-export const axiosInstance = (api: AxiosInstance, store: any) => {
+export const axiosInstance = (api: AxiosInstance) => {
   api.interceptors.request.use(
-    (config: InternalAxiosRequestConfig<any>) => {
-      const state: AuthState & AuthAction = store.getState();
-      const access_token = state.auth?.token;
+    config => {
+      const state: AuthState = store.getState().auth;
+      console.log(state.isAuthenticated);
 
-      if (config.headers) {
-        if (state.authenticated && access_token) {
-          config.headers.Authorization = `Bearer ${access_token}`;
-        } else if (
-          config.url !== '/oauth/token' &&
-          !state.authenticated &&
-          state.clientToken &&
-          new Date(state?.clientToken?.access_token_expires) >= new Date()
-        ) {
-          config.headers.Authorization = `Bearer ${state.clientToken.access_token}`;
-        }
-        config.headers['Accep-Language'] = 'mn-MN';
+      if (state.isAuthenticated) {
+        config.headers.Authorization = `Bearer ${state.token?.jwt}`;
       }
+
       return config;
     },
-    (error: any) => {
-      return Promise.reject(error);
+    (error: AxiosError<any>) => {
+      return Promise.reject(error.response?.data);
     },
   );
 
@@ -40,17 +24,7 @@ export const axiosInstance = (api: AxiosInstance, store: any) => {
       return response.data;
     },
     (error: AxiosError<any>) => {
-      const _error = error.response?.data;
-      if (
-        error.response === undefined ||
-        (error.response && error.response.data === undefined)
-      ) {
-        return Promise.reject();
-      }
-      if (error.response.status === 401) {
-        tokenSubject.next(null);
-      }
-      return Promise.reject(_error);
+      return Promise.reject(error.response?.data);
     },
   );
 };

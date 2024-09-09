@@ -69,7 +69,7 @@ const SubCategoryList = (props: Props) => {
             clearButton
             placeholder={t('search.placeholder')}
             icon={
-              <SearchMdIcon style={{ color: colors.primary500 }} height={20} />
+              <SearchMdIcon style={{ color: colors.primaryGradient }} height={20} />
             }
             onChangeText={(text: string) => {
               handler({ ...filter, name: text });
@@ -82,7 +82,7 @@ const SubCategoryList = (props: Props) => {
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
-            tintColor={colors.primary500}
+            tintColor={colors.primaryGradient}
             onRefresh={onRefresh}
           />
         }>

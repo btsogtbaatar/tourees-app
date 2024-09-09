@@ -5,7 +5,7 @@ import {
   verticalScale,
 } from '../../../../utilities';
 
-const styles = StyleSheet.create({
+export const RegisterTermAndConditionStyle = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: horizontalScale(16),
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     color: '#21272D',
     fontFamily: 'Nunito',
   },
+  steps: {
+    marginBottom: 16,
+  },
 });
-
-export default styles;

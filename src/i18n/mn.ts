@@ -174,6 +174,9 @@ export default {
     category: 'Үйлчилгээний төрлүүд',
     address: 'Хаяг сонгох',
     request: 'Хүсэлт',
+    biometric: 'Биометрик',
+    createPin: 'Пин үүсгэх',
+    retypePin: 'Пин дахин оруулах',
   },
   otp: {
     your: 'Таны',

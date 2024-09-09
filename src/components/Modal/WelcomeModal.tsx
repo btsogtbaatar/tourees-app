@@ -31,7 +31,7 @@ const WelcomeModal = ({
       <View style={{ marginTop: verticalScale(16), alignItems: 'center' }}>
         <Text
           style={{
-            color: colors.primary500,
+            color: colors.primaryGradient,
             fontSize: 18,
             fontWeight: '700',
             lineHeight: 27,

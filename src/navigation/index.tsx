@@ -1,17 +1,20 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
+import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
 import Login from '../modules/Auth/pages/Login/Login';
 import LoginOtpCheck from '../modules/Auth/pages/LoginOtpCheck/LoginOtpCheck';
 import Register from '../modules/Auth/pages/Register/Register';
 import RegisterOtpCheck from '../modules/Auth/pages/RegisterOtpCheck/RegisterOtpCheck';
 import RegisterTermAndCondition from '../modules/Auth/pages/RegisterTermAndCondition/RegisterTermAndCondition';
+import RetypePin from '../modules/Auth/pages/RetypePin/RetypePin';
 import HomeTabNavigator from '../modules/Home/navigation';
 import RequestDetail from '../modules/Request/page/RequestDetail/RequestDetail';
 import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
-import AddressDetail from '../modules/Shared/page/AddressDetail/AddressDetail';
-import AddressMapView from '../modules/Shared/page/AddressMapView/AddressMapView';
+import AddressDetail from '../modules/Shared/pages/AddressDetail/AddressDetail';
+import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
 
@@ -49,6 +52,21 @@ const Route = () => {
           options={{ title: t('headers.register') }}
           name="RegisterTermAndCondition"
           component={RegisterTermAndCondition}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.biometric') }}
+          name="BiometricConsent"
+          component={BiometricConsent}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.createPin') }}
+          name="CreatePin"
+          component={CreatePin}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.retypePin') }}
+          name="RetypePin"
+          component={RetypePin}
         />
         <Stack.Screen
           options={{ title: t('headers.home') }}

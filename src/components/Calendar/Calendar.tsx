@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import DatePicker from 'react-native-date-picker';
-import { languageStore } from '../../context/auth/store';
+import { useSelector } from 'react-redux';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
+import { selectLanguage } from '../../modules/Shared/slice/preferenceSlice';
 import { Typography } from '../../theme';
 import {
   getToday,
@@ -44,7 +45,7 @@ const Calendar = ({ onSuccess }: CalendarItemProps) => {
     TimeChoices.MORNING,
   );
   const { t } = useTranslation();
-  const language = languageStore.getState().language;
+  const language = useSelector(selectLanguage);
   const [activeDate, setActiveDate] = useState<Date>(getToday());
   useEffect(() => {
     const date = moment(activeDate);

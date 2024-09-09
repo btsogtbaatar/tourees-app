@@ -1,11 +1,11 @@
 import React, { useReducer } from 'react';
+import ModalContainer from '../../components/Modal/ModalContainer';
 import {
   ModalAction,
   ModalState,
   initialState,
   reducer,
 } from './modal.reducer';
-import ModalContainer from '../../components/Modal/ModalContainer';
 
 export const ModalContext = React.createContext<{
   state: ModalState;
@@ -19,13 +19,17 @@ export interface ProviderProps {
   children: React.ReactNode;
 }
 
+const InnerModalProvider = React.memo((props: ProviderProps) => {
+  return <>{props.children}</>;
+});
+
 export const ModalProvider = (props: ProviderProps) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   return (
     <ModalContext.Provider value={{ state, dispatch }}>
       <ModalContainer isVisible={state.show}>{state.component}</ModalContainer>
-      {props.children}
+      <InnerModalProvider>{props.children}</InnerModalProvider>
     </ModalContext.Provider>
   );
 };

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   StyleProp,
   Text,
@@ -9,7 +10,6 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import { colors } from '../../theme/colors';
 import { horizontalScale, verticalScale } from '../../utilities';
-import { useTranslation } from 'react-i18next';
 
 interface LinearButtonProps {
   extra?: StyleProp<ViewStyle>;
@@ -30,7 +30,7 @@ const LinearButton = ({
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
       locations={[0, 1]}
-      colors={[colors.primary500, colors.logoColor]}
+      colors={[colors.primaryGradient, colors.primary500]}
       style={[
         extra,
         {

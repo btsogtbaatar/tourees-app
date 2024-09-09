@@ -3,7 +3,7 @@ import { colors } from '../../theme';
 
 const TimerStyle = StyleSheet.create({
   highlight: {
-    color: colors.primary500,
+    color: colors.primaryGradient,
   },
 });
 

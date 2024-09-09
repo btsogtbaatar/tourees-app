@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, View } from 'react-native';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
-import { Address } from '../../modules/Shared/page/AddressMapView/AddressMapView';
+import { Address } from '../../modules/Shared/pages/AddressMapView/AddressMapView';
 import { Typography } from '../../theme';
 import {
   getNearbyPlacesFromCoordinates,

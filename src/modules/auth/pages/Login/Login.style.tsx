@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { verticalScale } from '../../../../utilities';
+import { horizontalScale, verticalScale } from '../../../../utilities';
 
 const styles = StyleSheet.create({
   socialContainer: {
@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'stretch',
     gap: verticalScale(16),
+  },
+  buttonContainer: {
+    marginTop: verticalScale(16),
+    flexDirection: 'row',
+    gap: horizontalScale(16),
   },
 });
 

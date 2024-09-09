@@ -5,7 +5,11 @@ import {
   ImageRequireSource,
   ImageURISource,
 } from 'react-native';
-import { authStore } from '../../context/auth/store';
+import { useSelector } from 'react-redux';
+import {
+  selectAuthenticated,
+  selectToken,
+} from '../../modules/Auth/slice/authSlice';
 import { getImageUrl } from '../../utilities/image';
 
 export interface CustomImageProps extends ImageProps {}
@@ -14,13 +18,14 @@ const CustomImage = (props: CustomImageProps) => {
   const uriSource = props.source as ImageURISource;
   const requireSource = props.source as ImageRequireSource;
 
-  const authState = authStore(state => state.auth);
+  const token = useSelector(selectToken);
+  const isAuthenticated = useSelector(selectAuthenticated);
 
   const getSource = () => {
     if (uriSource.uri !== undefined) {
       return {
-        headers: authState?.token
-          ? { Authorization: `Bearer ${authState?.token}` }
+        headers: isAuthenticated
+          ? { Authorization: `Bearer ${token?.jwt}` }
           : undefined,
         uri: getImageUrl(uriSource.uri),
       };
