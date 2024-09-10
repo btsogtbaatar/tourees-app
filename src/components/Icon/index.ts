@@ -19,15 +19,12 @@ import LogoMini from '../../../assets/icons/logo-mini.svg';
 import LogoIcon from '../../../assets/icons/logo.svg';
 import LogoutIcon from '../../../assets/icons/logout.svg';
 import PhoneIcon from '../../../assets/icons/phone.svg';
-import PlusIcon from '../../../assets/icons/plus-icon.svg';
 import SearchMdIcon from '../../../assets/icons/search-md.svg';
 import SmallIcon from '../../../assets/icons/small-icon.svg';
 import SmileCircleActiveIcon from '../../../assets/icons/smile-circle-active.svg';
 import SmileCircleIcon from '../../../assets/icons/smile-circle.svg';
 import StepCircleIcon from '../../../assets/icons/step-circle.svg';
 import TrashIcon from '../../../assets/icons/trash-01.svg';
-import UserActiveIcon from '../../../assets/icons/user-active.svg';
-import UserCircleIcon from '../../../assets/icons/user-circle.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
@@ -35,6 +32,9 @@ import SunIcon from '../../../assets/icons/sun.svg';
 import SunRiseIcon from '../../../assets/icons/sunrise.svg';
 import SunSetIcon from '../../../assets/icons/sunset.svg';
 import MoonIcon from '../../../assets/icons/moon.svg';
+import PlusIcon from '../../../assets/icons/PlusIcon';
+import UserActiveIcon from '../../../assets/icons/UserActiveIcon';
+import UserCircleIcon from '../../../assets/icons/UserCircleIcon';
 
 export {
   ArrowLeftIcon,

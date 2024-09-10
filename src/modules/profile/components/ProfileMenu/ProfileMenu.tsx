@@ -27,7 +27,15 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        navigation.navigate('TaskerStack', { screen: 'RegisterTasker' });
+      },
+    },
+    {
+      values: [t('Set up task alerts')],
+      prefix: <UserCircleIcon />,
+      suffix: <ChevronRightIcon color={colors.gray700} />,
+      onPress: () => {
+        navigation.navigate('TaskerStack', { screen: 'RegisterTasker' });
       },
     },
     {

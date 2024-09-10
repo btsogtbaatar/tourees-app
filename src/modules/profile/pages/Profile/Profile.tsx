@@ -1,14 +1,19 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { LogoMini } from '../../../../components/Icon';
+import {
+  LogoMini,
+  SearchMdIcon,
+  UserCircleIcon,
+} from '../../../../components/Icon';
 import { authStore } from '../../../../context/auth/store';
 import { colors } from '../../../../theme/colors';
 import { horizontalScale, verticalScale } from '../../../../utilities/metrics';
 import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
+import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 
 const Profile = () => {
-  const authState = authStore(state => state);
+  const {auth} = authStore();
   return (
     <View>
       <LinearGradient
@@ -16,7 +21,8 @@ const Profile = () => {
         end={{ x: 1, y: 0 }}
         locations={[0, 1]}
         colors={['#37414B', '#161A1E']}
-        style={styles.container}>
+        style={styles.container}
+      >
         <View style={styles.headerContainer}>
           <View style={{}}>
             <Image
@@ -24,26 +30,13 @@ const Profile = () => {
             />
           </View>
           <View style={styles.headerUsername}>
-            <View style={styles.subHeaderContainer}>
-              <Text style={styles.titleUsername}>
-                {authState.auth?.user?.username}
-              </Text>
-            </View>
+            <ProfileImage />
             <View style={styles.mt16}>
               <Text style={styles.titleMail}>
-                {authState.auth?.user?.email
-                  ? authState.auth.user?.email
-                  : authState.auth?.user?.phoneNumber}
+                {auth?.user?.email
+                  ? auth.user?.email
+                  : auth?.user?.phoneNumber}
               </Text>
-              <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                locations={[0, 1]}
-                colors={['#FF9646', '#FA6432']}
-                style={styles.seedContainer}>
-                <LogoMini />
-                <Text style={styles.seedText}>45000</Text>
-              </LinearGradient>
             </View>
           </View>
           <View style={styles.alignEnd}>
@@ -77,11 +70,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerUsername: {
-    flex: 1,
-    height: '100%',
+    // flex: 1,
+    // height: '100%',
     justifyContent: 'flex-end',
-    paddingVertical: verticalScale(16),
+    paddingTop: verticalScale(16),
     alignItems: 'center',
+    // backgroundColor: colors.white
   },
   titleUsername: {
     color: colors.white,

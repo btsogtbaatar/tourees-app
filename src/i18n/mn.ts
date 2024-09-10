@@ -181,4 +181,12 @@ export default {
     resendCode: 'Код дахин илгээх',
     resend: 'дахин илгээх',
   },
+  tasker: {
+    education: 'Боловсрол',
+    specialities: 'Мэргэжил',
+    languages: 'Гадаад хэл',
+    rank: 'Зэрэг цол',
+    transportation: 'Тээврийн хэрэгсэл',
+    portfolio: 'Портфолио',
+  },
 };

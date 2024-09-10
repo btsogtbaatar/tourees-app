@@ -14,6 +14,7 @@ import AddressDetail from '../modules/Shared/page/AddressDetail/AddressDetail';
 import AddressMapView from '../modules/Shared/page/AddressMapView/AddressMapView';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import TaskerStack from '../modules/Tasker/routes/routes';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -83,6 +84,11 @@ const Route = () => {
           component={AddressDetail}
         />
       </Stack.Group>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="TaskerStack"
+        component={TaskerStack}
+      />
     </Stack.Navigator>
   );
 };

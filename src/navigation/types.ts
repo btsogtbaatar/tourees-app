@@ -29,6 +29,11 @@ export type RootStackParamList = {
     addresses: Addresses;
     onGoBack: (addresses: Addresses) => void;
   };
+  TaskerStack: NavigatorScreenParams<TaskerParamList>;
+};
+
+export type TaskerParamList = {
+  RegisterTasker: undefined;
 };
 
 declare global {
