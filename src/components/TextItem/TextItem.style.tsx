@@ -18,7 +18,7 @@ const TextItemStyle = StyleSheet.create({
     flex: 1,
   },
   action: {
-    color: colors.primary500,
+    color: colors.primaryGradient,
   },
 });
 

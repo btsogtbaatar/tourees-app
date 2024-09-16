@@ -1,6 +1,7 @@
 import { api } from '../../../api';
-import { authStore } from '../../../context/auth/store';
-import { AuthModel, AuthStateToken } from '../entities';
+import store from '../../../context/app/store';
+import { AuthModel } from '../entities';
+import { setToken, setUser } from '../slice/authSlice';
 
 export const authBaseUrl = '/auth';
 
@@ -10,50 +11,69 @@ export function signUp(
   return api.post(`${authBaseUrl}/customers/register`, customer);
 }
 
-export async function activate(otp: AuthModel.Otp): Promise<AuthStateToken> {
+export async function activate(
+  otp: AuthModel.Otp,
+): Promise<AuthModel.RegisterResponse> {
   let token: AuthModel.Token = await api.post(`${authBaseUrl}/activate`, otp);
-  let user: AuthModel.RegisterResponse = await authenticate(token.jwt);
-
-  return { token: token.jwt, user };
+  return await authenticate(token);
 }
 
-export async function token(otp: AuthModel.Otp): Promise<AuthStateToken> {
-  let token: AuthModel.Token = await api.post(`${authBaseUrl}/token/otp`, otp);
-  let user: AuthModel.RegisterResponse = await authenticate(token.jwt);
+export async function tokenCredentials(
+  credentials: AuthModel.UsernamePassword,
+): Promise<AuthModel.RegisterResponse> {
+  let token: AuthModel.Token = await api.post(
+    `${authBaseUrl}/token`,
+    credentials,
+  );
 
-  return { token: token.jwt, user };
+  return await authenticate(token);
+}
+
+export async function tokenOtp(
+  otp: AuthModel.Otp,
+): Promise<AuthModel.RegisterResponse> {
+  let token: AuthModel.Token = await api.post(`${authBaseUrl}/token/otp`, otp);
+  return await authenticate(token);
+}
+
+export function createPin(
+  pin: AuthModel.CreatePin,
+): Promise<AuthModel.RegisterResponse> {
+  return api.post(`${authBaseUrl}/pin`, pin);
+}
+
+export function updatePin(
+  pin: AuthModel.UpdatePin,
+): Promise<AuthModel.RegisterResponse> {
+  return api.put(`${authBaseUrl}/pin`, pin);
 }
 
 export async function socialCustomerAuthenticate(
   socialToken: AuthModel.SocialToken,
-): Promise<AuthStateToken> {
+): Promise<AuthModel.RegisterResponse> {
   let token: AuthModel.Token = await api.post(
     `${authBaseUrl}/customers/social`,
     socialToken,
   );
-  let user: AuthModel.RegisterResponse = await authenticate(token.jwt);
-  return { token: token.jwt, user };
+  return await authenticate(token);
 }
 
-// TODO: Refactor
 async function authenticate(
-  token: string,
+  token: AuthModel.Token,
 ): Promise<AuthModel.RegisterResponse> {
-  authStore.getState().setAuthentication(true);
-  authStore.getState().setAccessToken({ token: token }, true);
+  store.dispatch(setToken(token));
 
   let user: AuthModel.RegisterResponse = await introspect();
-  authStore.getState().setAccessToken({ token: token, user }, true);
+
+  store.dispatch(setUser(user));
 
   return user;
 }
 
-export async function introspect(): Promise<AuthModel.RegisterResponse> {
+export function introspect(): Promise<AuthModel.RegisterResponse> {
   return api.get(`${authBaseUrl}/introspect`);
 }
 
 export function sendOtp(credentials: AuthModel.Credentials) {
   return api.post('/otp/send', credentials);
 }
-
-export function logout() {}

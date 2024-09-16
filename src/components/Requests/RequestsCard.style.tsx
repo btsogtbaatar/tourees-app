@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   descStyle: {
     fontSize: 12,
     fontWeight: '700',
-    color: colors.primary500,
+    color: colors.primaryGradient,
     lineHeight: 18,
   },
   timeContainer: {
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     width: 16,
     height: 16,
-    backgroundColor: colors.primary500,
+    backgroundColor: colors.primaryGradient,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     paddingRight: horizontalScale(12),
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: colors.primary500,
+    borderColor: colors.primaryGradient,
     gap: 4,
     alignItems: 'center',
     flexDirection: 'row',
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   },
   operatorTxt: {
     marginLeft: horizontalScale(4),
-    color: colors.primary500,
+    color: colors.primaryGradient,
   },
   operatorContainer: {
     padding: verticalScale(12),

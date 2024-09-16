@@ -12,7 +12,7 @@ export const AddressCardStyles = StyleSheet.create({
     borderWidth: 1,
   },
   selected: {
-    borderColor: colors.primary500,
+    borderColor: colors.primaryGradient,
   },
   unselected: {
     borderColor: 'transparent',

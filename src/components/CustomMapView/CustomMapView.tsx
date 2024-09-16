@@ -4,8 +4,8 @@ import { Platform } from 'react-native';
 import MapView, { Details, LatLng, Marker, Region } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { AddressType } from '../../modules/Request/entities/request.model';
-import { Addresses } from '../../modules/Shared/page/AddressMapView/AddressMapView';
-import AddressMapViewStyle from '../../modules/Shared/page/AddressMapView/AddressMapView.style';
+import { Addresses } from '../../modules/Shared/pages/AddressMapView/AddressMapView';
+import AddressMapViewStyle from '../../modules/Shared/pages/AddressMapView/AddressMapView.style';
 import { colors } from '../../theme';
 import { LocationCircleIcon, LocationIcon } from '../Icon';
 
@@ -94,7 +94,7 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
             origin={props.addresses.from}
             destination={props.addresses.to}
             apikey={process.env.GOOGLE_API_KEY!}
-            strokeColor={colors.primary500}
+            strokeColor={colors.primaryGradient}
             strokeWidth={2}
           />
         )}

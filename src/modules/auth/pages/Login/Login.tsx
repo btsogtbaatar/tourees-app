@@ -4,25 +4,36 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import * as Keychain from 'react-native-keychain';
+import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
+import IconGradientButton from '../../../../components/CustomButton/IconGradientButton';
 import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
+import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
+import { FaceId } from '../../../../components/Icon';
 import Loading from '../../../../components/Loading/Loading';
 import {
   FbLoginButton,
   GoogleLoginButton,
 } from '../../../../components/SocialLoginButtons';
 import TabController from '../../../../components/TabController/TabController';
+import { colors } from '../../../../theme';
 import { verticalScale } from '../../../../utilities/metrics';
 import validations from '../../../../validations';
+import { selectBiometricEnabled } from '../../../Shared/slice/preferenceSlice';
 import { AuthChannel, AuthModel } from '../../entities';
-import { sendOtp, socialCustomerAuthenticate } from '../../services';
+import {
+  sendOtp,
+  socialCustomerAuthenticate,
+  tokenCredentials,
+} from '../../services';
 import styles from './Login.style';
 
 export default function Login() {
@@ -32,6 +43,7 @@ export default function Login() {
   const [authChannel, setAuthChannel] = useState<AuthChannel>(
     AuthChannel.Email,
   );
+  const biometricEnabled = useSelector(selectBiometricEnabled);
 
   const schema = yup.object().shape({
     email:
@@ -65,8 +77,24 @@ export default function Login() {
       .finally(() => setLoading(false));
   };
 
+  const onBiometicPress = async () => {
+    const credentials = await Keychain.getGenericPassword();
+
+    if (credentials) {
+      tokenCredentials({
+        username: credentials.username,
+        password: credentials.password,
+      }).then(() => {
+        navigation.navigate('HomeTab', { screen: 'Home' });
+      });
+    } else {
+      notifyMessage('Алдаа', 'Биометрик мэдээлэл хадгалагдаагүй байна.');
+    }
+  };
+
   const socialAuthentication = (socialToken: AuthModel.SocialToken) => {
     setLoading(true);
+
     socialCustomerAuthenticate(socialToken)
       .then(() => {
         navigation.navigate('HomeTab', {
@@ -111,6 +139,21 @@ export default function Login() {
                       keyboardType="phone-pad"
                     />
                   )}
+                  <View style={styles.buttonContainer}>
+                    <View style={{ flex: 1 }}>
+                      <CustomGradientButton
+                        title="Нэвтрэх"
+                        onPress={form.handleSubmit(onSubmit)}
+                        disabled={!form.formState.isValid}
+                      />
+                    </View>
+                    {biometricEnabled === true && (
+                      <IconGradientButton
+                        icon={<FaceId color={colors.white} />}
+                        onPress={onBiometicPress}
+                      />
+                    )}
+                  </View>
                 </FormProvider>
                 <CustomDivider>{t('or')}</CustomDivider>
                 <View style={styles.socialContainer}>
@@ -119,11 +162,6 @@ export default function Login() {
                 </View>
               </View>
             </ContainerView>
-            <FooterButton
-              text={t('check.label')}
-              onPress={form.handleSubmit(onSubmit)}
-              disabled={!form.formState.isValid}
-            />
           </FullHeightView>
         </CustomTouchableWithoutFeedback>
       </CustomKeyboardAvoidingView>

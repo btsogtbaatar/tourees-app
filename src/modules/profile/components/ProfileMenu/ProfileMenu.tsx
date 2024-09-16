@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { default as React } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import i18n from '../../../../../i18n';
 import GroupedMenuList from '../../../../components/GroupedMenuList/GroupedMenuList';
 import {
@@ -13,14 +14,20 @@ import {
   LogoutIcon,
   UserCircleIcon,
 } from '../../../../components/Icon';
-import { authStore, languageStore } from '../../../../context/auth/store';
+import { useAppDispatch } from '../../../../context/app/store';
 import { colors } from '../../../../theme/colors';
+import { resetAuth } from '../../../Auth/slice/authSlice';
+import {
+  changeLanguage,
+  selectLanguage,
+} from '../../../Shared/slice/preferenceSlice';
 
 const ProfileMenu = () => {
   const { t } = useTranslation();
-  const authState = authStore(state => state);
-  const languageState = languageStore(state => state);
+  const language = useSelector(selectLanguage);
   const navigation = useNavigation();
+  const dispatch = useAppDispatch();
+
   const profileMenus = [
     {
       values: [t('profile.l_register_infomation')],
@@ -52,9 +59,9 @@ const ProfileMenu = () => {
       prefix: <GlobalIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        const language = languageState.language;
-        i18n.changeLanguage(language === 'mn' ? 'en' : 'mn').then(() => {
-          languageState.setLanguage(language === 'mn' ? 'en' : 'mn');
+        let selectedLanguage = language === 'mn' ? 'en' : 'mn';
+        i18n.changeLanguage(selectedLanguage).then(() => {
+          dispatch(changeLanguage(selectedLanguage));
         });
       },
     },
@@ -77,9 +84,9 @@ const ProfileMenu = () => {
     {
       values: [t('profile.l_logout')],
       prefix: <LogoutIcon />,
-      suffix: <ChevronRightIcon color={colors.logoColor} />,
+      suffix: <ChevronRightIcon color={colors.primary500} />,
       onPress: () => {
-        authState.clearAccessToken();
+        dispatch(resetAuth());
         navigation.navigate('HomeTab', { screen: 'Home' });
       },
     },

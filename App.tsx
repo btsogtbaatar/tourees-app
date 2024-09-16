@@ -7,20 +7,33 @@ import { LogBox } from 'react-native';
 import { Settings } from 'react-native-fbsdk-next';
 import Geocoder from 'react-native-geocoding';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import * as Keychain from 'react-native-keychain';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import './i18n';
 import { api } from './src/api';
 import { axiosInstance } from './src/api/interceptors';
-import { authStore, languageStore } from './src/context/auth/store';
+import store, { persistor } from './src/context/app/store';
 import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/navigation';
 
-axiosInstance(api, authStore);
+persistor.subscribe(() => {
+  axiosInstance(api);
+});
+
+if (__DEV__) {
+  require('./ReactotronConfig');
+}
+
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
-  languageStore(state => state);
 
   useEffect(() => {
+    Keychain.resetGenericPassword().then(() => {
+      console.log('Successfully reset');
+    });
+
     Geocoder.init(process.env.GOOGLE_API_KEY!);
     Settings.setAppID(process.env.FACEBOOK_APP_ID!);
     Settings.initializeSDK();
@@ -38,15 +51,19 @@ function App(): React.JSX.Element {
   }, []);
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <ModalProvider>
-            <Route />
-          </ModalProvider>
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </GestureHandlerRootView>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <SafeAreaProvider>
+            <NavigationContainer>
+              <ModalProvider>
+                <Route />
+              </ModalProvider>
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </GestureHandlerRootView>
+      </PersistGate>
+    </Provider>
   );
 }
 export default App;

@@ -63,6 +63,8 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Do you allow the app to use Face ID?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>Do you allow the app to get your location?</string>
 	<key>NSLocationAlwaysUsageDescription</key>

@@ -30,6 +30,6 @@ export const CustomFlatListItemStyles = StyleSheet.create({
   },
   subtitle: {
     ...Typography.textSmaller,
-    color: colors.primary500,
+    color: colors.primaryGradient,
   },
 });

@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Controller, FieldError, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import Calendar from '../../../../components/Calendar/Calendar';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomImage from '../../../../components/CustomImage/CustomImage';
@@ -21,11 +22,11 @@ import FullHeightView from '../../../../components/FullHeightView/FullHeightView
 import { LocationCircleIcon, LocationIcon } from '../../../../components/Icon';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import TextItem from '../../../../components/TextItem/TextItem';
-import { authStore } from '../../../../context/auth/store';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
 import { TaskSchema } from '../../../../validations/schema';
-import { uploadFile } from '../../../Shared/service/shared.service';
+import { selectAuthenticated } from '../../../Auth/slice/authSlice';
+import { uploadFile } from '../../../Shared/services/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
 import {
   createTask,
@@ -42,7 +43,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
   const { t } = useTranslation();
   const rootNavigation = useNavigation();
   const subCategory = route.params.item;
-  const authState = authStore(state => state);
+  const isAuthenticated = useSelector(selectAuthenticated);
 
   const [addresses, setAddresses] = useState<TaskModel.Addresses>({
     from: {
@@ -58,7 +59,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
   });
 
   useEffect(() => {
-    if (authState.authenticated) {
+    if (isAuthenticated) {
       getLastTaskFromAddress().then(fromAddress => {
         if (fromAddress) {
           setAddresses(_addresses => ({

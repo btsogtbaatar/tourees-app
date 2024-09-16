@@ -2,6 +2,8 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import { defaultUrl } from '../../../../api';
 import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
@@ -9,18 +11,21 @@ import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/Custom
 import { SearchMdIcon } from '../../../../components/Icon';
 import ImageItem from '../../../../components/ImageItem/ImageItem';
 import Loading from '../../../../components/Loading/Loading';
-import { authStore } from '../../../../context/auth/store';
+import { useAppDispatch } from '../../../../context/app/store';
 import { colors } from '../../../../theme/colors';
+import { resetAuth, selectAuthenticated } from '../../../Auth/slice/authSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
+import { resetPreference } from '../../../Shared/slice/preferenceSlice';
 import { getCategories as fetchCategories } from '../../services/category.service';
 import HomeStyle from './Home.style';
 
 const Home = () => {
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<SharedModel.Category[]>();
-  const authState = authStore(state => state);
   const navigation = useNavigation();
   const { t } = useTranslation(undefined, { keyPrefix: 'home' });
+  const isAuthenticated = useSelector(selectAuthenticated);
+  const dispatch = useAppDispatch();
 
   const getCateories = () => {
     fetchCategories()
@@ -33,6 +38,8 @@ const Home = () => {
   };
 
   useEffect(() => {
+    dispatch(resetAuth());
+    dispatch(resetPreference());
     getCateories();
   }, []);
 
@@ -43,6 +50,7 @@ const Home = () => {
   ) : (
     <CustomSafeAreaView>
       <ContainerView>
+        <Text>{defaultUrl}</Text>
         <Text style={HomeStyle.title}>{t('category.question')}</Text>
         <View style={HomeStyle.inputContainer}>
           <CustomInput
@@ -52,7 +60,7 @@ const Home = () => {
                 title: t('category.title'),
               });
             }}
-            icon={<SearchMdIcon style={{ color: colors.primary500 }} />}
+            icon={<SearchMdIcon style={{ color: colors.primaryGradient }} />}
           />
         </View>
         <View style={HomeStyle.listContainer}>
@@ -79,7 +87,7 @@ const Home = () => {
             )}
           />
         </View>
-        {!authState.authenticated && (
+        {!isAuthenticated && (
           <Banner
             title={'Үйлчилгээ үзүүлэгчээр бүртгүүлэх'}
             onPress={() => navigation.navigate('Login')}

@@ -4,7 +4,7 @@ import { colors } from '../../theme/colors';
 const FooterButtonStyle = StyleSheet.create({
   btn: {
     borderRadius: 12,
-    backgroundColor: colors.primary500,
+    backgroundColor: colors.primaryGradient,
     paddingHorizontal: 16,
     height: 40,
     justifyContent: 'center',
@@ -25,7 +25,7 @@ const FooterButtonStyle = StyleSheet.create({
     borderRadius: 12,
   },
   disabled: {
-    backgroundColor: colors.disabledColor,
+    backgroundColor: colors.primary100,
   },
   btnTextStyle: {
     color: colors.white,
@@ -34,7 +34,6 @@ const FooterButtonStyle = StyleSheet.create({
     fontFamily: 'Nunito',
   },
   container: {
-    paddingHorizontal: 16,
     alignItems: 'flex-start',
     gap: 16,
     borderTopStartRadius: 28,

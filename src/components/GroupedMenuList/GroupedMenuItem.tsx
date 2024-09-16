@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import GroupedMenuItemStyle from './GroupedMenuItem.style';
 import { colors } from '../../theme';
+import GroupedMenuItemStyle from './GroupedMenuItem.style';
 
 export type FilledListProps = {
   onPress: () => void;
@@ -29,7 +29,7 @@ const GroupedMenuItem: React.FC<FilledListProps> = ({
             style={[
               GroupedMenuItemStyle.menuName,
               index === length - 1 && {
-                color: colors.logoColor,
+                color: colors.primary500,
               },
             ]}>
             {values[0]}

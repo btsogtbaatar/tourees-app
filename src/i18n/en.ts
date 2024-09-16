@@ -18,5 +18,8 @@ export default {
   },
   login: {
     or: 'or',
+    email: {
+      label: 'Email',
+    },
   },
 };
