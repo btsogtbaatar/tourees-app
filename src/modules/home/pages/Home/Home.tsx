@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
+import { defaultUrl } from '../../../../api';
 import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
@@ -49,6 +50,7 @@ const Home = () => {
   ) : (
     <CustomSafeAreaView>
       <ContainerView>
+        <Text>{defaultUrl}</Text>
         <Text style={HomeStyle.title}>{t('category.question')}</Text>
         <View style={HomeStyle.inputContainer}>
           <CustomInput
