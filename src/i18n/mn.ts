@@ -32,6 +32,49 @@ export default {
     understand: 'Ойлголоо',
     login: 'Нэвтрэх',
   },
+  form: {
+    firstName: {
+      label: 'Нэр',
+      placeHolder: 'Нэр',
+      errors: { required: 'Та өөрийн нэрийг оруулна уу.', validation: '' },
+    },
+    lastName: {
+      label: 'Овог',
+      placeHolder: 'Овог',
+      errors: { required: 'Та овогоон оруулна уу.', validation: '' },
+    },
+    address: {
+      label: 'Хаяг',
+      placeHolder: 'Хаяг',
+      errors: {
+        required: 'Хаягаа оруулна уу.',
+        validation: 'Хаягаа оруулна уу',
+      },
+    },
+    taskerType: {
+      label: 'Төрөл',
+      errors: {
+        required: 'Төрөл оруулна уу.',
+      },
+      education: 'Боловсрол',
+      specialities: 'Мэргэжил',
+      languages: 'Гадаад хэл',
+      rank: 'Зэрэг цол',
+      transportation: 'Тээврийн хэрэгсэл',
+      portfolio: 'Портфолио',
+    },
+    profile: {
+      label: 'Зураг',
+      placeHolder: 'Зураг',
+      errors: { required: 'Зураг оруулна уу', validation: 'Зураг оруулна уу' },
+    },
+  },
+  tasker: {
+    type: {
+      INDIVIDUAL: 'Хувь хүн',
+      BUSINESS: 'Байгуулга',
+    },
+  },
   profile: {
     language: 'Хэл',
     mongolia: 'Монгол',
@@ -179,19 +222,14 @@ export default {
     address: 'Хаяг сонгох',
     request: 'Хүсэлт',
     taskerProfile: 'Таскэр',
+    biometric: 'Биометрик',
+    createPin: 'Пин үүсгэх',
+    retypePin: 'Пин дахин оруулах',
   },
   otp: {
     your: 'Таны',
     requestCode: '-д илгээсэн 4 оронтой кодыг оруулна уу',
     resendCode: 'Код дахин илгээх',
     resend: 'дахин илгээх',
-  },
-  tasker: {
-    education: 'Боловсрол',
-    specialities: 'Мэргэжил',
-    languages: 'Гадаад хэл',
-    rank: 'Зэрэг цол',
-    transportation: 'Тээврийн хэрэгсэл',
-    portfolio: 'Портфолио',
   },
 };

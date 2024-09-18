@@ -6,15 +6,19 @@ import LoginOtpCheck from '../modules/Auth/pages/LoginOtpCheck/LoginOtpCheck';
 import Register from '../modules/Auth/pages/Register/Register';
 import RegisterOtpCheck from '../modules/Auth/pages/RegisterOtpCheck/RegisterOtpCheck';
 import RegisterTermAndCondition from '../modules/Auth/pages/RegisterTermAndCondition/RegisterTermAndCondition';
+import RetypePin from '../modules/Auth/pages/RetypePin/RetypePin';
 import HomeTabNavigator from '../modules/Home/navigation';
 import RequestDetail from '../modules/Request/page/RequestDetail/RequestDetail';
 import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
-import AddressDetail from '../modules/Shared/page/AddressDetail/AddressDetail';
-import AddressMapView from '../modules/Shared/page/AddressMapView/AddressMapView';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
 import TaskerStack from '../modules/Tasker/routes/routes';
+import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
+import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
+import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
+import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -52,6 +56,21 @@ const Route = () => {
           component={RegisterTermAndCondition}
         />
         <Stack.Screen
+          options={{ title: t('headers.biometric') }}
+          name="BiometricConsent"
+          component={BiometricConsent}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.createPin') }}
+          name="CreatePin"
+          component={CreatePin}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.retypePin') }}
+          name="RetypePin"
+          component={RetypePin}
+        />
+        <Stack.Screen
           options={{ title: t('headers.home') }}
           name="HomeTab"
           component={HomeTabNavigator}
@@ -75,13 +94,18 @@ const Route = () => {
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
           options={{ title: t('headers.address') }}
+          name="AddressesMapView"
+          component={AddressesMapView}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.address') }}
           name="AddressMapView"
           component={AddressMapView}
         />
         <Stack.Screen
           options={{ title: t('headers.address') }}
-          name="AddressDetail"
-          component={AddressDetail}
+          name="AddressesDetail"
+          component={AddressesDetail}
         />
       </Stack.Group>
       <Stack.Screen

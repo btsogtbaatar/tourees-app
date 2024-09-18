@@ -5,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import { Controller, FieldError, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, View } from 'react-native';
+import { useSelector } from 'react-redux';
 import Calendar from '../../../../components/Calendar/Calendar';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomImage from '../../../../components/CustomImage/CustomImage';
@@ -21,11 +22,11 @@ import FullHeightView from '../../../../components/FullHeightView/FullHeightView
 import { LocationCircleIcon, LocationIcon } from '../../../../components/Icon';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import TextItem from '../../../../components/TextItem/TextItem';
-import { authStore } from '../../../../context/auth/store';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
 import { TaskSchema } from '../../../../validations/schema';
-import { uploadFile } from '../../../Shared/service/shared.service';
+import { selectAuthenticated } from '../../../Auth/slice/authSlice';
+import { uploadFile } from '../../../Shared/services/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
 import {
   createTask,
@@ -42,7 +43,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
   const { t } = useTranslation();
   const rootNavigation = useNavigation();
   const subCategory = route.params.item;
-  const authState = authStore((state) => state);
+  const isAuthenticated = useSelector(selectAuthenticated);
 
   const [addresses, setAddresses] = useState<TaskModel.Addresses>({
     from: {
@@ -58,10 +59,10 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
   });
 
   useEffect(() => {
-    if (authState.authenticated) {
-      getLastTaskFromAddress().then((fromAddress) => {
+    if (isAuthenticated) {
+      getLastTaskFromAddress().then(fromAddress => {
         if (fromAddress) {
-          setAddresses((_addresses) => ({
+          setAddresses(_addresses => ({
             ..._addresses,
             from: fromAddress,
           }));
@@ -143,7 +144,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                     <Controller
                       name="timeRange"
                       render={({ field: { onChange } }) => (
-                        <Calendar onSuccess={(value) => onChange(value)} />
+                        <Calendar onSuccess={value => onChange(value)} />
                       )}
                     />
                     {errors.timeRange && (
@@ -158,17 +159,23 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       name="files"
                       render={({ field: { onChange, value } }) => (
                         <ImageUploadButton
-                          onImageSelection={(images) => {
+                          limit={0}
+                          onDelete={id => {
+                            const _value = value.filter(
+                              (_: any, index: number) => index !== id,
+                            );
+                            onChange([..._value]);
+                          }}
+                          onImageSelection={images => {
                             console.log('🚀 ~ images:', images);
-
-                            let image = images.pop();
-
-                            uploadFile(image).then((file) => {
-                              if (value) {
-                                onChange([...value, file]);
-                              } else {
-                                onChange([file]);
-                              }
+                            images.forEach(image => {
+                              uploadFile(image).then(file => {
+                                if (value) {
+                                  onChange([...value, file]);
+                                } else {
+                                  onChange([file]);
+                                }
+                              });
                             });
                           }}
                         />
@@ -206,10 +213,10 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       placeholder={t('userRequest.address.from')}
                       buttonText={t('userRequest.address.edit')}
                       onPress={() =>
-                        rootNavigation.navigate('AddressMapView', {
+                        rootNavigation.navigate('AddressesMapView', {
                           addresses: addresses,
                           addressType: AddressType.From,
-                          onGoBack: (_addresses) => {
+                          onGoBack: _addresses => {
                             form.setValue('addresses', [
                               _addresses.from,
                               _addresses.to,
@@ -232,10 +239,10 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       placeholder={t('userRequest.address.to')}
                       buttonText={t('userRequest.address.edit')}
                       onPress={() =>
-                        rootNavigation.navigate('AddressMapView', {
+                        rootNavigation.navigate('AddressesMapView', {
                           addresses: addresses,
                           addressType: AddressType.To,
-                          onGoBack: (_addresses) => {
+                          onGoBack: _addresses => {
                             form.setValue('addresses', [
                               _addresses.from,
                               _addresses.to,
@@ -257,7 +264,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                 </FormProvider>
               </ContainerView>
               <FooterButton
-                onPress={handleSubmit(onSubmit, (error) => console.log(error))}
+                onPress={handleSubmit(onSubmit, error => console.log(error))}
                 showBackButton={true}
               />
             </ScrollView>

@@ -18,7 +18,7 @@ const RatingList = ({ rating }: RatingListProps) => {
         data={numbers}
         renderItem={({ item }) =>
           item <= Math.round(rating) ? (
-            <LogoMini color={colors.primary500} width={16} height={16} />
+            <LogoMini color={colors.primaryGradient} width={16} height={16} />
           ) : (
             <LogoMiniBorder width={16} height={16} />
           )

@@ -1,26 +1,4 @@
 import { SharedModel } from '../../Shared/entities/shared.model';
-import { ProfilePicture } from './../../Profile/entities/profile.model';
-export interface AuthState {
-  authenticated?: boolean;
-  clientToken?: ClientTokenResponse;
-  auth?: AuthStateToken;
-}
-
-export interface LanguageState {
-  language: 'mn' | 'en' | 'chn';
-}
-
-export interface ClientTokenResponse {
-  access_token: string;
-  expires_in: number;
-  token_type: string;
-  access_token_expires: Date;
-}
-
-export interface AuthStateToken {
-  token: string;
-  user?: AuthModel.RegisterResponse;
-}
 
 export enum AuthChannel {
   Email = 0,
@@ -33,7 +11,13 @@ export declare module AuthModel {
     phoneNumber?: string;
     username: string;
   };
-
+  export type UpdatePin = {
+    oldPin: string;
+    newPin: string;
+  };
+  export type CreatePin = {
+    newPin: string;
+  };
   export type Otp = {
     email?: string;
     phoneNumber?: string;
@@ -45,6 +29,11 @@ export declare module AuthModel {
   };
   export type Token = {
     jwt: string;
+  };
+
+  export type UsernamePassword = {
+    username: string;
+    password: string;
   };
 
   export type Credentials = {
@@ -60,6 +49,8 @@ export declare module AuthModel {
     firstName?: string;
     lastName?: string;
     profilePicture?: SharedModel.File;
+    hasPin: boolean;
+    biometricEnabled?: boolean;
 
     constructor(username: string) {
       this.username = username;

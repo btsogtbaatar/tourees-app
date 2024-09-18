@@ -73,7 +73,7 @@ export const getFontWeight = (weight: weight) => {
   }
 };
 
-const fontFamily = 'Nunito';
+export const fontFamily = 'Nunito';
 
 export const Typography = StyleSheet.create({
   textLarge: {

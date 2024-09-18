@@ -1,71 +1,48 @@
 import React from 'react';
-import {
-  Image,
-  ImageBackground,
-  StyleProp,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  ViewStyle,
-} from 'react-native';
-import { PlusIcon } from '../Icon';
+import { ImageBackground, TouchableOpacity, View } from 'react-native';
+import { PlusIcon, XCircleIcon } from '../Icon';
 import ImagePreviewStyle from './ImagePreview.style';
 import { ImageSource } from './ImageUploadButton';
+import { colors } from '../../theme';
 
 interface ImageComponentProps {
   item: ImageSource;
   index: number;
   chooseFile: () => void;
-  selectedImage: number;
-  extra?: StyleProp<ViewStyle>;
-  limitSize?: number;
+  onDelete: (index: number) => void;
 }
 
 const ImagePreview = ({
   item,
   index,
   chooseFile,
-  selectedImage,
-  extra,
-  limitSize,
+  onDelete,
 }: ImageComponentProps) => {
-  const imageSize = () => {
-    return selectedImage - 5;
-  };
-
-  if (index < (limitSize ?? 5)) {
-    if (index === 0) {
-      return (
-        <View style={[ImagePreviewStyle.container, extra]}>
-          <TouchableOpacity onPress={chooseFile}>
-            <PlusIcon />
-          </TouchableOpacity>
-        </View>
-      );
-    } else {
-      return (
-        <View style={[ImagePreviewStyle.container, extra]}>
-          <Image style={ImagePreviewStyle.imageContainer} source={item} />
-        </View>
-      );
-    }
-  } else if (index === (limitSize ?? 5)) {
+  if (!item.uri) {
     return (
-      <View style={[ImagePreviewStyle.container]}>
-        <ImageBackground
-          style={ImagePreviewStyle.imageBackContainer}
-          imageStyle={ImagePreviewStyle.br16}
-          resizeMode="stretch"
-          source={item}
-          blurRadius={10}
-        >
-          <Text style={ImagePreviewStyle.imageTitle}>+{imageSize()}</Text>
-        </ImageBackground>
+      <View style={ImagePreviewStyle.container}>
+        <TouchableOpacity onPress={chooseFile}>
+          <PlusIcon />
+        </TouchableOpacity>
       </View>
     );
   } else {
-    return <></>;
+    return (
+      <View style={ImagePreviewStyle.container}>
+        <ImageBackground
+          style={ImagePreviewStyle.imageContainer}
+          imageStyle={ImagePreviewStyle.br16}
+          source={item}>
+          <TouchableOpacity
+            style={ImagePreviewStyle.delete}
+            onPress={() => {
+              onDelete(index);
+            }}>
+            <XCircleIcon color={colors.primary500} />
+          </TouchableOpacity>
+        </ImageBackground>
+      </View>
+    );
   }
 };
 

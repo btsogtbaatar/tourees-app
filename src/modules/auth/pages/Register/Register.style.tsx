@@ -1,11 +1,12 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../../theme/colors';
-import { verticalScale } from '../../../../utilities/metrics';
+import { horizontalScale, verticalScale } from '../../../../utilities/metrics';
 
-const styles = StyleSheet.create({
+export const RegisterStyle = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
     alignItems: 'stretch',
+    gap: 8,
   },
   tabButton: {
     borderRadius: 16,
@@ -40,7 +41,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito',
   },
   selectedBox: {
-    borderColor: colors.primary500,
+    borderColor: colors.primaryGradient,
     backgroundColor: colors.placeColor,
   },
   unSelectedBox: {
@@ -65,12 +66,6 @@ const styles = StyleSheet.create({
   mt10: {
     marginTop: 20,
   },
-  container: {
-    flex: 1,
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
   otherLabel: {
     color: '#5F676F',
     fontSize: 12,
@@ -82,7 +77,7 @@ const styles = StyleSheet.create({
     height: 41,
     paddingVertical: 6,
     borderRadius: 15,
-    backgroundColor: colors.primary500,
+    backgroundColor: colors.primaryGradient,
     color: colors.textDark,
     width: '100%',
     flexDirection: 'row',
@@ -96,9 +91,29 @@ const styles = StyleSheet.create({
     fontFamily: 'Nunito',
   },
   btnContainer: {
-    // backgroundColor: Colors.textWhite,
     width: '100%',
   },
+  container: {
+    flex: 1,
+  },
+  steps: {
+    marginBottom: 16,
+  },
+  tabController: {
+    marginVertical: verticalScale(16),
+  },
+  formController: {
+    marginTop: verticalScale(16),
+  },
+  type: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    gap: horizontalScale(16),
+  },
+  typeButtons: {
+    flex: 1,
+    padding: verticalScale(10),
+    gap: horizontalScale(4),
+  },
 });
-
-export default styles;

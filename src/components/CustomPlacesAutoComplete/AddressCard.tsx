@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AddressType } from '../../modules/Request/entities/request.model';
-import { Address } from '../../modules/Shared/page/AddressMapView/AddressMapView';
+import { Address } from '../../modules/Shared/pages/AddressMapView/AddressesMapView';
 import { LocationCircleIcon, LocationIcon } from '../Icon';
 import { AddressCardStyles } from './AddressCard.style';
 

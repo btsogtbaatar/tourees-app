@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  ActivityIndicator,
-  FlatList,
-  RefreshControl,
-  Text,
-  View
+    ActivityIndicator,
+    FlatList,
+    RefreshControl,
+    Text,
+    View
 } from 'react-native';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
@@ -65,7 +65,7 @@ const Request = () => {
     return (
       <View style={{ justifyContent: 'center', alignItems: 'center' }}>
         {moreLoading ? (
-          <ActivityIndicator color={colors.primary500} size="large" />
+          <ActivityIndicator color={colors.primaryGradient} size="large" />
         ) : null}
         {lastPage <= currentPage && null}
       </View>
@@ -101,7 +101,7 @@ const Request = () => {
             <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
-              tintColor={colors.primary500}
+              tintColor={colors.primaryGradient}
             />
           }
           contentContainerStyle={{ flexGrow: 1 }}

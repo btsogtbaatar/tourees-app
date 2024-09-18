@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Pressable, Text } from 'react-native';
 import useTimer from '../../hooks/useTimer';
 import { FontWeight, getFontWeight, Typography } from '../../theme';
-import { useTranslation } from 'react-i18next';
 import TimerStyle from './Timer.style';
 
 interface TimerProps {
@@ -46,7 +46,7 @@ const Timer: React.FC<TimerProps> = ({ startFrom, restartFrom, onResend }) => {
           getFontWeight(FontWeight.bold),
           TimerStyle.highlight,
         ]}>
-        {padDuration(Math.floor(otpTimer / 60))} : {padDuration(otpTimer % 60)}
+        {padDuration(Math.floor(otpTimer / 60))}:{padDuration(otpTimer % 60)}
       </Text>
     );
   }

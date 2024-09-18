@@ -6,10 +6,10 @@ export const calendarTheme: Theme = {
   dayTextColor: colors.textColor,
   textSectionTitleColor: colors.gray700,
   selectedDayTextColor: colors.white,
-  selectedDayBackgroundColor: colors.primary500,
+  selectedDayBackgroundColor: colors.primaryGradient,
   textMonthFontWeight: 'bold',
   monthTextColor: colors.gray700,
-  arrowColor: colors.primary500,
+  arrowColor: colors.primaryGradient,
 };
 
 const UserRequestStyle = StyleSheet.create({
@@ -53,7 +53,7 @@ const UserRequestStyle = StyleSheet.create({
     borderTopStartRadius: 16,
   },
   icon: {
-    color: colors.primary500,
+    color: colors.primaryGradient,
     marginRight: 8,
   },
 });

@@ -15,7 +15,7 @@ import AddressMapViewStyle from './AddressMapView.style';
 
 type AddressMapViewProps = NativeStackScreenProps<
   RootStackParamList,
-  'AddressMapView'
+  'AddressesMapView'
 >;
 
 export type Addresses = {
@@ -32,7 +32,7 @@ export type Address = {
   apartment?: string;
 } & LatLng;
 
-export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
+export default function AddressesMapView(props: Readonly<AddressMapViewProps>) {
   const insets = useSafeAreaInsets();
   const [addressType, setAddressType] = useState<AddressType | undefined>(
     props.route.params.addressType,
@@ -164,7 +164,7 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         disabled={isDisabled()}
         text={t('continue')}
         onPress={() =>
-          props.navigation.navigate('AddressDetail', {
+          props.navigation.navigate('AddressesDetail', {
             addresses: addresses,
             onGoBack: (_addresses: Addresses) => {
               props.route.params.onGoBack({ ..._addresses });

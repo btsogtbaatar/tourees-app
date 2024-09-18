@@ -1,24 +1,25 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 import CustomTabNavigator, {
-    TabNavigationItem,
+  TabNavigationItem,
 } from '../../../components/CustomTabNavigator/CustomTabNavigator';
 import {
-    HomeActiveIcon,
-    HomeIcon,
-    SmileCircleActiveIcon,
-    SmileCircleIcon,
-    UserActiveIcon,
-    UserIcon,
+  HomeActiveIcon,
+  HomeIcon,
+  SmileCircleActiveIcon,
+  SmileCircleIcon,
+  UserActiveIcon,
+  UserIcon,
 } from '../../../components/Icon';
-import { authStore } from '../../../context/auth/store';
+import { selectAuthenticated } from '../../Auth/slice/authSlice';
 import Profile from '../../Profile/pages/Profile/Profile';
 import RequestList from '../../Request/page/RequestList/RequestList';
 import Home from '../pages/Home/Home';
 
 const HomeTabNavigator = () => {
   const { t } = useTranslation();
-  const isLoggedIn = authStore(state => state.authenticated);
+  const isAuthenticated = useSelector(selectAuthenticated);
 
   const items: TabNavigationItem[] = [
     {
@@ -47,7 +48,7 @@ const HomeTabNavigator = () => {
     },
   ];
 
-  return <CustomTabNavigator showTabBar={isLoggedIn} items={items} />;
+  return <CustomTabNavigator showTabBar={isAuthenticated} items={items} />;
 };
 
 export default HomeTabNavigator;

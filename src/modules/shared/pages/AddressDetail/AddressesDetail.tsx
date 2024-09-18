@@ -57,10 +57,10 @@ const AddressDetailItem = (props: AddressDetailItemProps) => {
 
 type AddressDetailProps = NativeStackScreenProps<
   RootStackParamList,
-  'AddressDetail'
+  'AddressesDetail'
 >;
 
-const AddressDetail = (props: AddressDetailProps) => {
+const AddressesDetail = (props: AddressDetailProps) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'addressDetail' });
 
   const schema = yup.object().shape({
@@ -119,4 +119,4 @@ const AddressDetail = (props: AddressDetailProps) => {
   );
 };
 
-export default AddressDetail;
+export default AddressesDetail;

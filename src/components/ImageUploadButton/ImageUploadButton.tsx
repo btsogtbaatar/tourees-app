@@ -11,48 +11,64 @@ export type ImageSource = {
 };
 
 interface ImageUploadButtonProps {
+  limit: number;
+  onDelete: (index: number) => void;
   onImageSelection: (selectedImages: ImageSource[]) => void;
   extra?: StyleProp<ViewStyle>;
   limitSize?: number;
 }
 
 const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
+  limit,
   onImageSelection,
-  extra,
-  limitSize,
+  onDelete,
 }) => {
   const [selectedImages, setSelectedImages] = useState<ImageSource[]>([{}]);
   const flatlistRef = useRef<FlatList<ImageSource> | null>(null);
 
   const chooseFile = () => {
-    console.log(limitSize && limitSize <= selectedImages.length, 'sizee');
-    if (limitSize && limitSize <= selectedImages.length) {
-      console.log('sssss');
-    } else {
-      ImagePicker.launchImageLibrary(
-        {
-          mediaType: 'photo',
-          includeBase64: false,
-          maxHeight: 200,
-          maxWidth: 200,
-          selectionLimit: 5,
-        },
-        (response) => {
-          if (!response.didCancel && !response.errorCode && response.assets) {
-            const { uri, fileName, type } = response.assets[0];
-            const source: ImageSource = {
+    ImagePicker.launchImageLibrary(
+      {
+        mediaType: 'photo',
+        includeBase64: false,
+        selectionLimit: limit,
+        maxHeight: 200,
+        maxWidth: 200,
+      },
+      response => {
+        if (!response.didCancel && !response.errorCode && response.assets) {
+          const source = response.assets.map(({ uri, fileName, type }) => {
+            return {
               uri: Platform.OS === 'ios' ? uri?.replace('file://', '') : uri,
               name: fileName,
               type,
-            };
-            setSelectedImages([...selectedImages, source]);
-            onImageSelection([...selectedImages, source]);
+            } as ImageSource;
+          });
+          if (limit) {
+            const newSelectedImages = [...selectedImages, ...source];
+            /*
+              @selectedImages has one initial value so limit needs to be more than one
+            */
+            if (newSelectedImages.length > limit) {
+              newSelectedImages.shift();
+            }
+            setSelectedImages(newSelectedImages);
+          } else {
+            setSelectedImages([...selectedImages, ...source]);
           }
-        },
-      );
-    }
+          onImageSelection([...source]);
+        }
+      },
+    );
   };
-
+  const _onDelete = (index: number) => {
+    const images = selectedImages.filter((val, idx) => idx != index && val.uri);
+    if (images.length !== limit || images.length === 0) {
+      images.unshift({});
+    }
+    setSelectedImages([...images]);
+    onDelete(index);
+  };
   return (
     <FlatList
       scrollEnabled={false}
@@ -60,16 +76,14 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
       data={selectedImages}
       columnWrapperStyle={ImageUploadButtonStyle.columnWrapperStyle}
       contentContainerStyle={ImageUploadButtonStyle.contentContainerStyle}
-      numColumns={limitSize ? 4 : 3}
+      numColumns={3}
       keyExtractor={(source, index) => index.toString()}
       renderItem={({ item, index }) => (
         <ImagePreview
           item={item}
           index={index}
           chooseFile={chooseFile}
-          selectedImage={selectedImages.length}
-          extra={extra}
-          limitSize={limitSize}
+          onDelete={_onDelete}
         />
       )}
     />

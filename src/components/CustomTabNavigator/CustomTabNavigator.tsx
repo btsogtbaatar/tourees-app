@@ -59,7 +59,7 @@ const CustomTabNavigator = (props: CustomTabNavigatorProps) => {
               headerShown: item.showHeader,
               headerTitle: () => headerTitle(item),
               tabBarLabel: item.label,
-              tabBarActiveTintColor: colors.primary500,
+              tabBarActiveTintColor: colors.primaryGradient,
               tabBarInactiveTintColor: colors.gray400,
               tabBarLabelStyle: { ...Typography.textSmallest },
               tabBarIcon: ({ focused }) =>
