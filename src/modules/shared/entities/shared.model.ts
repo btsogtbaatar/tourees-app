@@ -81,3 +81,7 @@ export namespace SharedModel {
     end: Date;
   }
 }
+export enum TaskerType {
+  INDIVIDUAL = 'INDIVIDUAL',
+  BUSINESS = 'BUSINESS',
+}

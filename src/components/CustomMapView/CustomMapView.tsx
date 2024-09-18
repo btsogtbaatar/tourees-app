@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import MapView, { Details, LatLng, Marker, Region } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { AddressType } from '../../modules/Request/entities/request.model';
-import { Addresses } from '../../modules/Shared/pages/AddressMapView/AddressMapView';
+import { Addresses } from '../../modules/Shared/pages/AddressMapView/AddressesMapView';
 import AddressMapViewStyle from '../../modules/Shared/pages/AddressMapView/AddressMapView.style';
 import { colors } from '../../theme';
 import { LocationCircleIcon, LocationIcon } from '../Icon';

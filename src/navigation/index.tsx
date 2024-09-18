@@ -1,8 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
-import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
 import Login from '../modules/Auth/pages/Login/Login';
 import LoginOtpCheck from '../modules/Auth/pages/LoginOtpCheck/LoginOtpCheck';
 import Register from '../modules/Auth/pages/Register/Register';
@@ -13,10 +11,13 @@ import HomeTabNavigator from '../modules/Home/navigation';
 import RequestDetail from '../modules/Request/page/RequestDetail/RequestDetail';
 import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
-import AddressDetail from '../modules/Shared/pages/AddressDetail/AddressDetail';
-import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
+import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
+import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
+import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -92,13 +93,18 @@ const Route = () => {
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
           options={{ title: t('headers.address') }}
+          name="AddressesMapView"
+          component={AddressesMapView}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.address') }}
           name="AddressMapView"
           component={AddressMapView}
         />
         <Stack.Screen
           options={{ title: t('headers.address') }}
-          name="AddressDetail"
-          component={AddressDetail}
+          name="AddressesDetail"
+          component={AddressesDetail}
         />
       </Stack.Group>
     </Stack.Navigator>

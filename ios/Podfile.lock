@@ -1209,7 +1209,7 @@ PODS:
   - RNGoogleSignin (12.2.1):
     - GoogleSignIn (~> 7.1)
     - React-Core
-  - RNKeychain (8.2.0):
+  - RNKeychain (8.1.3):
     - React-Core
   - RNReanimated (3.15.1):
     - glog
@@ -1488,7 +1488,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AppAuth: 501c04eda8a8d11f179dbe8637b7a91bb7e5d2fa
-  boost: 26fad476bfa736552bbfa698a06cc530475c1505
+  boost: d3f49c53809116a5d38da093a8aa78bf551aed09
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
@@ -1570,7 +1570,7 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: d35c79ffba52c1013013e16b1fc295aec2feabb6
   RNGestureHandler: 75e2ebf4e8ac521f2b3c9afdc048fcbc2e2c9ea4
   RNGoogleSignin: 08dc4ba7eac2096c7fecfe109f0950fa4683c803
-  RNKeychain: bfe3d12bf4620fe488771c414530bf16e88f3678
+  RNKeychain: f1b48665a4646f61191eb048c4c05c58d9a7596f
   RNReanimated: fe9610fb0eebdd1fe8f38421bebcaa9afa0fe6b2
   RNScreens: 29418ceffb585b8f0ebd363de304288c3dce8323
   RNSVG: 963a95f1f5d512a13d11ffd50d351c87fb5c6890
@@ -1579,4 +1579,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 2d620bea67efb5d91a39090ad7b4ee6844850e87
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2
