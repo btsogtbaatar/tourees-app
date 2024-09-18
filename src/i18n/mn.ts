@@ -32,6 +32,43 @@ export default {
     understand: 'Ойлголоо',
     login: 'Нэвтрэх',
   },
+  form: {
+    firstName: {
+      label: 'Нэр',
+      placeHolder: 'Нэр',
+      errors: { required: 'Та өөрийн нэрийг оруулна уу.', validation: '' },
+    },
+    lastName: {
+      label: 'Овог',
+      placeHolder: 'Овог',
+      errors: { required: 'Та овогоон оруулна уу.', validation: '' },
+    },
+    address: {
+      label: 'Хаяг',
+      placeHolder: 'Хаяг',
+      errors: {
+        required: 'Хаягаа оруулна уу.',
+        validation: 'Хаягаа оруулна уу',
+      },
+    },
+    taskerType: {
+      label: 'Төрөл',
+      errors: {
+        required: 'Төрөл оруулна уу.',
+      },
+    },
+    profile: {
+      label: 'Зураг',
+      placeHolder: 'Зураг',
+      errors: { required: 'Зураг оруулна уу', validation: 'Зураг оруулна уу' },
+    },
+  },
+  tasker: {
+    type: {
+      INDIVIDUAL: 'Хувь хүн',
+      BUSINESS: 'Байгуулга',
+    },
+  },
   profile: {
     language: 'Хэл',
     mongolia: 'Монгол',

@@ -159,17 +159,23 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       name="files"
                       render={({ field: { onChange, value } }) => (
                         <ImageUploadButton
+                          limit={0}
+                          onDelete={id => {
+                            const _value = value.filter(
+                              (_: any, index: number) => index !== id,
+                            );
+                            onChange([..._value]);
+                          }}
                           onImageSelection={images => {
                             console.log('🚀 ~ images:', images);
-
-                            let image = images.pop();
-
-                            uploadFile(image).then(file => {
-                              if (value) {
-                                onChange([...value, file]);
-                              } else {
-                                onChange([file]);
-                              }
+                            images.forEach(image => {
+                              uploadFile(image).then(file => {
+                                if (value) {
+                                  onChange([...value, file]);
+                                } else {
+                                  onChange([file]);
+                                }
+                              });
                             });
                           }}
                         />
@@ -207,7 +213,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       placeholder={t('userRequest.address.from')}
                       buttonText={t('userRequest.address.edit')}
                       onPress={() =>
-                        rootNavigation.navigate('AddressMapView', {
+                        rootNavigation.navigate('AddressesMapView', {
                           addresses: addresses,
                           addressType: AddressType.From,
                           onGoBack: _addresses => {
@@ -233,7 +239,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       placeholder={t('userRequest.address.to')}
                       buttonText={t('userRequest.address.edit')}
                       onPress={() =>
-                        rootNavigation.navigate('AddressMapView', {
+                        rootNavigation.navigate('AddressesMapView', {
                           addresses: addresses,
                           addressType: AddressType.To,
                           onGoBack: _addresses => {

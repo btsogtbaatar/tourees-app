@@ -1,4 +1,5 @@
 import ArrowLeftIcon from '../../../assets/icons/arrow-left.svg';
+import BuildingIcon from '../../../assets/icons/building.svg';
 import CheckIcon from '../../../assets/icons/check.svg';
 import ChevronRightIcon from '../../../assets/icons/chevron-right.svg';
 import ClockRewindIcon from '../../../assets/icons/clock-rewind.svg';
@@ -75,6 +76,6 @@ export {
   UserCircleIcon,
   UserIcon,
   VectorIcon,
-  XCircleIcon
+  XCircleIcon,
+  BuildingIcon,
 };
-

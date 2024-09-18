@@ -1,9 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
+import {
+  Keyboard,
+  ScrollView,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
@@ -17,6 +23,24 @@ import validations from '../../../../validations';
 import { AuthChannel, AuthModel } from '../../entities';
 import { signUp } from '../../services';
 import { RegisterStyle } from './Register.style';
+import { SharedModel, TaskerType } from '../../../Shared/entities/shared.model';
+import CustomSelectionButton from '../../../../components/CustomButton/CustomSelectionButton';
+import {
+  BuildingIcon,
+  LocationCircleIcon,
+  UserIcon,
+} from '../../../../components/Icon';
+import InputError from '../../../../components/FormError/FormError';
+import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
+import { uploadFile } from '../../../Shared/services/shared.service';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import {
+  DEFAULT_LAT,
+  DEFAULT_LNG,
+} from '../../../../components/CustomMapView/CustomMapOneMarker';
+import TextItem from '../../../../components/TextItem/TextItem';
+import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
 
 type RegisterProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
@@ -25,7 +49,11 @@ function Register({ navigation }: RegisterProps) {
   const [authChannel, setAuthChannel] = useState<AuthChannel>(
     AuthChannel.Email,
   );
-
+  const rootNavigation = useNavigation();
+  const [address, setAddress] = useState<Address>({
+    latitude: DEFAULT_LAT,
+    longitude: DEFAULT_LNG,
+  });
   const schema = yup.object().shape({
     email:
       authChannel === AuthChannel.Email
@@ -45,6 +73,16 @@ function Register({ navigation }: RegisterProps) {
             )
         : yup.string(),
     username: yup.string().required(t('r_username')),
+    firstName: yup.string().required(t('form.firstName.errors.required')),
+    lastName: yup.string().required(t('form.lastName.errors.required')),
+    profilePicture: yup
+      .mixed<SharedModel.File>()
+      .required(t('form.profile.errors.required')),
+    type: yup
+      .mixed<TaskerType>()
+      .oneOf(Object.values(TaskerType))
+      .required(t('form.taskerType.errors.required')),
+    address: yup.string().required(t('form.address.errors.required')),
   });
 
   const form = useForm({
@@ -65,6 +103,10 @@ function Register({ navigation }: RegisterProps) {
       });
     });
   };
+  const getAddress = (address: Address) => {
+    const data = address.address!.split(', ');
+    return `${data[data.length - 2]}, ${data[data.length - 1]}`;
+  };
 
   return (
     <CustomSafeAreaView>
@@ -83,29 +125,137 @@ function Register({ navigation }: RegisterProps) {
                 />
               </View>
               <FormProvider {...form}>
-                {authChannel === AuthChannel.Email && (
-                  <CustomFormInput
-                    label={t('login.email.label')}
-                    placeholder={t('login.email.placeholder')}
-                    name={'email'}
-                    keyboardType="email-address"
-                  />
-                )}
-                {authChannel === AuthChannel.Phone && (
-                  <CustomFormInput
-                    label={t('login.phone.label')}
-                    placeholder={t('login.phone.placeholder')}
-                    name={'phone'}
-                    keyboardType="phone-pad"
-                  />
-                )}
-                <View style={RegisterStyle.formController}>
-                  <CustomFormInput
-                    placeholder={t('l_username')}
-                    name={'username'}
-                    label={t('l_usernamelabel')}
-                  />
-                </View>
+                <ScrollView>
+                  {authChannel === AuthChannel.Email && (
+                    <CustomFormInput
+                      label={t('login.email.label')}
+                      placeholder={t('login.email.placeholder')}
+                      name={'email'}
+                      keyboardType="email-address"
+                    />
+                  )}
+                  {authChannel === AuthChannel.Phone && (
+                    <CustomFormInput
+                      label={t('login.phone.label')}
+                      placeholder={t('login.phone.placeholder')}
+                      name={'phone'}
+                      keyboardType="phone-pad"
+                    />
+                  )}
+                  <View style={RegisterStyle.formController}>
+                    <CustomFormInput
+                      placeholder={t('l_username')}
+                      name={'username'}
+                      label={t('l_usernamelabel')}
+                    />
+                  </View>
+                  <View style={RegisterStyle.formController}>
+                    <CustomFormInput
+                      placeholder={t('form.firstName.label')}
+                      name={'firstName'}
+                      label={t('form.firstName.placeHolder')}
+                    />
+                  </View>
+                  <View style={RegisterStyle.formController}>
+                    <CustomFormInput
+                      placeholder={t('form.lastName.label')}
+                      name={'lastName'}
+                      label={t('form.lastName.placeHolder')}
+                    />
+                  </View>
+                  <View style={RegisterStyle.formController}>
+                    <Controller
+                      name="type"
+                      render={({ field: { onChange, value } }) => (
+                        <View style={RegisterStyle.type}>
+                          <CustomSelectionButton
+                            style={RegisterStyle.typeButtons}
+                            active={value === TaskerType.INDIVIDUAL}
+                            onPress={() => {
+                              onChange(TaskerType.INDIVIDUAL);
+                            }}>
+                            <UserIcon />
+                            <Text>
+                              {t(`tasker.type.${TaskerType.INDIVIDUAL}`)}
+                            </Text>
+                          </CustomSelectionButton>
+                          <CustomSelectionButton
+                            style={RegisterStyle.typeButtons}
+                            active={value === TaskerType.BUSINESS}
+                            onPress={() => {
+                              onChange(TaskerType.BUSINESS);
+                            }}>
+                            <BuildingIcon />
+                            <Text>
+                              {t(`tasker.type.${TaskerType.BUSINESS}`)}
+                            </Text>
+                          </CustomSelectionButton>
+                        </View>
+                      )}
+                    />
+                    {form.formState.errors.type && (
+                      <InputError error={form.formState.errors.type.message} />
+                    )}
+                  </View>
+                  <View style={RegisterStyle.formController}>
+                    <Controller
+                      name="profilePicture"
+                      render={({ field: { onChange } }) => (
+                        <ImageUploadButton
+                          limit={1}
+                          onImageSelection={images => {
+                            let image = images.pop();
+                            uploadFile(image).then(file => {
+                              onChange(file);
+                            });
+                          }}
+                          onDelete={index => {
+                            onChange(undefined);
+                          }}
+                        />
+                      )}
+                    />
+                    {form.formState.errors.profilePicture && (
+                      <InputError
+                        error={form.formState.errors.profilePicture.message}
+                      />
+                    )}
+                  </View>
+                  <View style={RegisterStyle.formController}>
+                    <Controller
+                      name="address"
+                      render={({ field: { onChange } }) => (
+                        <TextItem
+                          icon={<LocationCircleIcon width={20} height={20} />}
+                          label={
+                            address.displayName
+                              ? address.displayName
+                              : t('form.address.placeHolder')
+                          }
+                          buttonText={t('userRequest.address.edit')}
+                          onPress={() => {
+                            rootNavigation.navigate('AddressMapView', {
+                              prevAddress: address,
+                              title: t('form.address.label'),
+                              onGoBack: address => {
+                                const _address = { ...address };
+                                _address.displayName = getAddress(_address);
+                                setAddress(_address);
+                                console.log('result', address);
+                                onChange(_address.displayName);
+                              },
+                            });
+                          }}
+                        />
+                      )}
+                    />
+                    {form.formState.errors.address && (
+                      <InputError
+                        error={form.formState.errors.address.message}
+                      />
+                    )}
+                  </View>
+                </ScrollView>
               </FormProvider>
             </View>
             <CustomGradientButton

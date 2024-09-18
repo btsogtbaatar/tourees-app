@@ -12,11 +12,21 @@ const ImagePreviewStyle = StyleSheet.create({
     borderColor: colors.borderColor,
     justifyContent: 'center',
   },
+  delete: {
+    backgroundColor: 'white',
+    height: horizontalScale(20),
+    width: horizontalScale(20),
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: horizontalScale(20),
+    margin: horizontalScale(5),
+  },
   imageContainer: {
     flex: 1,
     height: '100%',
     width: '100%',
     borderRadius: 16,
+    flexDirection: 'row-reverse',
   },
   imageBackContainer: {
     flex: 1,

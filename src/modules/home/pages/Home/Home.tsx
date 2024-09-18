@@ -89,8 +89,16 @@ const Home = () => {
         </View>
         {!isAuthenticated && (
           <Banner
-            title={'Үйлчилгээ үзүүлэгчээр бүртгүүлэх'}
+            key={0}
+            title={'Үйлчилгээ үзүүлэгчээр нэвтрэх'}
             onPress={() => navigation.navigate('Login')}
+          />
+        )}
+        {!isAuthenticated && (
+          <Banner
+            key={1}
+            title={'Үйлчилгээ үзүүлэгчээр бүртгүүлэх'}
+            onPress={() => navigation.navigate('Register')}
           />
         )}
       </ContainerView>

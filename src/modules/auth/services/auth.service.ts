@@ -8,7 +8,7 @@ export const authBaseUrl = '/auth';
 export function signUp(
   customer: AuthModel.RegisterRequest,
 ): Promise<AuthModel.RegisterResponse> {
-  return api.post(`${authBaseUrl}/customers/register`, customer);
+  return api.post(`${authBaseUrl}/contractors/register`, customer);
 }
 
 export async function activate(
