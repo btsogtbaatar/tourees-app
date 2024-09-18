@@ -4,6 +4,8 @@ import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigati
 import { AddressType } from '../modules/Request/entities/request.model';
 import { SharedModel } from '../modules/Shared/entities/shared.model';
 import { Addresses } from '../modules/Shared/page/AddressMapView/AddressMapView';
+import { TaskerModel } from '../modules/Tasker/entities/tasker.model';
+import { FieldValues, UseFormSetValue } from 'react-hook-form';
 
 export type RootStackParamList = {
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
@@ -34,6 +36,12 @@ export type RootStackParamList = {
 
 export type TaskerParamList = {
   RegisterTasker: undefined;
+  RemarkListView: {
+    label: string;
+    setValue: UseFormSetValue<FieldValues>;
+    name: string;
+    value: string[];
+  };
 };
 
 declare global {

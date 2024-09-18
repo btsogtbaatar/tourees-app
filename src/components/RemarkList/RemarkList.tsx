@@ -1,38 +1,47 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react';
+import {
+  FieldValues,
+  Path,
+  useController,
+  useFormContext,
+} from 'react-hook-form';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { defaultMark } from '../../modules/Tasker/common/common';
+import { TaskerModel } from '../../modules/Tasker/entities/tasker.model';
+import FormError from '../FormError/FormError';
 import { PlusIcon } from '../Icon';
 import { RemarkListStyle } from './RemarkList.style';
-import { defaultMark } from '../../modules/Tasker/common/common';
-import { RemarkModel } from '../../modules/Tasker/entities/remark.mode';
-import { actions } from '../../context/modal/modal.reducer';
-import { ModalContext } from '../../context/modal/modal.context';
-import RemarkListModal from '../RemarkListModal/RemarkListModal';
 
-interface RemarkListProps {
+export interface RemarkListProps<T extends FieldValues> {
   label: string;
+  name: Path<T>;
 }
 
-const RemarkList = ({ label }: RemarkListProps) => {
-  const [remark, setRemark] = useState<RemarkModel.RemarkItem[]>([]);
-  const { dispatch: dispatchModal } = useContext(ModalContext);
+function RemarkList<T extends FieldValues>(props: RemarkListProps<T>) {
+  const { label, name } = props;
+  const [remark, setRemark] = useState<string[]>([]);
+  const navigation = useNavigation();
+  const form = useFormContext();
+  const { control, setValue } = form;
+
+  const {
+    field: { value },
+    fieldState: { error },
+  } = useController({ name, control });
+
   useEffect(() => {
-    const data: RemarkModel.RemarkItem[] = [];
-    defaultMark.forEach((item) => {
-      if (item.show) {
-        data.push(item);
-      }
-    });
-    if (data.length > 0) {
-      setRemark(data);
-    }
-  }, []);
+    setRemark(value && value.length > 0 ? value : []);
+  }, [value]);
   const openModal = () => {
-    dispatchModal({
-      type: actions.SHOW,
-      component: <RemarkListModal label={label} />,
-      direction: 'bottom',
-      closeOnBackDropPress: true,
-      closeOnSwipeComplete: true,
+    navigation.navigate('TaskerStack', {
+      screen: 'RemarkListView',
+      params: {
+        label: label,
+        setValue: setValue,
+        name: name,
+        value: value,
+      },
     });
   };
 
@@ -46,21 +55,20 @@ const RemarkList = ({ label }: RemarkListProps) => {
           children={<PlusIcon width={16} />}
         />
         {remark.map((item) => {
-          if (item.show) {
+          if (item) {
             return (
               <TouchableOpacity
-                key={item.id}
+                key={item}
                 style={RemarkListStyle.plusButton}
-                children={
-                  <Text style={RemarkListStyle.title}>{item.label}</Text>
-                }
+                children={<Text style={RemarkListStyle.title}>{item}</Text>}
               />
             );
           }
         })}
       </View>
+      {error?.message && <FormError error={error.message} />}
     </View>
   );
-};
+}
 
 export default RemarkList;

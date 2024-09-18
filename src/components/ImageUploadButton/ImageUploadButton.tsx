@@ -35,6 +35,7 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
           includeBase64: false,
           maxHeight: 200,
           maxWidth: 200,
+          selectionLimit: 5,
         },
         (response) => {
           if (!response.didCancel && !response.errorCode && response.assets) {
@@ -47,7 +48,7 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
             setSelectedImages([...selectedImages, source]);
             onImageSelection([...selectedImages, source]);
           }
-        }
+        },
       );
     }
   };

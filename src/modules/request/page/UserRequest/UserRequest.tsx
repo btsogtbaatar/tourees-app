@@ -42,7 +42,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
   const { t } = useTranslation();
   const rootNavigation = useNavigation();
   const subCategory = route.params.item;
-  const authState = authStore(state => state);
+  const authState = authStore((state) => state);
 
   const [addresses, setAddresses] = useState<TaskModel.Addresses>({
     from: {
@@ -59,9 +59,9 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
 
   useEffect(() => {
     if (authState.authenticated) {
-      getLastTaskFromAddress().then(fromAddress => {
+      getLastTaskFromAddress().then((fromAddress) => {
         if (fromAddress) {
-          setAddresses(_addresses => ({
+          setAddresses((_addresses) => ({
             ..._addresses,
             from: fromAddress,
           }));
@@ -143,7 +143,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                     <Controller
                       name="timeRange"
                       render={({ field: { onChange } }) => (
-                        <Calendar onSuccess={value => onChange(value)} />
+                        <Calendar onSuccess={(value) => onChange(value)} />
                       )}
                     />
                     {errors.timeRange && (
@@ -158,12 +158,12 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       name="files"
                       render={({ field: { onChange, value } }) => (
                         <ImageUploadButton
-                          onImageSelection={images => {
+                          onImageSelection={(images) => {
                             console.log('🚀 ~ images:', images);
 
                             let image = images.pop();
 
-                            uploadFile(image).then(file => {
+                            uploadFile(image).then((file) => {
                               if (value) {
                                 onChange([...value, file]);
                               } else {
@@ -209,7 +209,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                         rootNavigation.navigate('AddressMapView', {
                           addresses: addresses,
                           addressType: AddressType.From,
-                          onGoBack: _addresses => {
+                          onGoBack: (_addresses) => {
                             form.setValue('addresses', [
                               _addresses.from,
                               _addresses.to,
@@ -235,7 +235,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                         rootNavigation.navigate('AddressMapView', {
                           addresses: addresses,
                           addressType: AddressType.To,
-                          onGoBack: _addresses => {
+                          onGoBack: (_addresses) => {
                             form.setValue('addresses', [
                               _addresses.from,
                               _addresses.to,
@@ -257,7 +257,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                 </FormProvider>
               </ContainerView>
               <FooterButton
-                onPress={handleSubmit(onSubmit, error => console.log(error))}
+                onPress={handleSubmit(onSubmit, (error) => console.log(error))}
                 showBackButton={true}
               />
             </ScrollView>

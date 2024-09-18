@@ -5,6 +5,7 @@ import {
   AuthStateToken,
   ClientTokenResponse,
   LanguageState,
+  ProfileState,
 } from '../../modules/Auth/entities/auth.model';
 import { zStorage } from '../reducers/reducers';
 
@@ -22,7 +23,7 @@ export type LanguageAction = {
 
 const languageStore = create<LanguageState & LanguageAction>()(
   persist(
-    set => ({
+    (set) => ({
       language: 'mn',
       setLanguage(language) {
         set({ language: language });
@@ -37,11 +38,11 @@ const languageStore = create<LanguageState & LanguageAction>()(
 
 const authStore = create<AuthState & AuthAction>()(
   persist(
-    set => ({
+    (set) => ({
       authenticated: false,
       auth: undefined,
       clientToken: undefined,
-      setClentToken: token =>
+      setClentToken: (token) =>
         set({
           clientToken: token,
           authenticated: false,
@@ -64,4 +65,22 @@ const authStore = create<AuthState & AuthAction>()(
   ),
 );
 
-export { authStore, languageStore };
+const profileStore = create<ProfileState>()(
+  persist(
+    (set) => ({
+      picture: '',
+      setPicture(picture) {
+        set({ picture });
+      },
+      clearPicture() {
+        set({ picture: '' });
+      },
+    }),
+    {
+      name: 'profile-store',
+      storage: createJSONStorage(() => zStorage),
+    },
+  ),
+);
+
+export { authStore, languageStore, profileStore };

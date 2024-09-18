@@ -4,13 +4,16 @@ import { AvatarModalStyle } from './AvatarModal.style';
 
 interface IProps {
   onCamera: () => void;
-  onGallery: () => void
+  onGallery: () => void;
 }
 
 const AvatarModal = (props: IProps) => {
   return (
     <View style={AvatarModalStyle.container}>
-      <TouchableOpacity style={AvatarModalStyle.titleContainer} onPress={props.onGallery}>
+      <TouchableOpacity
+        style={AvatarModalStyle.titleContainer}
+        onPress={props.onGallery}
+      >
         <Text style={AvatarModalStyle.label}>Зураг оруулах</Text>
       </TouchableOpacity>
       <TouchableOpacity

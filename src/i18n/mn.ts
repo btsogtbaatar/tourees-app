@@ -42,6 +42,10 @@ export default {
     l_help: 'Тусламж',
     l_logout: 'Гарах',
     seeProfile: 'Профайл харах',
+    imageSuccess: {
+      title: 'Амжилттай',
+      message: 'Зураг амжилттай солигдлоо.',
+    },
   },
   tab: {
     t_home: 'Нүүр',
@@ -174,6 +178,7 @@ export default {
     category: 'Үйлчилгээний төрлүүд',
     address: 'Хаяг сонгох',
     request: 'Хүсэлт',
+    taskerProfile: 'Таскэр',
   },
   otp: {
     your: 'Таны',

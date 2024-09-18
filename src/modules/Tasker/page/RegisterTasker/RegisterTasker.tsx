@@ -20,6 +20,8 @@ import ImageUploadButton, {
   ImageSource,
 } from '../../../../components/ImageUploadButton/ImageUploadButton';
 import { verticalScale } from '../../../../utilities';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { TaskSchema } from '../../../../validations/schema';
 
 type RegisterOtpCheckProps = NativeStackScreenProps<
   TaskerParamList,
@@ -31,9 +33,12 @@ const RegisterTasker = ({
   navigation,
 }: Readonly<RegisterOtpCheckProps>) => {
   const { t } = useTranslation();
-  const form = useForm({ mode: 'onChange' });
-  const onSubmit = () => {
-    console.log('values');
+  const form = useForm({
+    mode: 'onChange',
+    resolver: yupResolver(TaskSchema.registerTaskerSchema),
+  });
+  const onSubmit = (values: any) => {
+    console.log('values', values);
   };
   return (
     <CustomSafeAreaView>
@@ -68,11 +73,23 @@ const RegisterTasker = ({
                         autoComplete="off"
                       />
                     </View>
-                    <RemarkList label={t('tasker.education')} />
-                    <RemarkList label={t('tasker.specialities')} />
-                    <RemarkList label={t('tasker.languages')} />
-                    <RemarkList label={t('tasker.rank')} />
-                    <RemarkList label={t('tasker.transportation')} />
+                    <RemarkList
+                      label={t('tasker.education')}
+                      name={'education'}
+                    />
+                    <RemarkList
+                      label={t('tasker.specialities')}
+                      name="specialities"
+                    />
+                    <RemarkList
+                      label={t('tasker.languages')}
+                      name="languages"
+                    />
+                    <RemarkList label={t('tasker.rank')} name="rank" />
+                    <RemarkList
+                      label={t('tasker.transportation')}
+                      name="transportation"
+                    />
                     {/* <PortfolioImageUpload /> */}
                     <Text
                       style={[

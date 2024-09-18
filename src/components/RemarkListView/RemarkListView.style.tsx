@@ -2,14 +2,14 @@ import { StyleSheet } from 'react-native';
 import { horizontalScale, moderateScale, verticalScale } from '../../utilities';
 import { colors } from '../../theme';
 
-export const RemarkListModalStyle = StyleSheet.create({
+export const RemarkListViewStyle = StyleSheet.create({
   modalView: {
     flexDirection: 'column',
-    justifyContent: 'center',
     paddingBottom: verticalScale(32),
     backgroundColor: colors.white,
     borderRadius: moderateScale(12),
     paddingHorizontal: verticalScale(16),
+    flex: 1,
   },
   header: {
     flexDirection: 'row',

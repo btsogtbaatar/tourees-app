@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 import i18n from '../../i18n';
 import { TaskModel } from '../modules/Request/entities/request.model';
+import { TaskerModel } from '../modules/Tasker/entities/tasker.model';
 
 export module TaskSchema {
   export const subCategorySchema = yup
@@ -33,6 +34,32 @@ export module TaskSchema {
       addresses: yup
         .array()
         .min(2)
+        .required(i18n.t('userRequest.messages.addresses.required')),
+    });
+
+  export const remarkSchema = yup
+    .array()
+    .min(1, i18n.t('userRequest.messages.addresses.required'))
+    .required(i18n.t('userRequest.messages.addresses.required'));
+
+  export const registerTaskerSchema: yup.ObjectSchema<TaskerModel.TaskerRequest> =
+    yup.object({
+      tag: yup
+        .string()
+        .required(i18n.t('userRequest.messages.addresses.required')),
+      description: yup
+        .string()
+        .required(i18n.t('userRequest.messages.addresses.required')),
+      education: remarkSchema,
+      specialities: remarkSchema,
+      languages: remarkSchema,
+      transportation: remarkSchema,
+    });
+
+  export const remarkListSchema: yup.ObjectSchema<TaskerModel.RemarkRequest> =
+    yup.object({
+      remark: yup
+        .string()
         .required(i18n.t('userRequest.messages.addresses.required')),
     });
 }

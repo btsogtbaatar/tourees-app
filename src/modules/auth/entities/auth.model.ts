@@ -1,3 +1,5 @@
+import { SharedModel } from '../../Shared/entities/shared.model';
+import { ProfilePicture } from './../../Profile/entities/profile.model';
 export interface AuthState {
   authenticated?: boolean;
   clientToken?: ClientTokenResponse;
@@ -57,6 +59,7 @@ export declare module AuthModel {
     username: string;
     firstName?: string;
     lastName?: string;
+    profilePicture?: SharedModel.File;
 
     constructor(username: string) {
       this.username = username;
@@ -70,4 +73,10 @@ export declare module AuthModel {
 export enum SocialType {
   GOOGLE = 'GOOGLE',
   FACEBOOK = 'FACEBOOK',
+}
+
+export interface ProfileState {
+  picture: string;
+  setPicture: (value?: string) => void;
+  clearPicture: () => void;
 }

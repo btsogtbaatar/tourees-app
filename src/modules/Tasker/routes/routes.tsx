@@ -1,9 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import RemarkListView from '../../../components/RemarkListView/RemarkListView';
 import { TaskerParamList } from '../../../navigation/types';
 import customScreenOption from '../../../theme/customHeaderOption';
 import RegisterTasker from '../page/RegisterTasker/RegisterTasker';
-import { useTranslation } from 'react-i18next';
 
 const Stack = createNativeStackNavigator<TaskerParamList>();
 
@@ -12,12 +13,20 @@ const TaskerStack = () => {
   return (
     <Stack.Navigator
       initialRouteName="RegisterTasker"
-      screenOptions={customScreenOption}>
+      screenOptions={customScreenOption}
+    >
       <Stack.Group>
         <Stack.Screen
           name="RegisterTasker"
           component={RegisterTasker}
-          options={{ title: t('headers.request') }}
+          options={{ title: t('headers.taskerProfile') }}
+        />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen
+          name="RemarkListView"
+          component={RemarkListView}
+          options={{ headerShown: false }}
         />
       </Stack.Group>
     </Stack.Navigator>

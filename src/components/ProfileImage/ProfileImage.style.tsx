@@ -6,7 +6,7 @@ export const ProfileImageStyle = StyleSheet.create({
   container: {
     width: horizontalScale(84),
     height: horizontalScale(84),
-    borderRadius: moderateScale(42),
+    borderRadius: moderateScale(40),
     backgroundColor: 'white',
   },
   image: {
@@ -23,5 +23,8 @@ export const ProfileImageStyle = StyleSheet.create({
     borderColor: colors.borderColor,
     borderRadius: moderateScale(50),
     backgroundColor: colors.borderColor,
+  },
+  picture: {
+    borderRadius: moderateScale(40),
   },
 });

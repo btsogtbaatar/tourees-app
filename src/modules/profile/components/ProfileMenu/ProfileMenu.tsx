@@ -13,13 +13,18 @@ import {
   LogoutIcon,
   UserCircleIcon,
 } from '../../../../components/Icon';
-import { authStore, languageStore } from '../../../../context/auth/store';
+import {
+  authStore,
+  languageStore,
+  profileStore,
+} from '../../../../context/auth/store';
 import { colors } from '../../../../theme/colors';
 
 const ProfileMenu = () => {
   const { t } = useTranslation();
-  const authState = authStore(state => state);
-  const languageState = languageStore(state => state);
+  const authState = authStore((state) => state);
+  const languageState = languageStore((state) => state);
+  const profileState = profileStore();
   const navigation = useNavigation();
   const profileMenus = [
     {
@@ -88,6 +93,7 @@ const ProfileMenu = () => {
       suffix: <ChevronRightIcon color={colors.logoColor} />,
       onPress: () => {
         authState.clearAccessToken();
+        profileState.clearPicture();
         navigation.navigate('HomeTab', { screen: 'Home' });
       },
     },

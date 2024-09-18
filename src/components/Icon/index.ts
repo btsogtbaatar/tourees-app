@@ -24,7 +24,6 @@ import SmallIcon from '../../../assets/icons/small-icon.svg';
 import SmileCircleActiveIcon from '../../../assets/icons/smile-circle-active.svg';
 import SmileCircleIcon from '../../../assets/icons/smile-circle.svg';
 import StepCircleIcon from '../../../assets/icons/step-circle.svg';
-import TrashIcon from '../../../assets/icons/trash-01.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
@@ -35,6 +34,8 @@ import MoonIcon from '../../../assets/icons/moon.svg';
 import PlusIcon from '../../../assets/icons/PlusIcon';
 import UserActiveIcon from '../../../assets/icons/UserActiveIcon';
 import UserCircleIcon from '../../../assets/icons/UserCircleIcon';
+import CloseCircleIcon from '../../../assets/icons/CloseCircleIcon';
+import TrashIcon from '../../../assets/icons/TrashIcon';
 
 export {
   ArrowLeftIcon,
@@ -74,4 +75,6 @@ export {
   SunRiseIcon,
   SunSetIcon,
   MoonIcon,
+  CloseCircleIcon,
+  // TrashIcon,
 };

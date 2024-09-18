@@ -18,7 +18,7 @@ import Route from './src/navigation';
 axiosInstance(api, authStore);
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
-  languageStore(state => state);
+  languageStore((state) => state);
 
   useEffect(() => {
     Geocoder.init(process.env.GOOGLE_API_KEY!);
@@ -34,6 +34,9 @@ function App(): React.JSX.Element {
     i18n.changeLanguage('en');
     LogBox.ignoreLogs([
       'In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.',
+    ]);
+    LogBox.ignoreLogs([
+      'Non-serializable values were found in the navigation state',
     ]);
   }, []);
 

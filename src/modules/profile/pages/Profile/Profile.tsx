@@ -13,7 +13,7 @@ import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
 import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 
 const Profile = () => {
-  const {auth} = authStore();
+  const { auth } = authStore();
   return (
     <View>
       <LinearGradient
@@ -24,7 +24,7 @@ const Profile = () => {
         style={styles.container}
       >
         <View style={styles.headerContainer}>
-          <View style={{}}>
+          <View>
             <Image
               source={require('../../../../../assets/images/rectangle.png')}
             />
@@ -33,9 +33,7 @@ const Profile = () => {
             <ProfileImage />
             <View style={styles.mt16}>
               <Text style={styles.titleMail}>
-                {auth?.user?.email
-                  ? auth.user?.email
-                  : auth?.user?.phoneNumber}
+                {auth?.user?.email ? auth.user?.email : auth?.user?.phoneNumber}
               </Text>
             </View>
           </View>

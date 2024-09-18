@@ -1,5 +1,5 @@
 import { api } from '../../../api';
-import { authStore } from '../../../context/auth/store';
+import { authStore, profileStore } from '../../../context/auth/store';
 import { AuthModel, AuthStateToken } from '../entities';
 
 export const authBaseUrl = '/auth';
@@ -43,8 +43,11 @@ async function authenticate(
   authStore.getState().setAccessToken({ token: token }, true);
 
   let user: AuthModel.RegisterResponse = await introspect();
+  console.log('🚀 ~ user:', user);
+  if (user.profilePicture) {
+    profileStore.getState().setPicture(user.profilePicture.url);
+  }
   authStore.getState().setAccessToken({ token: token, user }, true);
-
   return user;
 }
 
