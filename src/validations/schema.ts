@@ -37,10 +37,7 @@ export module TaskSchema {
         .required(i18n.t('userRequest.messages.addresses.required')),
     });
 
-  export const remarkSchema = yup
-    .array()
-    .min(1, i18n.t('userRequest.messages.addresses.required'))
-    .required(i18n.t('userRequest.messages.addresses.required'));
+  export const remarkSchema = yup.array();
 
   export const registerTaskerSchema: yup.ObjectSchema<TaskerModel.TaskerRequest> =
     yup.object({
@@ -54,6 +51,8 @@ export module TaskSchema {
       specialities: remarkSchema,
       languages: remarkSchema,
       transportation: remarkSchema,
+      ranks: remarkSchema,
+      files: remarkSchema,
     });
 
   export const remarkListSchema: yup.ObjectSchema<TaskerModel.RemarkRequest> =

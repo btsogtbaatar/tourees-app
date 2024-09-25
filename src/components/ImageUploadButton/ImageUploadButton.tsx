@@ -1,13 +1,15 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FlatList, Platform, StyleProp, ViewStyle } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
 import ImagePreview from './ImagePreview';
 import ImageUploadButtonStyle from './ImageUploadButton.style';
+import { SharedModel } from '../../modules/Shared/entities/shared.model';
 
 export type ImageSource = {
   uri?: string;
   name?: string;
   type?: string;
+  url?: string;
 };
 
 interface ImageUploadButtonProps {
@@ -15,16 +17,23 @@ interface ImageUploadButtonProps {
   onDelete: (index: number) => void;
   onImageSelection: (selectedImages: ImageSource[]) => void;
   extra?: StyleProp<ViewStyle>;
-  limitSize?: number;
+  value?: ImageSource[];
 }
 
 const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
   limit,
   onImageSelection,
   onDelete,
+  value,
 }) => {
   const [selectedImages, setSelectedImages] = useState<ImageSource[]>([{}]);
   const flatlistRef = useRef<FlatList<ImageSource> | null>(null);
+
+  useEffect(() => {
+    if (value) {
+      setSelectedImages([{}, ...value]);
+    }
+  }, [value]);
 
   const chooseFile = () => {
     ImagePicker.launchImageLibrary(
@@ -52,6 +61,11 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
             if (newSelectedImages.length > limit) {
               newSelectedImages.shift();
             }
+            console.log(
+              newSelectedImages,
+              'newSelectedImagesnewSelectedImages',
+            );
+
             setSelectedImages(newSelectedImages);
           } else {
             setSelectedImages([...selectedImages, ...source]);
@@ -62,7 +76,13 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
     );
   };
   const _onDelete = (index: number) => {
-    const images = selectedImages.filter((val, idx) => idx != index && val.uri);
+    console.log(index, 'sssss');
+
+    const images = selectedImages.filter(
+      (val, idx) => idx != index && (val.uri || val.url),
+    );
+    console.log(images, 'imageesss');
+
     if (images.length !== limit || images.length === 0) {
       images.unshift({});
     }

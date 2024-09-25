@@ -11,6 +11,7 @@ import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 
 const Profile = () => {
   const user = useSelector(selectUser);
+  console.log(user?.profilePicture, 'ss');
 
   return (
     <View>
@@ -27,22 +28,14 @@ const Profile = () => {
             />
           </View>
           <View style={styles.headerUsername}>
-            <View style={styles.subHeaderContainer}>
+            <ProfileImage />
+            {/* <View style={styles.subHeaderContainer}>
               <Text style={styles.titleUsername}>{user?.username}</Text>
-            </View>
+            </View> */}
             <View style={styles.mt16}>
               <Text style={styles.titleMail}>
                 {user?.email ?? user?.phoneNumber}
               </Text>
-              <LinearGradient
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                locations={[0, 1]}
-                colors={['#FF9646', '#FA6432']}
-                style={styles.seedContainer}>
-                <LogoMini />
-                <Text style={styles.seedText}>45,000</Text>
-              </LinearGradient>
             </View>
           </View>
           <View style={styles.alignEnd}>

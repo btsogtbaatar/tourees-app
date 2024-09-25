@@ -7,8 +7,6 @@ import {
   useFormContext,
 } from 'react-hook-form';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { defaultMark } from '../../modules/Tasker/common/common';
-import { TaskerModel } from '../../modules/Tasker/entities/tasker.model';
 import FormError from '../FormError/FormError';
 import { PlusIcon } from '../Icon';
 import { RemarkListStyle } from './RemarkList.style';
@@ -54,7 +52,7 @@ function RemarkList<T extends FieldValues>(props: RemarkListProps<T>) {
           style={RemarkListStyle.plusButton}
           children={<PlusIcon width={16} />}
         />
-        {remark.map((item) => {
+        {remark.map(item => {
           if (item) {
             return (
               <TouchableOpacity

@@ -34,7 +34,10 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        navigation.navigate('TaskerStack', { screen: 'RegisterTasker' });
+        navigation.navigate('TaskerStack', {
+          screen: 'RegisterTasker',
+          params: { taskerView: undefined },
+        });
       },
     },
     {
@@ -42,7 +45,7 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        navigation.navigate('TaskerStack', { screen: 'RegisterTasker' });
+        navigation.navigate('TaskerStack', { screen: 'TaskerView' });
       },
     },
     {

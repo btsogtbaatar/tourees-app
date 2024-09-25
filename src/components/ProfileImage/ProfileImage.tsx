@@ -1,26 +1,33 @@
 import React, { useContext } from 'react';
-import { Image, Platform, TouchableOpacity, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Platform, TouchableOpacity, View } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { Camera } from 'react-native-vision-camera';
-import { profileStore } from '../../context/auth/store';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../../context/app/store';
 import { ModalContext } from '../../context/modal/modal.context';
 import { actions } from '../../context/modal/modal.reducer';
-import { horizontalScale } from '../../utilities';
-import { SearchMdIcon, UserCircleIcon } from '../Icon';
-import AvatarModal from './AvatarModal';
-import { ProfileImageStyle } from './ProfileImage.style';
-import { ImageSource } from '../ImageUploadButton/ImageUploadButton';
-import { uploadFile } from '../../modules/Shared/service/shared.service';
+import {
+  selectProfile,
+  setProfileImage,
+} from '../../modules/Auth/slice/authSlice';
 import { ProfileModel } from '../../modules/Profile/entities/profile.model';
 import { uploadProfile } from '../../modules/Profile/services/profile.service';
+import { uploadFile } from '../../modules/Shared/services/shared.service';
+import { horizontalScale } from '../../utilities';
 import CustomImage from '../CustomImage/CustomImage';
 import { notifyMessage } from '../CustomToast/CustomToast';
-import { useTranslation } from 'react-i18next';
+import { HeaderEditIcon, SearchMdIcon, UserCircleIcon } from '../Icon';
+import { ImageSource } from '../ImageUploadButton/ImageUploadButton';
+import AvatarModal from './AvatarModal';
+import { ProfileImageStyle } from './ProfileImage.style';
 
 const ProfileImage = () => {
   const { dispatch: dispatchModal } = useContext(ModalContext);
-  const { picture, setPicture } = profileStore();
   const { t } = useTranslation();
+  const profileImage = useSelector(selectProfile);
+  const dispatch = useAppDispatch();
+  console.log(profileImage?.url, 'ss');
 
   const onCamera = async () => {
     await Camera.requestCameraPermission();
@@ -29,7 +36,7 @@ const ProfileImage = () => {
       maxHeight: 300,
       maxWidth: 300,
       includeBase64: true,
-    }).then((res) => {
+    }).then(res => {
       console.log('res', res);
     });
   };
@@ -40,7 +47,7 @@ const ProfileImage = () => {
       maxHeight: 300,
       maxWidth: 300,
       includeBase64: true,
-    }).then((res) => {
+    }).then(res => {
       if (!res.didCancel && !res.errorCode && res.assets) {
         const { uri, fileName, type } = res.assets[0];
         const source: ImageSource = {
@@ -48,7 +55,7 @@ const ProfileImage = () => {
           name: fileName,
           type,
         };
-        uploadFile(source).then((file) => {
+        uploadFile(source).then(file => {
           const profilePicture: ProfileModel.ProfilePicture = {
             profilePicture: file,
           };
@@ -59,7 +66,7 @@ const ProfileImage = () => {
               t('profile.imageSuccess.title'),
               t('profile.imageSuccess.message'),
             );
-            setPicture(file.url);
+            dispatch(setProfileImage(file));
           });
         });
       }
@@ -76,14 +83,14 @@ const ProfileImage = () => {
   };
   return (
     <View style={ProfileImageStyle.container}>
-      {picture ? (
+      {profileImage ? (
         <TouchableOpacity onPress={showAvatarModal}>
           <CustomImage
             style={ProfileImageStyle.picture}
             width={horizontalScale(84)}
             height={horizontalScale(84)}
             source={{
-              uri: picture,
+              uri: profileImage.url,
             }}
             resizeMode="cover"
           />
@@ -91,16 +98,14 @@ const ProfileImage = () => {
       ) : (
         <TouchableOpacity
           style={ProfileImageStyle.image}
-          onPress={showAvatarModal}
-        >
+          onPress={showAvatarModal}>
           <UserCircleIcon width={80} height={80} />
         </TouchableOpacity>
       )}
       <TouchableOpacity
         style={ProfileImageStyle.editBtn}
-        onPress={showAvatarModal}
-      >
-        <SearchMdIcon />
+        onPress={showAvatarModal}>
+        <HeaderEditIcon width={24} />
       </TouchableOpacity>
     </View>
   );

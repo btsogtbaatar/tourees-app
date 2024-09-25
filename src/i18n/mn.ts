@@ -56,12 +56,6 @@ export default {
       errors: {
         required: 'Төрөл оруулна уу.',
       },
-      education: 'Боловсрол',
-      specialities: 'Мэргэжил',
-      languages: 'Гадаад хэл',
-      rank: 'Зэрэг цол',
-      transportation: 'Тээврийн хэрэгсэл',
-      portfolio: 'Портфолио',
     },
     profile: {
       label: 'Зураг',
@@ -74,6 +68,12 @@ export default {
       INDIVIDUAL: 'Хувь хүн',
       BUSINESS: 'Байгуулга',
     },
+    education: 'Боловсрол',
+    specialities: 'Мэргэжил',
+    languages: 'Гадаад хэл',
+    rank: 'Зэрэг цол',
+    transportation: 'Тээврийн хэрэгсэл',
+    portfolio: 'Портфолио',
   },
   profile: {
     language: 'Хэл',

@@ -6,6 +6,7 @@ import { SharedModel } from '../modules/Shared/entities/shared.model';
 import { Addresses } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import { Address } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
+import { TaskerModel } from '../modules/Tasker/entities/tasker.model';
 
 export type RootStackParamList = {
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
@@ -36,20 +37,23 @@ export type RootStackParamList = {
     addresses: Addresses;
     onGoBack: (addresses: Addresses) => void;
   };
+  BiometricConsent: undefined;
+  CreatePin: undefined;
+  RetypePin: { pin: string };
   TaskerStack: NavigatorScreenParams<TaskerParamList>;
 };
 
 export type TaskerParamList = {
-  RegisterTasker: undefined;
+  RegisterTasker: {
+    taskerView?: TaskerModel.TaskerRequest;
+  };
   RemarkListView: {
     label: string;
     setValue: UseFormSetValue<FieldValues>;
     name: string;
     value: string[];
   };
-  BiometricConsent: undefined;
-  CreatePin: undefined;
-  RetypePin: { pin: string };
+  TaskerView: undefined;
 };
 
 declare global {
