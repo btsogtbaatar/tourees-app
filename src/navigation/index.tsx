@@ -18,6 +18,7 @@ import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricCo
 import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
 import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
+import TaskerService from '../modules/Request/page/TaskerService/TaskerService';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -89,6 +90,11 @@ const Route = () => {
           name="RequestDetail"
           component={RequestDetail}
         />
+          <Stack.Screen
+          options={{ title: t('headers.request') }}
+          name="TaskerService"
+          component={TaskerService}
+        />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
@@ -106,6 +112,7 @@ const Route = () => {
           name="AddressesDetail"
           component={AddressesDetail}
         />
+        
       </Stack.Group>
     </Stack.Navigator>
   );
