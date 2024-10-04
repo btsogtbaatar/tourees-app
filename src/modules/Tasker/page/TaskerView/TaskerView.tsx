@@ -2,13 +2,7 @@ import { useNavigation } from '@react-navigation/core';
 import { useIsFocused } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  FlatList,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { FlatList, ScrollView, Text, TouchableOpacity } from 'react-native';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomImage from '../../../../components/CustomImage/CustomImage';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
@@ -17,14 +11,16 @@ import HeaderBar from '../../../../components/HeaderBar/HeaderBar';
 import { HeaderEditIcon } from '../../../../components/Icon';
 import RemarkTextView from '../../../../components/RemarkTextView/RemarkTextView';
 import { horizontalScale, moderateScale } from '../../../../utilities/metrics';
+import { ProfileModel } from '../../entities/profile.model';
 import { TaskerModel } from '../../entities/tasker.model';
-import { getTaskerView } from '../../service/tasker.service';
+import { getProfile } from '../../service/profile.service';
 import { TaskerViewStyle } from './TaskerView.style';
 
 const TaskerView = () => {
   const isFocused = useIsFocused();
   const [taskerView, setTaskerView] =
     useState<TaskerModel.TaskerRequestProps>();
+  const [profile, setProfile] = useState<ProfileModel.ProfileRequest>();
   const { t } = useTranslation();
   const navigation = useNavigation();
 
@@ -39,7 +35,7 @@ const TaskerView = () => {
               onPress={() => {
                 navigation.navigate('TaskerStack', {
                   screen: 'RegisterTasker',
-                  params: { taskerView: taskerView },
+                  params: { profile: profile },
                 });
               }}>
               <HeaderEditIcon />
@@ -48,12 +44,12 @@ const TaskerView = () => {
         />
       ),
     });
-  }, [taskerView]);
+  }, [profile]);
 
   useEffect(() => {
     if (isFocused) {
-      getTaskerView().then(res => {
-        setTaskerView(res);
+      getProfile().then(res => {
+        setProfile(res);
       });
     }
   }, [isFocused]);
@@ -63,36 +59,36 @@ const TaskerView = () => {
       <FullHeightView>
         <ScrollView>
           <ContainerView>
-            <RemarkTextView label={t('tasker.tag')} text={taskerView?.tag} />
+            <RemarkTextView label={t('tasker.tag')} text={profile?.tagLine} />
             <RemarkTextView
               label={t('tasker.description')}
-              text={taskerView?.description}
+              text={profile?.description}
             />
             <Text style={TaskerViewStyle.headerLabael}>{t('Skills')}</Text>
             <RemarkTextView
               label={t('tasker.education')}
-              arrayText={taskerView?.education}
+              arrayText={profile?.educations}
             />
             <RemarkTextView
               label={t('tasker.specialities')}
-              arrayText={taskerView?.specialities}
+              arrayText={profile?.specialities}
             />
             <RemarkTextView
               label={t('tasker.languages')}
-              arrayText={taskerView?.languages}
+              arrayText={profile?.languages}
             />
             <RemarkTextView
               label={t('tasker.rank')}
-              arrayText={taskerView?.ranks}
+              arrayText={profile?.ranks}
             />
             <RemarkTextView
               label={t('tasker.transportation')}
-              arrayText={taskerView?.transportation}
+              arrayText={profile?.transportations}
             />
             <RemarkTextView label={t('tasker.portfolio')} />
             <FlatList
               keyExtractor={(_, index) => index.toString()}
-              data={taskerView?.files}
+              data={profile?.files}
               numColumns={4}
               columnWrapperStyle={{ gap: horizontalScale(12) }}
               contentContainerStyle={{ gap: horizontalScale(12) }}

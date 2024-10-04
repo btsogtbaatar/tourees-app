@@ -10,14 +10,16 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import FormError from '../FormError/FormError';
 import { PlusIcon } from '../Icon';
 import { RemarkListStyle } from './RemarkList.style';
+import { ProfileModel } from '../../modules/Tasker/entities/profile.model';
 
 export interface RemarkListProps<T extends FieldValues> {
   label: string;
   name: Path<T>;
+  tags?: ProfileModel.ProfileTag[];
 }
 
 function RemarkList<T extends FieldValues>(props: RemarkListProps<T>) {
-  const { label, name } = props;
+  const { label, name, tags } = props;
   const [remark, setRemark] = useState<string[]>([]);
   const navigation = useNavigation();
   const form = useFormContext();
@@ -39,6 +41,7 @@ function RemarkList<T extends FieldValues>(props: RemarkListProps<T>) {
         setValue: setValue,
         name: name,
         value: value,
+        tags: tags,
       },
     });
   };

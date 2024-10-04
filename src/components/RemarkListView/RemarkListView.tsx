@@ -1,7 +1,7 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { TaskerModel } from '../../modules/Tasker/entities/tasker.model';
 import { TaskerParamList } from '../../navigation/types';
 import { horizontalScale, moderateScale, verticalScale } from '../../utilities';
@@ -11,19 +11,40 @@ import FormError from '../FormError/FormError';
 import { CloseIcon, TrashIcon } from '../Icon';
 import { RemarkListStyle } from '../RemarkList/RemarkList.style';
 import { RemarkListViewStyle } from './RemarkListView.style';
+import { ProfileModel } from '../../modules/Tasker/entities/profile.model';
+import { colors } from '../../theme';
 
 type RemarkListModalProps = NativeStackScreenProps<
   TaskerParamList,
   'RemarkListView'
 >;
 const RemarkListView = (props: RemarkListModalProps) => {
-  const { label, name, setValue, value } = props.route.params;
+  const { label, name, setValue, value, tags } = props.route.params;
   const [duplicateError, setDuplicateError] = useState<string>('');
   const [listData, setListData] = useState<string[]>(value);
+  const [tag, setTag] = useState<ProfileModel.ProfileTag[]>();
 
   const form = useForm({
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    if (form.watch('remark')) {
+      if (tags) {
+        const filterTags = tags.filter(t =>
+          t.value.toUpperCase().includes(form.watch('remark').toUpperCase()),
+        );
+
+        if (filterTags.length > 5) {
+          setTag(filterTags.slice(0, 5));
+        } else {
+          setTag(filterTags);
+        }
+      }
+    } else {
+      setTag([]);
+    }
+  }, [form.watch('remark')]);
 
   const onSubmit = (values: TaskerModel.RemarkRequest) => {
     if (values && values.remark && values.remark.trim() !== '') {
@@ -68,6 +89,27 @@ const RemarkListView = (props: RemarkListModalProps) => {
         />
         {duplicateError && <FormError error={duplicateError} />}
       </FormProvider>
+      <FlatList
+        data={tag}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={{
+              backgroundColor: colors.gray100,
+              padding: 10,
+              borderRadius: 10,
+            }}
+            onPress={() => {
+              form.setValue('remark', item.value);
+            }}>
+            <Text>{item.value}</Text>
+          </TouchableOpacity>
+        )}
+        ItemSeparatorComponent={() => <View style={{ marginVertical: 6 }} />}
+        style={{ flexGrow: 0 }}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{ paddingTop: verticalScale(8) }}
+      />
       <View style={[RemarkListStyle.container]}>
         {listData &&
           listData.map(item => {

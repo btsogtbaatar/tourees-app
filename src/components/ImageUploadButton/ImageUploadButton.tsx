@@ -3,7 +3,6 @@ import { FlatList, Platform, StyleProp, ViewStyle } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
 import ImagePreview from './ImagePreview';
 import ImageUploadButtonStyle from './ImageUploadButton.style';
-import { SharedModel } from '../../modules/Shared/entities/shared.model';
 
 export type ImageSource = {
   uri?: string;

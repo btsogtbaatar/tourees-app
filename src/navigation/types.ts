@@ -1,12 +1,14 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
+import { FieldValues, UseFormSetValue } from 'react-hook-form';
 import { AuthModel } from '../modules/Auth/entities';
 import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigation/types';
 import { AddressType } from '../modules/Request/entities/request.model';
 import { SharedModel } from '../modules/Shared/entities/shared.model';
-import { Addresses } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
-import { Address } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
-import { FieldValues, UseFormSetValue } from 'react-hook-form';
-import { TaskerModel } from '../modules/Tasker/entities/tasker.model';
+import {
+  Address,
+  Addresses,
+} from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import { ProfileModel } from '../modules/Tasker/entities/profile.model';
 
 export type RootStackParamList = {
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
@@ -45,13 +47,14 @@ export type RootStackParamList = {
 
 export type TaskerParamList = {
   RegisterTasker: {
-    taskerView?: TaskerModel.TaskerRequest;
+    profile?: ProfileModel.ProfileRequest;
   };
   RemarkListView: {
     label: string;
     setValue: UseFormSetValue<FieldValues>;
     name: string;
     value: string[];
+    tags?: ProfileModel.ProfileTag[];
   };
   TaskerView: undefined;
 };

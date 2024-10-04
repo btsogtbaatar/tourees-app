@@ -38,6 +38,10 @@ const ImagePreview = ({
             height={horizontalScale(72)}
             style={ImagePreviewStyle.imageContainer}
             resizeMode="cover"
+            onDelete={() => {
+              onDelete(index);
+            }}
+            index={index}
           />
         </View>
       );

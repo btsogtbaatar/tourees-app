@@ -36,7 +36,7 @@ const ProfileMenu = () => {
       onPress: () => {
         navigation.navigate('TaskerStack', {
           screen: 'RegisterTasker',
-          params: { taskerView: undefined },
+          params: { profile: undefined },
         });
       },
     },

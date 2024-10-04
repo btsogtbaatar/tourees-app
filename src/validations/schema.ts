@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 import i18n from '../../i18n';
 import { TaskModel } from '../modules/Request/entities/request.model';
+import { ProfileModel } from '../modules/Tasker/entities/profile.model';
 import { TaskerModel } from '../modules/Tasker/entities/tasker.model';
 
 export module TaskSchema {
@@ -39,18 +40,18 @@ export module TaskSchema {
 
   export const remarkSchema = yup.array();
 
-  export const registerTaskerSchema: yup.ObjectSchema<TaskerModel.TaskerRequest> =
+  export const registerTaskerSchema: yup.ObjectSchema<ProfileModel.ProfileRequest> =
     yup.object({
-      tag: yup
+      tagLine: yup
         .string()
         .required(i18n.t('userRequest.messages.addresses.required')),
       description: yup
         .string()
         .required(i18n.t('userRequest.messages.addresses.required')),
-      education: remarkSchema,
+      educations: remarkSchema,
       specialities: remarkSchema,
       languages: remarkSchema,
-      transportation: remarkSchema,
+      transportations: remarkSchema,
       ranks: remarkSchema,
       files: remarkSchema,
     });
