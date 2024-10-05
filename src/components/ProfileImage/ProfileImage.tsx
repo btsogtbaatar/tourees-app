@@ -1,8 +1,11 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Platform, TouchableOpacity, View } from 'react-native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { Camera } from 'react-native-vision-camera';
+import {
+  ImagePickerResponse,
+  launchCamera,
+  launchImageLibrary,
+} from 'react-native-image-picker';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../context/app/store';
 import { ModalContext } from '../../context/modal/modal.context';
@@ -21,13 +24,13 @@ import { HeaderEditIcon, SearchMdIcon, UserCircleIcon } from '../Icon';
 import { ImageSource } from '../ImageUploadButton/ImageUploadButton';
 import AvatarModal from './AvatarModal';
 import { ProfileImageStyle } from './ProfileImage.style';
+import { Camera } from 'react-native-vision-camera';
 
 const ProfileImage = () => {
   const { dispatch: dispatchModal } = useContext(ModalContext);
   const { t } = useTranslation();
   const profileImage = useSelector(selectProfile);
   const dispatch = useAppDispatch();
-  console.log(profileImage?.url, 'ss');
 
   const onCamera = async () => {
     await Camera.requestCameraPermission();
@@ -35,10 +38,35 @@ const ProfileImage = () => {
       mediaType: 'photo',
       maxHeight: 300,
       maxWidth: 300,
-      includeBase64: true,
+      includeBase64: false,
     }).then(res => {
-      console.log('res', res);
+      uploadProfileImage(res);
     });
+  };
+
+  const uploadProfileImage = (res: ImagePickerResponse) => {
+    if (!res.didCancel && !res.errorCode && res.assets) {
+      const { uri, fileName, type } = res.assets[0];
+      const source: ImageSource = {
+        uri: Platform.OS === 'ios' ? uri?.replace('file://', '') : uri,
+        name: fileName,
+        type,
+      };
+      uploadFile(source).then(file => {
+        const profilePicture: ProfileModel.ProfilePicture = {
+          profilePicture: file,
+        };
+        uploadProfile(profilePicture).then(() => {
+          dispatchModal({ type: actions.HIDE });
+
+          notifyMessage(
+            t('profile.imageSuccess.title'),
+            t('profile.imageSuccess.message'),
+          );
+          dispatch(setProfileImage(file));
+        });
+      });
+    }
   };
 
   const onGallery = async () => {
@@ -46,30 +74,9 @@ const ProfileImage = () => {
       mediaType: 'photo',
       maxHeight: 300,
       maxWidth: 300,
-      includeBase64: true,
+      includeBase64: false,
     }).then(res => {
-      if (!res.didCancel && !res.errorCode && res.assets) {
-        const { uri, fileName, type } = res.assets[0];
-        const source: ImageSource = {
-          uri: Platform.OS === 'ios' ? uri?.replace('file://', '') : uri,
-          name: fileName,
-          type,
-        };
-        uploadFile(source).then(file => {
-          const profilePicture: ProfileModel.ProfilePicture = {
-            profilePicture: file,
-          };
-          uploadProfile(profilePicture).then(() => {
-            dispatchModal({ type: actions.HIDE });
-
-            notifyMessage(
-              t('profile.imageSuccess.title'),
-              t('profile.imageSuccess.message'),
-            );
-            dispatch(setProfileImage(file));
-          });
-        });
-      }
+      uploadProfileImage(res);
     });
   };
 

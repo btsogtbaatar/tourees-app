@@ -31,8 +31,12 @@ const RemarkListView = (props: RemarkListModalProps) => {
   useEffect(() => {
     if (form.watch('remark')) {
       if (tags) {
-        const filterTags = tags.filter(t =>
-          t.value.toUpperCase().includes(form.watch('remark').toUpperCase()),
+        const filterTags = tags.filter(
+          (value, index, self) =>
+            index === self.findIndex(obj => obj.value === value.value) &&
+            value.value
+              .toUpperCase()
+              .includes(form.watch('remark').toUpperCase()),
         );
 
         if (filterTags.length > 5) {
@@ -94,19 +98,17 @@ const RemarkListView = (props: RemarkListModalProps) => {
         keyExtractor={(_, index) => index.toString()}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={{
-              backgroundColor: colors.gray100,
-              padding: 10,
-              borderRadius: 10,
-            }}
+            style={RemarkListViewStyle.tagListContainer}
             onPress={() => {
               form.setValue('remark', item.value);
             }}>
             <Text>{item.value}</Text>
           </TouchableOpacity>
         )}
-        ItemSeparatorComponent={() => <View style={{ marginVertical: 6 }} />}
-        style={{ flexGrow: 0 }}
+        ItemSeparatorComponent={() => (
+          <View style={RemarkListViewStyle.marginVertical} />
+        )}
+        style={RemarkListViewStyle.fGrow}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingTop: verticalScale(8) }}
       />
@@ -119,11 +121,11 @@ const RemarkListView = (props: RemarkListModalProps) => {
                   key={item}
                   style={[
                     RemarkListStyle.plusButton,
-                    { paddingRight: horizontalScale(6) },
+                    RemarkListViewStyle.pRight6,
                   ]}>
                   <Text style={RemarkListStyle.title}>{item}</Text>
                   <TouchableOpacity
-                    style={{ paddingLeft: 12 }}
+                    style={RemarkListViewStyle.p12}
                     onPress={() => deleteItem(item)}>
                     <CloseIcon width={10} />
                   </TouchableOpacity>

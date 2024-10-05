@@ -26,4 +26,22 @@ export const RemarkListViewStyle = StyleSheet.create({
     paddingHorizontal: undefined,
     marginTop: verticalScale(16),
   },
+  tagListContainer: {
+    backgroundColor: colors.gray100,
+    padding: 10,
+    borderRadius: 10,
+  },
+
+  fGrow: {
+    flexGrow: 0,
+  },
+  p12: {
+    paddingLeft: horizontalScale(12),
+  },
+  pRight6: {
+    paddingRight: horizontalScale(6),
+  },
+  marginVertical: {
+    marginVertical: verticalScale(6),
+  },
 });
