@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 import { verticalScale } from '../../../../utilities';
 import { Typography, getFontWeight, FontWeight } from '../../../../theme';
 
-export const RegisterTaskerStyle = StyleSheet.create({
+export const RegisterProfileStyle = StyleSheet.create({
   formItem: {
     marginTop: verticalScale(20),
   },

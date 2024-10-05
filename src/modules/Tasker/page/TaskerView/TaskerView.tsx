@@ -19,7 +19,7 @@ import { TaskerViewStyle } from './TaskerView.style';
 const TaskerView = () => {
   const isFocused = useIsFocused();
   const [taskerView, setTaskerView] =
-    useState<TaskerModel.TaskerRequestProps>();
+    useState<TaskerModel.TaskerProfileProps>();
   const [profile, setProfile] = useState<ProfileModel.ProfileRequest>();
   const { t } = useTranslation();
   const navigation = useNavigation();

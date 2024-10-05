@@ -4,8 +4,8 @@ import { useTranslation } from 'react-i18next';
 import RemarkListView from '../../../components/RemarkListView/RemarkListView';
 import { TaskerParamList } from '../../../navigation/types';
 import customScreenOption from '../../../theme/customHeaderOption';
-import RegisterTasker from '../page/RegisterTasker/RegisterTasker';
 import TaskerView from '../page/TaskerView/TaskerView';
+import RegisterTasker from '../page/RegisterProfile/RegisterProfile';
 
 const Stack = createNativeStackNavigator<TaskerParamList>();
 

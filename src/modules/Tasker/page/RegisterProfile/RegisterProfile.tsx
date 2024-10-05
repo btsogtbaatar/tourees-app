@@ -21,7 +21,7 @@ import { SharedModel } from '../../../Shared/entities/shared.model';
 import { uploadFiles } from '../../../Shared/services/shared.service';
 import { ProfileModel } from '../../entities/profile.model';
 import { createProfile, getTags } from '../../service/profile.service';
-import { RegisterTaskerStyle } from './RegisterTasker.style';
+import { RegisterProfileStyle } from './RegisterProfile.style';
 
 type RegisterTaskerProps = NativeStackScreenProps<
   TaskerParamList,
@@ -105,8 +105,8 @@ const RegisterTasker = ({
                     label="tagLine"
                     autoComplete="off"
                   />
-                  <View style={RegisterTaskerStyle.formItem}>
-                    <Text style={RegisterTaskerStyle.label}>{t('desc')}</Text>
+                  <View style={RegisterProfileStyle.formItem}>
+                    <Text style={RegisterProfileStyle.label}>{t('desc')}</Text>
                     <CustomFormInput
                       label="description"
                       name="description"
@@ -141,8 +141,8 @@ const RegisterTasker = ({
                   />
                   <Text
                     style={[
-                      RegisterTaskerStyle.label,
-                      RegisterTaskerStyle.formItem,
+                      RegisterProfileStyle.label,
+                      RegisterProfileStyle.formItem,
                     ]}>
                     {t('tasker.portfolio')}
                   </Text>

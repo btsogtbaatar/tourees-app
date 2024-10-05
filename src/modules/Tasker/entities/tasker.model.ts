@@ -8,18 +8,7 @@ export declare namespace TaskerModel {
     show?: boolean;
   }
 
-  export interface TaskerRequest {
-    tag: string;
-    description: string;
-    education?: string[];
-    specialities?: string[];
-    languages?: string[];
-    transportation?: string[];
-    ranks?: string[];
-    files?: ImageSource[] | SharedModel.File[];
-  }
-
-  export interface TaskerRequestProps {
+  export interface TaskerProfileProps {
     tag: string;
     description: string;
     education?: string[];
