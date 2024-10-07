@@ -8,12 +8,14 @@ import { Settings } from 'react-native-fbsdk-next';
 import Geocoder from 'react-native-geocoding';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import * as Keychain from 'react-native-keychain';
+import PushNotification from 'react-native-push-notification';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './i18n';
 import { api } from './src/api';
 import { axiosInstance } from './src/api/interceptors';
+import RemoteNotification from './src/components/RemoteNotification/RemoteNotification';
 import store, { persistor } from './src/context/app/store';
 import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/navigation';
@@ -28,6 +30,16 @@ if (__DEV__) {
 
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
+
+  PushNotification.checkPermissions(async ({ alert, badge, sound }) => {
+    console.log(
+      '🚀 ~ PushNotification.checkPermissions ~ !alert || !badge || !sound:',
+      !alert || !badge || !sound,
+    );
+    if (!alert || !badge || !sound) {
+      await PushNotification.requestPermissions();
+    }
+  });
 
   useEffect(() => {
     Keychain.resetGenericPassword().then(() => {
@@ -53,6 +65,7 @@ function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <RemoteNotification />  
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>
             <NavigationContainer>

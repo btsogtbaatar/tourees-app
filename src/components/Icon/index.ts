@@ -1,4 +1,6 @@
 import ArrowLeftIcon from '../../../assets/icons/arrow-left.svg';
+import BellIcon from '../../../assets/icons/bell-03.svg';
+import BellActiveIcon from '../../../assets/icons/bell-active.svg';
 import CheckIcon from '../../../assets/icons/check.svg';
 import ChevronRightIcon from '../../../assets/icons/chevron-right.svg';
 import ClockRewindIcon from '../../../assets/icons/clock-rewind.svg';
@@ -38,8 +40,7 @@ import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
 
 export {
-  ArrowLeftIcon,
-  CheckIcon,
+  ArrowLeftIcon, BellActiveIcon, BellIcon, CheckIcon,
   ChevronRightIcon,
   CircleIcon,
   ClockRewindIcon,

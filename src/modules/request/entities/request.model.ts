@@ -16,8 +16,8 @@ export declare namespace TaskModel {
     createdDate: string;
     description: string;
     subCategory: SharedModel.SubCategory;
-    contractor: AuthModel.RegisterResponse;
-    customer: AuthModel.RegisterResponse;
+    contractor: AuthModel.User;
+    customer: AuthModel.User;
     files: SharedModel.File[];
     addresses: Address[];
   };

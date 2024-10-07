@@ -11,7 +11,7 @@ export type RootStackParamList = {
   LoginOtpCheck: { credentials: AuthModel.Credentials };
   Register: undefined;
   RegisterTermAndCondition: undefined;
-  RegisterOtpCheck: { registration: AuthModel.RegisterResponse };
+  RegisterOtpCheck: { registration: AuthModel.User };
   SubCategoryList: { parentCategoryId?: number; title: string };
   UserRequest: {
     item: SharedModel.SubCategory;

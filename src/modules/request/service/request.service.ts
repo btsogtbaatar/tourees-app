@@ -1,5 +1,4 @@
 import { api } from '../../../api';
-import { AuthStateToken } from '../../Auth/entities';
 import { SharedModel } from '../../Shared/entities/shared.model';
 import { TaskModel } from '../entities/request.model';
 
@@ -32,6 +31,6 @@ export async function getLastTaskFromAddress(): Promise<
 
 export function createTask(
   task: TaskModel.TaskRequest,
-): Promise<AuthStateToken> {
+) {
   return api.post('/tasks', task);
 }

@@ -7,20 +7,20 @@ export const authBaseUrl = '/auth';
 
 export function signUp(
   customer: AuthModel.RegisterRequest,
-): Promise<AuthModel.RegisterResponse> {
+): Promise<AuthModel.User> {
   return api.post(`${authBaseUrl}/customers/register`, customer);
 }
 
 export async function activate(
   otp: AuthModel.Otp,
-): Promise<AuthModel.RegisterResponse> {
+): Promise<AuthModel.User> {
   let token: AuthModel.Token = await api.post(`${authBaseUrl}/activate`, otp);
   return await authenticate(token);
 }
 
 export async function tokenCredentials(
   credentials: AuthModel.UsernamePassword,
-): Promise<AuthModel.RegisterResponse> {
+): Promise<AuthModel.User> {
   let token: AuthModel.Token = await api.post(
     `${authBaseUrl}/token`,
     credentials,
@@ -31,26 +31,26 @@ export async function tokenCredentials(
 
 export async function tokenOtp(
   otp: AuthModel.Otp,
-): Promise<AuthModel.RegisterResponse> {
+): Promise<AuthModel.User> {
   let token: AuthModel.Token = await api.post(`${authBaseUrl}/token/otp`, otp);
   return await authenticate(token);
 }
 
 export function createPin(
   pin: AuthModel.CreatePin,
-): Promise<AuthModel.RegisterResponse> {
+): Promise<AuthModel.User> {
   return api.post(`${authBaseUrl}/pin`, pin);
 }
 
 export function updatePin(
   pin: AuthModel.UpdatePin,
-): Promise<AuthModel.RegisterResponse> {
+): Promise<AuthModel.User> {
   return api.put(`${authBaseUrl}/pin`, pin);
 }
 
 export async function socialCustomerAuthenticate(
   socialToken: AuthModel.SocialToken,
-): Promise<AuthModel.RegisterResponse> {
+): Promise<AuthModel.User> {
   let token: AuthModel.Token = await api.post(
     `${authBaseUrl}/customers/social`,
     socialToken,
@@ -60,17 +60,21 @@ export async function socialCustomerAuthenticate(
 
 async function authenticate(
   token: AuthModel.Token,
-): Promise<AuthModel.RegisterResponse> {
+): Promise<AuthModel.User> {
   store.dispatch(setToken(token));
 
-  let user: AuthModel.RegisterResponse = await introspect();
+  let user: AuthModel.User = await introspect();
 
   store.dispatch(setUser(user));
 
   return user;
 }
 
-export function introspect(): Promise<AuthModel.RegisterResponse> {
+export function updateFirebaseToken(token: string) {
+  return api.put(`${authBaseUrl}/firebase/token`, { token });
+}
+
+export function introspect(): Promise<AuthModel.User> {
   return api.get(`${authBaseUrl}/introspect`);
 }
 

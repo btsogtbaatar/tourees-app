@@ -15,6 +15,7 @@ export default {
     t_home: 'Home',
     t_request: 'Requests',
     t_profile: 'Profile',
+    t_notification: 'Notification',
   },
   login: {
     or: 'or',

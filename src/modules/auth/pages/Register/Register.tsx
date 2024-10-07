@@ -59,7 +59,7 @@ function Register({ navigation }: RegisterProps) {
       values.email = '';
     }
 
-    signUp(values).then((response: AuthModel.RegisterResponse) => {
+    signUp(values).then((response: AuthModel.User) => {
       navigation.navigate('RegisterOtpCheck', {
         registration: response,
       });

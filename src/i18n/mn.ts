@@ -47,6 +47,7 @@ export default {
     t_home: 'Нүүр',
     t_request: 'Хүсэлтүүд',
     t_profile: 'Миний',
+    t_notification: 'Мэдэгдэл',
   },
   home: {
     category: {
