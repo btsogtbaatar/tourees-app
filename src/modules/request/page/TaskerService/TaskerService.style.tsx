@@ -60,43 +60,67 @@ export const TaskerServiceStyle = StyleSheet.create({
     gap: horizontalScale(16),
   },
 
-
-  isOnlineButton: {
+  locationTypeButton: {
     flex: 1,
     padding: verticalScale(10),
     gap: horizontalScale(8),
     marginHorizontal: horizontalScale(2),
   },
-  isOnlineSection: {
+  locationSection: {
     display: 'flex',
     flex: 1,
     flexDirection: 'column',
     paddingTop: verticalScale(10),
     gap: horizontalScale(2),
   },
-  isOnlineRow: {
+  locationRow: {
     display: 'flex',
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     gap: horizontalScale(16),
   },
   inActive: {
     borderColor: colors.borderColor,
+    backgoundColor: colors.gray100,
   },
   active: {
     borderColor: colors.borderPrimaryColor,
     backgroundColor: colors.placeColor,
   },
-
-
-
-  containerIsOnline: {
+  locationContainer: {
     display: 'flex',
     gap: verticalScale(16),
-    borderRadius: 5,
+    borderRadius: 16,
     borderWidth: 1,
     padding: horizontalScale(16),
     borderColor: colors.borderColor,
+    marginTop: verticalScale(10),
+  },
+  touchable: {
+    marginTop: verticalScale(10),
+    backgroundColor: colors.placeColor,
+    padding: 10,
+    borderRadius:16
+  },
+  disabled: {
+    opacity: 0.5,
+  },
+  label: {
+    ...Typography.textSmall,
+    ...getFontWeight(FontWeight.bold),
+    marginBottom: 8,
+  },
+  lockOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: colors.disabled,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
   },
 });

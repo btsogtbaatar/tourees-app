@@ -148,7 +148,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       )}
                     />
                     {errors.timeRange && (
-                      <InputError error={'Өдөр, цагийг оруулна уу.'} />
+                      <InputError error={t('l_date')} />
                     )}
                   </View>
                   <View style={UserRequestStyle.formItem}>
