@@ -38,6 +38,14 @@ const ProfileMenu = () => {
       },
     },
     {
+      values: [t('Үйлчилгээ бүртгүүлэх')],
+      prefix: <HelpCircleIcon />,
+      suffix: <ChevronRightIcon color={colors.gray700} />,
+      onPress: () => {
+        navigation.navigate('TaskerService');
+      },
+    },
+    {
       values: [t('profile.l_history')],
       prefix: <ClockRewindIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,

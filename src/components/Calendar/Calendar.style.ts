@@ -44,6 +44,7 @@ const CalendarStyle = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: colors.placeColor,
     justifyContent: 'center',
+    alignItems: 'center',   
     padding: verticalScale(10),
     gap: horizontalScale(16),
   },

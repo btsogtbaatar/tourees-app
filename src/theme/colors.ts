@@ -26,4 +26,5 @@ export const colors = {
   danger: '#F15980',
   dark700: '#161A1E',
   silver: '#F2F2F2',
+  disabled :'rgba(255, 255, 255, 0.7)',
 };

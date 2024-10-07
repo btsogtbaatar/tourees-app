@@ -38,7 +38,8 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
     setAddress(_prev => {
       return {
         ..._prev,
-        ...address,
+        latitude: region.latitude,   
+        longitude: region.longitude,
         ...region,
       };
     });
@@ -92,6 +93,7 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         disabled={isDisabled()}
         text={t('addressMapView.continue')}
         onPress={() => {
+          const { longitudeDelta, latitudeDelta, ...addressData } = address;
           onGoBack(address);
           props.navigation.goBack();
         }}

@@ -14,6 +14,7 @@ export const CustomBottomSheet = React.forwardRef(
       android_keyboardInputMode="adjustResize"
       index={-1}
       style={CustomBottomStyle.shadow}
+      snapPoints={['50%', '100%']}
       ref={ref}
       enableDynamicSizing={true}
       enablePanDownToClose={true}>
