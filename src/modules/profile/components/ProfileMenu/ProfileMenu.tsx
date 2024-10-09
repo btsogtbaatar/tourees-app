@@ -30,6 +30,7 @@ const ProfileMenu = () => {
 
   const profileMenus = [
     {
+      key: 1,
       values: [t('profile.l_register_infomation')],
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -41,6 +42,7 @@ const ProfileMenu = () => {
       },
     },
     {
+      key: 2,
       values: [t('Set up task alerts')],
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -49,6 +51,7 @@ const ProfileMenu = () => {
       },
     },
     {
+      key: 3,
       values: [t('profile.l_history')],
       prefix: <ClockRewindIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -57,6 +60,7 @@ const ProfileMenu = () => {
       },
     },
     {
+      key: 4,
       values: [t('profile.l_ebarimt')],
       prefix: <EBarimtIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -66,6 +70,7 @@ const ProfileMenu = () => {
     },
 
     {
+      key: 5,
       values: [t('profile.language'), t('profile.mongolia')],
       prefix: <GlobalIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -77,6 +82,7 @@ const ProfileMenu = () => {
       },
     },
     {
+      key: 6,
       values: [t('profile.t_serviceterm')],
       prefix: <FileIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -85,6 +91,7 @@ const ProfileMenu = () => {
       },
     },
     {
+      key: 1,
       values: [t('profile.l_help')],
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -93,6 +100,7 @@ const ProfileMenu = () => {
       },
     },
     {
+      key: 7,
       values: [t('profile.l_logout')],
       prefix: <LogoutIcon />,
       suffix: <ChevronRightIcon color={colors.primary500} />,

@@ -27,19 +27,18 @@ import SmallIcon from '../../../assets/icons/small-icon.svg';
 import SmileCircleActiveIcon from '../../../assets/icons/smile-circle-active.svg';
 import SmileCircleIcon from '../../../assets/icons/smile-circle.svg';
 import StepCircleIcon from '../../../assets/icons/step-circle.svg';
-import PlusIcon from '../../../assets/icons/PlusIcon';
-import CloseCircleIcon from '../../../assets/icons/CloseCircleIcon';
 import SunIcon from '../../../assets/icons/sun.svg';
 import SunRiseIcon from '../../../assets/icons/sunrise.svg';
 import SunSetIcon from '../../../assets/icons/sunset.svg';
-import TrashIcon from '../../../assets/icons/TrashIcon';
+import TrashIcon from '../../../assets/icons/trash-01.svg';
 import UserActiveIcon from '../../../assets/icons/user-active.svg';
 import UserCircleIcon from '../../../assets/icons/user-circle.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
-import CloseIcon from '../../../assets/icons/CloseIcon';
-import HeaderEditIcon from '../../../assets/icons/HeaderEditIcon';
+import CloseIcon from '../../../assets/icons/close-icon.svg';
+import HeaderEditIcon from '../../../assets/icons/header-edit-icon.svg';
+import PlusIcon from '../../../assets/icons/plus-icon.svg';
 
 export {
   ArrowLeftIcon,
@@ -80,9 +79,7 @@ export {
   SunRiseIcon,
   SunSetIcon,
   MoonIcon,
-  CloseCircleIcon,
   CloseIcon,
-  // TrashIcon,
   BuildingIcon,
   HeaderEditIcon,
 };

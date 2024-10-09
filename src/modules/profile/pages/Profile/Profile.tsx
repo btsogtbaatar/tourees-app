@@ -29,9 +29,6 @@ const Profile = () => {
           </View>
           <View style={styles.headerUsername}>
             <ProfileImage />
-            {/* <View style={styles.subHeaderContainer}>
-              <Text style={styles.titleUsername}>{user?.username}</Text>
-            </View> */}
             <View style={styles.mt16}>
               <Text style={styles.titleMail}>
                 {user?.email ?? user?.phoneNumber}

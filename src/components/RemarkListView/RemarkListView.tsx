@@ -2,17 +2,16 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { ProfileModel } from '../../modules/Tasker/entities/profile.model';
 import { TaskerModel } from '../../modules/Tasker/entities/tasker.model';
 import { TaskerParamList } from '../../navigation/types';
-import { horizontalScale, moderateScale, verticalScale } from '../../utilities';
+import { verticalScale } from '../../utilities';
 import CustomFormInput from '../CustomInput/CustomFormInput';
 import FooterButton from '../FooterButton/FooterButton';
 import FormError from '../FormError/FormError';
-import { CloseIcon, TrashIcon } from '../Icon';
+import { CloseIcon } from '../Icon';
 import { RemarkListStyle } from '../RemarkList/RemarkList.style';
 import { RemarkListViewStyle } from './RemarkListView.style';
-import { ProfileModel } from '../../modules/Tasker/entities/profile.model';
-import { colors } from '../../theme';
 
 type RemarkListModalProps = NativeStackScreenProps<
   TaskerParamList,

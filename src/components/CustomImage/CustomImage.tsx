@@ -45,13 +45,7 @@ const CustomImage = (props: CustomImageProps) => {
   if (props.onDelete)
     return (
       <ImageBackground
-        style={{
-          flex: 1,
-          height: '100%',
-          width: '100%',
-          borderRadius: 16,
-          flexDirection: 'row-reverse',
-        }}
+        style={ImagePreviewStyle.customContainer}
         imageStyle={{ borderRadius: 16 }}
         source={getSource()}>
         <TouchableOpacity

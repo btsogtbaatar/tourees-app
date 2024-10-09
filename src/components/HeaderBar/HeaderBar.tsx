@@ -19,15 +19,13 @@ const HeaderBar = ({ backButtonVisible, title, suffix }: HeaderBarProps) => {
   const isCanGoBack = backButtonVisible && navigation.canGoBack;
   return (
     <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: horizontalScale(16),
-        paddingVertical: verticalScale(8),
-        alignItems: 'center',
-        paddingTop:
-          insets.top + verticalScale(Platform.OS === 'android' ? 12 : 0),
-      }}>
+      style={[
+        HeaderBarStyle.container,
+        {
+          paddingTop:
+            insets.top + verticalScale(Platform.OS === 'android' ? 12 : 0),
+        },
+      ]}>
       {isCanGoBack && (
         <CustomHeaderBackButton
           color={colors.gray700}

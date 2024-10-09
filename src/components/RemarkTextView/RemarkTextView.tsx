@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { CloseIcon } from '../Icon';
 import { RemarkTextViewStyle } from './RemarkTextView.style';
+import { RemarkListViewStyle } from '../RemarkListView/RemarkListView.style';
 
 interface RemarkTextViewProps {
   arrayText?: string[];
@@ -31,7 +32,7 @@ const RemarkTextView = ({
                 <View key={item} style={[RemarkTextViewStyle.plusButton]}>
                   <Text style={RemarkTextViewStyle.title}>{item}</Text>
                   {isDelete && (
-                    <TouchableOpacity style={{ paddingLeft: 12 }}>
+                    <TouchableOpacity style={RemarkListViewStyle.p12}>
                       <CloseIcon width={10} />
                     </TouchableOpacity>
                   )}

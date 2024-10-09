@@ -60,10 +60,6 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
             if (newSelectedImages.length > limit) {
               newSelectedImages.shift();
             }
-            console.log(
-              newSelectedImages,
-              'newSelectedImagesnewSelectedImages',
-            );
 
             setSelectedImages(newSelectedImages);
           } else {
@@ -75,12 +71,9 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
     );
   };
   const _onDelete = (index: number) => {
-    console.log(index, 'sssss');
-
     const images = selectedImages.filter(
       (val, idx) => idx != index && (val.uri || val.url),
     );
-    console.log(images, 'imageesss');
 
     if (images.length !== limit || images.length === 0) {
       images.unshift({});
