@@ -18,8 +18,6 @@ import { TaskerViewStyle } from './TaskerView.style';
 
 const TaskerView = () => {
   const isFocused = useIsFocused();
-  const [taskerView, setTaskerView] =
-    useState<TaskerModel.TaskerProfileProps>();
   const [profile, setProfile] = useState<ProfileModel.ProfileRequest>();
   const { t } = useTranslation();
   const navigation = useNavigation();
@@ -59,7 +57,10 @@ const TaskerView = () => {
       <FullHeightView>
         <ScrollView>
           <ContainerView>
-            <RemarkTextView label={t('tasker.tag')} text={profile?.tagLine} />
+            <RemarkTextView
+              label={t('tasker.tagLine')}
+              text={profile?.tagLine}
+            />
             <RemarkTextView
               label={t('tasker.description')}
               text={profile?.description}
@@ -82,8 +83,12 @@ const TaskerView = () => {
               arrayText={profile?.ranks}
             />
             <RemarkTextView
-              label={t('tasker.transportation')}
-              arrayText={profile?.transportations}
+              label={t('tasker.workingType.name')}
+              text={
+                profile?.workingType
+                  ? t(`tasker.workingType.${profile?.workingType}`)
+                  : ''
+              }
             />
             <RemarkTextView label={t('tasker.portfolio')} />
             <FlatList

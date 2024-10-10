@@ -9,8 +9,8 @@ export declare namespace ProfileModel {
     specialities?: string[];
     languages?: string[];
     ranks?: string[];
-    transportations?: string[];
     files?: SharedModel.File[];
+    workingType?: string;
   }
 
   export interface ProfileTag {

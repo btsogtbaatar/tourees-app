@@ -5,6 +5,7 @@ import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, View } from 'react-native';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomCheckBox from '../../../../components/CustomCheckBox/CustomCheckBox';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
@@ -12,12 +13,16 @@ import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import RemarkList from '../../../../components/RemarkList/RemarkList';
+import { RemarkListStyle } from '../../../../components/RemarkList/RemarkList.style';
 import { TaskerParamList } from '../../../../navigation/types';
 import { FontWeight, getFontWeight, Typography } from '../../../../theme';
 import { verticalScale } from '../../../../utilities';
 import { TaskSchema } from '../../../../validations/schema';
 import HomeStyle from '../../../Home/pages/Home/Home.style';
-import { SharedModel } from '../../../Shared/entities/shared.model';
+import {
+  ProfileWorkingType,
+  SharedModel,
+} from '../../../Shared/entities/shared.model';
 import { uploadFiles } from '../../../Shared/services/shared.service';
 import { ProfileModel } from '../../entities/profile.model';
 import { createProfile, getTags } from '../../service/profile.service';
@@ -46,7 +51,7 @@ const RegisterTasker = ({
       languages: profile?.languages,
       educations: profile?.educations,
       specialities: profile?.specialities,
-      transportations: profile?.transportations,
+      workingType: profile?.workingType,
     },
   });
 
@@ -101,17 +106,20 @@ const RegisterTasker = ({
                 <FormProvider {...form}>
                   <CustomFormInput
                     name="tagLine"
-                    placeholder="dsds"
-                    label="tagLine"
+                    placeholder="tagLine"
+                    label={t('tasker.tagLine')}
                     autoComplete="off"
                   />
                   <View style={RegisterProfileStyle.formItem}>
-                    <Text style={RegisterProfileStyle.label}>{t('desc')}</Text>
+                    <Text style={RegisterProfileStyle.label}>
+                      {t('tasker.description')}
+                    </Text>
                     <CustomFormInput
-                      label="description"
+                      label={t('tasker.description')}
                       name="description"
                       numberOfLines={3}
                       autoComplete="off"
+                      placeholder="description"
                     />
                   </View>
                   <RemarkList
@@ -134,10 +142,35 @@ const RegisterTasker = ({
                     name="ranks"
                     tags={tags}
                   />
-                  <RemarkList
-                    label={t('tasker.transportation')}
-                    name="transportations"
-                    tags={tags}
+                  <Text style={[RemarkListStyle.label, RemarkListStyle.header]}>
+                    {t('tasker.workingType.name')}
+                  </Text>
+                  <Controller
+                    name={'workingType'}
+                    render={({ field: { onChange, value } }) => (
+                      <View style={RegisterProfileStyle.workingContainer}>
+                        <CustomCheckBox
+                          onPress={() => onChange(ProfileWorkingType.ONLINE)}
+                          value={value === ProfileWorkingType.ONLINE}>
+                          <Text style={RegisterProfileStyle.alignCenter}>
+                            {t(
+                              `tasker.workingType.${ProfileWorkingType.ONLINE}`,
+                            )}
+                          </Text>
+                        </CustomCheckBox>
+                        <CustomCheckBox
+                          onPress={() =>
+                            onChange(ProfileWorkingType.PHYSICALLY)
+                          }
+                          value={value === ProfileWorkingType.PHYSICALLY}>
+                          <Text style={RegisterProfileStyle.alignCenter}>
+                            {t(
+                              `tasker.workingType.${ProfileWorkingType.PHYSICALLY}`,
+                            )}
+                          </Text>
+                        </CustomCheckBox>
+                      </View>
+                    )}
                   />
                   <Text
                     style={[
@@ -161,8 +194,6 @@ const RegisterTasker = ({
                         }}
                         extra={{ height: verticalScale(75) }}
                         onDelete={id => {
-                          console.log(value, 'iddd');
-
                           const _value = value.filter(
                             (_: any, index: number) => index != id - 1,
                           );

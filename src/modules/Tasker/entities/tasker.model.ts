@@ -14,7 +14,6 @@ export declare namespace TaskerModel {
     education?: string[];
     specialities?: string[];
     languages?: string[];
-    transportation?: string[];
     ranks?: string[];
     files?: SharedModel.File[];
   }
