@@ -1,12 +1,12 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useSelector } from 'react-redux';
+import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
+import ProfileMenu from '../../../../components/ProfileMenu/ProfileMenu';
 import { colors } from '../../../../theme/colors';
 import { horizontalScale, verticalScale } from '../../../../utilities/metrics';
 import { selectUser } from '../../../Auth/slice/authSlice';
-import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
-import ProfileImage from '../../../../components/ProfileImage/ProfileImage';
 
 const Profile = () => {
   const user = useSelector(selectUser);

@@ -42,13 +42,13 @@ export default function Steps(props: StepsProp) {
     if (index === props.totalSteps) {
       if (index === props.currentStepIndex) {
         return (
-          <View style={[StepStyle.step, StepStyle.completed]}>
+          <View key={`step-${index}`} style={[StepStyle.step, StepStyle.completed]}>
             <CheckIcon height={12} width={12} color={colors.white} />
           </View>
         );
       } else {
         return (
-          <View style={[StepStyle.step, StepStyle.uncompleted]}>
+          <View key={`step-${index}`} style={[StepStyle.step, StepStyle.uncompleted]}>
             <CheckIcon height={8} width={8} color={colors.gray300} />
           </View>
         );
@@ -57,7 +57,7 @@ export default function Steps(props: StepsProp) {
 
     if (index === props.currentStepIndex) {
       return (
-        <View style={[StepStyle.step, StepStyle.active]}>
+        <View key={`step-${index}`} style={[StepStyle.step, StepStyle.active]}>
           <StepCircleIcon color={colors.primaryGradient} />
         </View>
       );
@@ -65,7 +65,7 @@ export default function Steps(props: StepsProp) {
       const isVisited = index < props.currentStepIndex;
 
       return (
-        <View style={StepStyle.step}>
+        <View key={`trail-${index}`} style={StepStyle.step}>
           <StepCircleIcon
             color={isVisited ? colors.success : colors.borderColor}
           />

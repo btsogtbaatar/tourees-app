@@ -1,21 +1,21 @@
+import { yupResolver } from '@hookform/resolvers/yup';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../../navigation/types';
-import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
-import ContainerView from '../../../../components/ContainerView/ContainerView';
-import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
-import validations from '../../../../validations';
-import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { View } from 'react-native';
 import * as yup from 'yup';
 import i18n from '../../../../../i18n';
-import { yupResolver } from '@hookform/resolvers/yup';
+import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
+import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
+import FooterButton from '../../../../components/FooterButton/FooterButton';
+import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
+import { RootStackParamList } from '../../../../navigation/types';
+import validations from '../../../../validations';
+import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import InformationFields from '../../components/InformationFields/InformationFields';
 import { Schema } from '../../model/registration.model';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
-import { View } from 'react-native';
 import { patchInformation } from '../../service/profile.service';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
-import { useTranslation } from 'react-i18next';
 
 type UpdateInformationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -78,11 +78,7 @@ function UpdateInformation(prop: UpdateInformationProps) {
     resolver: yupResolver(getScema(field)),
     defaultValues: { ...defaultValues },
   });
-  console.log(field, getScema(field));
   const handleSubmit = (value: Schema) => {
-    console.log('why');
-    console.log('form value');
-    console.log(value);
     patchInformation(value)
       .then(() => {
         prop.navigation.goBack();

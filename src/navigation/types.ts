@@ -2,14 +2,13 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 import { FieldValues, UseFormSetValue } from 'react-hook-form';
 import { AuthModel } from '../modules/Auth/entities';
 import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigation/types';
+import { Schema } from '../modules/Profile/model/registration.model';
 import { AddressType } from '../modules/Request/entities/request.model';
 import {
   FormField,
   SharedModel,
 } from '../modules/Shared/entities/shared.model';
-import { Addresses } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
-import { Address } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
-import { Schema } from '../modules/Profile/model/registration.model';
+import { Address, Addresses } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import { ProfileModel } from '../modules/Tasker/entities/profile.model';
 
 export type RootStackParamList = {
@@ -18,8 +17,7 @@ export type RootStackParamList = {
   LoginOtpCheck: { credentials: AuthModel.Credentials };
   Register: undefined;
   RegisterTermAndCondition: undefined;
-  RegistrationInformation: undefined;
-  RegisterOtpCheck: { registration: AuthModel.RegisterResponse };
+  RegisterOtpCheck: { registration: AuthModel.User };
   SubCategoryList: { parentCategoryId?: number; title: string };
   UserRequest: {
     item: SharedModel.SubCategory;

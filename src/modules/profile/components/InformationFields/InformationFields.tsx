@@ -1,23 +1,23 @@
-import { useTranslation } from 'react-i18next';
-import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
-import { Text, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
 import CustomSelectionButton from '../../../../components/CustomButton/CustomSelectionButton';
-import { InformationFieldsStyle } from './InformationFields.style';
-import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
+import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
+import {
+  DEFAULT_LAT,
+  DEFAULT_LNG,
+} from '../../../../components/CustomMapView/CustomMapView';
 import {
   BuildingIcon,
   LocationCircleIcon,
   UserIcon,
 } from '../../../../components/Icon';
 import TextItem from '../../../../components/TextItem/TextItem';
-import { useNavigation } from '@react-navigation/native';
+import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
-import { useState } from 'react';
-import {
-  DEFAULT_LAT,
-  DEFAULT_LNG,
-} from '../../../../components/CustomMapView/CustomMapView';
+import { InformationFieldsStyle } from './InformationFields.style';
 
 const EmailField = () => {
   const { t } = useTranslation();
@@ -108,7 +108,6 @@ const AddressField = () => {
   });
   const getAddress = (address: Address) => {
     const data = address.formattedAddress!.split(', ');
-    console.log('ADDRESS::', address);
     return `${data[data.length - 3]}, ${data[data.length - 2]}`;
   };
   return (

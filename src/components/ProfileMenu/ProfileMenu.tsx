@@ -2,8 +2,12 @@ import { useNavigation } from '@react-navigation/native';
 import { default as React } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
-import i18n from '../../../../../i18n';
-import GroupedMenuList from '../../../../components/GroupedMenuList/GroupedMenuList';
+import i18n from '../../../i18n';
+import { useAppDispatch } from '../../context/app/store';
+import { resetAuth } from '../../modules/Auth/slice/authSlice';
+import { changeLanguage, selectLanguage } from '../../modules/Shared/slice/preferenceSlice';
+import { colors } from '../../theme';
+import GroupedMenuList from '../GroupedMenuList/GroupedMenuList';
 import {
   ChevronRightIcon,
   ClockRewindIcon,
@@ -14,15 +18,7 @@ import {
   LogoutIcon,
   PassportIcon,
   UserCircleIcon,
-} from '../../../../components/Icon';
-import { useAppDispatch } from '../../../../context/app/store';
-import { colors } from '../../../../theme/colors';
-import { resetAuth } from '../../../Auth/slice/authSlice';
-import {
-  changeLanguage,
-  selectLanguage,
-} from '../../../Shared/slice/preferenceSlice';
-
+} from '../Icon';
 const ProfileMenu = () => {
   const { t } = useTranslation();
   const language = useSelector(selectLanguage);
@@ -66,7 +62,7 @@ const ProfileMenu = () => {
       prefix: <ClockRewindIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        
       },
     },
     {
@@ -75,7 +71,7 @@ const ProfileMenu = () => {
       prefix: <EBarimtIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        
       },
     },
 
@@ -97,7 +93,7 @@ const ProfileMenu = () => {
       prefix: <FileIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        
       },
     },
     {
@@ -106,7 +102,7 @@ const ProfileMenu = () => {
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        
       },
     },
     {

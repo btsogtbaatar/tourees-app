@@ -1,10 +1,8 @@
-import { number } from 'yup';
+import { Client } from '@stomp/stompjs';
 import { api, getEnv } from '../../../api';
-import { AuthStateToken } from '../../Auth/entities';
+import store from '../../../context/app/store';
 import { SharedModel } from '../../Shared/entities/shared.model';
 import { TaskModel } from '../entities/request.model';
-import { Client } from '@stomp/stompjs';
-import store from '../../../context/app/store';
 
 export function getTasks(
   page: number = 1,
@@ -44,7 +42,7 @@ export function sendChat(
 }
 export function createTask(
   task: TaskModel.TaskRequest,
-): Promise<AuthStateToken> {
+) {
   return api.post('/tasks', task);
 }
 
@@ -57,7 +55,7 @@ export function subscribeToNotification(
       Authorization: `Bearer ${store.getState().auth.token?.jwt}`,
     },
     debug: str => {
-      console.log(str);
+      console.debug(str);
     },
     onConnect: () => {
       client.subscribe('/user/queue/notification/chat', message => {
@@ -65,18 +63,18 @@ export function subscribeToNotification(
         fn(chat);
       });
       client.subscribe('/user/queue/notification/task', message => {
-        console.log(`Received: ${JSON.parse(message.body).content}`);
-        console.log(JSON.parse(message.body));
+        console.debug(`Received: ${JSON.parse(message.body).content}`);
+        console.debug(JSON.parse(message.body));
       });
     },
     onStompError: e => {
-      console.log(e);
+      console.error(e);
     },
     onWebSocketError: e => {
-      console.log(e);
+      console.error(e);
     },
     onWebSocketClose: e => {
-      console.log(e);
+      console.error(e);
     },
   });
   return client;

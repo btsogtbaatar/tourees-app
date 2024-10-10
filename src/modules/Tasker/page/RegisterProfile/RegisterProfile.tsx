@@ -84,7 +84,7 @@ const RegisterTasker = ({
         navigation.goBack();
       })
       .catch(err => {
-        console.log('ssdsdsds', err);
+        console.error('Error creating profile', err);
       });
   };
 

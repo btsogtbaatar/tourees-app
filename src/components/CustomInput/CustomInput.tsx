@@ -153,7 +153,9 @@ const CustomInput = forwardRef<CustomInputRef, CustomInputProps>(
                   style={[
                     CustomInputStyle.input,
                     props.style?.input,
-                    props.numberOfLines ? { minHeight: 100 } : {},
+                    props.numberOfLines
+                      ? { minHeight: 100, textAlignVertical: 'top' }
+                      : { alignItems: 'center' },
                   ]}
                   onChangeText={(text: string) => {
                     props.onChangeText && props.onChangeText(text);

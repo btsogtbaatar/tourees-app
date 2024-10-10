@@ -13,11 +13,11 @@ import FullHeightView from '../../../../components/FullHeightView/FullHeightView
 import { LocationCircleIcon, LocationIcon } from '../../../../components/Icon';
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme';
 import { TaskSchema } from '../../../../validations/schema';
 import { AddressType } from '../../../Request/entities/request.model';
 import UserRequestStyle from '../../../Request/page/UserRequest/UserRequest.style';
 import AddressDetailStyle from './AddressDetail.style';
-import { colors } from '../../../../theme';
 
 interface AddressDetailItemProps {
   addressType: AddressType;
@@ -68,8 +68,6 @@ const AddressesDetail = (props: AddressDetailProps) => {
     from: TaskSchema.addressDetailSchema,
     to: TaskSchema.addressDetailSchema,
   });
-
-  console.log(props.route.params.addresses);
 
   const form = useForm({
     resolver: yupResolver(schema),

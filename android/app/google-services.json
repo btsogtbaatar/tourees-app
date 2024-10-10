@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "818182635198",
+    "project_id": "tourees-5ab67",
+    "storage_bucket": "tourees-5ab67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:818182635198:android:daabe59a1ee0e96ff3e8ef",
+        "android_client_info": {
+          "package_name": "com.toureesapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsUG5vxW5pNkxhjdIN9m9hU1pDZpNWJFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

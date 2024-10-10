@@ -46,7 +46,7 @@ export declare module AuthModel {
     phoneNumber?: string;
   };
 
-  export class RegisterResponse {
+  export class User {
     id?: number;
     email?: string;
     phoneNumber?: string;
