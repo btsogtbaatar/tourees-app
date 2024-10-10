@@ -66,6 +66,14 @@ const CalendarStyle = StyleSheet.create({
     padding: verticalScale(10),
     gap: horizontalScale(4),
   },
+  toggleSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderRadius: 5, 
+    marginBottom: 5,
+  },
 });
 
 export default CalendarStyle;

@@ -203,6 +203,7 @@ export default {
     afternoonTimeRange: '6PM-н дараа',
     cancel: 'Цуцлах',
     title: 'Өдөр сонгох',
+    flexible: 'Уян хатан цагийн хуваарьтай'
   },
   emptyRequest: 'Таньд үүсгэсэн хүсэлт байхгүй байна.',
   headers: {

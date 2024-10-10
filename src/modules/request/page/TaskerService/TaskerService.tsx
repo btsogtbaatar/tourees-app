@@ -20,6 +20,11 @@ import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import InputError from '../../../../components/FormError/FormError';
 import { LocationCircleIcon } from '../../../../components/Icon/index';
+import {
+  MoonIcon,
+  SunRiseIcon,
+  SunSetIcon,
+} from '../../../../components/Icon/index';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import TextItem from '../../../../components/TextItem/TextItem';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
@@ -51,7 +56,6 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
   const [subCategories, setSubCategories] =
     useState<SharedModel.SubCategory[]>();
 
-  const bottomSheetRef = useRef<BottomSheetMethods>(null);
   const subCategorySheetRef = useRef<BottomSheetMethods>(null);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [selectedCategoryName, setSelectedCategoryName] = useState(
@@ -69,6 +73,39 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
   const [filter, setFilter] = useState<string>('');
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [inPerson, setInPerson] = useState(false);
+
+  const [isFlexible, setIsFlexible] = useState(false);
+  const handleToggleFlexible = (isFlexible: boolean) => {
+    setIsFlexible(isFlexible);
+    console.log('Flexible:', isFlexible);
+  };
+
+  const [selectedTimeRange, setSelectedTimeRange] = useState(null);
+  const handleTimeRange = value => {
+    setSelectedTimeRange(value);
+    console.log('Selected Time Range:', value);
+  };
+
+  const timeRanges = [
+    {
+      label: t('calendar.morning'),
+      startHour: 8,
+      endHour: 11,
+      icon: <SunRiseIcon />,
+    },
+    {
+      label: t('calendar.afternoon'),
+      startHour: 12,
+      endHour: 15,
+      icon: <SunSetIcon />,
+    },
+    {
+      label: t('calendar.evening'),
+      startHour: 16,
+      endHour: 22,
+      icon: <MoonIcon />,
+    },
+  ];
 
   const taskerServiceSchema = yup.object().shape({
     name: yup
@@ -107,6 +144,9 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
           .nullable(false)
           .required(t('service.validation.addressRequired')),
       }),
+    files: yup
+      .mixed<SharedModel.File>()
+      .required(t('request.requestImageWarning')),
   });
 
   const getCategories = () => {
@@ -161,6 +201,8 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
     const payload = {
       ...taskerService,
       isInPerson: inPerson,
+      isFlexible: isFlexible,
+      timeRange: selectedTimeRange,
     };
     createTaskerService(payload).then(() => {
       notifyMessage(
@@ -229,7 +271,17 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
                 <Controller
                   name="timeRange"
                   render={({ field: { onChange } }) => (
-                    <Calendar onSuccess={value => onChange(value)} />
+                    <Calendar
+                      onSuccess={handleTimeRange}
+                      timeRanges={timeRanges}
+                      locale="en"
+                      showTodayButton={false}
+                      showTomorrowButton={false}
+                      showRangeButtons={true}
+                      showdatePick={true}
+                      showToggleBtn={true}
+                      onToggleFlexible={handleToggleFlexible}
+                    />
                   )}
                 />
                 {errors.timeRange && <InputError error={t('l_date')} />}
@@ -310,7 +362,7 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
                       render={({ field: { onChange, value } }) => (
                         <CustomSlider
                           minDistance={0}
-                          maxDistance={101} //over 100 km
+                          maxDistance={101}
                           initialDistance={value}
                           step={5}
                           onChange={onChange}
