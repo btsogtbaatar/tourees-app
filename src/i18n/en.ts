@@ -23,4 +23,20 @@ export default {
       label: 'Email',
     },
   },
+  tasker: {
+    type: {
+      INDIVIDUAL: 'Хувь хүн',
+      BUSINESS: 'Байгуулга',
+    },
+    education: 'Боловсрол',
+    specialities: 'Мэргэжил',
+    languages: 'Гадаад хэл',
+    rank: 'Зэрэг цол',
+    portfolio: 'Портфолио',
+    workingType: {
+      name: 'Ажиллах төрөл',
+      online: 'Online',
+      physically: 'Physically',
+    },
+  },
 };

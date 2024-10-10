@@ -51,9 +51,9 @@ export module TaskSchema {
       educations: remarkSchema,
       specialities: remarkSchema,
       languages: remarkSchema,
-      transportations: remarkSchema,
       ranks: remarkSchema,
       files: remarkSchema,
+      workingType: yup.string(),
     });
 
   export const remarkListSchema: yup.ObjectSchema<TaskerModel.RemarkRequest> =

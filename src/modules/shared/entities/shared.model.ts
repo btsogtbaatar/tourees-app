@@ -85,3 +85,8 @@ export enum TaskerType {
   INDIVIDUAL = 'INDIVIDUAL',
   BUSINESS = 'BUSINESS',
 }
+
+export enum ProfileWorkingType {
+  ONLINE = 'ONLINE',
+  PHYSICALLY = 'PHYSICALLY',
+}

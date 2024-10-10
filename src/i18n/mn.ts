@@ -72,8 +72,14 @@ export default {
     specialities: 'Мэргэжил',
     languages: 'Гадаад хэл',
     rank: 'Зэрэг цол',
-    transportation: 'Тээврийн хэрэгсэл',
     portfolio: 'Портфолио',
+    workingType: {
+      name: 'Ажиллах төрөл',
+      ONLINE: 'Онлайнаар',
+      PHYSICALLY: 'Биетээр',
+    },
+    tagLine: 'tagLine',
+    description: 'description',
   },
   profile: {
     language: 'Хэл',
