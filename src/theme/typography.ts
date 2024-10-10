@@ -76,11 +76,18 @@ export const getFontWeight = (weight: weight) => {
 export const fontFamily = 'Nunito';
 
 export const Typography = StyleSheet.create({
+  textExtraLarge: {
+    color: colors.gray700,
+    fontFamily: fontFamily,
+    fontSize: 32,
+    lineHeight: 40,
+    ...getFontWeight(FontWeight.medium),
+  },
   textLarge: {
     color: colors.gray700,
     fontFamily: fontFamily,
-    fontSize: 20,
-    lineHeight: 30,
+    fontSize: 24,
+    lineHeight: 32,
     ...getFontWeight(FontWeight.medium),
   },
   textRegular: {
@@ -106,6 +113,12 @@ export const Typography = StyleSheet.create({
   },
   textSmallest: {
     color: colors.gray700,
+    fontFamily: fontFamily,
+    fontSize: 10,
+    lineHeight: 16,
+    ...getFontWeight(FontWeight.medium),
+  },
+  textSmallestColorless: {
     fontFamily: fontFamily,
     fontSize: 10,
     lineHeight: 16,

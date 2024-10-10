@@ -13,10 +13,7 @@ import Loading from '../../../../components/Loading/Loading';
 import { useAppDispatch } from '../../../../context/app/store';
 import { colors } from '../../../../theme/colors';
 import { updateFirebaseToken } from '../../../Auth/services';
-import {
-  selectAuthenticated,
-  selectFirebaseToken
-} from '../../../Auth/slice/authSlice';
+import { selectAuthenticated, selectFirebaseToken } from '../../../Auth/slice/authSlice';
 import { getUnreadNotificationCount } from '../../../Notification/services/notification.service';
 import { setUnreadNotificationCount } from '../../../Notification/slice/notificationSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
@@ -102,16 +99,18 @@ const Home = () => {
         {!isAuthenticated && (
           <Banner
             key={0}
-            title={'Үйлчилгээ үзүүлэгчээр нэвтрэх'}
+            title={t('loginAsContractor')}
             onPress={() => navigation.navigate('Login')}
           />
         )}
         {!isAuthenticated && (
-          <Banner
-            key={1}
-            title={'Үйлчилгээ үзүүлэгчээр бүртгүүлэх'}
-            onPress={() => navigation.navigate('Register')}
-          />
+          <View style={{ marginTop: 5 }}>
+            <Banner
+              key={1}
+              title={t('signUpAsContractor')}
+              onPress={() => navigation.navigate('Register')}
+            />
+          </View>
         )}
       </ContainerView>
     </CustomSafeAreaView>

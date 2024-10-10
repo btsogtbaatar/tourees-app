@@ -11,16 +11,18 @@ import {
   BellIcon,
   HomeActiveIcon,
   HomeIcon,
+  SearchMdIcon,
   SmileCircleActiveIcon,
   SmileCircleIcon,
   UserActiveIcon,
   UserIcon,
 } from '../../../components/Icon';
+import { colors } from '../../../theme';
 import { selectAuthenticated } from '../../Auth/slice/authSlice';
 import NotificationList from '../../Notification/pages/NotificationList/NotificationList';
 import { selectUnreadNotificationCount } from '../../Notification/slice/notificationSlice';
 import Profile from '../../Profile/pages/Profile/Profile';
-import RequestList from '../../Request/page/RequestList/RequestList';
+import TaskList from '../../Request/page/TaskList/TaskList';
 import Home from '../pages/Home/Home';
 
 const HomeTabNavigator = () => {
@@ -31,18 +33,26 @@ const HomeTabNavigator = () => {
   const items: TabNavigationItem[] = [
     {
       route: 'Home',
-      label: t('tab.t_home'),
+      label: t('tab.tabHome'),
       activeIcon: <HomeActiveIcon />,
       inactiveIcon: <HomeIcon />,
       component: Home,
       showHeader: true,
     },
     {
-      route: 'Request',
-      label: t('tab.t_request'),
+      route: 'MyTasks',
+      label: t('tab.tabMyTasks'),
       activeIcon: <SmileCircleActiveIcon />,
       inactiveIcon: <SmileCircleIcon />,
-      component: RequestList,
+      component: TaskList,
+      showHeader: true,
+    },
+    {
+      route: 'BrowseTasks',
+      label: t('tab.tabBrowseTasks'),
+      activeIcon: <SearchMdIcon color={colors.primaryGradient} />,
+      inactiveIcon: <SearchMdIcon color={colors.gray300} />,
+      component: TaskList,
       showHeader: true,
     },
     {
@@ -69,9 +79,9 @@ const HomeTabNavigator = () => {
     },
     {
       route: 'Profile',
-      label: t('tab.t_profile'),
+      label: t('tab.tabProfile'),
       activeIcon: <UserActiveIcon />,
-      inactiveIcon: <UserIcon />,
+      inactiveIcon: <UserIcon color={colors.gray300} />,
       component: Profile,
       showHeader: false,
     },

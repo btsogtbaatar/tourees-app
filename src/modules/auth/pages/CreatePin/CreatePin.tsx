@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import * as Keychain from 'react-native-keychain';
 import { useSelector } from 'react-redux';
@@ -18,6 +19,7 @@ const CreatePin = () => {
   const [pin, setPin] = useState<string>('');
   const userHasPin = useSelector(hasPin);
   const user = useSelector(selectUser);
+  const { t } = useTranslation();
 
   const onSubmit = () => {
     if (user) {
@@ -33,7 +35,7 @@ const CreatePin = () => {
               navigation.navigate('HomeTab', { screen: 'Home' });
             })
             .catch(_error => {
-              notifyMessage('Алдаа', 'Пин кодыг хадгалахад алдаа гарлаа.');
+              notifyMessage(t('error'), t('pin.errorSaving'));
             });
         });
       } else {
@@ -50,15 +52,15 @@ const CreatePin = () => {
             <View style={CreatePinStyle.titleContainer}>
               <Text style={CreatePinStyle.title}>
                 {userHasPin
-                  ? 'Та пин кодоо оруулна уу.'
-                  : 'Та цаашид нэвтрэхдээ ашиглах 4 оронтой пин кодоо оруулна уу.'}
+                  ? t("pin.enterPin")
+                  : t('pin.createPin')}
               </Text>
             </View>
             <OtpInputGroup onChange={setPin} secureTextEntry={true} />
           </View>
           <CustomGradientButton
             disabled={pin.length < 4}
-            title={'Үргэлжлүүлэх'}
+            title={t('pin.continue')}
             onPress={onSubmit}
           />
         </ContainerView>

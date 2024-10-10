@@ -3,12 +3,18 @@ import { FieldValues, UseFormSetValue } from 'react-hook-form';
 import { AuthModel } from '../modules/Auth/entities';
 import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigation/types';
 import { Schema } from '../modules/Profile/model/registration.model';
-import { AddressType } from '../modules/Request/entities/request.model';
+import {
+  AddressType,
+  TaskModel,
+} from '../modules/Request/entities/request.model';
 import {
   FormField,
   SharedModel,
 } from '../modules/Shared/entities/shared.model';
-import { Address, Addresses } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import {
+  Address,
+  Addresses,
+} from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import { ProfileModel } from '../modules/Tasker/entities/profile.model';
 
 export type RootStackParamList = {
@@ -21,6 +27,9 @@ export type RootStackParamList = {
   SubCategoryList: { parentCategoryId?: number; title: string };
   UserRequest: {
     item: SharedModel.SubCategory;
+  };
+  TaskDetail: {
+    id: number;
   };
   UpdateInformation: {
     field: FormField;
@@ -48,8 +57,12 @@ export type RootStackParamList = {
   BiometricConsent: undefined;
   CreatePin: undefined;
   RetypePin: { pin: string };
+  TaskBudget: { task: TaskModel.TaskRequest };
+  CreateOffer: { taskId: number };
   TaskerStack: NavigatorScreenParams<TaskerParamList>;
+  RegistrationInformation: undefined
 };
+
 
 export type TaskerParamList = {
   RegisterTasker: {

@@ -10,6 +10,7 @@ import CustomPlacesAutoComplete from '../../../../components/CustomPlacesAutoCom
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import { LocationCircleIcon } from '../../../../components/Icon';
 import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme';
 import { SharedModel } from '../../entities/shared.model';
 import AddressMapViewStyle from './AddressMapView.style';
 
@@ -70,7 +71,13 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
           <View style={AddressMapViewStyle.left}>
             <AddressBannerProps
               address={address}
-              icon={<LocationCircleIcon width={20} height={20} />}
+              icon={
+                <LocationCircleIcon
+                  color={colors.primaryGradient}
+                  width={20}
+                  height={20}
+                />
+              }
               text={title}
             />
           </View>

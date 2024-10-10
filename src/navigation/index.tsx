@@ -1,6 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
+import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
 import Login from '../modules/Auth/pages/Login/Login';
 import LoginOtpCheck from '../modules/Auth/pages/LoginOtpCheck/LoginOtpCheck';
 import Register from '../modules/Auth/pages/Register/Register';
@@ -8,19 +10,19 @@ import RegisterOtpCheck from '../modules/Auth/pages/RegisterOtpCheck/RegisterOtp
 import RegisterTermAndCondition from '../modules/Auth/pages/RegisterTermAndCondition/RegisterTermAndCondition';
 import RetypePin from '../modules/Auth/pages/RetypePin/RetypePin';
 import HomeTabNavigator from '../modules/Home/navigation';
-import RequestDetail from '../modules/Request/page/RequestDetail/RequestDetail';
-import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
-import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
-import customScreenOption from '../theme/customHeaderOption';
-import { RootStackParamList } from './types';
-import TaskerStack from '../modules/Tasker/routes/routes';
-import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
-import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
-import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
-import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
-import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
 import RegistrationInformation from '../modules/Profile/pages/RegistrationInformation/RegistrationInformation';
 import UpdateInformation from '../modules/Profile/pages/UpdateInformation/UpdateInformation';
+import CreateOffer from '../modules/Request/page/Offer/CreateOffer';
+import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
+import TaskBudget from '../modules/Request/page/TaskBudget/TaskBudget';
+import TaskDetail from '../modules/Request/page/TaskDetail/TaskDetail';
+import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
+import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
+import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
+import TaskerStack from '../modules/Tasker/routes/routes';
+import customScreenOption from '../theme/customHeaderOption';
+import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -89,8 +91,8 @@ const Route = () => {
         />
         <Stack.Screen
           options={{ title: t('headers.request') }}
-          name="RequestDetail"
-          component={RequestDetail}
+          name="TaskDetail"
+          component={TaskDetail}
         />
         <Stack.Screen
           options={{ title: t('headers.registrationInformation') }}
@@ -114,6 +116,16 @@ const Route = () => {
           name="AddressesDetail"
           component={AddressesDetail}
         />
+        <Stack.Screen
+          options={{ title: t('headers.taskPrice') }}
+          name="TaskBudget"
+          component={TaskBudget}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.createOffer') }}
+          name="CreateOffer"
+          component={CreateOffer}
+          />
         <Stack.Screen
           options={{ title: t('headers.updateInformation') }}
           name="UpdateInformation"

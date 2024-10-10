@@ -55,7 +55,7 @@ export function subscribeToNotification(
       Authorization: `Bearer ${store.getState().auth.token?.jwt}`,
     },
     debug: str => {
-      console.debug(str);
+      console.log(str);
     },
     onConnect: () => {
       client.subscribe('/user/queue/notification/chat', message => {
@@ -63,18 +63,18 @@ export function subscribeToNotification(
         fn(chat);
       });
       client.subscribe('/user/queue/notification/task', message => {
-        console.debug(`Received: ${JSON.parse(message.body).content}`);
-        console.debug(JSON.parse(message.body));
+        console.log(`Received: ${JSON.parse(message.body).content}`);
+        console.log(JSON.parse(message.body));
       });
     },
     onStompError: e => {
-      console.error(e);
+      console.log(e);
     },
     onWebSocketError: e => {
-      console.error(e);
+      console.log(e);
     },
     onWebSocketClose: e => {
-      console.error(e);
+      console.log(e);
     },
   });
   return client;

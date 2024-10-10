@@ -1,5 +1,6 @@
 export type HomeStackParamList = {
   Home: undefined;
-  Request: undefined;
+  MyTasks: undefined;
+  BrowseTasks: undefined;
   Profile: undefined;
 };

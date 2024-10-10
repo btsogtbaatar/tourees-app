@@ -35,6 +35,7 @@ import Steps from '../../../../components/Steps/Steps';
 import TabController from '../../../../components/TabController/TabController';
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme';
 import validations from '../../../../validations';
 import { SharedModel, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
@@ -188,7 +189,7 @@ function Register({ navigation }: RegisterProps) {
                             onPress={() => {
                               onChange(TaskerType.INDIVIDUAL);
                             }}>
-                            <UserIcon />
+                            <UserIcon color={colors.gray300}  />
                             <Text>
                               {t(`tasker.type.${TaskerType.INDIVIDUAL}`)}
                             </Text>
@@ -240,7 +241,13 @@ function Register({ navigation }: RegisterProps) {
                       name="address"
                       render={({ field: { onChange } }) => (
                         <TextItem
-                          icon={<LocationCircleIcon width={20} height={20} />}
+                          icon={
+                            <LocationCircleIcon
+                              color={colors.primaryGradient}
+                              width={20}
+                              height={20}
+                            />
+                          }
                           label={
                             address.displayName
                               ? address.displayName
@@ -273,7 +280,7 @@ function Register({ navigation }: RegisterProps) {
             </View>
             <CustomGradientButton
               onPress={form.handleSubmit(onContinue)}
-              title={'Үргэлжлүүлэх'}
+              title={t('signUp.continue')}
             />
           </ContainerView>
         </TouchableWithoutFeedback>
