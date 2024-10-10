@@ -34,7 +34,7 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        navigation.navigate('RegistrationInformation');
       },
     },
     {
@@ -85,6 +85,7 @@ const ProfileMenu = () => {
       values: [t('profile.l_logout')],
       prefix: <LogoutIcon />,
       suffix: <ChevronRightIcon color={colors.primary500} />,
+      color: colors.primary500,
       onPress: () => {
         dispatch(resetAuth());
         navigation.navigate('HomeTab', { screen: 'Home' });

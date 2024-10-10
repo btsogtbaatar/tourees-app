@@ -7,6 +7,7 @@ export type FilledListProps = {
   onPress: () => void;
   values: string[];
   prefix: React.ReactNode;
+  color?: string;
   suffix: React.ReactNode;
 };
 export type GroupedMenuListProps = {
@@ -19,15 +20,14 @@ const GroupedMenuList: React.FC<GroupedMenuListProps> = ({ listItems }) => {
       data={listItems}
       contentContainerStyle={GroupedMenuListStyle.container}
       keyExtractor={(_, index) => index.toString()}
-      renderItem={({ item, index }) => {
+      renderItem={({ item }) => {
         return (
           <GroupedMenuItem
-            index={index}
-            length={listItems.length}
             onPress={item.onPress}
             values={item.values}
             prefix={item.prefix}
             suffix={item.suffix}
+            color={item.color}
           />
         );
       }}

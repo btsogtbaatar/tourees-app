@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { LatLng, Region } from 'react-native-maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import CustomMapView from '../../../../components/CustomMapView/CustomMapView';
 import CustomPlacesAutoComplete from '../../../../components/CustomPlacesAutoComplete/CustomPlacesAutoComplete';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import { RootStackParamList } from '../../../../navigation/types';
@@ -24,6 +23,7 @@ export type Address = {
   unit?: string;
   floor?: string;
   apartment?: string;
+  formattedAddress?: string;
 } & LatLng;
 
 export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
@@ -51,13 +51,14 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         address: `${place?.displayName.text}, ${place?.shortFormattedAddress}`,
         latitude: place.location.latitude,
         longitude: place.location.longitude,
+        formattedAddress: place.formattedAddress,
       };
 
       let _addresses = {
         ..._prev,
         ...address,
       };
-
+      console.log('SELECT::', place);
       return _addresses;
     });
   };

@@ -230,7 +230,12 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       }
                     />
                     <TextItem
-                      icon={<LocationIcon style={UserRequestStyle.icon} />}
+                      icon={
+                        <LocationIcon
+                          color={colors.primary500}
+                          style={UserRequestStyle.icon}
+                        />
+                      }
                       label={
                         addresses.to.address
                           ? getFullAddress(addresses.to)

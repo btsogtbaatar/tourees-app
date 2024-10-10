@@ -10,7 +10,7 @@ import ProfileMenu from '../../components/ProfileMenu/ProfileMenu';
 
 const Profile = () => {
   const user = useSelector(selectUser);
-
+  console.log(user);
   return (
     <View>
       <LinearGradient

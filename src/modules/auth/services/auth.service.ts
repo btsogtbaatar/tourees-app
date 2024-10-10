@@ -52,7 +52,7 @@ export async function socialCustomerAuthenticate(
   socialToken: AuthModel.SocialToken,
 ): Promise<AuthModel.RegisterResponse> {
   let token: AuthModel.Token = await api.post(
-    `${authBaseUrl}/customers/social`,
+    `${authBaseUrl}/contractors/social`,
     socialToken,
   );
   return await authenticate(token);

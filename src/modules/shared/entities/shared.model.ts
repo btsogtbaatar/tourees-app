@@ -65,6 +65,7 @@ export namespace SharedModel {
     types: string[];
     location: Location;
     shortFormattedAddress: string;
+    formattedAddress?: string;
     displayName: DisplayName;
   };
 
@@ -80,8 +81,20 @@ export namespace SharedModel {
     start: Date;
     end: Date;
   }
+  export interface FieldControll {
+    value: any;
+    onChange: any;
+  }
 }
 export enum TaskerType {
   INDIVIDUAL = 'INDIVIDUAL',
   BUSINESS = 'BUSINESS',
+}
+export enum FormField {
+  NAME,
+  USERNAME,
+  EMAIL,
+  PHONE,
+  ADDRESS,
+  TYPE,
 }

@@ -33,7 +33,6 @@ import {
 import InputError from '../../../../components/FormError/FormError';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import { uploadFile } from '../../../Shared/services/shared.service';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import {
   DEFAULT_LAT,
@@ -41,11 +40,14 @@ import {
 } from '../../../../components/CustomMapView/CustomMapOneMarker';
 import TextItem from '../../../../components/TextItem/TextItem';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
+import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
+import Loading from '../../../../components/Loading/Loading';
 
 type RegisterProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
 function Register({ navigation }: RegisterProps) {
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
   const [authChannel, setAuthChannel] = useState<AuthChannel>(
     AuthChannel.Email,
   );
@@ -96,18 +98,31 @@ function Register({ navigation }: RegisterProps) {
     } else if (AuthChannel.Phone === authChannel) {
       values.email = '';
     }
-
-    signUp(values).then((response: AuthModel.RegisterResponse) => {
-      navigation.navigate('RegisterOtpCheck', {
-        registration: response,
+    setLoading(true);
+    signUp(values)
+      .then((response: AuthModel.RegisterResponse) => {
+        navigation.navigate('RegisterOtpCheck', {
+          registration: response,
+        });
+      })
+      .catch(e => {
+        notifyMessage(
+          t('login.socialError.title'),
+          e.message ? e.message : 'Network Error',
+        );
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    });
   };
   const getAddress = (address: Address) => {
-    const data = address.address!.split(', ');
-    return `${data[data.length - 2]}, ${data[data.length - 1]}`;
+    const data = address.formattedAddress!.split(', ');
+    console.log('ADDRESS::', address);
+    return `${data[data.length - 3]}, ${data[data.length - 2]}`;
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <CustomSafeAreaView>
       <CustomKeyboardAvoidingView>
@@ -241,7 +256,6 @@ function Register({ navigation }: RegisterProps) {
                                 const _address = { ...address };
                                 _address.displayName = getAddress(_address);
                                 setAddress(_address);
-                                console.log('result', address);
                                 onChange(_address.displayName);
                               },
                             });

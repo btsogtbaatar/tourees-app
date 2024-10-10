@@ -37,6 +37,11 @@ import UserCircleIcon from '../../../assets/icons/user-circle.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
+import MailIcon from '../../../assets/icons/mail.svg';
+import PassportIcon from '../../../assets/icons/passport.svg';
+import ImagePlaceHolderIcon from '../../../assets/icons/image-placeholder.svg';
+import CameraIcon from '../../../assets/icons/camera.svg';
+import SendIcon from '../../../assets/icons/send.svg';
 
 export {
   ArrowLeftIcon,
@@ -78,4 +83,9 @@ export {
   VectorIcon,
   XCircleIcon,
   BuildingIcon,
+  MailIcon,
+  PassportIcon,
+  CameraIcon,
+  ImagePlaceHolderIcon,
+  SendIcon,
 };

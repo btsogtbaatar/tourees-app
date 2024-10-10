@@ -1,3 +1,5 @@
+import { SharedModel, TaskerType } from '../../Shared/entities/shared.model';
+
 export enum AuthChannel {
   Email = 0,
   Phone = 1,
@@ -8,6 +10,11 @@ export declare module AuthModel {
     email?: string;
     phoneNumber?: string;
     username: string;
+  };
+  export type Contractor = {
+    address?: string;
+    profilePicture?: SharedModel.File;
+    type?: TaskerType;
   };
   export type UpdatePin = {
     oldPin: string;
@@ -48,14 +55,7 @@ export declare module AuthModel {
     lastName?: string;
     hasPin: boolean;
     biometricEnabled?: boolean;
-
-    constructor(username: string) {
-      this.username = username;
-    }
-
-    get fullName() {
-      return `${this.firstName} ${this.lastName}`;
-    }
+    contractor?: Contractor;
   }
 }
 export enum SocialType {

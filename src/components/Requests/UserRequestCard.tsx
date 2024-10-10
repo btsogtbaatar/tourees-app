@@ -3,7 +3,10 @@ import moment from 'moment';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { getEnv } from '../../api';
-import { TaskModel } from '../../modules/Request/entities/request.model';
+import {
+  TaskModel,
+  TaskStatus,
+} from '../../modules/Request/entities/request.model';
 import { CheckIcon } from '../Icon';
 import styles from './RequestsCard.style';
 
@@ -16,6 +19,7 @@ const UserRequestCard = ({ item }: UserRequestCardProps) => {
   const navigation = useNavigation();
   const onDetails = () => {
     navigation.navigate('RequestDetail', {
+      id: item.id,
       title: item.subCategory.name,
       status: item.status,
     });
@@ -47,11 +51,11 @@ const UserRequestCard = ({ item }: UserRequestCardProps) => {
         <View
           style={[
             styles.iconContainer,
-            item.status == 3 && {
+            item.status == TaskStatus.COMPLETED && {
               backgroundColor: 'rgba(70, 220, 157, 0.20)',
             },
           ]}>
-          {item.status == 3 ? (
+          {item.status == TaskStatus.COMPLETED ? (
             <CheckIcon width={10} height={10} color={'#46DC9D'} />
           ) : (
             <Text style={styles.iconText}>1</Text>

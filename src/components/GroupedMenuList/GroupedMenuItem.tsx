@@ -8,17 +8,15 @@ export type FilledListProps = {
   values: string[];
   prefix: React.ReactNode;
   suffix: React.ReactNode;
-  index: number;
-  length: number;
+  color?: string;
 };
 
 const GroupedMenuItem: React.FC<FilledListProps> = ({
   onPress,
   prefix,
-  index,
   values,
   suffix,
-  length,
+  color,
 }) => {
   return (
     <TouchableOpacity style={GroupedMenuItemStyle.container} onPress={onPress}>
@@ -28,8 +26,8 @@ const GroupedMenuItem: React.FC<FilledListProps> = ({
           <Text
             style={[
               GroupedMenuItemStyle.menuName,
-              index === length - 1 && {
-                color: colors.primary500,
+              color !== undefined && {
+                color: color,
               },
             ]}>
             {values[0]}
