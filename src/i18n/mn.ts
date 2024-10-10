@@ -89,6 +89,7 @@ export default {
       title: 'Амжилттай',
       message: 'Зураг амжилттай солигдлоо.',
     },
+    l_setup_profile: 'Профайл засах',
   },
   tab: {
     t_home: 'Нүүр',

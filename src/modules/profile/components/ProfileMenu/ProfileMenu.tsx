@@ -43,7 +43,7 @@ const ProfileMenu = () => {
     },
     {
       key: 2,
-      values: [t('Set up task alerts')],
+      values: [t('profile.l_setup_profile')],
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
