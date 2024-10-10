@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "ios": "react-native run-ios --simulator 'iPhone 15 Pro'",
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
@@ -28,6 +28,7 @@
     "react-i18next": "^14.0.0",
     "react-native": "^0.73.9",
     "react-native-calendars": "^1.1303.0",
+    "react-native-currency-input": "^1.1.1",
     "react-native-date-picker": "^5.0.4",
     "react-native-dotenv": "^3.4.11",
     "react-native-fbsdk-next": "^13.0.0",

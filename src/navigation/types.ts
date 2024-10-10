@@ -1,10 +1,15 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
 import { AuthModel } from '../modules/Auth/entities';
 import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigation/types';
-import { AddressType } from '../modules/Request/entities/request.model';
+import {
+  AddressType,
+  TaskModel,
+} from '../modules/Request/entities/request.model';
 import { SharedModel } from '../modules/Shared/entities/shared.model';
-import { Addresses } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
-import { Address } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import {
+  Address,
+  Addresses,
+} from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 
 export type RootStackParamList = {
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
@@ -17,9 +22,8 @@ export type RootStackParamList = {
   UserRequest: {
     item: SharedModel.SubCategory;
   };
-  RequestDetail: {
-    title: string;
-    status?: number;
+  TaskDetail: {
+    id: number;
   };
   AddressesMapView: {
     addresses: Addresses;
@@ -38,6 +42,8 @@ export type RootStackParamList = {
   BiometricConsent: undefined;
   CreatePin: undefined;
   RetypePin: { pin: string };
+  TaskBudget: { task: TaskModel.TaskRequest };
+  CreateOffer: { taskId: number };
 };
 
 declare global {

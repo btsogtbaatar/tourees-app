@@ -1,5 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
@@ -11,6 +12,7 @@ import { BiometricConsentStyle } from './BiometricConsent.style';
 
 const BiometricConsent = () => {
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   return (
     <CustomSafeAreaView>
@@ -18,18 +20,18 @@ const BiometricConsent = () => {
         <View style={BiometricConsentStyle.innerContainer}>
           <FaceId color={colors.primaryGradient} height={80} width={80} />
           <Text style={BiometricConsentStyle.label}>
-            Та биометрик ашиглан нэвтрэхийг хүсч байна уу?
+            {t('biometric.consent')}
           </Text>
         </View>
         <View style={BiometricConsentStyle.messageContainer}>
           <Text style={BiometricConsentStyle.message}>
-            Дахин харуулахгүй байх
+            {t('biometric.doNotShowAgain')}
           </Text>
         </View>
         <View style={{ flexDirection: 'row', gap: 8 }}>
           <View style={{ flex: 1 }}>
             <CustomGradientButton
-              title={'Тийм'}
+              title={t('biometric.accept')}
               onPress={() => {
                 navigation.navigate('CreatePin');
               }}
@@ -37,7 +39,7 @@ const BiometricConsent = () => {
           </View>
           <View style={{ flex: 1 }}>
             <CustomLinkButton
-              title={'Үгүй'}
+              title={t('biometric.decline')}
               onPress={() => {
                 navigation.navigate('HomeTab', { screen: 'Home' });
               }}

@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import * as Keychain from 'react-native-keychain';
 import { useSelector } from 'react-redux';
@@ -25,6 +26,7 @@ const RetypePin = (props: RetypePinProps) => {
   const [pin, setPin] = useState<string>('');
   const user = useSelector(selectUser);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const onSubmit = () => {
     if (user) {
@@ -39,14 +41,14 @@ const RetypePin = (props: RetypePinProps) => {
               })
               .catch(_error => {
                 notifyMessage(
-                  'Алдаа',
-                  'Пин кодыг хадгалахад алдаа гарлаа.' + JSON.stringify(_error),
+                  t('error'),
+                  t('pin.errorSaving') + JSON.stringify(_error),
                 );
               });
           }
         });
       } else {
-        notifyMessage('Алдаа', 'Пин кодууд хоорондоо зөрж байна.');
+        notifyMessage(t('error'), t('pin.mismatch'));
       }
     }
   };
@@ -58,14 +60,14 @@ const RetypePin = (props: RetypePinProps) => {
           <View style={{ flex: 1 }}>
             <View style={CreatePinStyle.titleContainer}>
               <Text style={CreatePinStyle.title}>
-                Та пин кодоо дахин оруулна уу.
+                {t('pin.retype')}
               </Text>
             </View>
             <OtpInputGroup onChange={setPin} secureTextEntry={true} />
           </View>
           <CustomGradientButton
             disabled={pin.length < 4}
-            title={'Үргэлжлүүлэх'}
+            title={t('pin.continue')}
             onPress={onSubmit}
           />
         </ContainerView>

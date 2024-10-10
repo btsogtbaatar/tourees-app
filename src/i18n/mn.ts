@@ -1,4 +1,6 @@
 export default {
+  error: 'Алдаа',
+  successful: 'Амжилттай',
   l_email: 'И-мэйл хаягаа оруулна уу.',
   l_username: 'Таны нэр',
   b_email: 'И-мэйл',
@@ -17,8 +19,7 @@ export default {
   m_email: 'И-мэйл хаягаа зөв оруулна уу.',
   m_phone: 'Утасны дугаараа оруулна уу.',
   t_home: 'Нүүр',
-  t_request: 'Хүсэлтүүд',
-  t_profile: 'Миний',
+  myTask: 'Хүсэлтүүд',
   l_register_infomation: 'Бүртгэлийн мэдээлэл',
   l_history: 'Түүх',
   l_ebarimt: 'И-Баримт',
@@ -31,6 +32,7 @@ export default {
     welcome_seed: 'Та Сийд платформд тавтай морил.',
     understand: 'Ойлголоо',
     login: 'Нэвтрэх',
+    continue: 'Үргэлжлүүлэх',
   },
   form: {
     firstName: {
@@ -81,9 +83,10 @@ export default {
     seeProfile: 'Профайл харах',
   },
   tab: {
-    t_home: 'Нүүр',
-    t_request: 'Хүсэлтүүд',
-    t_profile: 'Миний',
+    tabHome: 'Нүүр',
+    tabMyTasks: 'Миний таскууд',
+    tabBrowseTasks: 'Таскууд',
+    tabProfile: 'Тохиргоо',
   },
   home: {
     category: {
@@ -91,6 +94,8 @@ export default {
       title: 'Үйлчилгээний төрлүүд',
       search: 'Хайх',
     },
+    loginAsContractor: 'Үйлчилгээ үзүүлэгчээр нэвтрэх',
+    signUpAsContractor: 'Үйлчилгээ үзүүлэгчээр бүртгүүлэх',
   },
   subCategoryList: {
     search: {
@@ -124,6 +129,8 @@ export default {
     requestDone: 'Болсон',
     requestDetailMsg: 'Хүсэлтийн дэлгэрэнгүй мэдээлэл',
     requestDetail: 'Дэлгэрэнгүй тайлбар',
+    requestName: 'Нэр',
+    requestNamePlaceholder: 'Жишээ: Хот доторх нүүлгэлт',
     requestDetailWarning: 'Дэлгэрэнгүй тайлбар оруулна уу!',
     requestAddress: 'Хаяг',
     requestAddressMsg: 'Хаягаа оруулна уу.',
@@ -134,8 +141,45 @@ export default {
     requestDeliveryAddress: 'Буулгах газар',
     requestCreate: 'Хүсэлт үүсгэх',
     requestDeliveryDate: 'Хүргэлт хийх өдөр сонгох',
+    offer: "санал",
+    status: {
+      NEW: 'Шинэ',
+      ASSIGNED: 'Хуваарилагдсан',
+      IN_PROGRESS: 'Хийгдэж буй',
+      COMPLETED: 'Дууссан',
+      CANCELLED: 'Цуцлагдсан',
+    },
+    postedBy: 'Хүсэлт үүсгэсэн',
+    date: 'Хүсэлтийн огноо',
+    images: 'Зурагууд',
+    price: 'Хүсэлтийн үнэ',
+    offerButton: 'Санал үүсгэх',
+    offerLabel: 'Саналууд',
+  },
+  offer:{
+    approve: 'Зөвшөөрөх',
+    description: 'Тайлбар',
+    enterFields: 'Та доорх талбаруудад саналынхаа мэдээллүүдийг оруулна уу.',
+    success: 'Таны санал амжилттай илгээгдлээ.',
+    notFound: 'Санал одоогоор байхгүй байна.'
+  },
+  biometric: {
+    consent: 'Та биометрик мэдээллийг ашиглахыг зөвшөөрч байна уу?',
+    doNotShowAgain: 'Дахин харуулахгүй байх',
+    accept: 'Тийм',
+    decline: 'Үгүй',
+    notSavedError: 'Биометрик мэдээллийг хадгалагдаагүй байна.',
+  },
+  pin: {
+    createPin: 'Та цаашид нэвтрэхдээ ашиглах 4 оронтой пин кодоо оруулна уу.',
+    enterPin: 'Та пин кодоо оруулна уу.',  
+    errorSaving: 'Пин кодыг хадгалахад алдаа гарлаа.', 
+    continue: 'Үргэлжлүүлэх',
+    retype: 'Та пин кодоо дахин оруулна уу.',
+    mismatch: 'Пин кодууд хоорондоо зөрж байна.',
   },
   userRequest: {
+    enterBudget: 'Та доорх талбарт үүсгэж буй таскынхаа үнийг оруулна уу.',
     success: {
       title: 'Амжилттай',
       message: 'Таны хүсэлт амжилттай үүслээ.',
@@ -147,6 +191,9 @@ export default {
       edit: 'Засах',
     },
     messages: {
+      name: {
+        required: 'Нэр оруулна уу.',
+      },
       description: {
         required: 'Тайлбар оруулна уу.',
       },
@@ -156,6 +203,9 @@ export default {
       addresses: {
         required: 'Хаягуудыг оруулна уу.',
       },
+      timeRange: {
+        required: 'Өдөр, цагийг оруулна уу.',
+      }
     },
   },
   login: {
@@ -187,6 +237,7 @@ export default {
     check: {
       label: 'Шалгах',
     },
+    submit: 'Нэвтрэх'
   },
   calendar: {
     today: 'Өнөөдөр',
@@ -214,6 +265,11 @@ export default {
     biometric: 'Биометрик',
     createPin: 'Пин үүсгэх',
     retypePin: 'Пин дахин оруулах',
+    taskBudget: 'Таскын үнэ',
+    createOffer: 'Санал үүсгэх',
+  },
+  taskBudget: {
+    submit: 'Хадгалах',
   },
   otp: {
     your: 'Таны',

@@ -1,7 +1,10 @@
 import { api } from '../../../api';
-import { AuthStateToken } from '../../Auth/entities';
 import { SharedModel } from '../../Shared/entities/shared.model';
 import { TaskModel } from '../entities/request.model';
+
+export function getTask(id: number): Promise<TaskModel.TaskResponse> {
+  return api.get(`/tasks/${id}`);
+}
 
 export function getTasks(
   page: number = 1,
@@ -12,6 +15,17 @@ export function getTasks(
     size: size,
   };
   return api.get('/tasks', { params: params });
+}
+
+export function getMyTasks(
+  page: number = 1,
+  size = 10,
+): Promise<SharedModel.Pagination<TaskModel.TaskResponse>> {
+  const params = {
+    page: page - 1,
+    size: size,
+  };
+  return api.get('/tasks/created/', { params: params });
 }
 
 export async function getLastTaskFromAddress(): Promise<
@@ -30,8 +44,10 @@ export async function getLastTaskFromAddress(): Promise<
   return undefined;
 }
 
-export function createTask(
-  task: TaskModel.TaskRequest,
-): Promise<AuthStateToken> {
+export function createTask(task: TaskModel.TaskRequest): Promise<TaskModel.TaskResponse> {
   return api.post('/tasks', task);
+}
+
+export function createOffer(offer: TaskModel.CreateOffer): Promise<TaskModel.OfferResponse> {
+  return api.post('/offers', offer);
 }

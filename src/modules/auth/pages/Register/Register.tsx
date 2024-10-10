@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
@@ -13,34 +14,33 @@ import {
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
+import CustomSelectionButton from '../../../../components/CustomButton/CustomSelectionButton';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
+import {
+  DEFAULT_LAT,
+  DEFAULT_LNG,
+} from '../../../../components/CustomMapView/CustomMapOneMarker';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import Steps from '../../../../components/Steps/Steps';
-import TabController from '../../../../components/TabController/TabController';
-import { RootStackParamList } from '../../../../navigation/types';
-import validations from '../../../../validations';
-import { AuthChannel, AuthModel } from '../../entities';
-import { signUp } from '../../services';
-import { RegisterStyle } from './Register.style';
-import { SharedModel, TaskerType } from '../../../Shared/entities/shared.model';
-import CustomSelectionButton from '../../../../components/CustomButton/CustomSelectionButton';
+import InputError from '../../../../components/FormError/FormError';
 import {
   BuildingIcon,
   LocationCircleIcon,
   UserIcon,
 } from '../../../../components/Icon';
-import InputError from '../../../../components/FormError/FormError';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
-import { uploadFile } from '../../../Shared/services/shared.service';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-import {
-  DEFAULT_LAT,
-  DEFAULT_LNG,
-} from '../../../../components/CustomMapView/CustomMapOneMarker';
+import Steps from '../../../../components/Steps/Steps';
+import TabController from '../../../../components/TabController/TabController';
 import TextItem from '../../../../components/TextItem/TextItem';
+import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme';
+import validations from '../../../../validations';
+import { SharedModel, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
+import { uploadFile } from '../../../Shared/services/shared.service';
+import { AuthChannel, AuthModel } from '../../entities';
+import { signUp } from '../../services';
+import { RegisterStyle } from './Register.style';
 
 type RegisterProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
@@ -174,7 +174,7 @@ function Register({ navigation }: RegisterProps) {
                             onPress={() => {
                               onChange(TaskerType.INDIVIDUAL);
                             }}>
-                            <UserIcon />
+                            <UserIcon color={colors.gray300}  />
                             <Text>
                               {t(`tasker.type.${TaskerType.INDIVIDUAL}`)}
                             </Text>
@@ -226,7 +226,13 @@ function Register({ navigation }: RegisterProps) {
                       name="address"
                       render={({ field: { onChange } }) => (
                         <TextItem
-                          icon={<LocationCircleIcon width={20} height={20} />}
+                          icon={
+                            <LocationCircleIcon
+                              color={colors.primaryGradient}
+                              width={20}
+                              height={20}
+                            />
+                          }
                           label={
                             address.displayName
                               ? address.displayName
@@ -260,7 +266,7 @@ function Register({ navigation }: RegisterProps) {
             </View>
             <CustomGradientButton
               onPress={form.handleSubmit(onContinue)}
-              title={'Үргэлжлүүлэх'}
+              title={t('signUp.continue')}
             />
           </ContainerView>
         </TouchableWithoutFeedback>

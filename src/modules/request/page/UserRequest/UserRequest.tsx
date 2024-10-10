@@ -15,7 +15,6 @@ import {
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
 import InputError from '../../../../components/FormError/FormError';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
@@ -28,10 +27,7 @@ import { TaskSchema } from '../../../../validations/schema';
 import { selectAuthenticated } from '../../../Auth/slice/authSlice';
 import { uploadFile } from '../../../Shared/services/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
-import {
-  createTask,
-  getLastTaskFromAddress,
-} from '../../service/request.service';
+import { getLastTaskFromAddress } from '../../service/request.service';
 import UserRequestStyle from './UserRequest.style';
 
 type UserRequestProps = NativeStackScreenProps<
@@ -72,14 +68,8 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
   }, []);
 
   const onSubmit = (task: TaskModel.TaskRequest) => {
-    createTask(task).then(() => {
-      notifyMessage(
-        t('userRequest.success.title'),
-        t('userRequest.success.message'),
-        () => {
-          rootNavigation.navigate('HomeTab', { screen: 'Home' });
-        },
-      );
+    rootNavigation.navigate('TaskBudget', {
+      task,
     });
   };
 
@@ -139,6 +129,25 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                 <FormProvider {...form}>
                   <View style={UserRequestStyle.formItem}>
                     <Text style={UserRequestStyle.label}>
+                      {t('request.requestName')}
+                    </Text>
+                    <CustomFormInput
+                      name={'name'}
+                      placeholder={t('request.requestNamePlaceholder')}
+                    />
+                  </View>
+                  <View style={UserRequestStyle.formItem}>
+                    <Text style={UserRequestStyle.label}>
+                      {t('request.requestDetail')}
+                    </Text>
+                    <CustomFormInput
+                      name={'description'}
+                      placeholder={subCategory.instruction}
+                      numberOfLines={3}
+                    />
+                  </View>
+                  <View style={UserRequestStyle.formItem}>
+                    <Text style={UserRequestStyle.label}>
                       {t('request.requestDeliveryDate')}
                     </Text>
                     <Controller
@@ -148,7 +157,9 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       )}
                     />
                     {errors.timeRange && (
-                      <InputError error={'Өдөр, цагийг оруулна уу.'} />
+                      <InputError
+                        error={(errors.files as FieldError).message}
+                      />
                     )}
                   </View>
                   <View style={UserRequestStyle.formItem}>
@@ -167,7 +178,6 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                             onChange([..._value]);
                           }}
                           onImageSelection={images => {
-                            console.log('🚀 ~ images:', images);
                             images.forEach(image => {
                               uploadFile(image).then(file => {
                                 if (value) {
@@ -187,23 +197,16 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       />
                     )}
                   </View>
-                  <View style={UserRequestStyle.formItem}>
-                    <Text style={UserRequestStyle.label}>
-                      {t('request.requestDetail')}
-                    </Text>
-                    <CustomFormInput
-                      name={'description'}
-                      placeholder={subCategory.instruction}
-                      numberOfLines={3}
-                    />
-                  </View>
                   <View>
                     <Text style={UserRequestStyle.label}>
                       {t('userRequest.address.label')}
                     </Text>
                     <TextItem
                       icon={
-                        <LocationCircleIcon style={UserRequestStyle.icon} />
+                        <LocationCircleIcon
+                          color={colors.primaryGradient}
+                          style={UserRequestStyle.icon}
+                        />
                       }
                       label={
                         addresses.from.address
@@ -230,7 +233,12 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       }
                     />
                     <TextItem
-                      icon={<LocationIcon style={UserRequestStyle.icon} />}
+                      icon={
+                        <LocationIcon
+                          color={colors.primaryGradient}
+                          style={UserRequestStyle.icon}
+                        />
+                      }
                       label={
                         addresses.to.address
                           ? getFullAddress(addresses.to)

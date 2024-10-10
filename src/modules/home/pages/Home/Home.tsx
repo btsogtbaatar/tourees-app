@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { defaultUrl } from '../../../../api';
 import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
@@ -13,9 +12,8 @@ import ImageItem from '../../../../components/ImageItem/ImageItem';
 import Loading from '../../../../components/Loading/Loading';
 import { useAppDispatch } from '../../../../context/app/store';
 import { colors } from '../../../../theme/colors';
-import { resetAuth, selectAuthenticated } from '../../../Auth/slice/authSlice';
+import { selectAuthenticated } from '../../../Auth/slice/authSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
-import { resetPreference } from '../../../Shared/slice/preferenceSlice';
 import { getCategories as fetchCategories } from '../../services/category.service';
 import HomeStyle from './Home.style';
 
@@ -38,8 +36,6 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(resetAuth());
-    dispatch(resetPreference());
     getCateories();
   }, []);
 
@@ -50,7 +46,7 @@ const Home = () => {
   ) : (
     <CustomSafeAreaView>
       <ContainerView>
-        <Text>{defaultUrl}</Text>
+        {/* <Text>{defaultUrl}</Text> */}
         <Text style={HomeStyle.title}>{t('category.question')}</Text>
         <View style={HomeStyle.inputContainer}>
           <CustomInput
@@ -90,16 +86,18 @@ const Home = () => {
         {!isAuthenticated && (
           <Banner
             key={0}
-            title={'Үйлчилгээ үзүүлэгчээр нэвтрэх'}
+            title={t('loginAsContractor')}
             onPress={() => navigation.navigate('Login')}
           />
         )}
         {!isAuthenticated && (
-          <Banner
-            key={1}
-            title={'Үйлчилгээ үзүүлэгчээр бүртгүүлэх'}
-            onPress={() => navigation.navigate('Register')}
-          />
+          <View style={{ marginTop: 5 }}>
+            <Banner
+              key={1}
+              title={t('signUpAsContractor')}
+              onPress={() => navigation.navigate('Register')}
+            />
+          </View>
         )}
       </ContainerView>
     </CustomSafeAreaView>

@@ -13,6 +13,7 @@ import FullHeightView from '../../../../components/FullHeightView/FullHeightView
 import { LocationCircleIcon, LocationIcon } from '../../../../components/Icon';
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme';
 import { TaskSchema } from '../../../../validations/schema';
 import { AddressType } from '../../../Request/entities/request.model';
 import UserRequestStyle from '../../../Request/page/UserRequest/UserRequest.style';
@@ -101,13 +102,23 @@ const AddressesDetail = (props: AddressDetailProps) => {
             <Text style={UserRequestStyle.label}>{t('label')}</Text>
             <TextItem
               hideAction={true}
-              icon={<LocationCircleIcon style={UserRequestStyle.icon} />}
+              icon={
+                <LocationCircleIcon
+                  color={colors.primaryGradient}
+                  style={UserRequestStyle.icon}
+                />
+              }
               label={t('from')}
             />
             <AddressDetailItem addressType={AddressType.From} />
             <TextItem
               hideAction={true}
-              icon={<LocationIcon style={UserRequestStyle.icon} />}
+              icon={
+                <LocationIcon
+                  color={colors.primaryGradient}
+                  style={UserRequestStyle.icon}
+                />
+              }
               label={t('to')}
             />
             <AddressDetailItem addressType={AddressType.To} />

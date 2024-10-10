@@ -9,7 +9,7 @@ import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvo
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import Steps from '../../../../components/Steps/Steps';
 import { RootStackParamList } from '../../../../navigation/types';
-import { AuthStateToken } from '../../entities/auth.model';
+import { AuthModel } from '../../entities';
 import { activate, sendOtp } from '../../services';
 import { RegisterOtpCheckStyle } from './RegisterOtpCheck.style';
 
@@ -31,7 +31,7 @@ function RegisterOtpCheck({
       email: registration?.email,
       phoneNumber: registration?.phoneNumber,
       value: otpValue,
-    }).then((_response: AuthStateToken) => {
+    }).then((_response: AuthModel.RegisterResponse) => {
       navigation.navigate('RegisterTermAndCondition');
     });
   };

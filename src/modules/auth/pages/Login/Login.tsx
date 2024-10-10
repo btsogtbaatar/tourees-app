@@ -88,7 +88,7 @@ export default function Login() {
         navigation.navigate('HomeTab', { screen: 'Home' });
       });
     } else {
-      notifyMessage('Алдаа', 'Биометрик мэдээлэл хадгалагдаагүй байна.');
+      notifyMessage(t('error'), t('biometric.notSavedError'));
     }
   };
 
@@ -142,7 +142,7 @@ export default function Login() {
                   <View style={styles.buttonContainer}>
                     <View style={{ flex: 1 }}>
                       <CustomGradientButton
-                        title="Нэвтрэх"
+                        title={t('login.submit')}
                         onPress={form.handleSubmit(onSubmit)}
                         disabled={!form.formState.isValid}
                       />

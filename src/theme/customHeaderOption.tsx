@@ -18,6 +18,9 @@ const getTextColor = (routeName: string) => {
 
 const getBackgroundColor = (routeName: string) => {
   switch (routeName) {
+    case 'CreateOffer':
+    case 'TaskDetail':
+      return colors.white;
     case 'UserRequest':
       return colors.gray700;
     case 'AddressMapView':
