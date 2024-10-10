@@ -17,7 +17,7 @@ export const CustomInputStyle = StyleSheet.create({
     ...Typography.textSmall,
     color: colors.gray700,
     flex: 1,
-    paddingTop: 0,
+    padding: 0,
     margin: 0,
   },
   inputContainer: {

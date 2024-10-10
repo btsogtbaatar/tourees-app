@@ -22,6 +22,7 @@ import {
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapOneMarker';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
+import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import InputError from '../../../../components/FormError/FormError';
 import {
   BuildingIcon,
@@ -29,6 +30,7 @@ import {
   UserIcon,
 } from '../../../../components/Icon';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
+import Loading from '../../../../components/Loading/Loading';
 import Steps from '../../../../components/Steps/Steps';
 import TabController from '../../../../components/TabController/TabController';
 import TextItem from '../../../../components/TextItem/TextItem';
@@ -46,6 +48,7 @@ type RegisterProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
 function Register({ navigation }: RegisterProps) {
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(false);
   const [authChannel, setAuthChannel] = useState<AuthChannel>(
     AuthChannel.Email,
   );
@@ -96,18 +99,30 @@ function Register({ navigation }: RegisterProps) {
     } else if (AuthChannel.Phone === authChannel) {
       values.email = '';
     }
-
-    signUp(values).then((response: AuthModel.RegisterResponse) => {
-      navigation.navigate('RegisterOtpCheck', {
-        registration: response,
+    setLoading(true);
+    signUp(values)
+      .then((response: AuthModel.User) => {
+        navigation.navigate('RegisterOtpCheck', {
+          registration: response,
+        });
+      })
+      .catch(e => {
+        notifyMessage(
+          t('login.socialError.title'),
+          e.message ? e.message : 'Network Error',
+        );
+      })
+      .finally(() => {
+        setLoading(false);
       });
-    });
   };
   const getAddress = (address: Address) => {
-    const data = address.address!.split(', ');
-    return `${data[data.length - 2]}, ${data[data.length - 1]}`;
+    const data = address.formattedAddress!.split(', ');
+    return `${data[data.length - 3]}, ${data[data.length - 2]}`;
   };
-
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <CustomSafeAreaView>
       <CustomKeyboardAvoidingView>
@@ -247,7 +262,6 @@ function Register({ navigation }: RegisterProps) {
                                 const _address = { ...address };
                                 _address.displayName = getAddress(_address);
                                 setAddress(_address);
-                                console.log('result', address);
                                 onChange(_address.displayName);
                               },
                             });

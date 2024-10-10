@@ -272,7 +272,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                 </FormProvider>
               </ContainerView>
               <FooterButton
-                onPress={handleSubmit(onSubmit, error => console.log(error))}
+                onPress={handleSubmit(onSubmit)}
                 showBackButton={true}
               />
             </ScrollView>

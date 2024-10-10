@@ -24,6 +24,7 @@ export type Address = {
   unit?: string;
   floor?: string;
   apartment?: string;
+  formattedAddress?: string;
 } & LatLng;
 
 export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
@@ -51,13 +52,13 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         address: `${place?.displayName.text}, ${place?.shortFormattedAddress}`,
         latitude: place.location.latitude,
         longitude: place.location.longitude,
+        formattedAddress: place.formattedAddress,
       };
 
       let _addresses = {
         ..._prev,
         ...address,
       };
-
       return _addresses;
     });
   };

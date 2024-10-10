@@ -33,7 +33,6 @@ const RetypePin = (props: RetypePinProps) => {
       if (newPin === pin) {
         createPin({ newPin: pin }).then(() => {
           if (user.username && pin) {
-            console.log(user.username, pin);
             Keychain.setGenericPassword(user.username, pin)
               .then(() => {
                 dispatch(enableBiometric());

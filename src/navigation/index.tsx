@@ -10,14 +10,17 @@ import RegisterOtpCheck from '../modules/Auth/pages/RegisterOtpCheck/RegisterOtp
 import RegisterTermAndCondition from '../modules/Auth/pages/RegisterTermAndCondition/RegisterTermAndCondition';
 import RetypePin from '../modules/Auth/pages/RetypePin/RetypePin';
 import HomeTabNavigator from '../modules/Home/navigation';
+import RegistrationInformation from '../modules/Profile/pages/RegistrationInformation/RegistrationInformation';
+import UpdateInformation from '../modules/Profile/pages/UpdateInformation/UpdateInformation';
 import CreateOffer from '../modules/Request/page/Offer/CreateOffer';
 import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
-import TaskPrice from '../modules/Request/page/TaskBudget/TaskBudget';
+import TaskBudget from '../modules/Request/page/TaskBudget/TaskBudget';
 import TaskDetail from '../modules/Request/page/TaskDetail/TaskDetail';
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
 import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
 import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
+import TaskerStack from '../modules/Tasker/routes/routes';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
 
@@ -91,6 +94,11 @@ const Route = () => {
           name="TaskDetail"
           component={TaskDetail}
         />
+        <Stack.Screen
+          options={{ title: t('headers.registrationInformation') }}
+          name="RegistrationInformation"
+          component={RegistrationInformation}
+        />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
@@ -110,15 +118,25 @@ const Route = () => {
         />
         <Stack.Screen
           options={{ title: t('headers.taskPrice') }}
-          name="TaskPrice"
-          component={TaskPrice}
+          name="TaskBudget"
+          component={TaskBudget}
         />
         <Stack.Screen
           options={{ title: t('headers.createOffer') }}
           name="CreateOffer"
           component={CreateOffer}
+          />
+        <Stack.Screen
+          options={{ title: t('headers.updateInformation') }}
+          name="UpdateInformation"
+          component={UpdateInformation}
         />
       </Stack.Group>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="TaskerStack"
+        component={TaskerStack}
+      />
     </Stack.Navigator>
   );
 };

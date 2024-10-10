@@ -5,6 +5,7 @@ const ContainerViewStyles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 16,
     paddingTop: 12,
+    paddingBottom: 8,
   },
 });
 

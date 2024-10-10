@@ -32,7 +32,6 @@ export default function CustomPlacesAutoComplete(
   const textInputRef = useRef<CustomInputRef>(null);
 
   useEffect(() => {
-    console.log('🚀 ~ props.address:', props.address);
     // TODO: Compare with radius
 
     if (
