@@ -3,11 +3,13 @@ import { FieldValues, UseFormSetValue } from 'react-hook-form';
 import { AuthModel } from '../modules/Auth/entities';
 import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigation/types';
 import { AddressType } from '../modules/Request/entities/request.model';
-import { SharedModel } from '../modules/Shared/entities/shared.model';
 import {
-  Address,
-  Addresses,
-} from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+  FormField,
+  SharedModel,
+} from '../modules/Shared/entities/shared.model';
+import { Addresses } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import { Address } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import { Schema } from '../modules/Profile/model/registration.model';
 import { ProfileModel } from '../modules/Tasker/entities/profile.model';
 
 export type RootStackParamList = {
@@ -16,14 +18,20 @@ export type RootStackParamList = {
   LoginOtpCheck: { credentials: AuthModel.Credentials };
   Register: undefined;
   RegisterTermAndCondition: undefined;
+  RegistrationInformation: undefined;
   RegisterOtpCheck: { registration: AuthModel.RegisterResponse };
   SubCategoryList: { parentCategoryId?: number; title: string };
   UserRequest: {
     item: SharedModel.SubCategory;
   };
+  UpdateInformation: {
+    field: FormField;
+    defaultValues: Schema;
+  };
   RequestDetail: {
+    id: number;
     title: string;
-    status?: number;
+    status?: string;
   };
   AddressesMapView: {
     addresses: Addresses;

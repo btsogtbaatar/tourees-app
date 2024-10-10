@@ -19,6 +19,8 @@ import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricCo
 import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
 import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
+import RegistrationInformation from '../modules/Profile/pages/RegistrationInformation/RegistrationInformation';
+import UpdateInformation from '../modules/Profile/pages/UpdateInformation/UpdateInformation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -90,6 +92,11 @@ const Route = () => {
           name="RequestDetail"
           component={RequestDetail}
         />
+        <Stack.Screen
+          options={{ title: t('headers.registrationInformation') }}
+          name="RegistrationInformation"
+          component={RegistrationInformation}
+        />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
@@ -106,6 +113,11 @@ const Route = () => {
           options={{ title: t('headers.address') }}
           name="AddressesDetail"
           component={AddressesDetail}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.updateInformation') }}
+          name="UpdateInformation"
+          component={UpdateInformation}
         />
       </Stack.Group>
       <Stack.Screen

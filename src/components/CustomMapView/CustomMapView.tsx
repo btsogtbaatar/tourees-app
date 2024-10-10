@@ -31,7 +31,7 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
     if (props.addressType === AddressType.From) {
       return <LocationCircleIcon width={25} height={25} />;
     } else if (props.addressType === AddressType.To) {
-      return <LocationIcon width={25} height={25} />;
+      return <LocationIcon color={colors.primary500} width={25} height={25} />;
     } else {
       return <></>;
     }
@@ -83,7 +83,7 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
               latitude: props.addresses.to.latitude,
               longitude: props.addresses.to.longitude,
             }}>
-            <LocationIcon width={20} height={20} />
+            <LocationIcon color={colors.primary500} width={20} height={20} />
           </Marker>
         )}
       {props.addresses?.from.address !== undefined &&

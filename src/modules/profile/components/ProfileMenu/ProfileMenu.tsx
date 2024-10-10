@@ -12,6 +12,7 @@ import {
   GlobalIcon,
   HelpCircleIcon,
   LogoutIcon,
+  PassportIcon,
   UserCircleIcon,
 } from '../../../../components/Icon';
 import { useAppDispatch } from '../../../../context/app/store';
@@ -31,6 +32,15 @@ const ProfileMenu = () => {
   const profileMenus = [
     {
       key: 1,
+      values: [t('profile.l_user_infomation')],
+      prefix: <PassportIcon />,
+      suffix: <ChevronRightIcon color={colors.gray700} />,
+      onPress: () => {
+        navigation.navigate('RegistrationInformation');
+      },
+    },
+    {
+      key: 2,
       values: [t('profile.l_register_infomation')],
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -42,7 +52,7 @@ const ProfileMenu = () => {
       },
     },
     {
-      key: 2,
+      key: 3,
       values: [t('profile.l_setup_profile')],
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -51,7 +61,7 @@ const ProfileMenu = () => {
       },
     },
     {
-      key: 3,
+      key: 4,
       values: [t('profile.l_history')],
       prefix: <ClockRewindIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -60,7 +70,7 @@ const ProfileMenu = () => {
       },
     },
     {
-      key: 4,
+      key: 5,
       values: [t('profile.l_ebarimt')],
       prefix: <EBarimtIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -70,7 +80,7 @@ const ProfileMenu = () => {
     },
 
     {
-      key: 5,
+      key: 6,
       values: [t('profile.language'), t('profile.mongolia')],
       prefix: <GlobalIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -82,7 +92,7 @@ const ProfileMenu = () => {
       },
     },
     {
-      key: 6,
+      key: 7,
       values: [t('profile.t_serviceterm')],
       prefix: <FileIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -91,7 +101,7 @@ const ProfileMenu = () => {
       },
     },
     {
-      key: 1,
+      key: 8,
       values: [t('profile.l_help')],
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
@@ -100,10 +110,11 @@ const ProfileMenu = () => {
       },
     },
     {
-      key: 7,
+      key: 9,
       values: [t('profile.l_logout')],
       prefix: <LogoutIcon />,
       suffix: <ChevronRightIcon color={colors.primary500} />,
+      color: colors.primary500,
       onPress: () => {
         dispatch(resetAuth());
         navigation.navigate('HomeTab', { screen: 'Home' });

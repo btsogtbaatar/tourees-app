@@ -36,6 +36,11 @@ import UserCircleIcon from '../../../assets/icons/user-circle.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
+import MailIcon from '../../../assets/icons/mail.svg';
+import PassportIcon from '../../../assets/icons/passport.svg';
+import ImagePlaceHolderIcon from '../../../assets/icons/image-placeholder.svg';
+import CameraIcon from '../../../assets/icons/camera.svg';
+import SendIcon from '../../../assets/icons/send.svg';
 import CloseIcon from '../../../assets/icons/close-icon.svg';
 import HeaderEditIcon from '../../../assets/icons/header-edit-icon.svg';
 import PlusIcon from '../../../assets/icons/plus-icon.svg';
@@ -81,5 +86,10 @@ export {
   MoonIcon,
   CloseIcon,
   BuildingIcon,
+  MailIcon,
+  PassportIcon,
+  CameraIcon,
+  ImagePlaceHolderIcon,
+  SendIcon,
   HeaderEditIcon,
 };

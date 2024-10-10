@@ -1,21 +1,21 @@
 import React, {
-    forwardRef,
-    useImperativeHandle,
-    useRef,
-    useState,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
 } from 'react';
 import {
-    GestureResponderEvent,
-    NativeSyntheticEvent,
-    Pressable,
-    StyleProp,
-    Text,
-    TextInput,
-    TextInputFocusEventData,
-    TextInputProps,
-    TextStyle,
-    View,
-    ViewStyle,
+  GestureResponderEvent,
+  NativeSyntheticEvent,
+  Pressable,
+  StyleProp,
+  Text,
+  TextInput,
+  TextInputFocusEventData,
+  TextInputProps,
+  TextStyle,
+  View,
+  ViewStyle,
 } from 'react-native';
 import { colors } from '../../theme/colors';
 import { Typography } from '../../theme/typography';

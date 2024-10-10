@@ -33,6 +33,9 @@ export default {
     login: 'Нэвтрэх',
   },
   form: {
+    fullName: {
+      label: 'Нэр',
+    },
     firstName: {
       label: 'Нэр',
       placeHolder: 'Нэр',
@@ -84,6 +87,7 @@ export default {
   profile: {
     language: 'Хэл',
     mongolia: 'Монгол',
+    l_user_infomation: 'Ерөнхий мэдээлэл',
     l_register_infomation: 'Бүртгэлийн мэдээлэл',
     l_history: 'Түүх',
     l_ebarimt: 'И-Баримт',
@@ -232,6 +236,8 @@ export default {
     biometric: 'Биометрик',
     createPin: 'Пин үүсгэх',
     retypePin: 'Пин дахин оруулах',
+    registrationInformation: 'Бүртгэлийн мэдээлэл',
+    updateInformation: 'Бүртгэлийн мэдээлэл',
   },
   otp: {
     your: 'Таны',

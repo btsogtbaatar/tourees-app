@@ -45,7 +45,6 @@ export async function getNearbyPlacesFromCoordinates(
         headers: headers,
       },
     );
-
   return response.data?.places ? response.data.places : [];
 }
 
