@@ -1,8 +1,6 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
-import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
 import Login from '../modules/Auth/pages/Login/Login';
 import LoginOtpCheck from '../modules/Auth/pages/LoginOtpCheck/LoginOtpCheck';
 import Register from '../modules/Auth/pages/Register/Register';
@@ -13,10 +11,16 @@ import HomeTabNavigator from '../modules/Home/navigation';
 import RequestDetail from '../modules/Request/page/RequestDetail/RequestDetail';
 import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
-import AddressDetail from '../modules/Shared/pages/AddressDetail/AddressDetail';
-import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import TaskerStack from '../modules/Tasker/routes/routes';
+import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
+import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
+import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
+import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
+import RegistrationInformation from '../modules/Profile/pages/RegistrationInformation/RegistrationInformation';
+import UpdateInformation from '../modules/Profile/pages/UpdateInformation/UpdateInformation';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -88,8 +92,18 @@ const Route = () => {
           name="RequestDetail"
           component={RequestDetail}
         />
+        <Stack.Screen
+          options={{ title: t('headers.registrationInformation') }}
+          name="RegistrationInformation"
+          component={RegistrationInformation}
+        />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen
+          options={{ title: t('headers.address') }}
+          name="AddressesMapView"
+          component={AddressesMapView}
+        />
         <Stack.Screen
           options={{ title: t('headers.address') }}
           name="AddressMapView"
@@ -97,10 +111,20 @@ const Route = () => {
         />
         <Stack.Screen
           options={{ title: t('headers.address') }}
-          name="AddressDetail"
-          component={AddressDetail}
+          name="AddressesDetail"
+          component={AddressesDetail}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.updateInformation') }}
+          name="UpdateInformation"
+          component={UpdateInformation}
         />
       </Stack.Group>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="TaskerStack"
+        component={TaskerStack}
+      />
     </Stack.Navigator>
   );
 };

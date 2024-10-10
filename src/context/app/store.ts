@@ -3,6 +3,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import { reactotron } from '../../../ReactotronConfig';
+
 import authSlice from '../../modules/Auth/slice/authSlice';
 import notificationSlice from '../../modules/Notification/slice/notificationSlice';
 import preferenceSlice from '../../modules/Shared/slice/preferenceSlice';

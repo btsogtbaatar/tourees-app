@@ -1,14 +1,14 @@
 import { api } from '../../../api';
 import store from '../../../context/app/store';
 import { AuthModel } from '../entities';
-import { setToken, setUser } from '../slice/authSlice';
+import { setProfileImage, setToken, setUser } from '../slice/authSlice';
 
 export const authBaseUrl = '/auth';
 
 export function signUp(
   customer: AuthModel.RegisterRequest,
 ): Promise<AuthModel.User> {
-  return api.post(`${authBaseUrl}/customers/register`, customer);
+  return api.post(`${authBaseUrl}/contractors/register`, customer);
 }
 
 export async function activate(
@@ -52,7 +52,7 @@ export async function socialCustomerAuthenticate(
   socialToken: AuthModel.SocialToken,
 ): Promise<AuthModel.User> {
   let token: AuthModel.Token = await api.post(
-    `${authBaseUrl}/customers/social`,
+    `${authBaseUrl}/contractors/social`,
     socialToken,
   );
   return await authenticate(token);
@@ -66,6 +66,7 @@ async function authenticate(
   let user: AuthModel.User = await introspect();
 
   store.dispatch(setUser(user));
+  if (user.profilePicture) store.dispatch(setProfileImage(user.profilePicture));
 
   return user;
 }

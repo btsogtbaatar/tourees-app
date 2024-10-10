@@ -1,34 +1,27 @@
 import React from 'react';
-import {
-  Image,
-  ImageBackground,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import { PlusIcon } from '../Icon';
+import { ImageBackground, TouchableOpacity, View } from 'react-native';
+import { colors } from '../../theme';
+import { PlusIcon, XCircleIcon } from '../Icon';
 import ImagePreviewStyle from './ImagePreview.style';
 import { ImageSource } from './ImageUploadButton';
+import CustomImage from '../CustomImage/CustomImage';
+import { horizontalScale, moderateScale } from '../../utilities';
 
 interface ImageComponentProps {
   item: ImageSource;
   index: number;
   chooseFile: () => void;
-  selectedImage: number;
+  onDelete: (index: number) => void;
 }
 
 const ImagePreview = ({
   item,
   index,
   chooseFile,
-  selectedImage,
+  onDelete,
 }: ImageComponentProps) => {
-  const imageSize = () => {
-    return selectedImage - 5;
-  };
-
-  if (index < 5) {
-    if (index === 0) {
+  if (!item.uri) {
+    if (!item.url) {
       return (
         <View style={ImagePreviewStyle.container}>
           <TouchableOpacity onPress={chooseFile}>
@@ -39,25 +32,37 @@ const ImagePreview = ({
     } else {
       return (
         <View style={ImagePreviewStyle.container}>
-          <Image style={ImagePreviewStyle.imageContainer} source={item} />
+          <CustomImage
+            source={{ uri: item.url }}
+            width={horizontalScale(72)}
+            height={horizontalScale(72)}
+            style={ImagePreviewStyle.imageContainer}
+            resizeMode="cover"
+            onDelete={() => {
+              onDelete(index);
+            }}
+            index={index}
+          />
         </View>
       );
     }
-  } else if (index === 5) {
+  } else {
     return (
       <View style={ImagePreviewStyle.container}>
         <ImageBackground
-          style={ImagePreviewStyle.imageBackContainer}
+          style={ImagePreviewStyle.imageContainer}
           imageStyle={ImagePreviewStyle.br16}
-          resizeMode="stretch"
-          source={item}
-          blurRadius={10}>
-          <Text style={ImagePreviewStyle.imageTitle}>+{imageSize()}</Text>
+          source={item}>
+          <TouchableOpacity
+            style={ImagePreviewStyle.delete}
+            onPress={() => {
+              onDelete(index);
+            }}>
+            <XCircleIcon color={colors.primary500} />
+          </TouchableOpacity>
         </ImageBackground>
       </View>
     );
-  } else {
-    return <></>;
   }
 };
 

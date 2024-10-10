@@ -17,6 +17,7 @@ import { TaskSchema } from '../../../../validations/schema';
 import { AddressType } from '../../../Request/entities/request.model';
 import UserRequestStyle from '../../../Request/page/UserRequest/UserRequest.style';
 import AddressDetailStyle from './AddressDetail.style';
+import { colors } from '../../../../theme';
 
 interface AddressDetailItemProps {
   addressType: AddressType;
@@ -57,10 +58,10 @@ const AddressDetailItem = (props: AddressDetailItemProps) => {
 
 type AddressDetailProps = NativeStackScreenProps<
   RootStackParamList,
-  'AddressDetail'
+  'AddressesDetail'
 >;
 
-const AddressDetail = (props: AddressDetailProps) => {
+const AddressesDetail = (props: AddressDetailProps) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'addressDetail' });
 
   const schema = yup.object().shape({
@@ -107,7 +108,12 @@ const AddressDetail = (props: AddressDetailProps) => {
             <AddressDetailItem addressType={AddressType.From} />
             <TextItem
               hideAction={true}
-              icon={<LocationIcon style={UserRequestStyle.icon} />}
+              icon={
+                <LocationIcon
+                  color={colors.primary500}
+                  style={UserRequestStyle.icon}
+                />
+              }
               label={t('to')}
             />
             <AddressDetailItem addressType={AddressType.To} />
@@ -119,4 +125,4 @@ const AddressDetail = (props: AddressDetailProps) => {
   );
 };
 
-export default AddressDetail;
+export default AddressesDetail;

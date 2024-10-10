@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import MapView, { Details, LatLng, Marker, Region } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 import { AddressType } from '../../modules/Request/entities/request.model';
-import { Addresses } from '../../modules/Shared/pages/AddressMapView/AddressMapView';
+import { Addresses } from '../../modules/Shared/pages/AddressMapView/AddressesMapView';
 import AddressMapViewStyle from '../../modules/Shared/pages/AddressMapView/AddressMapView.style';
 import { colors } from '../../theme';
 import { LocationCircleIcon, LocationIcon } from '../Icon';
@@ -31,7 +31,7 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
     if (props.addressType === AddressType.From) {
       return <LocationCircleIcon width={25} height={25} />;
     } else if (props.addressType === AddressType.To) {
-      return <LocationIcon width={25} height={25} />;
+      return <LocationIcon color={colors.primary500} width={25} height={25} />;
     } else {
       return <></>;
     }
@@ -83,7 +83,7 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
               latitude: props.addresses.to.latitude,
               longitude: props.addresses.to.longitude,
             }}>
-            <LocationIcon width={20} height={20} />
+            <LocationIcon color={colors.primary500} width={20} height={20} />
           </Marker>
         )}
       {props.addresses?.from.address !== undefined &&

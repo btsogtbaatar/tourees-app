@@ -60,6 +60,9 @@ function App(): React.JSX.Element {
     LogBox.ignoreLogs([
       'In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.',
     ]);
+    LogBox.ignoreLogs([
+      'Non-serializable values were found in the navigation state',
+    ]);
   }, []);
 
   return (

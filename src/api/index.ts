@@ -1,13 +1,14 @@
 import axios from 'axios';
 
-// export const defaultUrl = 'http://192.168.4.22:8080';
-export const defaultUrl = 'http://10.0.2.2:8080';
+export const defaultUrl = 'http://localhost:8080';
 const imageUrl = `${defaultUrl}/file/resource/`;
+const brokerUrl = `ws://localhost:8080/ws/websocket`;
 
 export const getEnv = () => {
   return {
     API_URL: defaultUrl,
     IMAGE_URL: imageUrl,
+    BROKER_URL: brokerUrl,
   };
 };
 

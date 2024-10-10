@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../../../theme/colors';
-import { verticalScale } from '../../../../utilities/metrics';
+import { horizontalScale, verticalScale } from '../../../../utilities/metrics';
 
 export const RegisterStyle = StyleSheet.create({
   tabContainer: {
@@ -104,5 +104,16 @@ export const RegisterStyle = StyleSheet.create({
   },
   formController: {
     marginTop: verticalScale(16),
+  },
+  type: {
+    display: 'flex',
+    flexDirection: 'row',
+    width: '100%',
+    gap: horizontalScale(16),
+  },
+  typeButtons: {
+    flex: 1,
+    padding: verticalScale(10),
+    gap: horizontalScale(4),
   },
 });

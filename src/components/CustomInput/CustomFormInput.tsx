@@ -34,7 +34,7 @@ export default function CustomFormInput<T extends FieldValues>(
       <CustomInput
         {...props}
         value={value}
-        onChangeText={text => onChange(text)}
+        onChangeText={(text) => onChange(text)}
       />
       {error?.message && <FormError error={error.message} />}
     </View>

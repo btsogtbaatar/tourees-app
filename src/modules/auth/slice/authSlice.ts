@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../../context/app/store';
+import { SharedModel } from '../../Shared/entities/shared.model';
 import { AuthModel } from '../entities';
 
 export interface AuthState {
@@ -7,6 +8,7 @@ export interface AuthState {
   token?: AuthModel.Token;
   user?: AuthModel.User;
   firebaseToken?: string;
+  profile?: SharedModel.File;
 }
 
 const authSlice = createSlice({
@@ -15,6 +17,7 @@ const authSlice = createSlice({
     isAuthenticated: false,
     token: undefined,
     user: undefined,
+    profile: undefined,
   } as AuthState,
   reducers: {
     setToken: (state, action: PayloadAction<AuthModel.Token>) => {
@@ -24,10 +27,14 @@ const authSlice = createSlice({
     setUser: (state, action: PayloadAction<AuthModel.User>) => {
       state.user = action.payload;
     },
+    setProfileImage: (state, action: PayloadAction<SharedModel.File>) => {
+      state.profile = action.payload;
+    },
     resetAuth: state => {
       state.isAuthenticated = false;
       state.token = undefined;
       state.user = undefined;
+      state.profile = undefined;
     },
     setFirebaseToken: (state, action: PayloadAction<string>) => {
       state.firebaseToken = action.payload;
@@ -35,7 +42,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, setUser, resetAuth, setFirebaseToken } = authSlice.actions;
+export const { setToken, setUser, resetAuth, setFirebaseToken, setProfileImage } = authSlice.actions;
 export default authSlice.reducer;
 
 export const selectAuthenticated = (state: RootState) =>
@@ -47,3 +54,4 @@ export const selectFirebaseToken = (state: RootState) => state.auth.firebaseToke
 export const selectToken = (state: RootState) => state.auth.token;
 
 export const hasPin = (state: RootState) => state.auth.user?.hasPin;
+export const selectProfile = (state: RootState) => state.auth.profile;

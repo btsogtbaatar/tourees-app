@@ -32,9 +32,62 @@ export default {
     understand: 'Ойлголоо',
     login: 'Нэвтрэх',
   },
+  form: {
+    fullName: {
+      label: 'Нэр',
+    },
+    firstName: {
+      label: 'Нэр',
+      placeHolder: 'Нэр',
+      errors: { required: 'Та өөрийн нэрийг оруулна уу.', validation: '' },
+    },
+    lastName: {
+      label: 'Овог',
+      placeHolder: 'Овог',
+      errors: { required: 'Та овогоон оруулна уу.', validation: '' },
+    },
+    address: {
+      label: 'Хаяг',
+      placeHolder: 'Хаяг',
+      errors: {
+        required: 'Хаягаа оруулна уу.',
+        validation: 'Хаягаа оруулна уу',
+      },
+    },
+    taskerType: {
+      label: 'Төрөл',
+      errors: {
+        required: 'Төрөл оруулна уу.',
+      },
+    },
+    profile: {
+      label: 'Зураг',
+      placeHolder: 'Зураг',
+      errors: { required: 'Зураг оруулна уу', validation: 'Зураг оруулна уу' },
+    },
+  },
+  tasker: {
+    type: {
+      INDIVIDUAL: 'Хувь хүн',
+      BUSINESS: 'Байгуулга',
+    },
+    education: 'Боловсрол',
+    specialities: 'Мэргэжил',
+    languages: 'Гадаад хэл',
+    rank: 'Зэрэг цол',
+    portfolio: 'Портфолио',
+    workingType: {
+      name: 'Ажиллах төрөл',
+      ONLINE: 'Онлайнаар',
+      PHYSICALLY: 'Биетээр',
+    },
+    tagLine: 'tagLine',
+    description: 'description',
+  },
   profile: {
     language: 'Хэл',
     mongolia: 'Монгол',
+    l_user_infomation: 'Ерөнхий мэдээлэл',
     l_register_infomation: 'Бүртгэлийн мэдээлэл',
     l_history: 'Түүх',
     l_ebarimt: 'И-Баримт',
@@ -42,6 +95,11 @@ export default {
     l_help: 'Тусламж',
     l_logout: 'Гарах',
     seeProfile: 'Профайл харах',
+    imageSuccess: {
+      title: 'Амжилттай',
+      message: 'Зураг амжилттай солигдлоо.',
+    },
+    l_setup_profile: 'Профайл засах',
   },
   tab: {
     t_home: 'Нүүр',
@@ -175,9 +233,12 @@ export default {
     category: 'Үйлчилгээний төрлүүд',
     address: 'Хаяг сонгох',
     request: 'Хүсэлт',
+    taskerProfile: 'Таскэр',
     biometric: 'Биометрик',
     createPin: 'Пин үүсгэх',
     retypePin: 'Пин дахин оруулах',
+    registrationInformation: 'Бүртгэлийн мэдээлэл',
+    updateInformation: 'Бүртгэлийн мэдээлэл',
   },
   otp: {
     your: 'Таны',
