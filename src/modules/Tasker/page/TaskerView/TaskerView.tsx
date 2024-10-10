@@ -99,7 +99,6 @@ const TaskerView = () => {
                   height={horizontalScale(72)}
                   style={{
                     borderRadius: moderateScale(12),
-                    // marginHorizontal: horizontalScale(8),
                   }}
                   resizeMode="cover"
                 />

@@ -66,12 +66,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerUsername: {
-    // flex: 1,
-    // height: '100%',
     justifyContent: 'flex-end',
     paddingTop: verticalScale(16),
     alignItems: 'center',
-    // backgroundColor: colors.white
   },
   titleUsername: {
     color: colors.white,
