@@ -10,6 +10,7 @@ export default {
     t_serviceterm: 'Terms of Service',
     l_help: 'Help',
     l_logout: 'Log out',
+    l_setup_profile: 'Set up task alerts',
   },
   tab: {
     t_home: 'Home',

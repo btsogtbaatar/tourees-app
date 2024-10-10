@@ -1,10 +1,14 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
+import { FieldValues, UseFormSetValue } from 'react-hook-form';
 import { AuthModel } from '../modules/Auth/entities';
 import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigation/types';
 import { AddressType } from '../modules/Request/entities/request.model';
 import { SharedModel } from '../modules/Shared/entities/shared.model';
-import { Addresses } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
-import { Address } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import {
+  Address,
+  Addresses,
+} from '../modules/Shared/pages/AddressMapView/AddressesMapView';
+import { ProfileModel } from '../modules/Tasker/entities/profile.model';
 
 export type RootStackParamList = {
   HomeTab: NavigatorScreenParams<HomeTabParamList>;
@@ -38,6 +42,21 @@ export type RootStackParamList = {
   BiometricConsent: undefined;
   CreatePin: undefined;
   RetypePin: { pin: string };
+  TaskerStack: NavigatorScreenParams<TaskerParamList>;
+};
+
+export type TaskerParamList = {
+  RegisterTasker: {
+    profile?: ProfileModel.ProfileRequest;
+  };
+  RemarkListView: {
+    label: string;
+    setValue: UseFormSetValue<FieldValues>;
+    name: string;
+    value: string[];
+    tags?: ProfileModel.ProfileTag[];
+  };
+  TaskerView: undefined;
 };
 
 declare global {

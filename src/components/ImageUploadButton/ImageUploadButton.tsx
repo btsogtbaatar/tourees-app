@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { FlatList, Platform } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { FlatList, Platform, StyleProp, ViewStyle } from 'react-native';
 import * as ImagePicker from 'react-native-image-picker';
 import ImagePreview from './ImagePreview';
 import ImageUploadButtonStyle from './ImageUploadButton.style';
@@ -8,21 +8,31 @@ export type ImageSource = {
   uri?: string;
   name?: string;
   type?: string;
+  url?: string;
 };
 
 interface ImageUploadButtonProps {
   limit: number;
   onDelete: (index: number) => void;
   onImageSelection: (selectedImages: ImageSource[]) => void;
+  extra?: StyleProp<ViewStyle>;
+  value?: ImageSource[];
 }
 
 const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
   limit,
   onImageSelection,
   onDelete,
+  value,
 }) => {
   const [selectedImages, setSelectedImages] = useState<ImageSource[]>([{}]);
   const flatlistRef = useRef<FlatList<ImageSource> | null>(null);
+
+  useEffect(() => {
+    if (value) {
+      setSelectedImages([{}, ...value]);
+    }
+  }, [value]);
 
   const chooseFile = () => {
     ImagePicker.launchImageLibrary(
@@ -50,6 +60,7 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
             if (newSelectedImages.length > limit) {
               newSelectedImages.shift();
             }
+
             setSelectedImages(newSelectedImages);
           } else {
             setSelectedImages([...selectedImages, ...source]);
@@ -60,7 +71,10 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
     );
   };
   const _onDelete = (index: number) => {
-    const images = selectedImages.filter((val, idx) => idx != index && val.uri);
+    const images = selectedImages.filter(
+      (val, idx) => idx != index && (val.uri || val.url),
+    );
+
     if (images.length !== limit || images.length === 0) {
       images.unshift({});
     }

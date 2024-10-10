@@ -68,6 +68,12 @@ export default {
       INDIVIDUAL: 'Хувь хүн',
       BUSINESS: 'Байгуулга',
     },
+    education: 'Боловсрол',
+    specialities: 'Мэргэжил',
+    languages: 'Гадаад хэл',
+    rank: 'Зэрэг цол',
+    transportation: 'Тээврийн хэрэгсэл',
+    portfolio: 'Портфолио',
   },
   profile: {
     language: 'Хэл',
@@ -79,6 +85,11 @@ export default {
     l_help: 'Тусламж',
     l_logout: 'Гарах',
     seeProfile: 'Профайл харах',
+    imageSuccess: {
+      title: 'Амжилттай',
+      message: 'Зураг амжилттай солигдлоо.',
+    },
+    l_setup_profile: 'Профайл засах',
   },
   tab: {
     t_home: 'Нүүр',
@@ -211,6 +222,7 @@ export default {
     category: 'Үйлчилгээний төрлүүд',
     address: 'Хаяг сонгох',
     request: 'Хүсэлт',
+    taskerProfile: 'Таскэр',
     biometric: 'Биометрик',
     createPin: 'Пин үүсгэх',
     retypePin: 'Пин дахин оруулах',
