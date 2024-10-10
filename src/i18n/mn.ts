@@ -1,4 +1,6 @@
 export default {
+  error: 'Алдаа',
+  successful: 'Амжилттай',
   l_email: 'И-мэйл хаягаа оруулна уу.',
   l_username: 'Таны нэр',
   b_email: 'И-мэйл',
@@ -17,8 +19,7 @@ export default {
   m_email: 'И-мэйл хаягаа зөв оруулна уу.',
   m_phone: 'Утасны дугаараа оруулна уу.',
   t_home: 'Нүүр',
-  t_request: 'Хүсэлтүүд',
-  t_profile: 'Миний',
+  myTask: 'Хүсэлтүүд',
   l_register_infomation: 'Бүртгэлийн мэдээлэл',
   l_history: 'Түүх',
   l_ebarimt: 'И-Баримт',
@@ -32,8 +33,12 @@ export default {
     welcome_seed: 'Та Сийд платформд тавтай морил.',
     understand: 'Ойлголоо',
     login: 'Нэвтрэх',
+    continue: 'Үргэлжлүүлэх',
   },
   form: {
+    fullName: {
+      label: 'Нэр',
+    },
     firstName: {
       label: 'Нэр',
       placeHolder: 'Нэр',
@@ -69,10 +74,23 @@ export default {
       INDIVIDUAL: 'Хувь хүн',
       BUSINESS: 'Байгуулга',
     },
+    education: 'Боловсрол',
+    specialities: 'Мэргэжил',
+    languages: 'Гадаад хэл',
+    rank: 'Зэрэг цол',
+    portfolio: 'Портфолио',
+    workingType: {
+      name: 'Ажиллах төрөл',
+      ONLINE: 'Онлайнаар',
+      PHYSICALLY: 'Биетээр',
+    },
+    tagLine: 'tagLine',
+    description: 'description',
   },
   profile: {
     language: 'Хэл',
     mongolia: 'Монгол',
+    l_user_infomation: 'Ерөнхий мэдээлэл',
     l_register_infomation: 'Бүртгэлийн мэдээлэл',
     l_history: 'Түүх',
     l_ebarimt: 'И-Баримт',
@@ -80,11 +98,17 @@ export default {
     l_help: 'Тусламж',
     l_logout: 'Гарах',
     seeProfile: 'Профайл харах',
+    imageSuccess: {
+      title: 'Амжилттай',
+      message: 'Зураг амжилттай солигдлоо.',
+    },
+    l_setup_profile: 'Профайл засах',
   },
   tab: {
-    t_home: 'Нүүр',
-    t_request: 'Хүсэлтүүд',
-    t_profile: 'Миний',
+    tabHome: 'Нүүр',
+    tabMyTasks: 'Миний таскууд',
+    tabBrowseTasks: 'Таскууд',
+    tabProfile: 'Тохиргоо',
   },
   home: {
     category: {
@@ -92,6 +116,8 @@ export default {
       title: 'Үйлчилгээний төрлүүд',
       search: 'Хайх',
     },
+    loginAsContractor: 'Үйлчилгээ үзүүлэгчээр нэвтрэх',
+    signUpAsContractor: 'Үйлчилгээ үзүүлэгчээр бүртгүүлэх',
   },
   subCategoryList: {
     search: {
@@ -114,6 +140,12 @@ export default {
     from: 'Ачих байршлын дэлгэрэнгүй мэдээлэл',
     to: 'Буулгах байршлын дэлгэрэнгүй мэдээлэл',
     continue: 'Үргэлжлүүлэх',
+    apartmentLabel: 'Байрны дугаар',
+    apartmentPlaceholder: 'Жишээ: 2 - р дугаар байр',
+    floorLabel: 'Давхар',
+    unitLabel: 'Тоот',
+    unitPlaceholder: 'Жишээ: 106',
+    floorPlaceholder: 'Жишээ: 3',
   },
   request: {
     requestNewMessage:
@@ -125,6 +157,8 @@ export default {
     requestDone: 'Болсон',
     requestDetailMsg: 'Хүсэлтийн дэлгэрэнгүй мэдээлэл',
     requestDetail: 'Дэлгэрэнгүй тайлбар',
+    requestName: 'Нэр',
+    requestNamePlaceholder: 'Жишээ: Хот доторх нүүлгэлт',
     requestDetailWarning: 'Дэлгэрэнгүй тайлбар оруулна уу!',
     requestAddress: 'Хаяг',
     requestAddressMsg: 'Хаягаа оруулна уу.',
@@ -135,8 +169,45 @@ export default {
     requestDeliveryAddress: 'Буулгах газар',
     requestCreate: 'Хүсэлт үүсгэх',
     requestDeliveryDate: 'Хүргэлт хийх өдөр сонгох',
+    offer: 'санал',
+    status: {
+      NEW: 'Шинэ',
+      ASSIGNED: 'Хуваарилагдсан',
+      IN_PROGRESS: 'Хийгдэж буй',
+      COMPLETED: 'Дууссан',
+      CANCELLED: 'Цуцлагдсан',
+    },
+    postedBy: 'Хүсэлт үүсгэсэн',
+    date: 'Хүсэлтийн огноо',
+    images: 'Зурагууд',
+    price: 'Хүсэлтийн үнэ',
+    offerButton: 'Санал үүсгэх',
+    offerLabel: 'Саналууд',
+  },
+  offer: {
+    approve: 'Зөвшөөрөх',
+    description: 'Тайлбар',
+    enterFields: 'Та доорх талбаруудад саналынхаа мэдээллүүдийг оруулна уу.',
+    success: 'Таны санал амжилттай илгээгдлээ.',
+    notFound: 'Санал одоогоор байхгүй байна.',
+  },
+  biometric: {
+    consent: 'Та биометрик мэдээллийг ашиглахыг зөвшөөрч байна уу?',
+    doNotShowAgain: 'Дахин харуулахгүй байх',
+    accept: 'Тийм',
+    decline: 'Үгүй',
+    notSavedError: 'Биометрик мэдээллийг хадгалагдаагүй байна.',
+  },
+  pin: {
+    createPin: 'Та цаашид нэвтрэхдээ ашиглах 4 оронтой пин кодоо оруулна уу.',
+    enterPin: 'Та пин кодоо оруулна уу.',
+    errorSaving: 'Пин кодыг хадгалахад алдаа гарлаа.',
+    continue: 'Үргэлжлүүлэх',
+    retype: 'Та пин кодоо дахин оруулна уу.',
+    mismatch: 'Пин кодууд хоорондоо зөрж байна.',
   },
   userRequest: {
+    enterBudget: 'Та доорх талбарт үүсгэж буй таскынхаа үнийг оруулна уу.',
     success: {
       title: 'Амжилттай',
       message: 'Таны хүсэлт амжилттай үүслээ.',
@@ -146,8 +217,13 @@ export default {
       from: 'Ачих газар',
       to: 'Буулгах газар',
       edit: 'Засах',
+      floor: 'давхар',
+      unit: 'тоот',
     },
     messages: {
+      name: {
+        required: 'Нэр оруулна уу.',
+      },
       description: {
         required: 'Тайлбар оруулна уу.',
       },
@@ -156,6 +232,9 @@ export default {
       },
       addresses: {
         required: 'Хаягуудыг оруулна уу.',
+      },
+      timeRange: {
+        required: 'Өдөр, цагийг оруулна уу.',
       },
     },
   },
@@ -188,6 +267,7 @@ export default {
     check: {
       label: 'Шалгах',
     },
+    submit: 'Нэвтрэх',
   },
   calendar: {
     today: 'Өнөөдөр',
@@ -213,9 +293,17 @@ export default {
     category: 'Үйлчилгээний төрлүүд',
     address: 'Хаяг сонгох',
     request: 'Хүсэлт',
+    taskerProfile: 'Таскэр',
     biometric: 'Биометрик',
     createPin: 'Пин үүсгэх',
     retypePin: 'Пин дахин оруулах',
+    taskBudget: 'Таскын үнэ',
+    createOffer: 'Санал үүсгэх',
+    registrationInformation: 'Бүртгэлийн мэдээлэл',
+    updateInformation: 'Бүртгэлийн мэдээлэл',
+  },
+  taskBudget: {
+    submit: 'Хадгалах',
   },
   otp: {
     your: 'Таны',

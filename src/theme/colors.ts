@@ -16,6 +16,7 @@ export const colors = {
   textColor: '#0B0D0F',
   primaryGradient: '#FF9646',
   primary500: '#FA6432',
+  gray50: '#F2F2F4',
   gray100: '#D7D9DB',
   gray200: '#AFB3B7',
   gray300: '#878D93',

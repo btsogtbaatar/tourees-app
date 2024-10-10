@@ -4,6 +4,7 @@ import { Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AddressType } from '../../modules/Request/entities/request.model';
 import { Address } from '../../modules/Shared/pages/AddressMapView/AddressesMapView';
+import { colors } from '../../theme';
 import { LocationCircleIcon, LocationIcon } from '../Icon';
 import { AddressCardStyles } from './AddressCard.style';
 
@@ -27,9 +28,13 @@ function AddressCard(props: Readonly<AddressCardProps>) {
       ]}>
       <View style={AddressCardStyles.iconContainer}>
         {props.address.name === AddressType.From ? (
-          <LocationCircleIcon width={20} height={20} />
+          <LocationCircleIcon
+            color={colors.primaryGradient}
+            width={20}
+            height={20}
+          />
         ) : (
-          <LocationIcon width={20} height={20} />
+          <LocationIcon color={colors.primaryGradient} width={20} height={20} />
         )}
       </View>
       <View style={AddressCardStyles.textContainer}>

@@ -28,7 +28,13 @@ export const ModalProvider = (props: ProviderProps) => {
 
   return (
     <ModalContext.Provider value={{ state, dispatch }}>
-      <ModalContainer isVisible={state.show}>{state.component}</ModalContainer>
+      <ModalContainer
+        direction={state.direction}
+        closeOnBackDropPress={state.closeOnBackDropPress}
+        closeOnSwipeComplete={state.closeOnSwipeComplete}
+        isVisible={state.show}>
+        {state.component}
+      </ModalContainer>
       <InnerModalProvider>{props.children}</InnerModalProvider>
     </ModalContext.Provider>
   );

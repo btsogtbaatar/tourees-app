@@ -21,6 +21,7 @@ const UserRequestStyle = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     gap: 20,
+    marginBottom: 24,
   },
   label: {
     ...Typography.textSmall,

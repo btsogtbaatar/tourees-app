@@ -31,7 +31,6 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
   const checkOtp = () => {
     if (value) {
       tokenOtp({ ...credentials, value }).then(() => {
-        console.log('🚀 ~ tokenOtp ~ biometricEnabled:', biometricEnabled);
         if (biometricEnabled === undefined) {
           navigation.navigate('BiometricConsent');
         } else {

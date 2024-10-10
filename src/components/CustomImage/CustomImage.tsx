@@ -1,9 +1,11 @@
 import React from 'react';
 import {
   Image,
+  ImageBackground,
   ImageProps,
   ImageRequireSource,
   ImageURISource,
+  TouchableOpacity,
 } from 'react-native';
 import { useSelector } from 'react-redux';
 import {
@@ -11,8 +13,14 @@ import {
   selectToken,
 } from '../../modules/Auth/slice/authSlice';
 import { getImageUrl } from '../../utilities/image';
+import ImagePreviewStyle from '../ImageUploadButton/ImagePreview.style';
+import { XCircleIcon } from '../Icon';
+import { colors } from '../../theme/colors';
 
-export interface CustomImageProps extends ImageProps {}
+export interface CustomImageProps extends ImageProps {
+  onDelete?: (index: number) => void;
+  index?: number;
+}
 
 const CustomImage = (props: CustomImageProps) => {
   const uriSource = props.source as ImageURISource;
@@ -33,6 +41,22 @@ const CustomImage = (props: CustomImageProps) => {
       return requireSource;
     }
   };
+
+  if (props.onDelete)
+    return (
+      <ImageBackground
+        style={ImagePreviewStyle.customContainer}
+        imageStyle={{ borderRadius: 16 }}
+        source={getSource()}>
+        <TouchableOpacity
+          style={ImagePreviewStyle.delete}
+          onPress={() => {
+            props.onDelete && props.index && props.onDelete(props.index);
+          }}>
+          <XCircleIcon color={colors.primary500} />
+        </TouchableOpacity>
+      </ImageBackground>
+    );
 
   return <Image resizeMode="contain" {...props} source={getSource()} />;
 };

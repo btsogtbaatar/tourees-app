@@ -3,7 +3,7 @@ import { NativeStackNavigationOptions } from '@react-navigation/native-stack';
 import { HeaderBackButtonProps } from '@react-navigation/native-stack/lib/typescript/src/types';
 import React from 'react';
 import CustomHeaderBackButton from '../components/CustomHeader/CustomHeaderBackButton';
-import { RootStackParamList } from '../navigation/types';
+import { RootStackParamList, TaskerParamList } from '../navigation/types';
 import { colors } from './colors';
 import { FontWeight, getFontWeight, Typography } from './typography';
 
@@ -18,6 +18,9 @@ const getTextColor = (routeName: string) => {
 
 const getBackgroundColor = (routeName: string) => {
   switch (routeName) {
+    case 'CreateOffer':
+    case 'TaskDetail':
+      return colors.white;
     case 'UserRequest':
       return colors.gray700;
     case 'AddressMapView':
@@ -32,7 +35,9 @@ const transparentHeaderScreens = ['AddressMapView'];
 
 const customScreenOption:
   | ((props: {
-      route: RouteProp<RootStackParamList, keyof RootStackParamList>;
+      route:
+        | RouteProp<RootStackParamList, keyof RootStackParamList>
+        | RouteProp<TaskerParamList, keyof TaskerParamList>;
       navigation: any;
     }) => NativeStackNavigationOptions)
   | undefined = ({ route, navigation }) => ({

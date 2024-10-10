@@ -7,13 +7,14 @@ import { LogBox } from 'react-native';
 import { Settings } from 'react-native-fbsdk-next';
 import Geocoder from 'react-native-geocoding';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import * as Keychain from 'react-native-keychain';
+import PushNotification from 'react-native-push-notification';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './i18n';
 import { api } from './src/api';
 import { axiosInstance } from './src/api/interceptors';
+import RemoteNotification from './src/components/RemoteNotification/RemoteNotification';
 import store, { persistor } from './src/context/app/store';
 import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/navigation';
@@ -29,11 +30,13 @@ if (__DEV__) {
 function App(): React.JSX.Element {
   const { i18n } = useTranslation();
 
-  useEffect(() => {
-    Keychain.resetGenericPassword().then(() => {
-      console.log('Successfully reset');
-    });
+  PushNotification.checkPermissions(async ({ alert, badge, sound }) => {
+    if (!alert || !badge || !sound) {
+      await PushNotification.requestPermissions();
+    }
+  });
 
+  useEffect(() => {
     Geocoder.init(process.env.GOOGLE_API_KEY!);
     Settings.setAppID(process.env.FACEBOOK_APP_ID!);
     Settings.initializeSDK();
@@ -48,11 +51,15 @@ function App(): React.JSX.Element {
     LogBox.ignoreLogs([
       'In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.',
     ]);
+    LogBox.ignoreLogs([
+      'Non-serializable values were found in the navigation state',
+    ]);
   }, []);
 
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
+        <RemoteNotification />  
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>
             <NavigationContainer>

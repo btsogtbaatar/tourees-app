@@ -4,15 +4,15 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { LatLng, Region } from 'react-native-maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import CustomMapView from '../../../../components/CustomMapView/CustomMapView';
+import CustomMapOneMarker from '../../../../components/CustomMapView/CustomMapOneMarker';
+import AddressBannerProps from '../../../../components/CustomPlacesAutoComplete/AddressBanner';
 import CustomPlacesAutoComplete from '../../../../components/CustomPlacesAutoComplete/CustomPlacesAutoComplete';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
+import { LocationCircleIcon } from '../../../../components/Icon';
 import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme';
 import { SharedModel } from '../../entities/shared.model';
 import AddressMapViewStyle from './AddressMapView.style';
-import { LocationCircleIcon } from '../../../../components/Icon';
-import AddressBannerProps from '../../../../components/CustomPlacesAutoComplete/AddressBanner';
-import CustomMapOneMarker from '../../../../components/CustomMapView/CustomMapOneMarker';
 
 type AddressMapViewProps = NativeStackScreenProps<
   RootStackParamList,
@@ -24,6 +24,7 @@ export type Address = {
   unit?: string;
   floor?: string;
   apartment?: string;
+  formattedAddress?: string;
 } & LatLng;
 
 export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
@@ -52,13 +53,13 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         address: `${place?.displayName.text}, ${place?.shortFormattedAddress}`,
         latitude: place.location.latitude,
         longitude: place.location.longitude,
+        formattedAddress: place.formattedAddress,
       };
 
       let _addresses = {
         ..._prev,
         ...address,
       };
-
       return _addresses;
     });
   };
@@ -71,7 +72,13 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
           <View style={AddressMapViewStyle.left}>
             <AddressBannerProps
               address={address}
-              icon={<LocationCircleIcon width={20} height={20} />}
+              icon={
+                <LocationCircleIcon
+                  color={colors.primaryGradient}
+                  width={20}
+                  height={20}
+                />
+              }
               text={title}
             />
           </View>

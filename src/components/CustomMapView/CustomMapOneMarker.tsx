@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import MapView, { Details, LatLng, Marker, Region } from 'react-native-maps';
 import { Address } from '../../modules/Shared/pages/AddressMapView/AddressMapView';
 import AddressMapViewStyle from '../../modules/Shared/pages/AddressMapView/AddressMapView.style';
+import { colors } from '../../theme';
 import { LocationCircleIcon } from '../Icon';
 
 const DELTA = 0.005;
@@ -40,7 +41,13 @@ const CustomMapOneMarker = (props: Readonly<CustomMapViewProps>) => {
         props.onRegionChangeComplete(region);
       }}>
       <Marker coordinate={latLng}>
-        {<LocationCircleIcon width={25} height={25} />}
+        {
+          <LocationCircleIcon
+            color={colors.primaryGradient}
+            width={25}
+            height={25}
+          />
+        }
       </Marker>
     </MapView>
   );

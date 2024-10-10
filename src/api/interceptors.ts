@@ -6,7 +6,6 @@ export const axiosInstance = (api: AxiosInstance) => {
   api.interceptors.request.use(
     config => {
       const state: AuthState = store.getState().auth;
-      console.log(state.isAuthenticated);
 
       if (state.isAuthenticated) {
         config.headers.Authorization = `Bearer ${state.token?.jwt}`;

@@ -13,8 +13,8 @@ import { CustomButtonStyle } from './CustomButton.style';
 
 export interface CustomGradientButtonProps extends ButtonProps {
   style?: {
-    button: StyleProp<ViewStyle>;
-    text: StyleProp<TextStyle>;
+    button?: StyleProp<ViewStyle>;
+    text?: StyleProp<TextStyle>;
   };
 }
 

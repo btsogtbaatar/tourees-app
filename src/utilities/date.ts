@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const getToday = () => {
   return new Date(Date.now());
 };
@@ -29,4 +31,13 @@ export const isSelectedDate = (currentDate: Date) => {
     return false;
   }
   return true;
+};
+
+
+export const formatDate = (value: Date) => {
+  return moment(value).format('ddd D MMM');
+};
+
+export const formatTime = (value: Date) => {
+  return moment(value).format('HH:mm');
 };
