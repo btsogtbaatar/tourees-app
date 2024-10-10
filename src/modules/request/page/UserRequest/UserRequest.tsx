@@ -91,15 +91,15 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
     let _address = address?.address;
 
     if (address?.apartment) {
-      _address = `${address?.apartment}, ` + _address;
+      _address = `${address?.apartment}, ${_address}`;
     }
 
     if (address?.floor) {
-      _address = `${address?.floor} давхар, ` + _address;
+      _address = `${address?.floor} ${t('userRequest.address.floor')}, ${_address}`;
     }
 
     if (address?.unit) {
-      _address = `${address?.unit} тоот, ` + _address;
+      _address = `${address?.unit} ${t('userRequest.address.unit')}, ${_address}`;
     }
 
     return _address;

@@ -118,6 +118,12 @@ export default {
     from: 'Ачих байршлын дэлгэрэнгүй мэдээлэл',
     to: 'Буулгах байршлын дэлгэрэнгүй мэдээлэл',
     continue: 'Үргэлжлүүлэх',
+    apartmentLabel: 'Байрны дугаар',
+    apartmentPlaceholder: 'Жишээ: 2 - р дугаар байр',
+    floorLabel: 'Давхар',
+    unitLabel: 'Тоот',
+    unitPlaceholder: 'Жишээ: 106',
+    floorPlaceholder: 'Жишээ: 3',
   },
   request: {
     requestNewMessage:
@@ -141,7 +147,7 @@ export default {
     requestDeliveryAddress: 'Буулгах газар',
     requestCreate: 'Хүсэлт үүсгэх',
     requestDeliveryDate: 'Хүргэлт хийх өдөр сонгох',
-    offer: "санал",
+    offer: 'санал',
     status: {
       NEW: 'Шинэ',
       ASSIGNED: 'Хуваарилагдсан',
@@ -156,12 +162,12 @@ export default {
     offerButton: 'Санал үүсгэх',
     offerLabel: 'Саналууд',
   },
-  offer:{
+  offer: {
     approve: 'Зөвшөөрөх',
     description: 'Тайлбар',
     enterFields: 'Та доорх талбаруудад саналынхаа мэдээллүүдийг оруулна уу.',
     success: 'Таны санал амжилттай илгээгдлээ.',
-    notFound: 'Санал одоогоор байхгүй байна.'
+    notFound: 'Санал одоогоор байхгүй байна.',
   },
   biometric: {
     consent: 'Та биометрик мэдээллийг ашиглахыг зөвшөөрч байна уу?',
@@ -172,8 +178,8 @@ export default {
   },
   pin: {
     createPin: 'Та цаашид нэвтрэхдээ ашиглах 4 оронтой пин кодоо оруулна уу.',
-    enterPin: 'Та пин кодоо оруулна уу.',  
-    errorSaving: 'Пин кодыг хадгалахад алдаа гарлаа.', 
+    enterPin: 'Та пин кодоо оруулна уу.',
+    errorSaving: 'Пин кодыг хадгалахад алдаа гарлаа.',
     continue: 'Үргэлжлүүлэх',
     retype: 'Та пин кодоо дахин оруулна уу.',
     mismatch: 'Пин кодууд хоорондоо зөрж байна.',
@@ -189,6 +195,8 @@ export default {
       from: 'Ачих газар',
       to: 'Буулгах газар',
       edit: 'Засах',
+      floor: 'давхар',
+      unit: 'тоот',
     },
     messages: {
       name: {
@@ -205,7 +213,7 @@ export default {
       },
       timeRange: {
         required: 'Өдөр, цагийг оруулна уу.',
-      }
+      },
     },
   },
   login: {
@@ -237,7 +245,7 @@ export default {
     check: {
       label: 'Шалгах',
     },
-    submit: 'Нэвтрэх'
+    submit: 'Нэвтрэх',
   },
   calendar: {
     today: 'Өнөөдөр',
