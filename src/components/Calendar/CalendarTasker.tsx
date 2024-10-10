@@ -92,7 +92,7 @@ const Calendar = ({
            onValueChange={() => {
              setIsFlexible(prev => {
                const newFlexibleState = !prev;
-               onToggleFlexible(newFlexibleState); // Call the prop function with the updated state
+               onToggleFlexible(newFlexibleState);
                return newFlexibleState;
              });
            }}
