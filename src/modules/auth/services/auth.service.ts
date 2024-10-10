@@ -1,7 +1,7 @@
 import { api } from '../../../api';
 import store from '../../../context/app/store';
 import { AuthModel } from '../entities';
-import { setToken, setUser } from '../slice/authSlice';
+import { setToken, setUser, setProfileImage } from '../slice/authSlice';
 
 export const authBaseUrl = '/auth';
 
@@ -66,6 +66,7 @@ async function authenticate(
   let user: AuthModel.RegisterResponse = await introspect();
 
   store.dispatch(setUser(user));
+  if (user.profilePicture) store.dispatch(setProfileImage(user.profilePicture));
 
   return user;
 }

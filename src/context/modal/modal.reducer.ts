@@ -1,11 +1,17 @@
 export interface ModalState {
   show: boolean;
   component?: React.ReactElement;
+  direction?: 'bottom' | 'center' | 'off' | 'left' | 'right';
+  closeOnBackDropPress?: boolean;
+  closeOnSwipeComplete?: boolean;
 }
 
 export interface ModalAction {
   type: string;
   component?: React.ReactElement;
+  direction?: 'bottom' | 'center' | 'off' | 'left' | 'right';
+  closeOnBackDropPress?: boolean;
+  closeOnSwipeComplete?: boolean;
 }
 
 export const initialState = {

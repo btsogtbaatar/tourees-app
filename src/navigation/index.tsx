@@ -13,6 +13,7 @@ import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategory
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import TaskerStack from '../modules/Tasker/routes/routes';
 import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
 import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
 import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
@@ -119,6 +120,11 @@ const Route = () => {
           component={UpdateInformation}
         />
       </Stack.Group>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="TaskerStack"
+        component={TaskerStack}
+      />
     </Stack.Navigator>
   );
 };

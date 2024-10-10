@@ -22,7 +22,6 @@ import LogoIcon from '../../../assets/icons/logo.svg';
 import LogoutIcon from '../../../assets/icons/logout.svg';
 import MoonIcon from '../../../assets/icons/moon.svg';
 import PhoneIcon from '../../../assets/icons/phone.svg';
-import PlusIcon from '../../../assets/icons/plus-icon.svg';
 import SearchMdIcon from '../../../assets/icons/search-md.svg';
 import SmallIcon from '../../../assets/icons/small-icon.svg';
 import SmileCircleActiveIcon from '../../../assets/icons/smile-circle-active.svg';
@@ -42,6 +41,9 @@ import PassportIcon from '../../../assets/icons/passport.svg';
 import ImagePlaceHolderIcon from '../../../assets/icons/image-placeholder.svg';
 import CameraIcon from '../../../assets/icons/camera.svg';
 import SendIcon from '../../../assets/icons/send.svg';
+import CloseIcon from '../../../assets/icons/close-icon.svg';
+import HeaderEditIcon from '../../../assets/icons/header-edit-icon.svg';
+import PlusIcon from '../../../assets/icons/plus-icon.svg';
 
 export {
   ArrowLeftIcon,
@@ -65,7 +67,6 @@ export {
   LogoMini,
   LogoMiniBorder,
   LogoutIcon,
-  MoonIcon,
   PhoneIcon,
   PlusIcon,
   SearchMdIcon,
@@ -73,19 +74,22 @@ export {
   SmileCircleActiveIcon,
   SmileCircleIcon,
   StepCircleIcon,
-  SunIcon,
-  SunRiseIcon,
-  SunSetIcon,
   TrashIcon,
   UserActiveIcon,
   UserCircleIcon,
   UserIcon,
   VectorIcon,
   XCircleIcon,
+  SunIcon,
+  SunRiseIcon,
+  SunSetIcon,
+  MoonIcon,
+  CloseIcon,
   BuildingIcon,
   MailIcon,
   PassportIcon,
   CameraIcon,
   ImagePlaceHolderIcon,
   SendIcon,
+  HeaderEditIcon,
 };

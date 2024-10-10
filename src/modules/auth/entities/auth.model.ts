@@ -53,6 +53,7 @@ export declare module AuthModel {
     username: string;
     firstName?: string;
     lastName?: string;
+    profilePicture?: SharedModel.File;
     hasPin: boolean;
     biometricEnabled?: boolean;
     contractor?: Contractor;
@@ -61,4 +62,10 @@ export declare module AuthModel {
 export enum SocialType {
   GOOGLE = 'GOOGLE',
   FACEBOOK = 'FACEBOOK',
+}
+
+export interface ProfileState {
+  picture: string;
+  setPicture: (value?: string) => void;
+  clearPicture: () => void;
 }

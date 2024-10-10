@@ -44,6 +44,13 @@ const ImagePreviewStyle = StyleSheet.create({
     fontWeight: '700',
     textAlign: 'center',
   },
+  customContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    borderRadius: 16,
+    flexDirection: 'row-reverse',
+  },
 });
 
 export default ImagePreviewStyle;

@@ -98,3 +98,7 @@ export enum FormField {
   ADDRESS,
   TYPE,
 }
+export enum ProfileWorkingType {
+  ONLINE = 'ONLINE',
+  PHYSICALLY = 'PHYSICALLY',
+}

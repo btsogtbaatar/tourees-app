@@ -6,18 +6,26 @@
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.INTERNET" />
-  <application android:name=".MainApplication" android:label="@string/app_name" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round" android:allowBackup="false" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
-    <activity android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:exported="true">
+  <uses-permission android:name="android.permission.CAMERA" />
+  <application android:name=".MainApplication" android:label="@string/app_name"
+    android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher_round"
+    android:allowBackup="false" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
+    <activity android:name=".MainActivity" android:label="@string/app_name"
+      android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+      android:launchMode="singleTask" android:windowSoftInputMode="adjustResize"
+      android:exported="true">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
     <provider android:authorities="com.facebook.app.FacebookContentProvider507170187173017"
-        android:name="com.facebook.FacebookContentProvider"
-        android:exported="true" />
-    <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyC2lMldNBbbU99OHB9mGoetWdR0v_Liy6A"/>
-    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-    <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+      android:name="com.facebook.FacebookContentProvider"
+      android:exported="true" />
+    <meta-data android:name="com.google.android.geo.API_KEY"
+      android:value="AIzaSyC2lMldNBbbU99OHB9mGoetWdR0v_Liy6A" />
+    <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id" />
+    <meta-data android:name="com.facebook.sdk.ClientToken"
+      android:value="@string/facebook_client_token" />
   </application>
 </manifest>
