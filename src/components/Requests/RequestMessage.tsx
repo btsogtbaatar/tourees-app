@@ -53,7 +53,6 @@ const RequestMessage = ({ time, newRequest }: RequestMessageProps) => {
             </View>
             <LoginButton
               title={t('profile.seeProfile')}
-              onClick={() => console.log('test')}
             />
           </View>
           <RatingList rating={2.4} />

@@ -4,14 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { LatLng, Region } from 'react-native-maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import CustomMapOneMarker from '../../../../components/CustomMapView/CustomMapOneMarker';
+import AddressBannerProps from '../../../../components/CustomPlacesAutoComplete/AddressBanner';
 import CustomPlacesAutoComplete from '../../../../components/CustomPlacesAutoComplete/CustomPlacesAutoComplete';
 import FooterButton from '../../../../components/FooterButton/FooterButton';
+import { LocationCircleIcon } from '../../../../components/Icon';
 import { RootStackParamList } from '../../../../navigation/types';
 import { SharedModel } from '../../entities/shared.model';
 import AddressMapViewStyle from './AddressMapView.style';
-import { LocationCircleIcon } from '../../../../components/Icon';
-import AddressBannerProps from '../../../../components/CustomPlacesAutoComplete/AddressBanner';
-import CustomMapOneMarker from '../../../../components/CustomMapView/CustomMapOneMarker';
 
 type AddressMapViewProps = NativeStackScreenProps<
   RootStackParamList,
@@ -58,7 +58,6 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         ..._prev,
         ...address,
       };
-      console.log('SELECT::', place);
       return _addresses;
     });
   };

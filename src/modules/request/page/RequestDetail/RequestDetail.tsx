@@ -1,24 +1,24 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import moment, { Moment } from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
+import { useSelector } from 'react-redux';
+import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
+import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import { RootStackParamList } from '../../../../navigation/types';
+import { verticalScale } from '../../../../utilities';
+import { selectUser } from '../../../Auth/slice/authSlice';
+import InputSection from '../../component/InputSection/InputSection';
+import SpeechBubble from '../../component/SpeechBubble/SpeechBubble';
+import TimeSeparator from '../../component/TimeSeparator/TimeSeparator';
 import { SeperatorType, TaskModel } from '../../entities/request.model';
 import {
   getChats,
   sendChat,
   subscribeToNotification,
 } from '../../service/request.service';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../../Auth/slice/authSlice';
-import ContainerView from '../../../../components/ContainerView/ContainerView';
-import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
-import { verticalScale } from '../../../../utilities';
-import moment, { Moment } from 'moment';
-import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
-import SpeechBubble from '../../component/SpeechBubble/SpeechBubble';
-import TimeSeparator from '../../component/TimeSeparator/TimeSeparator';
-import InputSection from '../../component/InputSection/InputSection';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'RequestDetail'>;
 
@@ -50,7 +50,7 @@ const RequestDetail = (props: Props) => {
         setState(chats);
       })
       .catch(e => {
-        console.log('error', e);
+        console.error('Error fetching chats', e);
       });
   }, []);
   useEffect(() => {

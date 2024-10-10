@@ -117,7 +117,6 @@ function Register({ navigation }: RegisterProps) {
   };
   const getAddress = (address: Address) => {
     const data = address.formattedAddress!.split(', ');
-    console.log('ADDRESS::', address);
     return `${data[data.length - 3]}, ${data[data.length - 2]}`;
   };
   if (loading) {

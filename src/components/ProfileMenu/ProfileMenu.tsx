@@ -62,7 +62,7 @@ const ProfileMenu = () => {
       prefix: <ClockRewindIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        
       },
     },
     {
@@ -71,7 +71,7 @@ const ProfileMenu = () => {
       prefix: <EBarimtIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        
       },
     },
 
@@ -93,7 +93,7 @@ const ProfileMenu = () => {
       prefix: <FileIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        
       },
     },
     {
@@ -102,7 +102,7 @@ const ProfileMenu = () => {
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        console.log('test');
+        
       },
     },
     {

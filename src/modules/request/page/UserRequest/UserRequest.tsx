@@ -167,7 +167,6 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                             onChange([..._value]);
                           }}
                           onImageSelection={images => {
-                            console.log('🚀 ~ images:', images);
                             images.forEach(image => {
                               uploadFile(image).then(file => {
                                 if (value) {
@@ -269,7 +268,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                 </FormProvider>
               </ContainerView>
               <FooterButton
-                onPress={handleSubmit(onSubmit, error => console.log(error))}
+                onPress={handleSubmit(onSubmit)}
                 showBackButton={true}
               />
             </ScrollView>

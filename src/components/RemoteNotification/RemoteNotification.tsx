@@ -18,7 +18,7 @@ const checkApplicationPermission = async () => {
       await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
       );
-      console.log('Permission granted');
+      console.debug('Permission granted');
     } catch (error) {
       console.error(error);
     }
@@ -32,14 +32,11 @@ const RemoteNotification = () => {
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
-        console.log('Token:', token);
         store.dispatch(setFirebaseToken(token.token));
       },
 
       // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification: any) {
-        console.log('Notification:', notification);
-
         getNotificationList().then(res =>
           store.dispatch(setNotifications(res.content)),
         );
@@ -98,8 +95,8 @@ const RemoteNotification = () => {
 
       // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
       onAction: function (notification) {
-        console.log('Action:', notification.action);
-        console.log('Notification:', notification);
+        console.debug('Action:', notification.action);
+        console.debug('Notification:', notification);
 
         // process the action
       },
@@ -110,7 +107,7 @@ const RemoteNotification = () => {
       },
 
       onRemoteFetch: function (notification) {
-        console.log('Remote fetch', notification);
+        console.debug('Remote fetch', notification);
       },
 
       // IOS ONLY (optional): default: all - Permissions to register.

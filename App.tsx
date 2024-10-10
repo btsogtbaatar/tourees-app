@@ -7,7 +7,6 @@ import { LogBox } from 'react-native';
 import { Settings } from 'react-native-fbsdk-next';
 import Geocoder from 'react-native-geocoding';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import * as Keychain from 'react-native-keychain';
 import PushNotification from 'react-native-push-notification';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
@@ -32,20 +31,12 @@ function App(): React.JSX.Element {
   const { i18n } = useTranslation();
 
   PushNotification.checkPermissions(async ({ alert, badge, sound }) => {
-    console.log(
-      '🚀 ~ PushNotification.checkPermissions ~ !alert || !badge || !sound:',
-      !alert || !badge || !sound,
-    );
     if (!alert || !badge || !sound) {
       await PushNotification.requestPermissions();
     }
   });
 
   useEffect(() => {
-    Keychain.resetGenericPassword().then(() => {
-      console.log('Successfully reset');
-    });
-
     Geocoder.init(process.env.GOOGLE_API_KEY!);
     Settings.setAppID(process.env.FACEBOOK_APP_ID!);
     Settings.initializeSDK();
