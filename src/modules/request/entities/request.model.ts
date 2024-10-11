@@ -1,5 +1,6 @@
 import { AuthModel } from '../../Auth/entities';
 import { SharedModel } from '../../Shared/entities/shared.model';
+import { Address } from '../../Shared/pages/AddressMapView/AddressesMapView';
 
 export enum TaskStatus {
   NEW = 'NEW',
@@ -112,3 +113,16 @@ export enum AddressType {
   From = 'from',
   To = 'to',
 }
+
+export type TaskerServiceModel = {
+  name: string;
+  description: string;
+  tag:string;
+  price: number;
+  autoMsg: string;
+  category: SharedModel.Category;
+  subCategory: SharedModel.SubCategory;
+  files: SharedModel.File[];
+  timeRange: SharedModel.TimeRange;
+  address: Address[];
+};

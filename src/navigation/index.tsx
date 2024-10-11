@@ -23,6 +23,7 @@ import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapVie
 import TaskerStack from '../modules/Tasker/routes/routes';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import TaskerService from '../modules/Request/page/TaskerService/TaskerService';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -99,6 +100,11 @@ const Route = () => {
           name="RegistrationInformation"
           component={RegistrationInformation}
         />
+          <Stack.Screen
+          options={{ title: t('headers.request') }}
+          name="TaskerService"
+          component={TaskerService}
+        />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen
@@ -116,6 +122,7 @@ const Route = () => {
           name="AddressesDetail"
           component={AddressesDetail}
         />
+        
         <Stack.Screen
           options={{ title: t('headers.taskPrice') }}
           name="TaskBudget"

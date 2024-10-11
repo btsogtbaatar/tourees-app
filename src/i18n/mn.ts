@@ -27,6 +27,7 @@ export default {
   l_logout: 'Гарах',
   l_dismissLabel: 'Ойлголоо',
   l_submitLabel: 'Ок',
+  l_date: 'Өдөр, цагийг оруулна уу.',
   signUp: {
     hello: 'Сайн байна уу?',
     welcome_seed: 'Та Сийд платформд тавтай морил.',
@@ -282,6 +283,7 @@ export default {
     afternoonTimeRange: '6PM-н дараа',
     cancel: 'Цуцлах',
     title: 'Өдөр сонгох',
+    flexible: 'Уян хатан цагийн хуваарьтай'
   },
   emptyRequest: 'Таньд үүсгэсэн хүсэлт байхгүй байна.',
   headers: {
@@ -308,5 +310,45 @@ export default {
     requestCode: '-д илгээсэн 4 оронтой кодыг оруулна уу',
     resendCode: 'Код дахин илгээх',
     resend: 'дахин илгээх',
+  },
+  service: {
+    name: 'Үйлчилгээний нэр',
+    tag: 'Таг',
+    price: 'Үйлчилгээний үнэ',
+    timeRange: 'Үйлчилгээ үзүүлэх хуваарь',
+    online: 'Онлайн',
+    inPerson: 'Хаягаар',
+    distance: 'Хэр зайнд үзүүлэх',
+    autoMsg: 'Автомат мессеж',
+    success: {
+      message: 'Таны оруулсан үйлчилгээ амжилттай бүртгэгдлээ.',
+      title: 'Амжилттай',
+    },
+    category: {
+      label: 'Үйлчилгээний ангилал сонгох',
+      category: 'Ангилал',
+      subCategory: 'Дэд ангилал',
+      searchCategory: 'Хайх',
+    },
+    errors: {
+      priceEmpty: 'Үйлчилгээний үнийг оруулна уу!',
+      priceValid: 'Зөв дүн оруулна уу!',
+    },
+    validation: {
+      required: 'Энэ талбар шаардлагатай',
+      min: 'Доод тал нь ${min} тэмдэгт байх ёстой',
+      positive: 'Эерэг тоо байх ёстой',
+      priceRequired: 'Үнийн дүн шаардлагатай',
+      priceValid: 'Үнийн дүн тоо байх ёстой',
+      tagRequired: 'Таг шаардлагатай',
+      tagMin: 'Таг доод тал нь 2 тэмдэгт байх ёстой',
+      distanceRequired: 'Үйлчилгээний хамрах хүрээ шаардлагатай',
+      distancePositive: 'Зай эерэг байх ёстой',
+      subCategoryRrequired: 'Дэд ангилал шаардлагатай',
+      addressRequired: 'Хувийн үйлчилгээний хаяг шаардлагатай',
+      nameRequired: 'Үйлчилгээний нэр шаардлагатай',
+      nameMin: 'Нэр доод тал нь 3 тэмдэгт байх ёстой',
+      customError: 'Буруу утга',
+    },
   },
 };

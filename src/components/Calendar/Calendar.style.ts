@@ -44,6 +44,7 @@ const CalendarStyle = StyleSheet.create({
     borderRadius: 16,
     backgroundColor: colors.placeColor,
     justifyContent: 'center',
+    alignItems: 'center',   
     padding: verticalScale(10),
     gap: horizontalScale(16),
   },
@@ -64,6 +65,14 @@ const CalendarStyle = StyleSheet.create({
     flex: 1,
     padding: verticalScale(10),
     gap: horizontalScale(4),
+  },
+  toggleSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    borderRadius: 5, 
+    marginBottom: 5,
   },
 });
 
