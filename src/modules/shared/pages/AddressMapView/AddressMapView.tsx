@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { LatLng, Region } from 'react-native-maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomMapOneMarker from '../../../../components/CustomMapView/CustomMapOneMarker';
 import AddressBannerProps from '../../../../components/CustomPlacesAutoComplete/AddressBanner';
 import CustomPlacesAutoComplete from '../../../../components/CustomPlacesAutoComplete/CustomPlacesAutoComplete';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
 import { LocationCircleIcon } from '../../../../components/Icon';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
@@ -39,8 +39,6 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
     setAddress(_prev => {
       return {
         ..._prev,
-        latitude: region.latitude,   
-        longitude: region.longitude,
         ...region,
       };
     });
@@ -90,17 +88,10 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
         latLng={address}
         onRegionChangeComplete={onRegionChangeComplete}
       />
-      <FooterButton
-        style={{
-          container: {
-            position: 'absolute',
-            bottom: insets.bottom,
-          },
-        }}
+      <CustomGradientButton
         disabled={isDisabled()}
-        text={t('addressMapView.continue')}
+        title={t('b_continue')}
         onPress={() => {
-          const { longitudeDelta, latitudeDelta, ...addressData } = address;
           onGoBack(address);
           props.navigation.goBack();
         }}

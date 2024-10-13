@@ -1,6 +1,7 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import Notification from '../../../../components/Notification/Notification';
 import { useAppDispatch } from '../../../../context/app/store';
@@ -38,7 +39,7 @@ const NotificationList = () => {
   };
 
   return (
-    <View style={NotificationListStyle.container}>
+    <SafeAreaView style={NotificationListStyle.container}>
       <FlatList
         data={notifications}
         refreshing={loading}
@@ -61,7 +62,7 @@ const NotificationList = () => {
           );
         }}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

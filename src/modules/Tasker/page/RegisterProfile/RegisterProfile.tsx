@@ -5,11 +5,11 @@ import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, Text, View } from 'react-native';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomCheckBox from '../../../../components/CustomCheckBox/CustomCheckBox';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import RemarkList from '../../../../components/RemarkList/RemarkList';
@@ -94,7 +94,7 @@ const RegisterTasker = ({
         <FullHeightView>
           <ScrollView>
             <ContainerView>
-              <View>
+              <View style={RegisterProfileStyle.container}>
                 <Text
                   style={[
                     HomeStyle.title,
@@ -204,9 +204,13 @@ const RegisterTasker = ({
                   />
                 </FormProvider>
               </View>
+              <CustomGradientButton
+                disabled={!form.formState.isValid}
+                title={t('b_continue')}
+                onPress={form.handleSubmit(onSubmit)}
+              />
             </ContainerView>
           </ScrollView>
-          <FooterButton onPress={form.handleSubmit(onSubmit)} />
         </FullHeightView>
       </CustomKeyboardAvoidingView>
     </CustomSafeAreaView>

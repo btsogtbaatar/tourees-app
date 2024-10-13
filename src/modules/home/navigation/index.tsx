@@ -57,7 +57,7 @@ const HomeTabNavigator = () => {
     },
     {
       route: 'Notification',
-      label: t('tab.t_notification'),
+      label: t('tab.tabNotification'),
       activeIcon: (
         <View>
           <BellActiveIcon />

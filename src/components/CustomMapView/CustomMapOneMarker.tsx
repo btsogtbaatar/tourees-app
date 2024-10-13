@@ -24,7 +24,6 @@ const CustomMapOneMarker = (props: Readonly<CustomMapViewProps>) => {
   return (
     <MapView
       style={AddressMapViewStyle.map}
-      mapType="terrain"
       region={{
         latitude: props.latLng.latitude,
         longitude: props.latLng.longitude,

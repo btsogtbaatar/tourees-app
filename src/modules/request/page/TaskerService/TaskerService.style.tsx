@@ -16,6 +16,7 @@ export const calendarTheme: Theme = {
 export const TaskerServiceStyle = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: verticalScale(16)
   },
   bottomSheetContainer: {
     flex: 1,
@@ -83,7 +84,7 @@ export const TaskerServiceStyle = StyleSheet.create({
   },
   inActive: {
     borderColor: colors.borderColor,
-    backgoundColor: colors.gray100,
+    backgroundColor: colors.gray100,
   },
   active: {
     borderColor: colors.borderPrimaryColor,

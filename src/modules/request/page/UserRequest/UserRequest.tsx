@@ -8,6 +8,7 @@ import { ScrollView, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import Calendar from '../../../../components/Calendar/Calendar';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomImage from '../../../../components/CustomImage/CustomImage';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import {
@@ -15,7 +16,6 @@ import {
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
 import InputError from '../../../../components/FormError/FormError';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { LocationCircleIcon, LocationIcon } from '../../../../components/Icon';
@@ -270,11 +270,12 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                     )}
                   </View>
                 </FormProvider>
+                <CustomGradientButton
+                  disabled={!form.formState.isValid}
+                  title={t('b_continue')}
+                  onPress={handleSubmit(onSubmit)}
+                />
               </ContainerView>
-              <FooterButton
-                onPress={handleSubmit(onSubmit)}
-                showBackButton={true}
-              />
             </ScrollView>
           </View>
         </FullHeightView>

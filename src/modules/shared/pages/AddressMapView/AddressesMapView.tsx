@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { LatLng, Region } from 'react-native-maps';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomMapView from '../../../../components/CustomMapView/CustomMapView';
 import AddressCard from '../../../../components/CustomPlacesAutoComplete/AddressCard';
 import CustomPlacesAutoComplete from '../../../../components/CustomPlacesAutoComplete/CustomPlacesAutoComplete';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
 import { RootStackParamList } from '../../../../navigation/types';
 import { AddressType } from '../../../Request/entities/request.model';
 import { SharedModel } from '../../entities/shared.model';
@@ -154,15 +154,9 @@ export default function AddressesMapView(props: Readonly<AddressMapViewProps>) {
         latLng={getAddress(addresses)}
         onRegionChangeComplete={onRegionChangeComplete}
       />
-      <FooterButton
-        style={{
-          container: {
-            position: 'absolute',
-            bottom: insets.bottom,
-          },
-        }}
+      <CustomGradientButton
         disabled={isDisabled()}
-        text={t('continue')}
+        title={t('b_continue')}
         onPress={() =>
           props.navigation.navigate('AddressesDetail', {
             addresses: addresses,
@@ -173,6 +167,7 @@ export default function AddressesMapView(props: Readonly<AddressMapViewProps>) {
           })
         }
       />
+      
     </View>
   );
 }

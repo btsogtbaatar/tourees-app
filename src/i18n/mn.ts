@@ -84,8 +84,8 @@ export default {
       ONLINE: 'Онлайнаар',
       PHYSICALLY: 'Биетээр',
     },
-    tagLine: 'tagLine',
-    description: 'description',
+    tagLine: 'Гарчиг',
+    description: 'Тайлбар',
   },
   profile: {
     language: 'Хэл',
@@ -103,12 +103,15 @@ export default {
       message: 'Зураг амжилттай солигдлоо.',
     },
     l_setup_profile: 'Профайл засах',
+    remark: 'Тайлбар',
+    remarkDuplicatedError: 'Тайлбар давхардаж байна.',
   },
   tab: {
     tabHome: 'Нүүр',
     tabMyTasks: 'Миний таскууд',
     tabBrowseTasks: 'Таскууд',
     tabProfile: 'Тохиргоо',
+    tabNotification: 'Мессэж',
   },
   home: {
     category: {
@@ -190,6 +193,7 @@ export default {
     enterFields: 'Та доорх талбаруудад саналынхаа мэдээллүүдийг оруулна уу.',
     success: 'Таны санал амжилттай илгээгдлээ.',
     notFound: 'Санал одоогоор байхгүй байна.',
+    chat: 'Чатлах', 
   },
   biometric: {
     consent: 'Та биометрик мэдээллийг ашиглахыг зөвшөөрч байна уу?',
@@ -301,6 +305,7 @@ export default {
     createOffer: 'Санал үүсгэх',
     registrationInformation: 'Бүртгэлийн мэдээлэл',
     updateInformation: 'Бүртгэлийн мэдээлэл',
+    chat: 'Чат',
   },
   taskBudget: {
     submit: 'Хадгалах',

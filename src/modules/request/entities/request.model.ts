@@ -31,8 +31,12 @@ export declare namespace TaskModel {
     createdDate: string;
     description: string;
     subCategory: SharedModel.SubCategory;
-    contractor: AuthModel.User;
-    customer: AuthModel.User;
+    contractor: {
+      user: AuthModel.User;
+    };
+    customer: {
+      user: AuthModel.User;
+    };
     files: SharedModel.File[];
     addresses: Address[];
     offers: OfferResponse[];

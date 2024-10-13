@@ -6,9 +6,9 @@ import { View } from 'react-native';
 import * as yup from 'yup';
 import i18n from '../../../../../i18n';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { RootStackParamList } from '../../../../navigation/types';
 import validations from '../../../../validations';
@@ -96,8 +96,9 @@ function UpdateInformation(prop: UpdateInformationProps) {
               <InformationFields field={field} />
             </FormProvider>
           </View>
-          <FooterButton
+          <CustomGradientButton
             disabled={!form.formState.isValid}
+            title={t('b_continue')}
             onPress={form.handleSubmit(handleSubmit)}
           />
         </ContainerView>

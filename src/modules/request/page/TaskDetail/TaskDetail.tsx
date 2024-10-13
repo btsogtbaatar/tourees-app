@@ -150,7 +150,7 @@ const TaskDetail = (props: Props) => {
               )}
               keyExtractor={(item, index) => item.id.toString()}
               renderItem={({ item }) => {
-                return <Offer offer={item} />;
+                return <Offer taskId={task.id} offer={item} />;
               }}
             />
           </View>
