@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { LocationCircleIcon, LocationIcon } from '../../../../components/Icon';
 import TextItem from '../../../../components/TextItem/TextItem';
@@ -30,8 +30,8 @@ const AddressDetailItem = (props: AddressDetailItemProps) => {
       <View style={AddressDetailStyle.controller}>
         <CustomFormInput
           clearButton={true}
-          label={t('userRequest.address.apartmentLabel')}
-          placeholder={t('userRequest.address.apartmentPlaceholder')}
+          label={t('addressDetail.apartmentLabel')}
+          placeholder={t('addressDetail.apartmentPlaceholder')}
           name={`${props.addressType.toString()}.apartment`}
         />
       </View>
@@ -39,8 +39,8 @@ const AddressDetailItem = (props: AddressDetailItemProps) => {
         <CustomFormInput
           clearButton={true}
           keyboardType="numeric"
-          label={t('userRequest.address.floorLabel')}
-          placeholder={t('userRequest.address.floorPlaceholder')}
+          label={t('addressDetail.floorLabel')}
+          placeholder={t('addressDetail.floorPlaceholder')}
           name={`${props.addressType.toString()}.floor`}
         />
       </View>
@@ -48,8 +48,8 @@ const AddressDetailItem = (props: AddressDetailItemProps) => {
         <CustomFormInput
           clearButton={true}
           keyboardType="numeric"
-          label={t('userRequest.address.unitLabel')}
-          placeholder={t('userRequest.address.unitPlaceholder')}
+          label={t('addressDetail.unitLabel')}
+          placeholder={t('addressDetail.unitPlaceholder')}
           name={`${props.addressType.toString()}.unit`}
         />
       </View>
@@ -123,7 +123,11 @@ const AddressesDetail = (props: AddressDetailProps) => {
             <AddressDetailItem addressType={AddressType.To} />
           </FormProvider>
         </ContainerView>
-        <FooterButton text={t('continue')} onPress={onPress} />
+        <CustomGradientButton
+          disabled={!form.formState.isValid}
+          title={t('b_continue')}
+          onPress={onPress}
+        />
       </FullHeightView>
     </CustomSafeAreaView>
   );

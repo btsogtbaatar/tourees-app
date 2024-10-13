@@ -1,47 +1,49 @@
+import { BottomSheetMethods } from '@gorhom/bottom-sheet';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { debounce } from 'lodash';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Controller, FieldError, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
-import { BottomSheetMethods } from '@gorhom/bottom-sheet';
-import { debounce } from 'lodash';
+import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import * as yup from 'yup';
 import Calendar from '../../../../components/Calendar/CalendarTasker';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
+import CustomSelectionButton from '../../../../components/CustomButton/CustomSelectionButton';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import {
   DEFAULT_LAT,
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
+import CustomSlider from '../../../../components/CustomSlider/CustomSlider';
 import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
-import FooterButton from '../../../../components/FooterButton/FooterButton';
 import InputError from '../../../../components/FormError/FormError';
-import { LocationCircleIcon } from '../../../../components/Icon/index';
 import {
+  LocationCircleIcon,
   MoonIcon,
   SunRiseIcon,
   SunSetIcon,
 } from '../../../../components/Icon/index';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import TextItem from '../../../../components/TextItem/TextItem';
-import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme/colors';
-import { TaskerServiceModel } from '../../entities/request.model';
-import { SharedModel } from '../../../Shared/entities/shared.model';
-import { uploadFile } from '../../../Shared/services/shared.service';
-import { createTaskerService } from '../../service/tasker.service';
-import { getCategories as fetchCategories } from '../../../Home/services/category.service';
-import { getSubCategories } from '../../../Home/services/category.service';
-import { TaskerServiceStyle } from './TaskerService.style';
 import { Typography } from '../../../../theme/typography';
-import CustomSelectionButton from '../../../../components/CustomButton/CustomSelectionButton';
-import CustomSlider from '../../../../components/CustomSlider/CustomSlider';
+import {
+  getCategories as fetchCategories,
+  getSubCategories,
+} from '../../../Home/services/category.service';
+import { SharedModel } from '../../../Shared/entities/shared.model';
+import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
+import { uploadFile } from '../../../Shared/services/shared.service';
+import { TaskerServiceModel } from '../../entities/request.model';
+import { createTaskerService } from '../../service/tasker.service';
 import CategorySelector from './CategorySelector';
 import SubCategorySelector from './SubCategorySelector';
+import { TaskerServiceStyle } from './TaskerService.style';
 
 type TaskerServiceProps = NativeStackScreenProps<
   RootStackParamList,
@@ -445,11 +447,12 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
               />
             </View>
           </FormProvider>
+          <CustomGradientButton
+            disabled={!form.formState.isValid}
+            title={t('b_continue')}
+            onPress={handleSubmit(onSubmit, (error: any) => console.log(error))}
+          />
         </ContainerView>
-        <FooterButton
-          onPress={handleSubmit(onSubmit, (error: any) => console.log(error))}
-          showBackButton={true}
-        />
       </ScrollView>
     </CustomSafeAreaView>
   );

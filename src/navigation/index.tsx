@@ -12,10 +12,12 @@ import RetypePin from '../modules/Auth/pages/RetypePin/RetypePin';
 import HomeTabNavigator from '../modules/Home/navigation';
 import RegistrationInformation from '../modules/Profile/pages/RegistrationInformation/RegistrationInformation';
 import UpdateInformation from '../modules/Profile/pages/UpdateInformation/UpdateInformation';
+import Chat from '../modules/Request/page/Chat/Chat';
 import CreateOffer from '../modules/Request/page/Offer/CreateOffer';
 import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
 import TaskBudget from '../modules/Request/page/TaskBudget/TaskBudget';
 import TaskDetail from '../modules/Request/page/TaskDetail/TaskDetail';
+import TaskerService from '../modules/Request/page/TaskerService/TaskerService';
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
 import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
 import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
@@ -23,7 +25,6 @@ import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapVie
 import TaskerStack from '../modules/Tasker/routes/routes';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
-import TaskerService from '../modules/Request/page/TaskerService/TaskerService';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -124,7 +125,7 @@ const Route = () => {
         />
         
         <Stack.Screen
-          options={{ title: t('headers.taskPrice') }}
+          options={{ title: t('headers.taskBudget') }}
           name="TaskBudget"
           component={TaskBudget}
         />
@@ -137,6 +138,11 @@ const Route = () => {
           options={{ title: t('headers.updateInformation') }}
           name="UpdateInformation"
           component={UpdateInformation}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.chat') }}
+          name="Chat"
+          component={Chat}
         />
       </Stack.Group>
       <Stack.Screen

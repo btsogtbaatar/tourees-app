@@ -32,6 +32,7 @@ const CustomCurrencyInput = (props: CurrencyInputProps) => {
         precision={0}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
+        returnKeyType="done"
       />
     </View>
   );

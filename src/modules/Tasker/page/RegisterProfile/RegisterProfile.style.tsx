@@ -1,8 +1,11 @@
 import { StyleSheet } from 'react-native';
+import { FontWeight, Typography, getFontWeight } from '../../../../theme';
 import { horizontalScale, verticalScale } from '../../../../utilities';
-import { Typography, getFontWeight, FontWeight } from '../../../../theme';
 
 export const RegisterProfileStyle = StyleSheet.create({
+  container: {
+    marginBottom: verticalScale(16),
+  },
   formItem: {
     marginTop: verticalScale(20),
   },

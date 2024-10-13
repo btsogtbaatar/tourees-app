@@ -60,9 +60,9 @@ export type RootStackParamList = {
   TaskBudget: { task: TaskModel.TaskRequest };
   CreateOffer: { taskId: number };
   TaskerStack: NavigatorScreenParams<TaskerParamList>;
-  RegistrationInformation: undefined
+  RegistrationInformation: undefined;
+  Chat: { id: number };
 };
-
 
 export type TaskerParamList = {
   RegisterTasker: {

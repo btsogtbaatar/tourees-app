@@ -1,13 +1,14 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { ProfileModel } from '../../modules/Tasker/entities/profile.model';
 import { TaskerModel } from '../../modules/Tasker/entities/tasker.model';
 import { TaskerParamList } from '../../navigation/types';
 import { verticalScale } from '../../utilities';
+import CustomGradientButton from '../CustomButton/CustomGradientButton';
 import CustomFormInput from '../CustomInput/CustomFormInput';
-import FooterButton from '../FooterButton/FooterButton';
 import FormError from '../FormError/FormError';
 import { CloseIcon } from '../Icon';
 import { RemarkListStyle } from '../RemarkList/RemarkList.style';
@@ -22,6 +23,7 @@ const RemarkListView = (props: RemarkListModalProps) => {
   const [duplicateError, setDuplicateError] = useState<string>('');
   const [listData, setListData] = useState<string[]>(value);
   const [tag, setTag] = useState<ProfileModel.ProfileTag[]>();
+  const { t } = useTranslation();
 
   const form = useForm({
     mode: 'onChange',
@@ -56,7 +58,7 @@ const RemarkListView = (props: RemarkListModalProps) => {
           setValue(name, [...listData, values.remark]);
           setDuplicateError('');
         } else {
-          setDuplicateError('davhardaj bn');
+          setDuplicateError(t('remark.remarkDuplicatedError'));
           return;
         }
       } else {
@@ -87,7 +89,7 @@ const RemarkListView = (props: RemarkListModalProps) => {
         <CustomFormInput
           placeholder={label}
           name="remark"
-          label="remark"
+          label={t('profile.remark')}
           autoComplete="off"
         />
         {duplicateError && <FormError error={duplicateError} />}
@@ -133,8 +135,8 @@ const RemarkListView = (props: RemarkListModalProps) => {
             }
           })}
       </View>
-      <FooterButton
-        style={RemarkListViewStyle}
+      <CustomGradientButton
+        title={t('b_continue')}
         onPress={form.handleSubmit(onSubmit)}
       />
     </View>
