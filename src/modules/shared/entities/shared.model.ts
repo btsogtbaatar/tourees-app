@@ -101,7 +101,6 @@ export namespace SharedModel {
     contractor: any;
     address?: Address;
     price: number;
-    subCategoryId: number;
   };
 
   export type TaskerServiceFilter = {
