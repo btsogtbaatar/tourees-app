@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, SectionList, Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
@@ -10,10 +10,15 @@ import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/Custom
 import { SearchMdIcon } from '../../../../components/Icon';
 import ImageItem from '../../../../components/ImageItem/ImageItem';
 import Loading from '../../../../components/Loading/Loading';
+import TaskerServiceList from '../../../../components/TaskerServiceList/TaskerServiceList';
 import { useAppDispatch } from '../../../../context/app/store';
+import { useTaskerServiceFetch } from '../../../../hooks/useTaskerServiceFetch';
 import { colors } from '../../../../theme/colors';
 import { updateFirebaseToken } from '../../../Auth/services';
-import { selectAuthenticated, selectFirebaseToken } from '../../../Auth/slice/authSlice';
+import {
+  selectAuthenticated,
+  selectFirebaseToken,
+} from '../../../Auth/slice/authSlice';
 import { getUnreadNotificationCount } from '../../../Notification/services/notification.service';
 import { setUnreadNotificationCount } from '../../../Notification/slice/notificationSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
@@ -34,6 +39,7 @@ const Home = () => {
       updateFirebaseToken(firebaseToken);
     }
   }, [firebaseToken, isAuthenticated]);
+  const { filteredGroupedTaskService } = useTaskerServiceFetch();
 
   const getCateories = () => {
     fetchCategories()
@@ -47,7 +53,6 @@ const Home = () => {
 
   useEffect(() => {
     getCateories();
-
     getUnreadNotificationCount().then(res => {
       dispatch(setUnreadNotificationCount(res));
     });
@@ -112,6 +117,38 @@ const Home = () => {
             />
           </View>
         )}
+        <View>
+          {filteredGroupedTaskService && (
+            <View style={HomeStyle.serviceSearchContainer}>
+              <Text style={HomeStyle.title}>{t('services.question')}</Text>
+              <View style={{ width: '40%' }}>
+                <CustomInput
+                  placeholder={t('services.search')}
+                  onPress={() => {
+                    navigation.navigate('TaskerServiceSearch', {});
+                  }}
+                  icon={
+                    <SearchMdIcon style={{ color: colors.primaryGradient }} />
+                  }
+                />
+              </View>
+            </View>
+          )}
+          <SectionList
+            sections={filteredGroupedTaskService}
+            showsVerticalScrollIndicator={false}
+            keyExtractor={(item, index) => item.name + index}
+            renderItem={({ section, index }) => {
+              return index < 1 ? (
+                <TaskerServiceList
+                  title={section.title}
+                  services={section.data}
+                />
+              ) : null;
+            }}
+            contentContainerStyle={HomeStyle.listContentContainer}
+          />
+        </View>
       </ContainerView>
     </CustomSafeAreaView>
   );

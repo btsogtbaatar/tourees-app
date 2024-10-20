@@ -30,7 +30,7 @@ export const RemarkTextViewStyle = StyleSheet.create({
     rowGap: verticalScale(8),
   },
   label: {
-    ...Typography.textLarge,
+    ...Typography.textRegular,
     ...getFontWeight(FontWeight.semiBold),
   },
   text: {

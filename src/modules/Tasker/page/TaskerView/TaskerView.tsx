@@ -12,7 +12,6 @@ import { HeaderEditIcon } from '../../../../components/Icon';
 import RemarkTextView from '../../../../components/RemarkTextView/RemarkTextView';
 import { horizontalScale, moderateScale } from '../../../../utilities/metrics';
 import { ProfileModel } from '../../entities/profile.model';
-import { TaskerModel } from '../../entities/tasker.model';
 import { getProfile } from '../../service/profile.service';
 import { TaskerViewStyle } from './TaskerView.style';
 
@@ -31,10 +30,7 @@ const TaskerView = () => {
           suffix={
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('TaskerStack', {
-                  screen: 'RegisterTasker',
-                  params: { profile: profile },
-                });
+                navigation.navigate('RegisterTasker', { profile: profile });
               }}>
               <HeaderEditIcon />
             </TouchableOpacity>

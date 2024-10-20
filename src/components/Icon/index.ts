@@ -49,15 +49,21 @@ import UserCircleIcon from '../../../assets/icons/user-circle.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
+import ChevronDownIcon from '../../../assets/icons/chevron-down.svg';
+import LaptopIcon from '../../../assets/icons/laptop-icon.svg';
 
 export {
   ArrowLeftIcon,
   BellActiveIcon,
   BellIcon,
-  BuildingIcon, CalendarIcon, CameraIcon,
+  BuildingIcon,
+  CalendarIcon,
+  CameraIcon,
   CheckIcon,
   ChevronRightIcon,
-  CircleIcon, ClockIcon, ClockRewindIcon,
+  CircleIcon,
+  ClockIcon,
+  ClockRewindIcon,
   CloseIcon,
   EBarimtIcon,
   FaceId,
@@ -68,8 +74,11 @@ export {
   GoogleIcon,
   HeaderEditIcon,
   HelpCircleIcon,
-  HomeActiveIcon, HomeIcon,
-  ImagePlaceHolderIcon, LocationCircleGrayIcon, LocationCircleIcon,
+  HomeActiveIcon,
+  HomeIcon,
+  ImagePlaceHolderIcon,
+  LocationCircleGrayIcon,
+  LocationCircleIcon,
   LocationIcon,
   LogoIcon,
   LogoMini,
@@ -94,6 +103,7 @@ export {
   UserCircleIcon,
   UserIcon,
   VectorIcon,
-  XCircleIcon
+  XCircleIcon,
+  ChevronDownIcon,
+  LaptopIcon,
 };
-

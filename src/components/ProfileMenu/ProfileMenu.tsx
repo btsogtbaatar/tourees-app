@@ -5,7 +5,10 @@ import { useSelector } from 'react-redux';
 import i18n from '../../../i18n';
 import { useAppDispatch } from '../../context/app/store';
 import { resetAuth } from '../../modules/Auth/slice/authSlice';
-import { changeLanguage, selectLanguage } from '../../modules/Shared/slice/preferenceSlice';
+import {
+  changeLanguage,
+  selectLanguage,
+} from '../../modules/Shared/slice/preferenceSlice';
 import { colors } from '../../theme';
 import GroupedMenuList from '../GroupedMenuList/GroupedMenuList';
 import {
@@ -41,10 +44,7 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        navigation.navigate('TaskerStack', {
-          screen: 'RegisterTasker',
-          params: { profile: undefined },
-        });
+        navigation.navigate('RegisterTasker', { profile: undefined });
       },
     },
     {
@@ -61,7 +61,7 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        navigation.navigate('TaskerStack', { screen: 'TaskerView' });
+        navigation.navigate('TaskerView');
       },
     },
     {
@@ -69,18 +69,14 @@ const ProfileMenu = () => {
       values: [t('profile.l_history')],
       prefix: <ClockRewindIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {
-        
-      },
+      onPress: () => {},
     },
     {
       key: 5,
       values: [t('profile.l_ebarimt')],
       prefix: <EBarimtIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {
-        
-      },
+      onPress: () => {},
     },
 
     {
@@ -100,18 +96,14 @@ const ProfileMenu = () => {
       values: [t('profile.t_serviceterm')],
       prefix: <FileIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {
-        
-      },
+      onPress: () => {},
     },
     {
       key: 8,
       values: [t('profile.l_help')],
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {
-        
-      },
+      onPress: () => {},
     },
     {
       key: 9,
