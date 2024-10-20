@@ -35,7 +35,6 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
 
   const getTaskerServices = (_filter: SharedModel.TaskerServiceFilter) => {
     setFilter(_filter);
-    console.log(_filter, '_filter');
     setLoading(true);
     fetchTaskerServices(_filter)
       .then(
