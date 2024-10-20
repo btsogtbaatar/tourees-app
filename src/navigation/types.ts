@@ -59,17 +59,14 @@ export type RootStackParamList = {
   RetypePin: { pin: string };
   TaskBudget: { task: TaskModel.TaskRequest };
   CreateOffer: { taskId: number };
-  TaskerStack: NavigatorScreenParams<TaskerParamList>;
   RegistrationInformation: undefined;
   Chat: { id: number };
   TaskerServiceView: { id: number; title: string };
   TaskerServiceSearch: { subCategoryId?: number; subCategoryName?: string };
-};
-
-export type TaskerParamList = {
   RegisterTasker: {
     profile?: ProfileModel.ProfileRequest;
   };
+  TaskerView: undefined;
   RemarkListView: {
     label: string;
     setValue: UseFormSetValue<FieldValues>;
@@ -77,7 +74,6 @@ export type TaskerParamList = {
     value: string[];
     tags?: ProfileModel.ProfileTag[];
   };
-  TaskerView: undefined;
 };
 
 declare global {
