@@ -27,5 +27,8 @@ export const colors = {
   danger: '#F15980',
   dark700: '#161A1E',
   silver: '#F2F2F2',
-  disabled :'rgba(255, 255, 255, 0.7)',
+  disabled: 'rgba(255, 255, 255, 0.7)',
+  blueColor: '#0a94f7',
+  grayBlue: '#dae0f1',
+  textBlueColor: '#1e6ee5',
 };

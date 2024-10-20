@@ -62,6 +62,8 @@ export type RootStackParamList = {
   TaskerStack: NavigatorScreenParams<TaskerParamList>;
   RegistrationInformation: undefined;
   Chat: { id: number };
+  TaskerServiceView: { id: number; title: string };
+  TaskerServiceSearch: { subCategoryId?: number; subCategoryName?: string };
 };
 
 export type TaskerParamList = {

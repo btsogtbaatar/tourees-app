@@ -25,6 +25,8 @@ import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapVie
 import TaskerStack from '../modules/Tasker/routes/routes';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import TaskerServiceView from '../modules/Request/page/TaskerServiceView/TaskerServiceView';
+import TaskerServiceSearch from '../modules/Home/pages/TaskerServiceSearch/TaskerServiceSearch';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -101,10 +103,20 @@ const Route = () => {
           name="RegistrationInformation"
           component={RegistrationInformation}
         />
-          <Stack.Screen
+        <Stack.Screen
           options={{ title: t('headers.request') }}
           name="TaskerService"
           component={TaskerService}
+        />
+        <Stack.Screen
+          name="TaskerServiceView"
+          component={TaskerServiceView}
+          options={{ title: t('headers.listingDetail') }}
+        />
+        <Stack.Screen
+          name="TaskerServiceSearch"
+          component={TaskerServiceSearch}
+          options={{ title: 'test' }}
         />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
@@ -123,7 +135,7 @@ const Route = () => {
           name="AddressesDetail"
           component={AddressesDetail}
         />
-        
+
         <Stack.Screen
           options={{ title: t('headers.taskBudget') }}
           name="TaskBudget"
@@ -133,7 +145,7 @@ const Route = () => {
           options={{ title: t('headers.createOffer') }}
           name="CreateOffer"
           component={CreateOffer}
-          />
+        />
         <Stack.Screen
           options={{ title: t('headers.updateInformation') }}
           name="UpdateInformation"

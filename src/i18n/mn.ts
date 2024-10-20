@@ -121,6 +121,11 @@ export default {
     },
     loginAsContractor: 'Үйлчилгээ үзүүлэгчээр нэвтрэх',
     signUpAsContractor: 'Үйлчилгээ үзүүлэгчээр бүртгүүлэх',
+    services: {
+      main: 'Үйлчилгээ',
+      search: 'Үйлчилгээнээс хайх',
+      question: 'Үйлчилгээний жагсаалт',
+    },
   },
   subCategoryList: {
     search: {
@@ -193,7 +198,7 @@ export default {
     enterFields: 'Та доорх талбаруудад саналынхаа мэдээллүүдийг оруулна уу.',
     success: 'Таны санал амжилттай илгээгдлээ.',
     notFound: 'Санал одоогоор байхгүй байна.',
-    chat: 'Чатлах', 
+    chat: 'Чатлах',
   },
   biometric: {
     consent: 'Та биометрик мэдээллийг ашиглахыг зөвшөөрч байна уу?',
@@ -287,7 +292,7 @@ export default {
     afternoonTimeRange: '6PM-н дараа',
     cancel: 'Цуцлах',
     title: 'Өдөр сонгох',
-    flexible: 'Уян хатан цагийн хуваарьтай'
+    flexible: 'Уян хатан цагийн хуваарьтай',
   },
   emptyRequest: 'Таньд үүсгэсэн хүсэлт байхгүй байна.',
   headers: {
@@ -306,6 +311,7 @@ export default {
     registrationInformation: 'Бүртгэлийн мэдээлэл',
     updateInformation: 'Бүртгэлийн мэдээлэл',
     chat: 'Чат',
+    listingDetail: 'Сервисийн дэлгэрэнгүй',
   },
   taskBudget: {
     submit: 'Хадгалах',
@@ -355,5 +361,16 @@ export default {
       nameMin: 'Нэр доод тал нь 3 тэмдэгт байх ёстой',
       customError: 'Буруу утга',
     },
+    status: {
+      new: 'Шинэ!',
+    },
+    sort: {
+      name: 'Эрэмбэлэх',
+      priceLowToHigh: 'Үнэ (багаас ихрүү)',
+      priceHighToLow: 'Үнэ (ихээс багаруу)',
+      cancel: 'Болих',
+      default: 'Үндсэн',
+    },
+    onlineService: 'Онлайн үйлчилгээ',
   },
 };
