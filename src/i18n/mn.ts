@@ -89,8 +89,9 @@ export default {
   },
   profile: {
     language: 'Хэл',
-    mongolia: 'Монгол',
+    language_label: 'Монгол',
     l_user_infomation: 'Ерөнхий мэдээлэл',
+    l_service: 'Үйлчилгээ бүртгүүлэх',
     l_register_infomation: 'Бүртгэлийн мэдээлэл',
     l_history: 'Түүх',
     l_ebarimt: 'И-Баримт',

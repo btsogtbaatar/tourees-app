@@ -89,8 +89,9 @@ export default {
   },
   profile: {
     language: 'Language',
-    mongolia: 'Mongolia',
+    language_label: 'English',
     l_user_infomation: 'General Information',
+    l_service: 'Post a service',
     l_register_infomation: 'Registration Information',
     l_history: 'History',
     l_ebarimt: 'E-Receipt',
