@@ -30,7 +30,7 @@ const getBackgroundColor = (routeName: string) => {
   }
 };
 
-const hidingHeaderScreens = ['HomeTab'];
+const hidingHeaderScreens = ['HomeTab', 'Photos'];
 const transparentHeaderScreens = ['AddressMapView'];
 
 const customScreenOption:

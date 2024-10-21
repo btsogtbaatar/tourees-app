@@ -12,7 +12,10 @@ import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/Custom
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { RootStackParamList } from '../../../../navigation/types';
-import { selectBiometricEnabled } from '../../../Shared/slice/preferenceSlice';
+import {
+  selectBiometricEnabled,
+  selectDontShowBiometricConsent,
+} from '../../../Shared/slice/preferenceSlice';
 import { sendOtp, tokenOtp } from '../../services';
 
 type LoginOtpCheckProps = NativeStackScreenProps<
@@ -24,6 +27,7 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
   const navigation = useNavigation();
   const { t } = useTranslation();
   const [value, setValue] = useState<string>();
+  const dontShowBiometricConsent = useSelector(selectDontShowBiometricConsent);
   const biometricEnabled = useSelector(selectBiometricEnabled);
 
   const { credentials } = props.route.params;
@@ -31,10 +35,10 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
   const checkOtp = () => {
     if (value) {
       tokenOtp({ ...credentials, value }).then(() => {
-        if (biometricEnabled === undefined) {
-          navigation.navigate('BiometricConsent');
-        } else {
+        if (dontShowBiometricConsent || biometricEnabled) {
           navigation.navigate('HomeTab', { screen: 'Home' });
+        } else {
+          navigation.navigate('BiometricConsent');
         }
       });
     }

@@ -12,5 +12,7 @@ export const CustomCurrencyInputStyle = StyleSheet.create({
   },
   text: {
     ...Typography.textExtraLarge,
+    width: '100%',
+    textAlign: 'center',
   },
 })

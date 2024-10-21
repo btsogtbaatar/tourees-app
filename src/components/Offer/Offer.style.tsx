@@ -24,7 +24,7 @@ export const OfferStyle = StyleSheet.create({
   left: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: horizontalScale(6),
+    gap: horizontalScale(12),
   },
   price: {
     ...Typography.textRegular,
@@ -33,5 +33,15 @@ export const OfferStyle = StyleSheet.create({
   bottom: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
-  }
+  },
+  smallButton: {
+    height: verticalScale(30),
+  },
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 1,
+    borderColor: colors.gray100,
+  },
 });

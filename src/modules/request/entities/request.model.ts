@@ -20,6 +20,7 @@ export declare namespace TaskModel {
 
   export type OfferTask = {
     id: number;
+    customer: User;
   };
 
   export type TaskResponse = {
@@ -74,11 +75,11 @@ export declare namespace TaskModel {
   };
 
   export type CreateOffer = {
+    id?: number;
     price: number;
     description: string;
-    taskId: number;
+    taskId?: number;
   };
-
   export type OfferResponse = {
     id: number;
     price: number;
@@ -121,7 +122,7 @@ export enum AddressType {
 export type TaskerServiceModel = {
   name: string;
   description: string;
-  tag:string;
+  tag: string;
   price: number;
   autoMsg: string;
   category: SharedModel.Category;

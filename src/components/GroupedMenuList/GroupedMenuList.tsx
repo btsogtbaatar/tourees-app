@@ -1,7 +1,7 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import GroupedMenuListStyle from './GroupedMenuList.style';
 import GroupedMenuItem from './GroupedMenuItem';
+import GroupedMenuListStyle from './GroupedMenuList.style';
 
 export type FilledListProps = {
   onPress: () => void;

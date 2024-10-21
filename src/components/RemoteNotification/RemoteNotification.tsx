@@ -1,6 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 import { PermissionsAndroid, Platform } from 'react-native';
 import PushNotification, { Importance } from 'react-native-push-notification';
+import { getEnv } from '../../api';
 import store from '../../context/app/store';
 import { setFirebaseToken } from '../../modules/Auth/slice/authSlice';
 import {
@@ -18,14 +20,34 @@ const checkApplicationPermission = async () => {
       await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS,
       );
-      console.debug('Permission granted');
+      console.log('Permission granted');
     } catch (error) {
       console.error(error);
     }
   }
 };
 
+const localNotification = (notification: any) => {
+  PushNotification.localNotification({
+    timeoutAfter: 10000,
+    channelId: 'default', // (required for Android)
+    title: notification.title, // (optional)
+    ignoreInForeground: false,
+    message: notification.message, // (required)
+    playSound: true, // (optional) default: true
+    soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+    importance: 'high', // (optional) set importance for Android notifications
+    vibrate: true, // (optional) default: true
+    invokeApp: true,
+    largeIconUrl: `${getEnv().IMAGE_URL}${notification.largeIconUrl}`,
+    bigLargeIconUrl: `${getEnv().IMAGE_URL}${notification.bigLargeIconUrl}`,
+    bigPictureUrl: `${getEnv().IMAGE_URL}${notification.bigPictureUrl}`,
+    data: notification.data,
+  });
+};
+
 const RemoteNotification = () => {
+  const navigation = useNavigation();
   checkApplicationPermission();
 
   useEffect(() => {
@@ -45,47 +67,34 @@ const RemoteNotification = () => {
           store.dispatch(setUnreadNotificationCount(res));
         });
 
-        PushNotification.channelExists('default', function (exists) {
-          if (!exists) {
-            PushNotification.createChannel(
-              {
-                channelId: 'default', // (required)
-                channelName: 'My channel', // (required)
-                channelDescription:
-                  'A channel to categorise your notifications', // (optional) default: undefined.
-                playSound: false, // (optional) default: true
-                soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
-                importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
-                vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
-              },
-              created => {
-                PushNotification.localNotification({
-                  timeoutAfter: 10000,
-                  channelId: 'default', // (required for Android)
-                  title: notification.title, // (optional)
-                  ignoreInForeground: false,
-                  message: notification.message, // (required)
-                  playSound: true, // (optional) default: true
+        if (notification.userInteraction == false) {
+          PushNotification.channelExists('default', function (exists) {
+            console.log('🚀 ~ notification:', notification);
+
+            if (!exists) {
+              PushNotification.createChannel(
+                {
+                  channelId: 'default', // (required)
+                  channelName: 'My channel', // (required)
+                  channelDescription:
+                    'A channel to categorise your notifications', // (optional) default: undefined.
+                  playSound: false, // (optional) default: true
                   soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
-                  importance: 'high', // (optional) set importance for Android notifications
-                  vibrate: true, // (optional) default: true
-                });
-              }, // (optional) callback returns whether the channel was created, false means it already existed.
-            );
-          } else {
-            PushNotification.localNotification({
-              timeoutAfter: 10000,
-              channelId: 'default', // (required for Android)
-              title: notification.title, // (optional)
-              ignoreInForeground: false,
-              message: notification.message, // (required)
-              playSound: true, // (optional) default: true
-              soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
-              importance: 'high', // (optional) set importance for Android notifications
-              vibrate: true, // (optional) default: true
-            });
-          }
-        });
+                  importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
+                  vibrate: true, // (optional) default: true. Creates the default vibration pattern if true.
+                },
+                created => {
+                  localNotification(notification);
+                }, // (optional) callback returns whether the channel was created, false means it already existed.
+              );
+            } else {
+              localNotification(notification);
+            }
+          });
+        } else {
+          console.log("🚀 ~ useEffect ~ notification.data:", notification.data)
+          navigation.navigate(notification.data.path, JSON.parse(notification.data.data));
+        }
 
         // process the notification
 
@@ -95,8 +104,8 @@ const RemoteNotification = () => {
 
       // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
       onAction: function (notification) {
-        console.debug('Action:', notification.action);
-        console.debug('Notification:', notification);
+        console.log('Action:', notification.action);
+        console.log('Notification:', notification);
 
         // process the action
       },
@@ -107,7 +116,7 @@ const RemoteNotification = () => {
       },
 
       onRemoteFetch: function (notification) {
-        console.debug('Remote fetch', notification);
+        console.log('Remote fetch', notification);
       },
 
       // IOS ONLY (optional): default: all - Permissions to register.
