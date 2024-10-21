@@ -29,7 +29,7 @@ import {
 } from '../../../../components/Icon/index';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import TextItem from '../../../../components/TextItem/TextItem';
-import { RootStackParamList } from '../../../../navigation/types';
+import { RootStackParamList, TaskerServiceParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme/colors';
 import { Typography } from '../../../../theme/typography';
 import {
@@ -39,15 +39,16 @@ import {
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
 import { uploadFile } from '../../../Shared/services/shared.service';
-import { TaskerServiceModel } from '../../entities/request.model';
-import { createTaskerService } from '../../service/tasker.service';
+import { TaskerServiceModel, ServiceTag } from '../../entities/request.model';
+import { createTaskerService, getTags } from '../../service/tasker.service';
 import CategorySelector from './CategorySelector';
 import SubCategorySelector from './SubCategorySelector';
 import { TaskerServiceStyle } from './TaskerService.style';
+import RemarkList from '../../../../components/RemarkList/RemarkList';
 
 type TaskerServiceProps = NativeStackScreenProps<
-  RootStackParamList,
-  'TaskerService'
+  TaskerServiceParamList,
+  'RegisterTaskerService'
 >;
 
 function TaskerService({ route }: Readonly<TaskerServiceProps>) {
@@ -75,6 +76,7 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
   const [filter, setFilter] = useState<string>('');
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [inPerson, setInPerson] = useState(false);
+  const [tags, setTags] = useState<ServiceTag[]>();
 
   const [isFlexible, setIsFlexible] = useState(false);
   const handleToggleFlexible = (isFlexible: boolean) => {
@@ -114,10 +116,6 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
       .string()
       .required(t('service.validation.nameRequired'))
       .min(3, t('service.validation.nameMin')),
-    tag: yup
-      .string()
-      .required(t('service.validation.tagRequired'))
-      .min(2, t('service.validation.tagMin')),
     price: yup
       .number()
       .required(t('service.validation.priceRequired'))
@@ -197,6 +195,9 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
     if (!inPerson) {
       form.setValue('distance', 0);
     }
+    getTags().then((res: ServiceTag[]) => {
+      setTags(res);
+    });
   }, [filter, selectedCategory, inPerson]);
 
   const onSubmit = (taskerService: TaskerServiceModel) => {
@@ -242,8 +243,11 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
             <View style={TaskerServiceStyle.container}>
               <Text style={TaskerServiceStyle.label}>{t('service.name')}</Text>
               <CustomFormInput placeholder={t('service.name')} name={'name'} />
-              <Text style={TaskerServiceStyle.label}>{t('service.tag')}</Text>
-              <CustomFormInput placeholder={t('service.tag')} name={'tag'} />
+              <RemarkList
+                label={t('service.tag')}
+                name={'services'}
+                tags={tags}
+              />
               <View>
                 <Text style={TaskerServiceStyle.label}>
                   {t('request.requestDetail')}
@@ -319,64 +323,56 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
                       </Text>
                     </CustomSelectionButton>
                   </View>
-
-                  <Controller
-                    name="address"
-                    render={({ field: { onChange } }) => (
-                      <TouchableOpacity
-                        activeOpacity={!inPerson ? 0.7 : 1}
-                        style={[
-                          TaskerServiceStyle.touchable,
-                          !inPerson && TaskerServiceStyle.disabled,
-                        ]}
-                        disabled={!inPerson}
-                        onPress={() => {
-                          if (inPerson) {
-                            rootNavigation.navigate('AddressMapView', {
-                              prevAddress: address,
-                              title: t('form.address.label'),
-                              onGoBack: (address: any) => {
-                                const _address = { ...address };
-                                _address.displayName = getAddress(_address);
-                                setAddress(_address);
-                                console.log(address)
-                                onChange(_address);
-                              },
-                            });
-                          }
-                        }}>
-                        <TextItem
-                          icon={<LocationCircleIcon width={20} height={20} />}
-                          label={
-                            address.displayName
-                              ? address.displayName
-                              : t('form.address.placeHolder')
-                          }
-                          buttonText={t('userRequest.address.edit')}
-                        />
-                      </TouchableOpacity>
-                    )}
-                  />
-                  <View>
+                  {inPerson && (
                     <Controller
-                      name="distance"
-                      control={form.control}
-                      defaultValue={0}
-                      render={({ field: { onChange, value } }) => (
-                        <CustomSlider
-                          minDistance={0}
-                          maxDistance={101}
-                          initialDistance={value}
-                          step={5}
-                          onChange={onChange}
-                        />
+                      name="address"
+                      render={({ field: { onChange } }) => (
+                        <View>
+                          <TextItem
+                            icon={<LocationCircleIcon width={20} height={20} />}
+                            label={
+                              address.displayName
+                                ? address.displayName
+                                : t('form.address.placeHolder')
+                            }
+                            buttonText={t('userRequest.address.edit')}
+                            onPress={() => {
+                              if (inPerson) {
+                                rootNavigation.navigate('AddressMapView', {
+                                  prevAddress: address,
+                                  title: t('form.address.label'),
+                                  onGoBack: (address: any) => {
+                                    const _address = { ...address };
+                                    _address.displayName = getAddress(_address);
+                                    setAddress(_address);
+                                    onChange(_address);
+                                  },
+                                });
+                              }
+                            }}
+                          />
+                        </View>
                       )}
                     />
-                    {!inPerson && (
-                      <View style={TaskerServiceStyle.lockOverlay} />
+                  )}
+                  <View>
+                    {inPerson && (
+                      <Controller
+                        name="distance"
+                        control={form.control}
+                        defaultValue={0}
+                        render={({ field: { onChange, value } }) => (
+                          <CustomSlider
+                            minDistance={0}
+                            maxDistance={110}
+                            initialDistance={value}
+                            step={5}
+                            onChange={onChange}
+                          />
+                        )}
+                      />
                     )}
                   </View>
-
                   {form.formState.errors.address && (
                     <InputError error={form.formState.errors.address.message} />
                   )}

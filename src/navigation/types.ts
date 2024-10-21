@@ -6,6 +6,8 @@ import { Schema } from '../modules/Profile/model/registration.model';
 import {
   AddressType,
   TaskModel,
+  ServiceTag,
+  TaskerServiceModel
 } from '../modules/Request/entities/request.model';
 import {
   FormField,
@@ -83,3 +85,16 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
+
+export type TaskerServiceParamList = {
+  RegisterTaskerService: {
+    service?: TaskerServiceModel;
+  };
+  RemarkListView: {
+    label: string;
+    setValue: UseFormSetValue<FieldValues>;
+    name: string;
+    value: string[];
+    tags?: ServiceTag[];
+  };
+};
