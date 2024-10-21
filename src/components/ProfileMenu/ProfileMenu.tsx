@@ -48,7 +48,7 @@ const ProfileMenu = () => {
       },
     },
     {
-      values: [t('Үйлчилгээ бүртгүүлэх')],
+      values: [t('profile.l_service')],
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
@@ -85,7 +85,7 @@ const ProfileMenu = () => {
 
     {
       key: 6,
-      values: [t('profile.language'), t('profile.mongolia')],
+      values: [t('profile.language'), t('profile.language_label')],
       prefix: <GlobalIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
