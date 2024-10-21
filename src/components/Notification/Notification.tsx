@@ -5,7 +5,7 @@ import CustomImage from '../CustomImage/CustomImage';
 import { NotificationStyle } from './Notification.style';
 
 export interface NotificationProps {
-  image: string;
+  image?: string;
   title: string;
   subTitle: string;
   body: string;
@@ -20,7 +20,13 @@ const Notification = (props: NotificationProps) => {
       onPress={props.onPress}>
       <CustomImage
         style={NotificationStyle.image}
-        source={require('../../../assets/images/icon-placeholder.png')}
+        source={
+          props.image
+            ? {
+                uri: props.image,
+              }
+            : require('../../../assets/images/icon-placeholder.png')
+        }
       />
       <View style={NotificationStyle.textContainer}>
         <Text style={NotificationStyle.title}>{props.title}</Text>

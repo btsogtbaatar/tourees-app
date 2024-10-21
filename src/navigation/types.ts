@@ -55,13 +55,18 @@ export type RootStackParamList = {
     onGoBack: (addresses: Addresses) => void;
   };
   BiometricConsent: undefined;
-  CreatePin: undefined;
-  RetypePin: { pin: string };
+  BiometricConfig: undefined;
+  CreatePin: { oldPin?: string };
+  EnterPin: { authenticating: boolean };
+  RetypePin: { pin: string; oldPin?: string };
   TaskBudget: { task: TaskModel.TaskRequest };
-  CreateOffer: { taskId: number };
+  CreateOffer: { taskId?: number, id?: number };
+  EditOffer: { taskId?: number, id?: number };
   TaskerStack: NavigatorScreenParams<TaskerParamList>;
   RegistrationInformation: undefined;
   Chat: { id: number };
+  MyOfferTasks: undefined;
+  Photos: { images: string[]; index: number };
 };
 
 export type TaskerParamList = {

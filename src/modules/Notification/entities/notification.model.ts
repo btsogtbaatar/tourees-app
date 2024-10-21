@@ -7,6 +7,8 @@ export declare module NotificationModel {
     body: string;
     user: AuthModel.User;
     read: boolean;
+    path: string;
+    data: any;
     createdDate: Date;
   };
 

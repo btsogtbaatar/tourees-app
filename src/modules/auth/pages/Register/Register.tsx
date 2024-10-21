@@ -22,7 +22,6 @@ import {
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapOneMarker';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import InputError from '../../../../components/FormError/FormError';
 import {
   BuildingIcon,
@@ -105,12 +104,6 @@ function Register({ navigation }: RegisterProps) {
         navigation.navigate('RegisterOtpCheck', {
           registration: response,
         });
-      })
-      .catch(e => {
-        notifyMessage(
-          t('login.socialError.title'),
-          e.message ? e.message : 'Network Error',
-        );
       })
       .finally(() => {
         setLoading(false);

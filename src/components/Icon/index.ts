@@ -30,7 +30,9 @@ import LogoMini from '../../../assets/icons/logo-mini.svg';
 import LogoIcon from '../../../assets/icons/logo.svg';
 import LogoutIcon from '../../../assets/icons/logout.svg';
 import MailIcon from '../../../assets/icons/mail.svg';
+import MessagePlusSquareIcon from '../../../assets/icons/message-plus-square.svg';
 import MoonIcon from '../../../assets/icons/moon.svg';
+import PasscodeIcon from '../../../assets/icons/passcode.svg';
 import PassportIcon from '../../../assets/icons/passport.svg';
 import PhoneIcon from '../../../assets/icons/phone.svg';
 import PlusIcon from '../../../assets/icons/plus-icon.svg';
@@ -51,9 +53,7 @@ import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
 
 export {
-  ArrowLeftIcon,
-  BellActiveIcon,
-  BellIcon,
+  ArrowLeftIcon, BellActiveIcon, BellIcon,
   BuildingIcon, CalendarIcon, CameraIcon,
   CheckIcon,
   ChevronRightIcon,
@@ -75,9 +75,7 @@ export {
   LogoMini,
   LogoMiniBorder,
   LogoutIcon,
-  MailIcon,
-  MoonIcon,
-  PassportIcon,
+  MailIcon, MessagePlusSquareIcon, MoonIcon, PasscodeIcon, PassportIcon,
   PhoneIcon,
   PlusIcon,
   SearchMdIcon,

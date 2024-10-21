@@ -1,10 +1,8 @@
 import { api } from '../../../api';
-import { AuthStateToken } from '../../Auth/entities';
-import { TaskerService} from '../entities/request.model';
-
+import { TaskerServiceModel } from '../entities/request.model';
 
 export function createTaskerService(
-  taskerService: TaskerService,
-): Promise<AuthStateToken> {
+  taskerService: TaskerServiceModel,
+): Promise<void> {
   return api.post('/tasker/service', taskerService);
 }

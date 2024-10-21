@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-export const defaultUrl = 'http://localhost:8080';
+const baseURL = '192.168.4.22:8080';
+const defaultUrl = `http://${baseURL}`;
 const imageUrl = `${defaultUrl}/file/resource/`;
-const brokerUrl = `ws://localhost:8080/ws/websocket`;
+const brokerUrl = `ws://${baseURL}/ws/websocket`;
 
 export const getEnv = () => {
   return {

@@ -13,7 +13,10 @@ import Loading from '../../../../components/Loading/Loading';
 import { useAppDispatch } from '../../../../context/app/store';
 import { colors } from '../../../../theme/colors';
 import { updateFirebaseToken } from '../../../Auth/services';
-import { selectAuthenticated, selectFirebaseToken } from '../../../Auth/slice/authSlice';
+import {
+  selectAuthenticated,
+  selectFirebaseToken,
+} from '../../../Auth/slice/authSlice';
 import { getUnreadNotificationCount } from '../../../Notification/services/notification.service';
 import { setUnreadNotificationCount } from '../../../Notification/slice/notificationSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
@@ -30,7 +33,7 @@ const Home = () => {
   const firebaseToken = useSelector(selectFirebaseToken);
 
   useEffect(() => {
-    if (firebaseToken && isAuthenticated) {
+    if (firebaseToken !== undefined && isAuthenticated === true) {
       updateFirebaseToken(firebaseToken);
     }
   }, [firebaseToken, isAuthenticated]);
@@ -48,9 +51,11 @@ const Home = () => {
   useEffect(() => {
     getCateories();
 
-    getUnreadNotificationCount().then(res => {
-      dispatch(setUnreadNotificationCount(res));
-    });
+    if (isAuthenticated) {
+      getUnreadNotificationCount().then(res => {
+        dispatch(setUnreadNotificationCount(res));
+      });
+    }
   }, []);
 
   const renderSeparator = () => <View style={HomeStyle.divider} />;

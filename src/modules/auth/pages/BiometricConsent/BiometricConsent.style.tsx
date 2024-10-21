@@ -23,6 +23,13 @@ export const BiometricConsentStyle = StyleSheet.create({
     marginBottom: 16,
   },
   message: {
-    ...Typography.textSmaller,
+    ...Typography.textSmall,
+  },
+  flexOne: {
+    flex: 1,
+  },
+  buttons: {
+    flexDirection: 'row',
+    gap: 8,
   },
 });

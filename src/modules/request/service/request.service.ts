@@ -15,7 +15,6 @@ export function getTasks(
   return api.get('/tasks', { params: params });
 }
 
-
 export function getMyTasks(
   page: number = 1,
   size = 10,
@@ -27,12 +26,41 @@ export function getMyTasks(
   return api.get('/tasks/created/', { params: params });
 }
 
-export function createOffer(offer: TaskModel.CreateOffer): Promise<TaskModel.OfferResponse> {
+export function getMyOfferTasks(
+  page: number = 1,
+  size = 10,
+): Promise<SharedModel.Pagination<TaskModel.TaskResponse>> {
+  const params = {
+    page: page - 1,
+    size: size,
+  };
+
+  return api.get('/tasks/created/offers', { params: params });
+}
+
+export function createOffer(
+  offer: TaskModel.CreateOffer,
+): Promise<TaskModel.OfferResponse> {
   return api.post('/offers', offer);
 }
 
-export function getTask(
-id: number): Promise<TaskModel.TaskResponse> {
+export function approveOffer(
+  offerId: number,
+): Promise<TaskModel.OfferResponse> {
+  return api.put(`/offers/${offerId}/approve`);
+}
+
+export function updateOffer(
+  offer: TaskModel.EditOffer,
+): Promise<TaskModel.OfferResponse> {
+  return api.put(`/offers/${offer.id}`, offer);
+}
+
+export function getOffer(id: number): Promise<TaskModel.OfferResponse> {
+  return api.get(`/offers/${id}`);
+}
+
+export function getTask(id: number): Promise<TaskModel.TaskResponse> {
   return api.get(`/tasks/${id}`);
 }
 
@@ -61,9 +89,7 @@ export function sendChat(
 ): Promise<TaskModel.Chat> {
   return api.post(`/chat`, { taskID: taskID, message: message });
 }
-export function createTask(
-  task: TaskModel.TaskRequest,
-) {
+export function createTask(task: TaskModel.TaskRequest) {
   return api.post('/tasks', task);
 }
 

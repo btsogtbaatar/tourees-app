@@ -160,6 +160,7 @@ const CustomInput = forwardRef<CustomInputRef, CustomInputProps>(
                   onChangeText={(text: string) => {
                     props.onChangeText && props.onChangeText(text);
                   }}
+                  returnKeyType="done"
                 />
               </View>
             </View>

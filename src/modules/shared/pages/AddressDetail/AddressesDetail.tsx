@@ -63,7 +63,7 @@ type AddressDetailProps = NativeStackScreenProps<
 >;
 
 const AddressesDetail = (props: AddressDetailProps) => {
-  const { t } = useTranslation(undefined, { keyPrefix: 'addressDetail' });
+  const { t } = useTranslation();
 
   const schema = yup.object().shape({
     from: TaskSchema.addressDetailSchema,
@@ -98,7 +98,7 @@ const AddressesDetail = (props: AddressDetailProps) => {
       <FullHeightView>
         <ContainerView>
           <FormProvider {...form}>
-            <Text style={UserRequestStyle.label}>{t('label')}</Text>
+            <Text style={UserRequestStyle.label}>{t('addressDetail.label')}</Text>
             <TextItem
               hideAction={true}
               icon={
@@ -107,7 +107,7 @@ const AddressesDetail = (props: AddressDetailProps) => {
                   style={UserRequestStyle.icon}
                 />
               }
-              label={t('from')}
+              label={t('addressDetail.from')}
             />
             <AddressDetailItem addressType={AddressType.From} />
             <TextItem
@@ -118,7 +118,7 @@ const AddressesDetail = (props: AddressDetailProps) => {
                   style={UserRequestStyle.icon}
                 />
               }
-              label={t('to')}
+              label={t('addressDetail.to')}
             />
             <AddressDetailItem addressType={AddressType.To} />
           </FormProvider>

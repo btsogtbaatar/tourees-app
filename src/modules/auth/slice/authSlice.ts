@@ -30,6 +30,9 @@ const authSlice = createSlice({
     setProfileImage: (state, action: PayloadAction<SharedModel.File>) => {
       state.profile = action.payload;
     },
+    setHasPin: (state, action: PayloadAction<boolean>) => {
+      state.user!.hasPin = action.payload;
+    },
     resetAuth: state => {
       state.isAuthenticated = false;
       state.token = undefined;
@@ -42,7 +45,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, setUser, resetAuth, setFirebaseToken, setProfileImage } = authSlice.actions;
+export const { setToken, setUser, setHasPin, resetAuth, setFirebaseToken, setProfileImage } = authSlice.actions;
 export default authSlice.reducer;
 
 export const selectAuthenticated = (state: RootState) =>

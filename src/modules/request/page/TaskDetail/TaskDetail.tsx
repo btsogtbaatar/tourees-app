@@ -1,9 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, ScrollView, Text, View } from 'react-native';
+import {
+  FlatList,
+  ScrollView,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomImage from '../../../../components/CustomImage/CustomImage';
@@ -18,10 +24,10 @@ import Offer from '../../../../components/Offer/Offer';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors, Typography } from '../../../../theme';
 import { formatDate, formatTime } from '../../../../utilities/date';
+import { getImageUrl } from '../../../../utilities/image';
 import { TaskModel } from '../../entities/request.model';
 import { getTask } from '../../service/request.service';
 import { TaskDetailStyle } from './TaskDetail.style';
-
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskDetail'>;
 
 const TaskDetail = (props: Props) => {
@@ -29,12 +35,13 @@ const TaskDetail = (props: Props) => {
   const [task, setTask] = useState<TaskModel.TaskResponse>();
   const { t } = useTranslation();
   const rootNavigation = useNavigation();
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     getTask(id).then(res => {
       setTask(res);
     });
-  }, []);
+  }, [isFocused]);
 
   const formattedDate = () => {
     return moment(task?.createdDate).format('yyyy-MM-DD mm:ss');
@@ -104,7 +111,6 @@ const TaskDetail = (props: Props) => {
             <Text style={TaskDetailStyle.text}>{task?.description}</Text>
           </View>
           <View style={TaskDetailStyle.detail}>
-            <Text style={TaskDetailStyle.label}>{t('request.images')}</Text>
             <FlatList
               numColumns={4}
               scrollEnabled={false}
@@ -112,12 +118,21 @@ const TaskDetail = (props: Props) => {
               keyExtractor={(item, index) => item.id.toString()}
               renderItem={({ item, index }) => {
                 return (
-                  <CustomImage
-                    key={item.id}
-                    height={100}
-                    width={100}
-                    source={{ uri: item.url }}
-                  />
+                  <TouchableWithoutFeedback
+                    key={item.url}
+                    onPress={() =>
+                      rootNavigation.navigate('Photos', {
+                        index,
+                        images: task?.files.map(file => getImageUrl(file.url)),
+                      })
+                    }>
+                    <CustomImage
+                      key={item.id}
+                      height={100}
+                      width={100}
+                      source={{ uri: item.url }}
+                    />
+                  </TouchableWithoutFeedback>
                 );
               }}
             />
@@ -131,7 +146,8 @@ const TaskDetail = (props: Props) => {
               <CustomGradientButton
                 title={t('request.offerButton')}
                 onPress={() =>
-                  rootNavigation.navigate('CreateOffer', { taskId: id })
+                  // TODO: fix this
+                  rootNavigation.navigate('CreateOffer', { taskId: task.id })
                 }
               />
             </View>
@@ -141,7 +157,11 @@ const TaskDetail = (props: Props) => {
             <FlatList
               data={task.offers}
               scrollEnabled={false}
-              ListEmptyComponent={<Text style={{...Typography.textSmall}}>{t('offer.notFound')}</Text>}
+              ListEmptyComponent={
+                <Text style={{ ...Typography.textSmall }}>
+                  {t('offer.notFound')}
+                </Text>
+              }
               ItemSeparatorComponent={() => (
                 <View
                   style={{
@@ -150,7 +170,7 @@ const TaskDetail = (props: Props) => {
               )}
               keyExtractor={(item, index) => item.id.toString()}
               renderItem={({ item }) => {
-                return <Offer taskId={task.id} offer={item} />;
+                return <Offer task={task} offer={item} />;
               }}
             />
           </View>

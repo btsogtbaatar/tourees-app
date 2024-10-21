@@ -39,7 +39,7 @@ import styles from './Login.style';
 export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const navigation = useNavigation();
-  const { t } = useTranslation(undefined, { keyPrefix: 'login' });
+  const { t } = useTranslation();
   const [authChannel, setAuthChannel] = useState<AuthChannel>(
     AuthChannel.Email,
   );
@@ -50,15 +50,15 @@ export default function Login() {
       authChannel === AuthChannel.Email
         ? yup
             .string()
-            .required(t('email.errors.required'))
-            .matches(validations.email, t('email.errors.validation'))
+            .required(t('login.email.errors.required'))
+            .matches(validations.email, t('login.email.errors.validation'))
         : yup.string(),
     phoneNumber:
       authChannel === AuthChannel.Phone
         ? yup
             .string()
-            .required(t('phone.errors.required'))
-            .matches(validations.phoneNumber, t('phone.errors.validation'))
+            .required(t('login.phone.errors.required'))
+            .matches(validations.phoneNumber, t('login.phone.errors.validation'))
         : yup.string(),
   });
 
@@ -78,7 +78,10 @@ export default function Login() {
   };
 
   const onBiometicPress = async () => {
-    const credentials = await Keychain.getGenericPassword();
+    const credentials = await Keychain.getGenericPassword({
+      service: 'tourees',
+      accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
+    });
 
     if (credentials) {
       tokenCredentials({
@@ -118,23 +121,23 @@ export default function Login() {
                 <View style={{ marginBottom: verticalScale(16) }}>
                   <TabController
                     onSelectedTabChange={setAuthChannel}
-                    firstTabLabel={t('email.tab')}
-                    secondTabLabel={t('phone.tab')}
+                    firstTabLabel={t('login.email.tab')}
+                    secondTabLabel={t('login.phone.tab')}
                   />
                 </View>
                 <FormProvider {...form}>
                   {authChannel === AuthChannel.Email && (
                     <CustomFormInput
-                      label={t('email.label')}
-                      placeholder={t('email.placeholder')}
+                      label={t('login.email.label')}
+                      placeholder={t('login.email.placeholder')}
                       name={'email'}
                       keyboardType="email-address"
                     />
                   )}
                   {authChannel === AuthChannel.Phone && (
                     <CustomFormInput
-                      label={t('phone.label')}
-                      placeholder={t('phone.placeholder')}
+                      label={t('login.phone.label')}
+                      placeholder={t('login.phone.placeholder')}
                       name={'phoneNumber'}
                       keyboardType="phone-pad"
                     />
@@ -155,7 +158,7 @@ export default function Login() {
                     )}
                   </View>
                 </FormProvider>
-                <CustomDivider>{t('or')}</CustomDivider>
+                <CustomDivider>{t('login.or')}</CustomDivider>
                 <View style={styles.socialContainer}>
                   <FbLoginButton onSuccess={socialAuthentication} />
                   <GoogleLoginButton onSuccess={socialAuthentication} />

@@ -48,7 +48,7 @@ const CustomMapView = (props: Readonly<CustomMapViewProps>) => {
   return (
     <MapView
       style={AddressMapViewStyle.map}
-      mapType="terrain"
+      mapType="standard"
       region={{
         latitude: props.latLng.latitude,
         longitude: props.latLng.longitude,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   ImageBackground,
@@ -12,10 +12,10 @@ import {
   selectAuthenticated,
   selectToken,
 } from '../../modules/Auth/slice/authSlice';
-import { getImageUrl } from '../../utilities/image';
-import ImagePreviewStyle from '../ImageUploadButton/ImagePreview.style';
-import { XCircleIcon } from '../Icon';
 import { colors } from '../../theme/colors';
+import { getImageUrl } from '../../utilities/image';
+import { XCircleIcon } from '../Icon';
+import ImagePreviewStyle from '../ImageUploadButton/ImagePreview.style';
 
 export interface CustomImageProps extends ImageProps {
   onDelete?: (index: number) => void;
@@ -25,6 +25,7 @@ export interface CustomImageProps extends ImageProps {
 const CustomImage = (props: CustomImageProps) => {
   const uriSource = props.source as ImageURISource;
   const requireSource = props.source as ImageRequireSource;
+  const [showPreview, setShowPreview] = useState(false);
 
   const token = useSelector(selectToken);
   const isAuthenticated = useSelector(selectAuthenticated);

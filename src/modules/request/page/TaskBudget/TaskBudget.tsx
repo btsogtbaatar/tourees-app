@@ -6,6 +6,7 @@ import { Text, View } from 'react-native';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomCurrencyInput from '../../../../components/CustomInput/CustomCurrencyInput';
+import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import { RootStackParamList } from '../../../../navigation/types';
@@ -34,23 +35,25 @@ const TaskBudget = (props: TaskBudgetProps) => {
   };
 
   return (
-    <CustomSafeAreaView>
-      <ContainerView>
-        <Text style={TaskBudgetStyle.instruction}>
-          {t('userRequest.enterBudget')}
-        </Text>
-        <View style={TaskBudgetStyle.innerContainer}>
-          <CustomCurrencyInput value={value} onChangeValue={setValue} />
-        </View>
-        <View style={{ width: '100%' }}>
-          <CustomGradientButton
-            disabled={value === 0 || value === null}
-            title={t('taskBudget.submit')}
-            onPress={onSubmit}
-          />
-        </View>
-      </ContainerView>
-    </CustomSafeAreaView>
+    <CustomKeyboardAvoidingView>
+      <CustomSafeAreaView>
+        <ContainerView>
+          <Text style={TaskBudgetStyle.instruction}>
+            {t('userRequest.enterBudget')}
+          </Text>
+          <View style={TaskBudgetStyle.innerContainer}>
+            <CustomCurrencyInput value={value} onChangeValue={setValue} />
+          </View>
+          <View style={{ width: '100%' }}>
+            <CustomGradientButton
+              disabled={value === 0 || value === null}
+              title={t('taskBudget.submit')}
+              onPress={onSubmit}
+            />
+          </View>
+        </ContainerView>
+      </CustomSafeAreaView>
+    </CustomKeyboardAvoidingView>
   );
 };
 

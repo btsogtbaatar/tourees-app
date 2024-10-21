@@ -1,29 +1,33 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  ActivityIndicator,
-  FlatList,
-  RefreshControl,
-  Text,
-  View,
-} from 'react-native';
-import ContainerView from '../../../../components/ContainerView/ContainerView';
+import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import TaskListItem from '../../../../components/Requests/TaskListItem';
+import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme/colors';
+import { horizontalScale } from '../../../../utilities';
 import { HomeStackParamList } from '../../../Home/navigation/types';
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { TaskModel } from '../../entities/request.model';
-import { getMyTasks, getTasks } from '../../service/request.service';
+import {
+  getMyOfferTasks,
+  getMyTasks,
+  getTasks,
+} from '../../service/request.service';
 import { TaskListStyle } from './TaskList.style';
 
-type TaskListProps = NativeStackScreenProps<
+type BrowseTasksProps = NativeStackScreenProps<
   HomeStackParamList,
   'MyTasks' | 'BrowseTasks'
 >;
 
-const TaskList = (props: TaskListProps) => {
+type MyOfferTasksProps = NativeStackScreenProps<
+  RootStackParamList,
+  'MyOfferTasks'
+>;
+
+const TaskList = (props: BrowseTasksProps | MyOfferTasksProps) => {
   const [requests, setRequests] = useState<TaskModel.TaskResponse[]>([]);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [moreLoading, setMoreLoading] = useState<boolean>(false);
@@ -38,30 +42,37 @@ const TaskList = (props: TaskListProps) => {
   }, [currentPage]);
 
   const getRequests = () => {
-    var request =
-      props.route.name === 'MyTasks'
-        ? getMyTasks(currentPage)
-        : getTasks(currentPage);
+    setRefreshing(true);
 
-    request
-      .then((res: SharedModel.Pagination<TaskModel.TaskResponse>) => {
-        if (currentPage === 1) {
-          setRequests(res.content);
-        } else {
-          setRequests([...requests, ...res.content]);
-        }
+    let request;
 
-        setLastPage(res.totalPages);
-      })
-      .finally(() => {
-        setRefreshing(false);
-        setMoreLoading(false);
-      });
+    if (props.route.name === 'BrowseTasks') {
+      request = getTasks(currentPage);
+    } else if (props.route.name === 'MyTasks') {
+      request = getMyTasks(currentPage);
+    } else if (props.route.name === 'MyOfferTasks') {
+      request = getMyOfferTasks(currentPage);
+    }
+
+    if (request) {
+      request
+        .then((res: SharedModel.Pagination<TaskModel.TaskResponse>) => {
+          if (currentPage === 1) {
+            setRequests(res.content);
+          } else {
+            setRequests([...requests, ...res.content]);
+          }
+
+          setLastPage(res.totalPages);
+        })
+        .finally(() => {
+          setRefreshing(false);
+          setMoreLoading(false);
+        });
+    }
   };
 
   const onRefresh = () => {
-    setRefreshing(true);
-
     if (currentPage === 1) {
       getRequests();
     } else {
@@ -86,42 +97,31 @@ const TaskList = (props: TaskListProps) => {
       </View>
     );
   };
-  
+
   const emptyComponent = () => {
     return (
       <View style={TaskListStyle.empty}>
-        <Text>{t('emptyRequest')}</Text>
+        <Text>{refreshing ? t('loading') : t('emptyRequest')}</Text>
       </View>
     );
   };
 
   return (
     <CustomSafeAreaView>
-      <ContainerView>
-        <FlatList
-          data={requests.filter(item => item.subCategory !== null)}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={({ item }) => <TaskListItem task={item} />}
-          ItemSeparatorComponent={() => (
-            <View style={TaskListStyle.seperator} />
-          )}
-          onEndReached={fetchMore}
-          onEndReachedThreshold={0.1}
-          pagingEnabled={true}
-          ListFooterComponent={footerComponent}
-          refreshing={refreshing}
-          refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-              tintColor={colors.primaryGradient}
-            />
-          }
-          contentContainerStyle={{ flexGrow: 1 }}
-          showsVerticalScrollIndicator={false}
-          ListEmptyComponent={emptyComponent}
-        />
-      </ContainerView>
+      <FlatList
+        data={requests.filter(item => item.subCategory !== null)}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({ item }) => <TaskListItem task={item} />}
+        ItemSeparatorComponent={() => <View style={TaskListStyle.seperator} />}
+        onEndReached={fetchMore}
+        onEndReachedThreshold={0.1}
+        ListFooterComponent={footerComponent}
+        refreshing={refreshing}
+        onRefresh={onRefresh}
+        contentContainerStyle={{ flexGrow: 1, padding: horizontalScale(16) }}
+        showsVerticalScrollIndicator={true}
+        ListEmptyComponent={emptyComponent}
+      />
     </CustomSafeAreaView>
   );
 };

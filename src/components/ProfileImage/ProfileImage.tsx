@@ -20,11 +20,10 @@ import { uploadFile } from '../../modules/Shared/services/shared.service';
 import { horizontalScale } from '../../utilities';
 import CustomImage from '../CustomImage/CustomImage';
 import { notifyMessage } from '../CustomToast/CustomToast';
-import { HeaderEditIcon, SearchMdIcon, UserCircleIcon } from '../Icon';
+import { HeaderEditIcon, UserCircleIcon } from '../Icon';
 import { ImageSource } from '../ImageUploadButton/ImageUploadButton';
 import AvatarModal from './AvatarModal';
 import { ProfileImageStyle } from './ProfileImage.style';
-import { Camera } from 'react-native-vision-camera';
 
 const ProfileImage = () => {
   const { dispatch: dispatchModal } = useContext(ModalContext);
@@ -33,7 +32,7 @@ const ProfileImage = () => {
   const dispatch = useAppDispatch();
 
   const onCamera = async () => {
-    await Camera.requestCameraPermission();
+    // await Camera.requestCameraPermission();
     await launchCamera({
       mediaType: 'photo',
       maxHeight: 300,
