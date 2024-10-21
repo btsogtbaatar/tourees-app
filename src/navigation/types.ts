@@ -25,6 +25,7 @@ export type RootStackParamList = {
   RegisterTermAndCondition: undefined;
   RegisterOtpCheck: { registration: AuthModel.User };
   SubCategoryList: { parentCategoryId?: number; title: string };
+  TaskerService: undefined;
   UserRequest: {
     item: SharedModel.SubCategory;
   };
@@ -62,6 +63,9 @@ export type RootStackParamList = {
   TaskerStack: NavigatorScreenParams<TaskerParamList>;
   RegistrationInformation: undefined;
   Chat: { id: number };
+  VisitProfile: {
+    id: number;
+  };
 };
 
 export type TaskerParamList = {
@@ -75,7 +79,7 @@ export type TaskerParamList = {
     value: string[];
     tags?: ProfileModel.ProfileTag[];
   };
-  TaskerView: undefined;
+  TaskerView: { id: number };
 };
 
 declare global {

@@ -14,6 +14,7 @@ import { horizontalScale, verticalScale } from '../../utilities';
 interface LinearButtonProps {
   extra?: StyleProp<ViewStyle>;
   textExtra?: StyleProp<TextStyle>;
+  buttonExtra?: StyleProp<TextStyle>;
   onClick: () => void;
   buttonText?: string;
 }
@@ -21,6 +22,7 @@ interface LinearButtonProps {
 const LinearButton = ({
   extra,
   textExtra,
+  buttonExtra,
   onClick,
   buttonText,
 }: LinearButtonProps) => {
@@ -47,6 +49,7 @@ const LinearButton = ({
             alignItems: 'center',
             width: '100%',
           },
+          buttonExtra,
         ]}>
         <Text
           style={[
