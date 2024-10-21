@@ -339,6 +339,7 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
                                 const _address = { ...address };
                                 _address.displayName = getAddress(_address);
                                 setAddress(_address);
+                                console.log(address)
                                 onChange(_address);
                               },
                             });
@@ -398,13 +399,16 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
                         onChange([..._value]);
                       }}
                       onImageSelection={images => {
-                        console.log('🚀 ~ images:', images);
+                        const uploadedFiles: SharedModel.File[] = [];
                         images.forEach(image => {
                           uploadFile(image).then(file => {
-                            if (value) {
-                              onChange([...value, file]);
-                            } else {
-                              onChange([file]);
+                            uploadedFiles.push(file);
+                            if (uploadedFiles.length === images.length) {
+                              if (value) {
+                                onChange([...value, ...uploadedFiles]);
+                              } else {
+                                onChange([...uploadedFiles]);
+                              }
                             }
                           });
                         });
