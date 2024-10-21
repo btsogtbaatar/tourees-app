@@ -11,12 +11,18 @@ import { selectUser } from '../../../Auth/slice/authSlice';
 import InputSection from '../../component/InputSection/InputSection';
 import SpeechBubble from '../../component/SpeechBubble/SpeechBubble';
 import TimeSeparator from '../../component/TimeSeparator/TimeSeparator';
-import { SeperatorType, TaskModel } from '../../entities/request.model';
+import { SeparatorType, TaskModel } from '../../entities/request.model';
 import {
+  addSeparator,
   getChats,
+  getConversation,
   sendChat,
-  subscribeToNotification,
-} from '../../service/request.service';
+} from '../../service/chat.service';
+import { useStompConnection } from '../../../Shared/hooks';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
+import { ImageSource } from '../../../../components/ImageUploadButton/ImageUploadButton';
+import { uniqueId } from 'lodash';
+import MessageWidget from '../../component/MessageWidget/MessageWidget';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Chat'>;
 
@@ -24,133 +30,151 @@ const Chat = (props: Props) => {
   const { id } = props.route.params;
   const user = useSelector(selectUser);
   const [state, setState] = useState<TaskModel.Message[]>([]);
-
-  useEffect(() => {
-    getChats(id)
-      .then(res => {
+  const [profile, setProfile] = useState<TaskModel.User | null>(null);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [lastPage, setLastPage] = useState(0);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const fetchPage = (
+    page: number,
+    callback: (value: TaskModel.Message[]) => void,
+  ) => {
+    getChats(id, page, 30)
+      .then(data => {
+        const res = data.content;
+        setLastPage(data.totalPages);
         const chats: TaskModel.Message[] = [];
         if (res && res.length == 0) {
           return;
         }
-        chats.push({ ...res[0], type: SeperatorType.CHAT });
+        chats.push({ ...res[0], type: SeparatorType.CHAT });
         let prev = res[0];
         for (let i = 1; i < res.length; i++) {
-          addSeparator(
+          const separated = addSeparator(
             prev,
             res[i],
             (a, b) => a.subtract(10, 'minutes').isAfter(b),
             moment(res[i].createdDate),
-            chats,
             res[i].user.id,
           );
           prev = res[i];
+          chats.push(...separated);
         }
-        setState(chats);
+        callback(chats);
       })
       .catch(e => {
-        console.log('error', e);
+        console.log('error retrieving chats :', e);
       });
-  }, []);
-  useEffect(() => {
-    const client = subscribeToNotification(res => {
-      if (res.taskID !== id) {
-        return;
-      }
-      setState(prev => {
-        const current = { ...res, type: SeperatorType.CHAT };
-        const newState: TaskModel.Message[] = [];
-        const previous = prev[0] as TaskModel.Chat;
-        addSeparator(
-          previous,
-          current,
-          (a, b) => a.add(10, 'minutes').isBefore(b),
-          moment(previous.createdDate),
-          newState,
-          previous.user.id,
-        );
-        return [...newState.reverse(), ...prev];
-      });
-    });
-    client.activate();
-    return () => {
-      client.deactivate();
-    };
-  }, []);
-
-  const addSeparator = (
-    prev: TaskModel.Chat,
-    current: TaskModel.Chat,
-    comperator: (p: Moment, c: Moment) => boolean,
-    date: Moment,
-    chats: TaskModel.Message[],
-    userID: number,
-  ) => {
-    const prevDate = moment(prev.createdDate.split('T')[0]);
-    const prevTime = moment(prev.createdDate);
-    const currentDate = moment(current.createdDate.split('T')[0]);
-    const currentTime = moment(current.createdDate);
-
-    if (!currentDate.isSame(prevDate)) {
-      chats.push({
-        type: SeperatorType.DATE,
-        id: userID,
-        message: date.format('DD/MM/YYYY'),
-      });
-    }
-    if (comperator(prevTime, currentTime) || prev.user.id != current.user.id) {
-      chats.push({
-        type: SeperatorType.TIME,
-        id: userID,
-        message: date.format('hh:mm'),
-      });
-    }
-    chats.push({ ...current, type: SeperatorType.CHAT });
   };
-
+  useEffect(() => {
+    fetchPage(0, value => {
+      setState(value);
+    });
+    getConversation(id).then(data => {
+      if (data.contractor.id != user?.id) {
+        setProfile(data.contractor);
+      } else {
+        setProfile(data.customer);
+      }
+    });
+  }, []);
+  useStompConnection<TaskModel.Chat>(`chat/${id}`, res => {
+    setState(prev => {
+      const current = { ...res, type: SeparatorType.CHAT };
+      const previous = prev[0] as TaskModel.Chat;
+      const chats = addSeparator(
+        previous,
+        current,
+        (a, b) => a.add(10, 'minutes').isBefore(b),
+        moment(previous.createdDate),
+        previous.user.id,
+      );
+      return [...chats.reverse(), ...prev];
+    });
+  });
+  const fetchMore = () => {
+    if (loadingMore) {
+      return;
+    }
+    if (currentPage > lastPage) {
+      return;
+    }
+    setLoadingMore(true);
+    setCurrentPage(currentPage + 1);
+    fetchPage(currentPage + 1, value => {
+      setState(prev => {
+        return [...prev, ...value];
+      });
+      setLoadingMore(false);
+    });
+  };
   const submit = (input: string) => {
     if (input.length == 0) {
       return;
     }
     sendChat(id, input);
   };
+  const sendPictures = (images: ImageSource[]) => {
+    if (images.length == 0) {
+      return;
+    }
+    sendChat(id, undefined, images);
+  };
   return (
     <CustomKeyboardAvoidingView>
-      <ContainerView>
-        <FlatList
-          data={state}
-          inverted
-          ItemSeparatorComponent={() => <View style={{ marginTop: 6 }} />}
-          keyExtractor={(item, key) => {
-            return key.toString();
-          }}
-          renderItem={({ item }) => {
-            switch (item.type) {
-              case SeperatorType.CHAT:
-                return (
-                  <SpeechBubble
-                    item={{ ...item } as TaskModel.Chat}
-                    id={user?.id}
-                  />
-                );
-              case SeperatorType.DATE:
-                return <CustomDivider>{item.message}</CustomDivider>;
-              case SeperatorType.TIME:
-                return (
-                  <TimeSeparator
-                    userID={user?.id}
-                    ownerID={item.id}
-                    time={item.message}
-                  />
-                );
-              default:
-                return <View></View>;
-            }
-          }}
-        />
-        <InputSection callback={submit} />
-      </ContainerView>
+      <CustomSafeAreaView>
+        <ContainerView>
+          {profile && (
+            <MessageWidget
+              user={profile}
+              onClick={() => {
+                props.navigation.navigate('TaskerStack', {
+                  screen: 'TaskerView',
+                  params: { id: profile.id },
+                });
+              }}
+            />
+          )}
+          <FlatList
+            data={state}
+            inverted
+            onEndReached={fetchMore}
+            onEndReachedThreshold={0.1}
+            pagingEnabled={true}
+            ItemSeparatorComponent={() => <View style={{ marginTop: 6 }} />}
+            keyExtractor={(item, key) => {
+              if (item.type === SeparatorType.CHAT) {
+                return item.id.toString();
+              }
+              return uniqueId('separator');
+            }}
+            renderItem={({ item }) => {
+              switch (item.type) {
+                case SeparatorType.CHAT:
+                  return (
+                    <SpeechBubble
+                      item={{ ...item } as TaskModel.Chat}
+                      id={user?.id}
+                    />
+                  );
+                case SeparatorType.DATE:
+                  return <CustomDivider>{item.message}</CustomDivider>;
+                case SeparatorType.TIME:
+                  return (
+                    <TimeSeparator
+                      userID={user?.id}
+                      ownerID={item.id}
+                      time={item.message}
+                    />
+                  );
+                default:
+                  return <View></View>;
+              }
+            }}
+          />
+          <InputSection onSubmit={submit} onImageSubmit={sendPictures} />
+        </ContainerView>
+      </CustomSafeAreaView>
     </CustomKeyboardAvoidingView>
   );
 };
-
 export default Chat;

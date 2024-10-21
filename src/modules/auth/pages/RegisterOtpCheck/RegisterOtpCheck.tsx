@@ -31,7 +31,7 @@ function RegisterOtpCheck({
       email: registration?.email,
       phoneNumber: registration?.phoneNumber,
       value: otpValue,
-    }).then((_response: AuthModel.RegisterResponse) => {
+    }).then((_response: AuthModel.User) => {
       navigation.navigate('RegisterTermAndCondition');
     });
   };

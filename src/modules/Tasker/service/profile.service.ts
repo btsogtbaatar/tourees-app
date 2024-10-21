@@ -5,8 +5,8 @@ export function createProfile(body: ProfileModel.ProfileRequest) {
   return api.post('/profile', body);
 }
 
-export function getProfile(): Promise<ProfileModel.ProfileRequest> {
-  return api.get('/profile');
+export function getProfile(id: number): Promise<ProfileModel.ProfileRequest> {
+  return api.get(`/profile/${id}`);
 }
 
 export function getTags(): Promise<ProfileModel.ProfileTag[]> {

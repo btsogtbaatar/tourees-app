@@ -1,6 +1,9 @@
-import { api } from '../../../api';
+import { Client } from '@stomp/stompjs';
+import { api, getEnv } from '../../../api';
 import { ImageSource } from '../../../components/ImageUploadButton/ImageUploadButton';
 import { SharedModel } from '../entities/shared.model';
+import store from '../../../context/app/store';
+import { TaskModel } from '../../Request/entities/request.model';
 
 export function uploadFile(file: any): Promise<SharedModel.File> {
   const formData = new FormData();

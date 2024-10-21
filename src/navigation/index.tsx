@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
 import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
@@ -25,12 +25,19 @@ import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapVie
 import TaskerStack from '../modules/Tasker/routes/routes';
 import customScreenOption from '../theme/customHeaderOption';
 import { RootStackParamList } from './types';
+import { useSocket } from '../modules/Shared/hooks';
+import VisitProfile from '../modules/Profile/pages/VisitProfile/VisitProfile';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Route = () => {
   const { t } = useTranslation();
-
+  const cleanup = useSocket();
+  useEffect(() => {
+    return () => {
+      cleanup();
+    };
+  }, []);
   return (
     <Stack.Navigator
       initialRouteName="HomeTab"
@@ -101,10 +108,15 @@ const Route = () => {
           name="RegistrationInformation"
           component={RegistrationInformation}
         />
-          <Stack.Screen
+        <Stack.Screen
           options={{ title: t('headers.request') }}
           name="TaskerService"
           component={TaskerService}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.chat') }}
+          name="Chat"
+          component={Chat}
         />
       </Stack.Group>
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
@@ -123,7 +135,7 @@ const Route = () => {
           name="AddressesDetail"
           component={AddressesDetail}
         />
-        
+
         <Stack.Screen
           options={{ title: t('headers.taskBudget') }}
           name="TaskBudget"
@@ -133,16 +145,16 @@ const Route = () => {
           options={{ title: t('headers.createOffer') }}
           name="CreateOffer"
           component={CreateOffer}
-          />
+        />
         <Stack.Screen
           options={{ title: t('headers.updateInformation') }}
           name="UpdateInformation"
           component={UpdateInformation}
         />
         <Stack.Screen
-          options={{ title: t('headers.chat') }}
-          name="Chat"
-          component={Chat}
+          options={{ title: t('headers.profile') }}
+          name="VisitProfile"
+          component={VisitProfile}
         />
       </Stack.Group>
       <Stack.Screen

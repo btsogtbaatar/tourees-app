@@ -1,4 +1,4 @@
-import { TextInput, TouchableOpacity, View } from 'react-native';
+import { Platform, TextInput, TouchableOpacity, View } from 'react-native';
 import {
   CameraIcon,
   ImagePlaceHolderIcon,
@@ -6,16 +6,42 @@ import {
 } from '../../../../components/Icon';
 import { useState } from 'react';
 import { colors, Typography } from '../../../../theme';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { ImageSource } from '../../../../components/ImageUploadButton/ImageUploadButton';
 
 type Prop = {
-  callback: (result: string) => void;
+  onSubmit: (result: string) => void;
+  onImageSubmit: (images: ImageSource[]) => void;
 };
 
-const InputSection = ({ callback }: Prop) => {
-  const [state, setState] = useState('');
+const InputSection = ({ onSubmit, onImageSubmit }: Prop) => {
+  const [text, setText] = useState('');
   const submit = () => {
-    callback(state);
-    setState('');
+    onSubmit(text);
+    setText('');
+  };
+  const chooseFile = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        includeBase64: false,
+        selectionLimit: 0,
+        maxHeight: 200,
+        maxWidth: 200,
+      },
+      response => {
+        if (!response.didCancel && !response.errorCode && response.assets) {
+          const source = response.assets.map(({ uri, fileName, type }) => {
+            return {
+              uri: Platform.OS === 'ios' ? uri?.replace('file://', '') : uri,
+              name: fileName,
+              type,
+            } as ImageSource;
+          });
+          onImageSubmit(source);
+        }
+      },
+    );
   };
   return (
     <View style={{ flexDirection: 'column', marginTop: 16 }}>
@@ -29,6 +55,7 @@ const InputSection = ({ callback }: Prop) => {
           <CameraIcon height={20} width={20} />
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={chooseFile}
           style={{
             alignItems: 'center',
             justifyContent: 'center',
@@ -37,9 +64,9 @@ const InputSection = ({ callback }: Prop) => {
           <ImagePlaceHolderIcon height={20} width={20} />
         </TouchableOpacity>
         <TextInput
-          value={state}
+          value={text}
           onChangeText={e => {
-            setState(e);
+            setText(e);
           }}
           placeholder="Aa"
           style={[
