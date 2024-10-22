@@ -24,7 +24,7 @@ import { HeaderEditIcon, SearchMdIcon, UserCircleIcon } from '../Icon';
 import { ImageSource } from '../ImageUploadButton/ImageUploadButton';
 import AvatarModal from './AvatarModal';
 import { ProfileImageStyle } from './ProfileImage.style';
-import { Camera } from 'react-native-vision-camera';
+// import { Camera } from 'react-native-vision-camera';
 
 const ProfileImage = () => {
   const { dispatch: dispatchModal } = useContext(ModalContext);
@@ -33,7 +33,7 @@ const ProfileImage = () => {
   const dispatch = useAppDispatch();
 
   const onCamera = async () => {
-    await Camera.requestCameraPermission();
+    // await Camera.requestCameraPermission();
     await launchCamera({
       mediaType: 'photo',
       maxHeight: 300,

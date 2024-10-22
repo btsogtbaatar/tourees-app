@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import i18n from '../../../i18n';
 import { useAppDispatch } from '../../context/app/store';
-import { resetAuth } from '../../modules/Auth/slice/authSlice';
+import { resetAuth, selectUser } from '../../modules/Auth/slice/authSlice';
 import {
   changeLanguage,
   selectLanguage,
@@ -27,6 +27,7 @@ const ProfileMenu = () => {
   const language = useSelector(selectLanguage);
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
+  const user = useSelector(selectUser);
 
   const profileMenus = [
     {
@@ -61,7 +62,9 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        navigation.navigate('TaskerView');
+        if (user && user.id) {
+          navigation.navigate('TaskerView', { id: user.id });
+        }
       },
     },
     {

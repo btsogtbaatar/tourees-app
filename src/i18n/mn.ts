@@ -161,6 +161,8 @@ export default {
       'Таны хүсэлт амжилттай бүртгэгдлээ, бид тун удахгүй таны хүсэлтэд таарсан гүйцэтгэгчийг холбох болно. Хэрэв та цуцлах бол яаралтай оператортой холбогдоно уу!',
     logoTitle: 'Seed Bot',
     operatorCall: 'Оператортой холбогдох',
+    requestUserProfile: 'Хэрэглэгчийн мэдээлэл харах',
+    requestViewProfile: 'Профайл харах',
     requestOperatorMessage:
       'Таны хүсэлт хуваарилагдсан байна. Болд тун удахгүй тантай холбогдох тул та түр хүлээнэ үү.',
     requestDone: 'Болсон',
@@ -215,6 +217,10 @@ export default {
     continue: 'Үргэлжлүүлэх',
     retype: 'Та пин кодоо дахин оруулна уу.',
     mismatch: 'Пин кодууд хоорондоо зөрж байна.',
+  },
+  visitProfile: {
+    contacts: 'Холбоо барих',
+    feedback: 'Үйлчлүүлэгчдийн сэтгэгдэл',
   },
   userRequest: {
     enterBudget: 'Та доорх талбарт үүсгэж буй таскынхаа үнийг оруулна уу.',
@@ -309,6 +315,7 @@ export default {
     retypePin: 'Пин дахин оруулах',
     taskBudget: 'Таскын үнэ',
     createOffer: 'Санал үүсгэх',
+    profile: 'Профайл',
     registrationInformation: 'Бүртгэлийн мэдээлэл',
     updateInformation: 'Бүртгэлийн мэдээлэл',
     chat: 'Чат',

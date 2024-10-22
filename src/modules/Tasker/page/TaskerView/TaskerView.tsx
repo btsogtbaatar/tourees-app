@@ -14,14 +14,24 @@ import { horizontalScale, moderateScale } from '../../../../utilities/metrics';
 import { ProfileModel } from '../../entities/profile.model';
 import { getProfile } from '../../service/profile.service';
 import { TaskerViewStyle } from './TaskerView.style';
+import { TaskerParamList } from '../../../../navigation/types';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../../Auth/slice/authSlice';
 
-const TaskerView = () => {
+type TaskerViewProps = NativeStackScreenProps<TaskerParamList, 'TaskerView'>;
+
+const TaskerView = (props: TaskerViewProps) => {
+  const { id } = props.route.params;
   const isFocused = useIsFocused();
   const [profile, setProfile] = useState<ProfileModel.ProfileRequest>();
   const { t } = useTranslation();
   const navigation = useNavigation();
-
+  const user = useSelector(selectUser);
   useEffect(() => {
+    if (user && user.id && user.id !== id) {
+      return;
+    }
     navigation.setOptions({
       header: () => (
         <HeaderBar
@@ -42,7 +52,7 @@ const TaskerView = () => {
 
   useEffect(() => {
     if (isFocused) {
-      getProfile().then(res => {
+      getProfile(id).then(res => {
         setProfile(res);
       });
     }

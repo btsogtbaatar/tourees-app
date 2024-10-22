@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import RemarkListView from '../components/RemarkListView/RemarkListView';
 import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
@@ -14,6 +14,7 @@ import HomeTabNavigator from '../modules/Home/navigation';
 import TaskerServiceSearch from '../modules/Home/pages/TaskerServiceSearch/TaskerServiceSearch';
 import RegistrationInformation from '../modules/Profile/pages/RegistrationInformation/RegistrationInformation';
 import UpdateInformation from '../modules/Profile/pages/UpdateInformation/UpdateInformation';
+import VisitProfile from '../modules/Profile/pages/VisitProfile/VisitProfile';
 import Chat from '../modules/Request/page/Chat/Chat';
 import CreateOffer from '../modules/Request/page/Offer/CreateOffer';
 import SubCategoryList from '../modules/Request/page/SubCategoryList/SubCategoryList';
@@ -22,6 +23,7 @@ import TaskDetail from '../modules/Request/page/TaskDetail/TaskDetail';
 import TaskerService from '../modules/Request/page/TaskerService/TaskerService';
 import TaskerServiceView from '../modules/Request/page/TaskerServiceView/TaskerServiceView';
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
+import { useSocket } from '../modules/Shared/hooks';
 import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
 import AddressesMapView from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import AddressMapView from '../modules/Shared/pages/AddressMapView/AddressMapView';
@@ -34,7 +36,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const Route = () => {
   const { t } = useTranslation();
-
+  const cleanup = useSocket();
+  useEffect(() => {
+    return () => {
+      cleanup();
+    };
+  }, []);
   return (
     <Stack.Navigator
       initialRouteName="HomeTab"
@@ -111,6 +118,11 @@ const Route = () => {
           component={TaskerService}
         />
         <Stack.Screen
+          options={{ title: t('headers.chat') }}
+          name="Chat"
+          component={Chat}
+        />
+        <Stack.Screen
           name="TaskerServiceView"
           component={TaskerServiceView}
           options={{ title: t('headers.listingDetail') }}
@@ -164,9 +176,9 @@ const Route = () => {
           component={UpdateInformation}
         />
         <Stack.Screen
-          options={{ title: t('headers.chat') }}
-          name="Chat"
-          component={Chat}
+          options={{ title: t('headers.profile') }}
+          name="VisitProfile"
+          component={VisitProfile}
         />
         <Stack.Screen
           name="RemarkListView"

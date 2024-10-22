@@ -27,6 +27,7 @@ export type RootStackParamList = {
   RegisterTermAndCondition: undefined;
   RegisterOtpCheck: { registration: AuthModel.User };
   SubCategoryList: { parentCategoryId?: number; title: string };
+  TaskerService: undefined;
   UserRequest: {
     item: SharedModel.SubCategory;
   };
@@ -68,7 +69,6 @@ export type RootStackParamList = {
   RegisterTasker: {
     profile?: ProfileModel.ProfileRequest;
   };
-  TaskerView: undefined;
   RemarkListView: {
     label: string;
     setValue: UseFormSetValue<FieldValues>;
@@ -76,6 +76,7 @@ export type RootStackParamList = {
     value: string[];
     tags?: ProfileModel.ProfileTag[];
   };
+  TaskerView: { id: number };
 };
 
 declare global {
