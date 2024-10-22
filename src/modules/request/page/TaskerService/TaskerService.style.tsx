@@ -99,15 +99,6 @@ export const TaskerServiceStyle = StyleSheet.create({
     borderColor: colors.borderColor,
     marginTop: verticalScale(10),
   },
-  touchable: {
-    marginTop: verticalScale(10),
-    backgroundColor: colors.placeColor,
-    padding: 10,
-    borderRadius:16
-  },
-  disabled: {
-    opacity: 0.5,
-  },
   label: {
     ...Typography.textSmall,
     ...getFontWeight(FontWeight.bold),
