@@ -25,9 +25,9 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
 
   const groupTaskServiceSubCategory = () => {
     const groupedTaskerService = _.chain(taskerServices)
-      .groupBy(task => `${task.subCategory.name}-${task.subCategory.id}`)
+      .groupBy(task => `${task.subCategory.name}-@${task.subCategory.id}`)
       .map((value, key) => {
-        return { title: key.split('-', 2), data: value };
+        return { title: key.split('-@', 2), data: value };
       })
       .value();
     return groupedTaskerService;

@@ -7,10 +7,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import AboutTaskerProfile from '../../../../components/AboutTaskerProfile/AboutTaskerProfile';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomCurrencyView from '../../../../components/CustomCurrencyView/CustomCurrencyView';
-import CustomImage from '../../../../components/CustomImage/CustomImage';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import { LaptopIcon, LocationIcon } from '../../../../components/Icon';
 import RemarkTextView from '../../../../components/RemarkTextView/RemarkTextView';
+import SliderImages from '../../../../components/SliderImages/SliderImages';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
 import { SharedModel } from '../../../Shared/entities/shared.model';
@@ -18,7 +18,6 @@ import { getTaskerServiceDetail } from '../../service/tasker.service';
 import TaskerServiceViewStyle from './TaskerServiceView.style';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskerServiceView'>;
-
 const TaskerServiceView = (props: Props) => {
   const { id } = props.route.params;
   const { t } = useTranslation();
@@ -44,13 +43,7 @@ const TaskerServiceView = (props: Props) => {
 
   return (
     <CustomSafeAreaView>
-      {taskerService?.files && taskerService?.files[0] && (
-        <CustomImage
-          source={{ uri: taskerService?.files[0].url }}
-          height={200}
-          resizeMode="cover"
-        />
-      )}
+      {taskerService?.files && <SliderImages images={taskerService.files} />}
       <ContainerView>
         <Text style={TaskerServiceViewStyle.nameStyle}>
           {taskerService?.name}
