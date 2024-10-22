@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import { ProfileModel } from '../../modules/Tasker/entities/profile.model';
 import { TaskerModel } from '../../modules/Tasker/entities/tasker.model';
-import { TaskerParamList } from '../../navigation/types';
+import { RootStackParamList } from '../../navigation/types';
 import { verticalScale } from '../../utilities';
 import CustomGradientButton from '../CustomButton/CustomGradientButton';
 import CustomFormInput from '../CustomInput/CustomFormInput';
@@ -15,7 +15,7 @@ import { RemarkListStyle } from '../RemarkList/RemarkList.style';
 import { RemarkListViewStyle } from './RemarkListView.style';
 
 type RemarkListModalProps = NativeStackScreenProps<
-  TaskerParamList,
+  RootStackParamList,
   'RemarkListView'
 >;
 const RemarkListView = (props: RemarkListModalProps) => {

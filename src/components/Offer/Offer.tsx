@@ -60,7 +60,7 @@ export default function Offer(props: OfferProps) {
               }}
               title={t('offer.chat')}
               onPress={() => {
-                navigation.navigate('Chat', { id: props.task.id });
+                navigation.navigate('Chat', { id: props.offer.conversation.id });
               }}
             />
           </View>

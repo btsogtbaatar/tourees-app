@@ -5,6 +5,7 @@ import BuildingIcon from '../../../assets/icons/building.svg';
 import CalendarIcon from '../../../assets/icons/calendar.svg';
 import CameraIcon from '../../../assets/icons/camera.svg';
 import CheckIcon from '../../../assets/icons/check.svg';
+import ChevronDownIcon from '../../../assets/icons/chevron-down.svg';
 import ChevronRightIcon from '../../../assets/icons/chevron-right.svg';
 import ClockRewindIcon from '../../../assets/icons/clock-rewind.svg';
 import ClockIcon from '../../../assets/icons/clock.svg';
@@ -22,6 +23,7 @@ import HomeActiveIcon from '../../../assets/icons/home-active.svg';
 import HomeIcon from '../../../assets/icons/home.svg';
 import CircleIcon from '../../../assets/icons/icon-circle.svg';
 import ImagePlaceHolderIcon from '../../../assets/icons/image-placeholder.svg';
+import LaptopIcon from '../../../assets/icons/laptop-icon.svg';
 import LocationCircleGrayIcon from '../../../assets/icons/location-circle-gray-icon.svg';
 import LocationCircleIcon from '../../../assets/icons/location-circle-icon.svg';
 import LocationIcon from '../../../assets/icons/location-icon.svg';
@@ -53,11 +55,16 @@ import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
 
 export {
-  ArrowLeftIcon, BellActiveIcon, BellIcon,
-  BuildingIcon, CalendarIcon, CameraIcon,
-  CheckIcon,
-  ChevronRightIcon,
-  CircleIcon, ClockIcon, ClockRewindIcon,
+  ArrowLeftIcon,
+  BellActiveIcon,
+  BellIcon,
+  BuildingIcon,
+  CalendarIcon,
+  CameraIcon,
+  CheckIcon, ChevronDownIcon, ChevronRightIcon,
+  CircleIcon,
+  ClockIcon,
+  ClockRewindIcon,
   CloseIcon,
   EBarimtIcon,
   FaceId,
@@ -68,8 +75,10 @@ export {
   GoogleIcon,
   HeaderEditIcon,
   HelpCircleIcon,
-  HomeActiveIcon, HomeIcon,
-  ImagePlaceHolderIcon, LocationCircleGrayIcon, LocationCircleIcon,
+  HomeActiveIcon,
+  HomeIcon,
+  ImagePlaceHolderIcon, LaptopIcon, LocationCircleGrayIcon,
+  LocationCircleIcon,
   LocationIcon,
   LogoIcon,
   LogoMini,

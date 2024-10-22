@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import { AuthModel } from '../../Auth/entities';
 import { SharedModel } from '../../Shared/entities/shared.model';
 import { Address } from '../../Shared/pages/AddressMapView/AddressesMapView';
@@ -88,16 +89,25 @@ export declare namespace TaskModel {
     contractor: {
       user: AuthModel.User;
     };
+    conversation: Conversation;
   };
   export type User = {
     id: number;
     firstName: string;
     lastName: string;
     username: string;
+    profile: SharedModel.File;
+  };
+  export type Conversation = {
+    id: number;
+    customerLastSeen: Moment;
+    contractorLastSeen: Moment;
+    contractor: User;
+    customer: User;
   };
 
   export type Chat = {
-    type: SeperatorType;
+    type: SeparatorType;
     id: number;
     message: string;
     files: SharedModel.File[];
@@ -106,10 +116,10 @@ export declare namespace TaskModel {
     taskID: number;
   };
   export type Message =
-    | { type: SeperatorType; message: string; id: number }
+    | { type: SeparatorType; message: string; id: number; user: User }
     | Chat;
 }
-export enum SeperatorType {
+export enum SeparatorType {
   DATE,
   TIME,
   CHAT,
@@ -123,6 +133,7 @@ export type TaskerServiceModel = {
   name: string;
   description: string;
   tag: string;
+  services?: string[];
   price: number;
   autoMsg: string;
   category: SharedModel.Category;
@@ -131,3 +142,8 @@ export type TaskerServiceModel = {
   timeRange: SharedModel.TimeRange;
   address: Address[];
 };
+export interface ServiceTag {
+  id: number;
+  type: string;
+  value: string;
+}

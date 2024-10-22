@@ -53,7 +53,7 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
           if (limit) {
             const newSelectedImages = [...selectedImages, ...source];
             /*
-              @selectedImages has one initial value so limit needs to be more than one
+            `@selectedImages has one initial value so limit needs to be more than one
             */
             if (newSelectedImages.length > limit) {
               newSelectedImages.shift();

@@ -14,7 +14,7 @@ import FullHeightView from '../../../../components/FullHeightView/FullHeightView
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import RemarkList from '../../../../components/RemarkList/RemarkList';
 import { RemarkListStyle } from '../../../../components/RemarkList/RemarkList.style';
-import { TaskerParamList } from '../../../../navigation/types';
+import { RootStackParamList } from '../../../../navigation/types';
 import { FontWeight, getFontWeight, Typography } from '../../../../theme';
 import { verticalScale } from '../../../../utilities';
 import { TaskSchema } from '../../../../validations/schema';
@@ -29,7 +29,7 @@ import { createProfile, getTags } from '../../service/profile.service';
 import { RegisterProfileStyle } from './RegisterProfile.style';
 
 type RegisterTaskerProps = NativeStackScreenProps<
-  TaskerParamList,
+  RootStackParamList,
   'RegisterTasker'
 >;
 

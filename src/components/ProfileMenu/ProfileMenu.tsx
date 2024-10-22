@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import i18n from '../../../i18n';
 import { useAppDispatch } from '../../context/app/store';
-import { resetAuth } from '../../modules/Auth/slice/authSlice';
+import { resetAuth, selectUser } from '../../modules/Auth/slice/authSlice';
 import {
   changeLanguage,
   selectLanguage,
@@ -26,6 +26,7 @@ const ProfileMenu = () => {
   const language = useSelector(selectLanguage);
   const navigation = useNavigation();
   const dispatch = useAppDispatch();
+  const user = useSelector(selectUser);
 
   const profileMenus = [
     {
@@ -43,14 +44,11 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        navigation.navigate('TaskerStack', {
-          screen: 'RegisterTasker',
-          params: { profile: undefined },
-        });
+        navigation.navigate('RegisterTasker', { profile: undefined });
       },
     },
     {
-      values: [t('Үйлчилгээ бүртгүүлэх')],
+      values: [t('profile.l_service')],
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
@@ -63,7 +61,9 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        navigation.navigate('TaskerStack', { screen: 'TaskerView' });
+        if (user && user.id) {
+          navigation.navigate('TaskerView', { id: user.id });
+        }
       },
     },
     {
@@ -86,7 +86,7 @@ const ProfileMenu = () => {
     },
     {
       key: 6,
-      values: [t('profile.language'), t('profile.mongolia')],
+      values: [t('profile.language'), t('profile.language_label')],
       prefix: <GlobalIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {

@@ -124,6 +124,11 @@ export default {
     },
     loginAsContractor: 'Үйлчилгээ үзүүлэгчээр нэвтрэх',
     signUpAsContractor: 'Үйлчилгээ үзүүлэгчээр бүртгүүлэх',
+    services: {
+      main: 'Үйлчилгээ',
+      search: 'Үйлчилгээнээс хайх',
+      question: 'Үйлчилгээний жагсаалт',
+    },
   },
   subCategoryList: {
     search: {
@@ -158,6 +163,8 @@ export default {
       'Таны хүсэлт амжилттай бүртгэгдлээ, бид тун удахгүй таны хүсэлтэд таарсан гүйцэтгэгчийг холбох болно. Хэрэв та цуцлах бол яаралтай оператортой холбогдоно уу!',
     logoTitle: 'Seed Bot',
     operatorCall: 'Оператортой холбогдох',
+    requestUserProfile: 'Хэрэглэгчийн мэдээлэл харах',
+    requestViewProfile: 'Профайл харах',
     requestOperatorMessage:
       'Таны хүсэлт хуваарилагдсан байна. Болд тун удахгүй тантай холбогдох тул та түр хүлээнэ үү.',
     requestDone: 'Болсон',
@@ -219,6 +226,10 @@ export default {
     retype: 'Та пин кодоо дахин оруулна уу.',
     mismatch: 'Пин кодууд хоорондоо зөрж байна.',
     success: 'Пин кодыг амжилттай хадгаллаа.',
+  },
+  visitProfile: {
+    contacts: 'Холбоо барих',
+    feedback: 'Үйлчлүүлэгчдийн сэтгэгдэл',
   },
   userRequest: {
     enterBudget: 'Та доорх талбарт үүсгэж буй таскынхаа үнийг оруулна уу.',
@@ -297,7 +308,7 @@ export default {
     afternoonTimeRange: '6PM-н дараа',
     cancel: 'Цуцлах',
     title: 'Өдөр сонгох',
-    flexible: 'Уян хатан цагийн хуваарьтай'
+    flexible: 'Уян хатан цагийн хуваарьтай',
   },
   emptyRequest: 'Таньд үүсгэсэн хүсэлт байхгүй байна.',
   headers: {
@@ -370,5 +381,16 @@ export default {
       nameMin: 'Нэр доод тал нь 3 тэмдэгт байх ёстой',
       customError: 'Буруу утга',
     },
+    status: {
+      new: 'Шинэ!',
+    },
+    sort: {
+      name: 'Эрэмбэлэх',
+      priceLowToHigh: 'Үнэ (багаас ихрүү)',
+      priceHighToLow: 'Үнэ (ихээс багаруу)',
+      cancel: 'Болих',
+      default: 'Үндсэн',
+    },
+    onlineService: 'Онлайн үйлчилгээ',
   },
 };

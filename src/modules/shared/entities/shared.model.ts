@@ -1,3 +1,4 @@
+import { Address } from '../pages/AddressMapView/AddressesMapView';
 export namespace SharedModel {
   export type Pagination<T> = {
     content: T[];
@@ -91,6 +92,27 @@ export namespace SharedModel {
     message: string;
     details: any;
   }
+  export type TaskerServiceModel = {
+    id: number;
+    name: string;
+    files?: SharedModel.File[];
+    description: string;
+    tag: string;
+    isInPersion?: boolean;
+    isFlexible?: boolean;
+    distance: number;
+    autoMsg: string;
+    timeRange: TimeRange;
+    subCategory: Category;
+    contractor: any;
+    address?: Address;
+    price: number;
+  };
+
+  export type TaskerServiceFilter = {
+    name?: string;
+    subCategoryId?: number;
+  };
 }
 export enum TaskerType {
   INDIVIDUAL = 'INDIVIDUAL',
@@ -107,4 +129,10 @@ export enum FormField {
 export enum ProfileWorkingType {
   ONLINE = 'ONLINE',
   PHYSICALLY = 'PHYSICALLY',
+}
+
+export enum TaskerServiceSortType {
+  PRICE_LOW = 'PRICE_LOW',
+  PRICE_HIGH = 'PRICE_HIGH',
+  DEFAULT = 'DEFAULT',
 }

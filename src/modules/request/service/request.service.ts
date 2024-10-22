@@ -1,6 +1,4 @@
-import { Client } from '@stomp/stompjs';
-import { api, getEnv } from '../../../api';
-import store from '../../../context/app/store';
+import { api } from '../../../api';
 import { SharedModel } from '../../Shared/entities/shared.model';
 import { TaskModel } from '../entities/request.model';
 
@@ -51,7 +49,7 @@ export function approveOffer(
 }
 
 export function updateOffer(
-  offer: TaskModel.EditOffer,
+  offer: TaskModel.CreateOffer,
 ): Promise<TaskModel.OfferResponse> {
   return api.put(`/offers/${offer.id}`, offer);
 }
@@ -91,38 +89,4 @@ export function sendChat(
 }
 export function createTask(task: TaskModel.TaskRequest) {
   return api.post('/tasks', task);
-}
-
-export function subscribeToNotification(
-  fn: (chat: TaskModel.Chat) => void,
-): Client {
-  const client = new Client({
-    brokerURL: getEnv().BROKER_URL,
-    connectHeaders: {
-      Authorization: `Bearer ${store.getState().auth.token?.jwt}`,
-    },
-    debug: str => {
-      console.log(str);
-    },
-    onConnect: () => {
-      client.subscribe('/user/queue/notification/chat', message => {
-        const chat = JSON.parse(message.body) as TaskModel.Chat;
-        fn(chat);
-      });
-      client.subscribe('/user/queue/notification/task', message => {
-        console.log(`Received: ${JSON.parse(message.body).content}`);
-        console.log(JSON.parse(message.body));
-      });
-    },
-    onStompError: e => {
-      console.log(e);
-    },
-    onWebSocketError: e => {
-      console.log(e);
-    },
-    onWebSocketClose: e => {
-      console.log(e);
-    },
-  });
-  return client;
 }

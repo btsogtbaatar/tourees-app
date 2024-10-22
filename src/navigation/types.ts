@@ -5,7 +5,9 @@ import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigati
 import { Schema } from '../modules/Profile/model/registration.model';
 import {
   AddressType,
-  TaskModel,
+  ServiceTag,
+  TaskerServiceModel,
+  TaskModel
 } from '../modules/Request/entities/request.model';
 import {
   FormField,
@@ -25,6 +27,7 @@ export type RootStackParamList = {
   RegisterTermAndCondition: undefined;
   RegisterOtpCheck: { registration: AuthModel.User };
   SubCategoryList: { parentCategoryId?: number; title: string };
+  TaskerService: undefined;
   UserRequest: {
     item: SharedModel.SubCategory;
   };
@@ -62,14 +65,12 @@ export type RootStackParamList = {
   TaskBudget: { task: TaskModel.TaskRequest };
   CreateOffer: { taskId?: number, id?: number };
   EditOffer: { taskId?: number, id?: number };
-  TaskerStack: NavigatorScreenParams<TaskerParamList>;
-  RegistrationInformation: undefined;
-  Chat: { id: number };
   MyOfferTasks: undefined;
   Photos: { images: string[]; index: number };
-};
-
-export type TaskerParamList = {
+  RegistrationInformation: undefined;
+  Chat: { id: number };
+  TaskerServiceView: { id: number; title: string };
+  TaskerServiceSearch: { subCategoryId?: number; subCategoryName?: string };
   RegisterTasker: {
     profile?: ProfileModel.ProfileRequest;
   };
@@ -80,7 +81,7 @@ export type TaskerParamList = {
     value: string[];
     tags?: ProfileModel.ProfileTag[];
   };
-  TaskerView: undefined;
+  TaskerView: { id: number };
 };
 
 declare global {
@@ -88,3 +89,16 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
+
+export type TaskerServiceParamList = {
+  RegisterTaskerService: {
+    service?: TaskerServiceModel;
+  };
+  RemarkListView: {
+    label: string;
+    setValue: UseFormSetValue<FieldValues>;
+    name: string;
+    value: string[];
+    tags?: ServiceTag[];
+  };
+};

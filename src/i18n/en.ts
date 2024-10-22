@@ -66,7 +66,10 @@ export default {
     profile: {
       label: 'Picture',
       placeHolder: 'Picture',
-      errors: { required: 'Please upload a picture', validation: 'Please upload a picture' },
+      errors: {
+        required: 'Please upload a picture',
+        validation: 'Please upload a picture',
+      },
     },
   },
   tasker: {
@@ -89,8 +92,9 @@ export default {
   },
   profile: {
     language: 'Language',
-    mongolia: 'Mongolia',
+    language_label: 'English',
     l_user_infomation: 'General Information',
+    l_service: 'Post a service',
     l_register_infomation: 'Registration Information',
     l_history: 'History',
     l_ebarimt: 'E-Receipt',
@@ -118,6 +122,11 @@ export default {
     },
     loginAsContractor: 'Log in as Service Provider',
     signUpAsContractor: 'Sign up as Service Provider',
+    services: {
+      main: 'Events and wedding services',
+      search: 'Services search',
+      question: 'Browse listed services',
+    },
   },
   subCategoryList: {
     search: {
@@ -207,7 +216,8 @@ export default {
     mismatch: 'Pin codes do not match.',
   },
   userRequest: {
-    enterBudget: 'Please enter the price for the task you are creating in the field below.',
+    enterBudget:
+      'Please enter the price for the task you are creating in the field below.',
     success: {
       title: 'Successful',
       message: 'Your request has been successfully created.',
@@ -283,7 +293,7 @@ export default {
     afternoonTimeRange: 'After 6PM',
     cancel: 'Cancel',
     title: 'Select Date',
-    flexible: 'Flexible schedule'
+    flexible: 'Flexible schedule',
   },
   emptyRequest: 'You have no requests created.',
   headers: {
@@ -301,6 +311,7 @@ export default {
     createOffer: 'Create Offer',
     registrationInformation: 'Registration Information',
     updateInformation: 'Update Information',
+    listingDetail: 'Listing details',
   },
   taskBudget: {
     submit: 'Save',
@@ -350,5 +361,16 @@ export default {
       nameMin: 'Name must be at least 3 characters',
       customError: 'Invalid value',
     },
+    status: {
+      new: 'New!',
+    },
+    sort: {
+      name: 'Sort by',
+      priceLowToHigh: 'Price (low to high)',
+      priceHighToLow: 'Price (high to low)',
+      cancel: 'Cancel',
+      default: 'Default',
+    },
+    onlineService: 'Online service',
   },
 };
