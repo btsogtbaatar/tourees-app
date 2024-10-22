@@ -40,10 +40,7 @@ const TaskerView = (props: TaskerViewProps) => {
           suffix={
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('TaskerStack', {
-                  screen: 'RegisterTasker',
-                  params: { profile: profile },
-                });
+                navigation.navigate('RegisterTasker', { profile: profile });
               }}>
               <HeaderEditIcon />
             </TouchableOpacity>

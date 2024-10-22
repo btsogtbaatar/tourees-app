@@ -5,7 +5,9 @@ import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigati
 import { Schema } from '../modules/Profile/model/registration.model';
 import {
   AddressType,
-  TaskModel,
+  ServiceTag,
+  TaskerServiceModel,
+  TaskModel
 } from '../modules/Request/entities/request.model';
 import {
   FormField,
@@ -60,15 +62,10 @@ export type RootStackParamList = {
   RetypePin: { pin: string };
   TaskBudget: { task: TaskModel.TaskRequest };
   CreateOffer: { taskId: number };
-  TaskerStack: NavigatorScreenParams<TaskerParamList>;
   RegistrationInformation: undefined;
   Chat: { id: number };
-  VisitProfile: {
-    id: number;
-  };
-};
-
-export type TaskerParamList = {
+  TaskerServiceView: { id: number; title: string };
+  TaskerServiceSearch: { subCategoryId?: number; subCategoryName?: string };
   RegisterTasker: {
     profile?: ProfileModel.ProfileRequest;
   };
@@ -87,3 +84,16 @@ declare global {
     interface RootParamList extends RootStackParamList {}
   }
 }
+
+export type TaskerServiceParamList = {
+  RegisterTaskerService: {
+    service?: TaskerServiceModel;
+  };
+  RemarkListView: {
+    label: string;
+    setValue: UseFormSetValue<FieldValues>;
+    name: string;
+    value: string[];
+    tags?: ServiceTag[];
+  };
+};

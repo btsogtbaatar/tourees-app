@@ -132,6 +132,7 @@ export type TaskerServiceModel = {
   name: string;
   description: string;
   tag: string;
+  services?: string[];
   price: number;
   autoMsg: string;
   category: SharedModel.Category;
@@ -140,3 +141,8 @@ export type TaskerServiceModel = {
   timeRange: SharedModel.TimeRange;
   address: Address[];
 };
+export interface ServiceTag {
+  id: number;
+  type: string;
+  value: string;
+}

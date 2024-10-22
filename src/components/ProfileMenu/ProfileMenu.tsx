@@ -45,14 +45,11 @@ const ProfileMenu = () => {
       prefix: <UserCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        navigation.navigate('TaskerStack', {
-          screen: 'RegisterTasker',
-          params: { profile: undefined },
-        });
+        navigation.navigate('RegisterTasker', { profile: undefined });
       },
     },
     {
-      values: [t('Үйлчилгээ бүртгүүлэх')],
+      values: [t('profile.l_service')],
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
@@ -66,10 +63,7 @@ const ProfileMenu = () => {
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
         if (user && user.id) {
-          navigation.navigate('TaskerStack', {
-            screen: 'TaskerView',
-            params: { id: user.id },
-          });
+          navigation.navigate('TaskerView', { id: user.id });
         }
       },
     },
@@ -90,7 +84,7 @@ const ProfileMenu = () => {
 
     {
       key: 6,
-      values: [t('profile.language'), t('profile.mongolia')],
+      values: [t('profile.language'), t('profile.language_label')],
       prefix: <GlobalIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {

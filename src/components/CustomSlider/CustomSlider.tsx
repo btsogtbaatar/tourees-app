@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, StyleSheet, PanResponder, Dimensions } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, PanResponder, Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import CustomSliderStyles from './CustomSlider.style';
 
@@ -15,7 +15,8 @@ const CustomSlider = ({
   const { t } = useTranslation();
   const [distance, setDistance] = useState(initialDistance);
   const sliderWidth = width * 0.8;
-  const thumbWidth = 20;
+  const thumbWidth = 25;
+  const displayThreshold = 100; // Value after which we display "100+"
 
   const panResponder = useRef(
     PanResponder.create({
@@ -23,10 +24,11 @@ const CustomSlider = ({
         return gestureState.dx > 0;
       },
       onPanResponderMove: (evt, gestureState) => {
+        const moveXPosition = gestureState.moveX - thumbWidth / 2;
+        const boundedMoveX = Math.max(0, Math.min(moveXPosition, sliderWidth - thumbWidth));
+
         const rawDistance = Math.round(
-          ((gestureState.moveX - thumbWidth) / (sliderWidth - thumbWidth)) *
-            (maxDistance - minDistance) +
-            minDistance,
+          (boundedMoveX / (sliderWidth - thumbWidth)) * (maxDistance - minDistance) + minDistance
         );
 
         const newDistance = Math.round(rawDistance / step) * step;
@@ -44,7 +46,7 @@ const CustomSlider = ({
   return (
     <View style={CustomSliderStyles.container}>
       <Text style={CustomSliderStyles.label}>
-        {t('service.distance')}: {distance > 100 ? '100+' : `${distance} км`}
+        {t('service.distance')}: {distance >= displayThreshold ? '100+' : `${distance} км`}
       </Text>
       <View style={CustomSliderStyles.sliderContainer}>
         <View style={[CustomSliderStyles.sliderTrack, { width: sliderWidth }]}>
@@ -67,7 +69,7 @@ const CustomSlider = ({
 
 CustomSlider.defaultProps = {
   minDistance: 0,
-  maxDistance: 101,
+  maxDistance: 110,
   initialDistance: 0,
   step: 5,
 };
