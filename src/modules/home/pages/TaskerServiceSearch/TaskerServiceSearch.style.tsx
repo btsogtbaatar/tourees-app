@@ -60,6 +60,9 @@ const TaskerSearchStyles = StyleSheet.create({
     alignItems: 'center',
     gap: verticalScale(4),
   },
+  pBottom: {
+    paddingBottom: verticalScale(80),
+  },
 });
 
 export default TaskerSearchStyles;

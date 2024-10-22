@@ -127,7 +127,7 @@ const TaskerServiceSearch = (props: Props) => {
           </Text>
         </View>
       )}
-      <View style={TaskerSearchStyles.mTop8}>
+      <View style={[TaskerSearchStyles.mTop8, TaskerSearchStyles.pBottom]}>
         <FlatList
           showsVerticalScrollIndicator={false}
           data={taskerServices}
@@ -146,12 +146,20 @@ const TaskerServiceSearch = (props: Props) => {
                       {item.name}
                     </Text>
                     <CustomCurrencyView amount={item.price} />
-                    <View style={TaskerSearchStyles.nameContainer}>
-                      <Text style={TaskerSearchStyles.nameTitle}>Darren.O</Text>
-                      <Text style={TaskerSearchStyles.rateStyles}>
-                        {t('service.status.new')}
-                      </Text>
-                    </View>
+                    {item.contractor && item.contractor.user && (
+                      <View style={TaskerSearchStyles.nameContainer}>
+                        <Text style={TaskerSearchStyles.nameTitle}>
+                          {item.contractor.user.lastName &&
+                            item.contractor.user.lastName
+                              ?.charAt(0)
+                              .toUpperCase() + '.'}
+                          {item.contractor.user?.firstName}
+                        </Text>
+                        <Text style={TaskerSearchStyles.rateStyles}>
+                          {t('service.status.new')}
+                        </Text>
+                      </View>
+                    )}
                   </View>
                   {item.files && item.files[0] && (
                     <CustomImage

@@ -1,16 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 import HomeStyle from '../../modules/Home/pages/Home/Home.style';
+import TaskerSearchStyles from '../../modules/Home/pages/TaskerServiceSearch/TaskerServiceSearch.style';
 import { SharedModel } from '../../modules/Shared/entities/shared.model';
 import { colors } from '../../theme/colors';
-import { verticalScale } from '../../utilities/metrics';
 import CustomCurrencyView from '../CustomCurrencyView/CustomCurrencyView';
 import CustomImage from '../CustomImage/CustomImage';
 import { ChevronRightIcon } from '../Icon';
 import TaskerServiceListStyle from './TaskerServiceList.style';
-import TaskerSearchStyles from '../../modules/Home/pages/TaskerServiceSearch/TaskerServiceSearch.style';
-import { useTranslation } from 'react-i18next';
 
 interface TaskerServiceListProps {
   title: string | string[];
@@ -27,7 +26,7 @@ const TaskerServiceList = (props: TaskerServiceListProps) => {
         style={TaskerServiceListStyle.container}
         onPress={() => {
           navigation.navigate('TaskerServiceSearch', {
-            subCategoryId: Number(title[1]),
+            subCategoryId: title[1] ? Number(title[1]) : undefined,
             subCategoryName: title[0],
           });
         }}>
@@ -63,12 +62,19 @@ const TaskerServiceList = (props: TaskerServiceListProps) => {
               {item.name}
             </Text>
             <CustomCurrencyView amount={item.price} />
-            <View style={TaskerSearchStyles.nameContainer}>
-              <Text style={TaskerSearchStyles.nameTitle}>Darren.O</Text>
-              <Text style={TaskerSearchStyles.rateStyles}>
-                {t('service.status.new')}
-              </Text>
-            </View>
+            {item.contractor && item.contractor.user && (
+              <View style={TaskerSearchStyles.nameContainer}>
+                <Text style={TaskerSearchStyles.nameTitle}>
+                  {item.contractor.user.lastName &&
+                    item.contractor.user.lastName?.charAt(0).toUpperCase() +
+                      '.'}
+                  {item.contractor.user?.firstName}
+                </Text>
+                <Text style={TaskerSearchStyles.rateStyles}>
+                  {t('service.status.new')}
+                </Text>
+              </View>
+            )}
           </TouchableOpacity>
         )}
       />
