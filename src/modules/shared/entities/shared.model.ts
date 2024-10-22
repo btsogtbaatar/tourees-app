@@ -86,6 +86,12 @@ export namespace SharedModel {
     value: any;
     onChange: any;
   }
+
+  export interface Error {
+    code: string;
+    message: string;
+    details: any;
+  }
   export type TaskerServiceModel = {
     id: number;
     name: string;

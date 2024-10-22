@@ -40,7 +40,7 @@ export default function AddressesMapView(props: Readonly<AddressMapViewProps>) {
   const [addresses, setAddresses] = useState<Addresses>(
     props.route.params.addresses,
   );
-  const { t } = useTranslation(undefined, { keyPrefix: 'addressMapView' });
+  const { t } = useTranslation();
 
   const getAddress = (_addresses: Addresses) => {
     if (addressType === AddressType.From) {

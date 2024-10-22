@@ -13,12 +13,11 @@ import { colors } from '../../theme';
 import GroupedMenuList from '../GroupedMenuList/GroupedMenuList';
 import {
   ChevronRightIcon,
-  ClockRewindIcon,
-  EBarimtIcon,
-  FileIcon,
+  FaceId,
   GlobalIcon,
   HelpCircleIcon,
   LogoutIcon,
+  MessagePlusSquareIcon,
   PassportIcon,
   UserCircleIcon,
 } from '../Icon';
@@ -68,20 +67,23 @@ const ProfileMenu = () => {
       },
     },
     {
-      key: 4,
-      values: [t('profile.l_history')],
-      prefix: <ClockRewindIcon />,
+      key: 3,
+      values: [t('profile.l_my_offer_tasks')],
+      prefix: <MessagePlusSquareIcon color={colors.gray700} />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('MyOfferTasks');
+      },
     },
     {
-      key: 5,
-      values: [t('profile.l_ebarimt')],
-      prefix: <EBarimtIcon />,
+      key: 3,
+      values: [t('headers.biometricConfig')],
+      prefix: <FaceId color={colors.gray700} />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('BiometricConfig');
+      },
     },
-
     {
       key: 6,
       values: [t('profile.language'), t('profile.language_label')],
@@ -93,20 +95,6 @@ const ProfileMenu = () => {
           dispatch(changeLanguage(selectedLanguage));
         });
       },
-    },
-    {
-      key: 7,
-      values: [t('profile.t_serviceterm')],
-      prefix: <FileIcon />,
-      suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {},
-    },
-    {
-      key: 8,
-      values: [t('profile.l_help')],
-      prefix: <HelpCircleIcon />,
-      suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {},
     },
     {
       key: 9,

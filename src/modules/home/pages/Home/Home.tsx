@@ -35,7 +35,7 @@ const Home = () => {
   const firebaseToken = useSelector(selectFirebaseToken);
 
   useEffect(() => {
-    if (firebaseToken && isAuthenticated) {
+    if (firebaseToken !== undefined && isAuthenticated === true) {
       updateFirebaseToken(firebaseToken);
     }
   }, [firebaseToken, isAuthenticated]);
@@ -53,9 +53,12 @@ const Home = () => {
 
   useEffect(() => {
     getCateories();
-    getUnreadNotificationCount().then(res => {
-      dispatch(setUnreadNotificationCount(res));
-    });
+
+    if (isAuthenticated) {
+      getUnreadNotificationCount().then(res => {
+        dispatch(setUnreadNotificationCount(res));
+      });
+    }
   }, []);
 
   const renderSeparator = () => <View style={HomeStyle.divider} />;

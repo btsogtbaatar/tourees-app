@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import CurrencyInput, { CurrencyInputProps } from 'react-native-currency-input';
 import { colors } from '../../theme';
@@ -7,6 +7,10 @@ import { CustomCurrencyInputStyle } from './CustomCurrencyInput.style';
 const CustomCurrencyInput = (props: CurrencyInputProps) => {
   const [value, setValue] = useState<number | null>(props.value);
   const [focused, setFocused] = useState(false);
+
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.value])
   
   return (
     <View

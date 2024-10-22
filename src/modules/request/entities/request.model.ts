@@ -21,6 +21,7 @@ export declare namespace TaskModel {
 
   export type OfferTask = {
     id: number;
+    customer: User;
   };
 
   export type TaskResponse = {
@@ -75,11 +76,11 @@ export declare namespace TaskModel {
   };
 
   export type CreateOffer = {
+    id?: number;
     price: number;
     description: string;
-    taskId: number;
+    taskId?: number;
   };
-
   export type OfferResponse = {
     id: number;
     price: number;

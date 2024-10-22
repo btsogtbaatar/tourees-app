@@ -1,9 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Photos } from '../components/Photos/Photos';
 import RemarkListView from '../components/RemarkListView/RemarkListView';
 import BiometricConsent from '../modules/Auth/pages/BiometricConsent/BiometricConsent';
 import CreatePin from '../modules/Auth/pages/CreatePin/CreatePin';
+import EnterPin from '../modules/Auth/pages/EnterPin/EnterPin';
 import Login from '../modules/Auth/pages/Login/Login';
 import LoginOtpCheck from '../modules/Auth/pages/LoginOtpCheck/LoginOtpCheck';
 import Register from '../modules/Auth/pages/Register/Register';
@@ -12,6 +14,7 @@ import RegisterTermAndCondition from '../modules/Auth/pages/RegisterTermAndCondi
 import RetypePin from '../modules/Auth/pages/RetypePin/RetypePin';
 import HomeTabNavigator from '../modules/Home/navigation';
 import TaskerServiceSearch from '../modules/Home/pages/TaskerServiceSearch/TaskerServiceSearch';
+import BiometricConfig from '../modules/Profile/pages/Biometric/BiometricConfig';
 import RegistrationInformation from '../modules/Profile/pages/RegistrationInformation/RegistrationInformation';
 import UpdateInformation from '../modules/Profile/pages/UpdateInformation/UpdateInformation';
 import VisitProfile from '../modules/Profile/pages/VisitProfile/VisitProfile';
@@ -22,6 +25,7 @@ import TaskBudget from '../modules/Request/page/TaskBudget/TaskBudget';
 import TaskDetail from '../modules/Request/page/TaskDetail/TaskDetail';
 import TaskerService from '../modules/Request/page/TaskerService/TaskerService';
 import TaskerServiceView from '../modules/Request/page/TaskerServiceView/TaskerServiceView';
+import TaskList from '../modules/Request/page/TaskList/TaskList';
 import UserRequest from '../modules/Request/page/UserRequest/UserRequest';
 import { useSocket } from '../modules/Shared/hooks';
 import AddressesDetail from '../modules/Shared/pages/AddressDetail/AddressesDetail';
@@ -83,6 +87,11 @@ const Route = () => {
           component={CreatePin}
         />
         <Stack.Screen
+          options={{ title: t('headers.enterPin') }}
+          name="EnterPin"
+          component={EnterPin}
+        />
+        <Stack.Screen
           options={{ title: t('headers.retypePin') }}
           name="RetypePin"
           component={RetypePin}
@@ -116,6 +125,36 @@ const Route = () => {
           options={{ title: t('headers.request') }}
           name="TaskerService"
           component={TaskerService}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.myOfferTasks') }}
+          name="MyOfferTasks"
+          component={TaskList}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.editOffer') }}
+          name="EditOffer"
+          component={CreateOffer}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.biometricConfig') }}
+          name="BiometricConfig"
+          component={BiometricConfig}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.photos') }}
+          name="Photos"
+          component={Photos}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.taskBudget') }}
+          name="TaskBudget"
+          component={TaskBudget}
+        />
+        <Stack.Screen
+          options={{ title: t('headers.createOffer') }}
+          name="CreateOffer"
+          component={CreateOffer}
         />
         <Stack.Screen
           options={{ title: t('headers.chat') }}
@@ -158,17 +197,6 @@ const Route = () => {
           options={{ title: t('headers.address') }}
           name="AddressesDetail"
           component={AddressesDetail}
-        />
-
-        <Stack.Screen
-          options={{ title: t('headers.taskBudget') }}
-          name="TaskBudget"
-          component={TaskBudget}
-        />
-        <Stack.Screen
-          options={{ title: t('headers.createOffer') }}
-          name="CreateOffer"
-          component={CreateOffer}
         />
         <Stack.Screen
           options={{ title: t('headers.updateInformation') }}

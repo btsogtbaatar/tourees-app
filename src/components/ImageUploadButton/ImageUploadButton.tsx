@@ -40,8 +40,6 @@ const ImageUploadButton: React.FC<ImageUploadButtonProps> = ({
         mediaType: 'photo',
         includeBase64: false,
         selectionLimit: limit,
-        maxHeight: 200,
-        maxWidth: 200,
       },
       response => {
         if (!response.didCancel && !response.errorCode && response.assets) {

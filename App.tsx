@@ -48,6 +48,14 @@ function App(): React.JSX.Element {
     });
 
     i18n.changeLanguage('en');
+
+    // Ignore API call errors
+    LogBox.ignoreLogs([
+      /^Possible unhandled promise rejection/,
+    ]);
+    LogBox.ignoreLogs([
+      /^no valid “aps-environment” entitlement string found for application/,
+    ]);
     LogBox.ignoreLogs([
       'In React 18, SSRProvider is not necessary and is a noop. You can remove it from your app.',
     ]);
@@ -59,10 +67,10 @@ function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RemoteNotification />
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>
             <NavigationContainer>
+              <RemoteNotification />
               <ModalProvider>
                 <Route />
               </ModalProvider>

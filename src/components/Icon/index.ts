@@ -5,6 +5,7 @@ import BuildingIcon from '../../../assets/icons/building.svg';
 import CalendarIcon from '../../../assets/icons/calendar.svg';
 import CameraIcon from '../../../assets/icons/camera.svg';
 import CheckIcon from '../../../assets/icons/check.svg';
+import ChevronDownIcon from '../../../assets/icons/chevron-down.svg';
 import ChevronRightIcon from '../../../assets/icons/chevron-right.svg';
 import ClockRewindIcon from '../../../assets/icons/clock-rewind.svg';
 import ClockIcon from '../../../assets/icons/clock.svg';
@@ -22,6 +23,7 @@ import HomeActiveIcon from '../../../assets/icons/home-active.svg';
 import HomeIcon from '../../../assets/icons/home.svg';
 import CircleIcon from '../../../assets/icons/icon-circle.svg';
 import ImagePlaceHolderIcon from '../../../assets/icons/image-placeholder.svg';
+import LaptopIcon from '../../../assets/icons/laptop-icon.svg';
 import LocationCircleGrayIcon from '../../../assets/icons/location-circle-gray-icon.svg';
 import LocationCircleIcon from '../../../assets/icons/location-circle-icon.svg';
 import LocationIcon from '../../../assets/icons/location-icon.svg';
@@ -30,7 +32,9 @@ import LogoMini from '../../../assets/icons/logo-mini.svg';
 import LogoIcon from '../../../assets/icons/logo.svg';
 import LogoutIcon from '../../../assets/icons/logout.svg';
 import MailIcon from '../../../assets/icons/mail.svg';
+import MessagePlusSquareIcon from '../../../assets/icons/message-plus-square.svg';
 import MoonIcon from '../../../assets/icons/moon.svg';
+import PasscodeIcon from '../../../assets/icons/passcode.svg';
 import PassportIcon from '../../../assets/icons/passport.svg';
 import PhoneIcon from '../../../assets/icons/phone.svg';
 import PlusIcon from '../../../assets/icons/plus-icon.svg';
@@ -49,8 +53,6 @@ import UserCircleIcon from '../../../assets/icons/user-circle.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
-import ChevronDownIcon from '../../../assets/icons/chevron-down.svg';
-import LaptopIcon from '../../../assets/icons/laptop-icon.svg';
 
 export {
   ArrowLeftIcon,
@@ -59,8 +61,7 @@ export {
   BuildingIcon,
   CalendarIcon,
   CameraIcon,
-  CheckIcon,
-  ChevronRightIcon,
+  CheckIcon, ChevronDownIcon, ChevronRightIcon,
   CircleIcon,
   ClockIcon,
   ClockRewindIcon,
@@ -76,17 +77,14 @@ export {
   HelpCircleIcon,
   HomeActiveIcon,
   HomeIcon,
-  ImagePlaceHolderIcon,
-  LocationCircleGrayIcon,
+  ImagePlaceHolderIcon, LaptopIcon, LocationCircleGrayIcon,
   LocationCircleIcon,
   LocationIcon,
   LogoIcon,
   LogoMini,
   LogoMiniBorder,
   LogoutIcon,
-  MailIcon,
-  MoonIcon,
-  PassportIcon,
+  MailIcon, MessagePlusSquareIcon, MoonIcon, PasscodeIcon, PassportIcon,
   PhoneIcon,
   PlusIcon,
   SearchMdIcon,
@@ -103,7 +101,6 @@ export {
   UserCircleIcon,
   UserIcon,
   VectorIcon,
-  XCircleIcon,
-  ChevronDownIcon,
-  LaptopIcon,
+  XCircleIcon
 };
+

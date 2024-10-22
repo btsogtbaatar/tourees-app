@@ -1,4 +1,6 @@
 import { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import i18n from '../../i18n';
+import { notifyMessage } from '../components/CustomToast/CustomToast';
 import store from '../context/app/store';
 import { AuthState } from '../modules/Auth/slice/authSlice';
 
@@ -22,7 +24,11 @@ export const axiosInstance = (api: AxiosInstance) => {
     (response: AxiosResponse) => {
       return response.data;
     },
-    (error: AxiosError<any>) => {
+    (error: AxiosError<Error>) => {
+      if (error.response?.data) {
+        notifyMessage(i18n.t('error'), error.response.data.message);
+      }
+
       return Promise.reject(error.response?.data);
     },
   );
