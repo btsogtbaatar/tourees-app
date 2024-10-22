@@ -5,6 +5,7 @@ import {
   getFontWeight,
   Typography,
 } from '../../../../theme';
+import { verticalScale } from '../../../../utilities/metrics';
 
 const HomeStyle = StyleSheet.create({
   container: {
@@ -27,6 +28,15 @@ const HomeStyle = StyleSheet.create({
   },
   divider: {
     width: 16,
+  },
+  serviceSearchContainer: {
+    marginBottom: 8,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  listContentContainer: {
+    paddingBottom: verticalScale(150),
   },
 });
 

@@ -34,15 +34,12 @@ function RemarkList<T extends FieldValues>(props: RemarkListProps<T>) {
     setRemark(value && value.length > 0 ? value : []);
   }, [value]);
   const openModal = () => {
-    navigation.navigate('TaskerStack', {
-      screen: 'RemarkListView',
-      params: {
-        label: label,
-        setValue: setValue,
-        name: name,
-        value: value,
-        tags: tags,
-      },
+    navigation.navigate('RemarkListView', {
+      label: label,
+      setValue: setValue,
+      name: name,
+      value: value,
+      tags: tags,
     });
   };
 

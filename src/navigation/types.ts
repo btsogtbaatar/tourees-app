@@ -5,9 +5,9 @@ import { HomeStackParamList as HomeTabParamList } from '../modules/Home/navigati
 import { Schema } from '../modules/Profile/model/registration.model';
 import {
   AddressType,
-  TaskModel,
   ServiceTag,
-  TaskerServiceModel
+  TaskerServiceModel,
+  TaskModel
 } from '../modules/Request/entities/request.model';
 import {
   FormField,
@@ -61,15 +61,14 @@ export type RootStackParamList = {
   RetypePin: { pin: string };
   TaskBudget: { task: TaskModel.TaskRequest };
   CreateOffer: { taskId: number };
-  TaskerStack: NavigatorScreenParams<TaskerParamList>;
   RegistrationInformation: undefined;
   Chat: { id: number };
-};
-
-export type TaskerParamList = {
+  TaskerServiceView: { id: number; title: string };
+  TaskerServiceSearch: { subCategoryId?: number; subCategoryName?: string };
   RegisterTasker: {
     profile?: ProfileModel.ProfileRequest;
   };
+  TaskerView: undefined;
   RemarkListView: {
     label: string;
     setValue: UseFormSetValue<FieldValues>;
@@ -77,7 +76,6 @@ export type TaskerParamList = {
     value: string[];
     tags?: ProfileModel.ProfileTag[];
   };
-  TaskerView: undefined;
 };
 
 declare global {
