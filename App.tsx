@@ -67,7 +67,6 @@ function App(): React.JSX.Element {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <RemoteNotification />
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>
             <NavigationContainer>
