@@ -59,7 +59,7 @@ const RemoteNotification = () => {
 
       // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification: any) {
-        getNotificationList().then(res =>
+        getNotificationList(1).then(res =>
           store.dispatch(setNotifications(res.content)),
         );
 
