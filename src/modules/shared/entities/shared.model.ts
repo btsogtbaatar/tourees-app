@@ -1,3 +1,4 @@
+import { AuthModel } from '../../Auth/entities';
 import { Address } from '../pages/AddressMapView/AddressesMapView';
 export namespace SharedModel {
   export type Pagination<T> = {
@@ -95,7 +96,7 @@ export namespace SharedModel {
   export type TaskerServiceModel = {
     id: number;
     name: string;
-    files?: SharedModel.File[];
+    files?: File[];
     description: string;
     tag: string;
     isInPersion?: boolean;
@@ -104,7 +105,11 @@ export namespace SharedModel {
     autoMsg: string;
     timeRange: TimeRange;
     subCategory: Category;
-    contractor: any;
+    contractor: {
+      user: AuthModel.User;
+      address?: string;
+      profilePicture?: File;
+    };
     address?: Address;
     price: number;
   };

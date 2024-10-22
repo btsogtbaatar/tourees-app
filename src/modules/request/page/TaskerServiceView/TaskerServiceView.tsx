@@ -1,22 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Image, Text, View } from 'react-native';
-import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import ContainerView from '../../../../components/ContainerView/ContainerView';
-import { verticalScale } from '../../../../utilities';
-import CustomCurrencyView from '../../../../components/CustomCurrencyView/CustomCurrencyView';
+import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../../../navigation/types';
-import { getTaskerServiceDetail } from '../../service/tasker.service';
-import { SharedModel } from '../../../Shared/entities/shared.model';
-import RemarkTextView from '../../../../components/RemarkTextView/RemarkTextView';
-import { LaptopIcon, LocationIcon } from '../../../../components/Icon';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { colors } from '../../../../theme';
-import CustomImage from '../../../../components/CustomImage/CustomImage';
-import { RemarkTextViewStyle } from '../../../../components/RemarkTextView/RemarkTextView.style';
-import AboutTaskerProfile from '../../../../components/AboutTaskerProfile/AboutTaskerProfile';
-import TaskerServiceViewStyle from './TaskerServiceView.style';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import AboutTaskerProfile from '../../../../components/AboutTaskerProfile/AboutTaskerProfile';
+import ContainerView from '../../../../components/ContainerView/ContainerView';
+import CustomCurrencyView from '../../../../components/CustomCurrencyView/CustomCurrencyView';
+import CustomImage from '../../../../components/CustomImage/CustomImage';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
+import { LaptopIcon, LocationIcon } from '../../../../components/Icon';
+import RemarkTextView from '../../../../components/RemarkTextView/RemarkTextView';
+import { RootStackParamList } from '../../../../navigation/types';
+import { colors } from '../../../../theme';
+import { SharedModel } from '../../../Shared/entities/shared.model';
+import { getTaskerServiceDetail } from '../../service/tasker.service';
+import TaskerServiceViewStyle from './TaskerServiceView.style';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskerServiceView'>;
 
@@ -25,6 +24,7 @@ const TaskerServiceView = (props: Props) => {
   const { t } = useTranslation();
   const [taskerService, setTaskerService] =
     useState<SharedModel.TaskerServiceModel>();
+  const navigation = useNavigation();
 
   const getServiceDetail = () => {
     getTaskerServiceDetail(id).then((res: SharedModel.TaskerServiceModel) => {
@@ -35,6 +35,12 @@ const TaskerServiceView = (props: Props) => {
   useEffect(() => {
     getServiceDetail();
   }, []);
+
+  const renderName = (lastName?: string, firstName?: string) => {
+    if (lastName && firstName)
+      return lastName.charAt(0).concat('.').concat(firstName);
+    return '';
+  };
 
   return (
     <CustomSafeAreaView>
@@ -67,10 +73,13 @@ const TaskerServiceView = (props: Props) => {
         <TouchableOpacity style={TaskerServiceViewStyle.packageContainer}>
           <Text style={TaskerServiceViewStyle.contactText}>View Packages</Text>
         </TouchableOpacity>
-        {taskerService?.files && taskerService?.files[0] && (
+        {taskerService?.contractor && taskerService?.contractor.user && (
           <AboutTaskerProfile
-            name="Jasmina N."
-            imageUrl={taskerService?.files[0].url}
+            name={renderName(
+              taskerService.contractor.user.lastName,
+              taskerService.contractor.user.firstName,
+            )}
+            imageUrl={taskerService.contractor.profilePicture?.url}
           />
         )}
         <RemarkTextView
@@ -83,7 +92,17 @@ const TaskerServiceView = (props: Props) => {
             taskerService?.timeRange.start + ' ' + taskerService?.timeRange.end
           }
         />
-        <TouchableOpacity style={TaskerServiceViewStyle.contactContainer}>
+        <TouchableOpacity
+          style={TaskerServiceViewStyle.contactContainer}
+          onPress={() => {
+            navigation.navigate('Chat', {
+              id:
+                (taskerService?.contractor &&
+                  taskerService?.contractor.user &&
+                  taskerService?.contractor.user.id) ??
+                1,
+            });
+          }}>
           <Text style={TaskerServiceViewStyle.contactText}>Contact Tasker</Text>
         </TouchableOpacity>
       </ContainerView>
