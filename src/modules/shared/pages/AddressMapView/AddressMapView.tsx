@@ -13,7 +13,6 @@ import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
 import { SharedModel } from '../../entities/shared.model';
 import AddressMapViewStyle from './AddressMapView.style';
-import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 
 type AddressMapViewProps = NativeStackScreenProps<
   RootStackParamList,

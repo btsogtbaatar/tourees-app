@@ -167,7 +167,6 @@ export default function AddressesMapView(props: Readonly<AddressMapViewProps>) {
           })
         }
       />
-      
     </View>
   );
 }

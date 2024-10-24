@@ -23,15 +23,13 @@ const getBackgroundColor = (routeName: string) => {
       return colors.white;
     case 'UserRequest':
       return colors.gray700;
-    case 'AddressMapView':
-      return colors.transparent;
     default:
       return colors.silver;
   }
 };
 
 const hidingHeaderScreens = ['HomeTab', 'Photos'];
-const transparentHeaderScreens = [''];
+const transparentHeaderScreens: string[] = [];
 
 const customScreenOption:
   | ((props: {
