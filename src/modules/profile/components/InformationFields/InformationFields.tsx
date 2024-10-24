@@ -18,6 +18,7 @@ import TextItem from '../../../../components/TextItem/TextItem';
 import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
 import { InformationFieldsStyle } from './InformationFields.style';
+import { colors } from '../../../../theme';
 
 const EmailField = () => {
   const { t } = useTranslation();
@@ -82,7 +83,7 @@ const TypeField = () => {
             onPress={() => {
               onChange(TaskerType.INDIVIDUAL);
             }}>
-            <UserIcon />
+            <UserIcon color={colors.dark700} />
             <Text>{t(`tasker.type.${TaskerType.INDIVIDUAL}`)}</Text>
           </CustomSelectionButton>
           <CustomSelectionButton
@@ -91,7 +92,7 @@ const TypeField = () => {
             onPress={() => {
               onChange(TaskerType.BUSINESS);
             }}>
-            <BuildingIcon />
+            <BuildingIcon color={colors.gray300} />
             <Text>{t(`tasker.type.${TaskerType.BUSINESS}`)}</Text>
           </CustomSelectionButton>
         </View>

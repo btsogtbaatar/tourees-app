@@ -4,6 +4,7 @@ const AddressMapViewStyle = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
+    padding: 16,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -11,7 +12,7 @@ const AddressMapViewStyle = StyleSheet.create({
   },
 
   controllerContainer: {
-    paddingHorizontal: 16,
+    marginHorizontal: 16,
     zIndex: 1,
     position: 'absolute',
     width: '100%',

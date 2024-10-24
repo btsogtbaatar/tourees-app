@@ -31,7 +31,7 @@ const getBackgroundColor = (routeName: string) => {
 };
 
 const hidingHeaderScreens = ['HomeTab', 'Photos'];
-const transparentHeaderScreens = ['AddressMapView'];
+const transparentHeaderScreens = [''];
 
 const customScreenOption:
   | ((props: {

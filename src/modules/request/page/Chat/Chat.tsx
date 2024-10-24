@@ -80,6 +80,9 @@ const Chat = (props: Props) => {
   useStompConnection<TaskModel.Chat>(`chat/${id}`, res => {
     setState(prev => {
       const current = { ...res, type: SeparatorType.CHAT };
+      if (prev.length === 0) {
+        return [current];
+      }
       const previous = prev[0] as TaskModel.Chat;
       const chats = addSeparator(
         previous,
