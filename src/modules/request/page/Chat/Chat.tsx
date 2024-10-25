@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import moment, { Moment } from 'moment';
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -70,7 +70,7 @@ const Chat = (props: Props) => {
       setState(value);
     });
     getConversation(id).then(data => {
-      if (data.contractor.id != user?.id) {
+      if (data.contractor.id !== user?.id) {
         setProfile(data.contractor);
       } else {
         setProfile(data.customer);
@@ -80,6 +80,9 @@ const Chat = (props: Props) => {
   useStompConnection<TaskModel.Chat>(`chat/${id}`, res => {
     setState(prev => {
       const current = { ...res, type: SeparatorType.CHAT };
+      if (prev.length === 0) {
+        return [current];
+      }
       const previous = prev[0] as TaskModel.Chat;
       const chats = addSeparator(
         previous,
@@ -127,10 +130,7 @@ const Chat = (props: Props) => {
             <MessageWidget
               user={profile}
               onClick={() => {
-                props.navigation.navigate('TaskerStack', {
-                  screen: 'TaskerView',
-                  params: { id: profile.id },
-                });
+                props.navigation.navigate('TaskerView', { id: profile.id });
               }}
             />
           )}

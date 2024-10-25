@@ -52,7 +52,8 @@ export default function Offer(props: OfferProps) {
         {props.offer.description}
       </Text>
       <View style={OfferStyle.bottom}>
-        {props.task.customer.user.id === user?.id && (
+        {(props.task.customer.user.id === user?.id ||
+          props.offer.contractor.user.id === user?.id) && (
           <View style={{ marginRight: horizontalScale(8) }}>
             <CustomGradientButton
               style={{
@@ -61,7 +62,9 @@ export default function Offer(props: OfferProps) {
               }}
               title={t('offer.chat')}
               onPress={() => {
-                navigation.navigate('Chat', { id: props.offer.conversation.id });
+                navigation.navigate('Chat', {
+                  id: props.offer.conversation.id,
+                });
               }}
             />
           </View>

@@ -11,9 +11,7 @@ export function signUp(
   return api.post(`${authBaseUrl}/contractors/register`, customer);
 }
 
-export async function activate(
-  otp: AuthModel.Otp,
-): Promise<AuthModel.User> {
+export async function activate(otp: AuthModel.Otp): Promise<AuthModel.User> {
   let token: AuthModel.Token = await api.post(`${authBaseUrl}/activate`, otp);
   return await authenticate(token);
 }
@@ -29,38 +27,36 @@ export async function tokenCredentials(
   return await authenticate(token);
 }
 
-export async function tokenOtp(
-  otp: AuthModel.Otp,
-): Promise<AuthModel.User> {
+export async function tokenOtp(otp: AuthModel.Otp): Promise<AuthModel.User> {
   let token: AuthModel.Token = await api.post(`${authBaseUrl}/token/otp`, otp);
   return await authenticate(token);
 }
 
-export function createPin(
-  pin: AuthModel.CreatePin,
-): Promise<AuthModel.User> {
+export function createPin(pin: AuthModel.CreatePin): Promise<AuthModel.User> {
   return api.post(`${authBaseUrl}/pin`, pin);
 }
 
-export function updatePin(
-  pin: AuthModel.UpdatePin,
-): Promise<AuthModel.User> {
+export function updatePin(pin: AuthModel.UpdatePin): Promise<AuthModel.User> {
   return api.put(`${authBaseUrl}/pin`, pin);
+}
+function socialAuthenticate(
+  socialToken: AuthModel.SocialToken,
+): Promise<AuthModel.Token> {
+  return api.post(`${authBaseUrl}/contractors/social`, {
+    token: socialToken.token,
+    type: socialToken.type,
+  });
 }
 
 export async function socialCustomerAuthenticate(
   socialToken: AuthModel.SocialToken,
 ): Promise<AuthModel.User> {
-  let token: AuthModel.Token = await api.post(
-    `${authBaseUrl}/contractors/social`,
-    socialToken,
-  );
+  let token: AuthModel.Token = await socialAuthenticate(socialToken);
+  console.log('Token resp:', token);
   return await authenticate(token);
 }
 
-async function authenticate(
-  token: AuthModel.Token,
-): Promise<AuthModel.User> {
+async function authenticate(token: AuthModel.Token): Promise<AuthModel.User> {
   store.dispatch(setToken(token));
 
   let user: AuthModel.User = await introspect();

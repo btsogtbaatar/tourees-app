@@ -61,7 +61,6 @@ export default function AddressMapView(props: Readonly<AddressMapViewProps>) {
       return _addresses;
     });
   };
-
   return (
     <View style={AddressMapViewStyle.container}>
       <View
