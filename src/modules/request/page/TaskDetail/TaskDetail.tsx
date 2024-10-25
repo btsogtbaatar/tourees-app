@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { useSelector } from 'react-redux';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomImage from '../../../../components/CustomImage/CustomImage';
@@ -25,7 +26,8 @@ import { RootStackParamList } from '../../../../navigation/types';
 import { colors, Typography } from '../../../../theme';
 import { formatDate, formatTime } from '../../../../utilities/date';
 import { getImageUrl } from '../../../../utilities/image';
-import { TaskModel } from '../../entities/request.model';
+import { selectUser } from '../../../Auth/slice/authSlice';
+import { TaskModel, TaskStatus } from '../../entities/request.model';
 import { getTask } from '../../service/request.service';
 import { TaskDetailStyle } from './TaskDetail.style';
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskDetail'>;
@@ -36,12 +38,17 @@ const TaskDetail = (props: Props) => {
   const { t } = useTranslation();
   const rootNavigation = useNavigation();
   const isFocused = useIsFocused();
+  const user = useSelector(selectUser);
 
   useEffect(() => {
+    fetchTask();
+  }, [isFocused]);
+
+  const fetchTask = () => {
     getTask(id).then(res => {
       setTask(res);
     });
-  }, [isFocused]);
+  };
 
   const formattedDate = () => {
     return moment(task?.createdDate).format('yyyy-MM-DD mm:ss');
@@ -55,7 +62,12 @@ const TaskDetail = (props: Props) => {
     <CustomSafeAreaView style={{ backgroundColor: colors.white }}>
       <ScrollView>
         <ContainerView style={TaskDetailStyle.container}>
-          <Text style={TaskDetailStyle.title}>{task?.name}</Text>
+          <View style={TaskDetailStyle.header}>
+            <Text style={TaskDetailStyle.title}>{task?.name}</Text>
+            <Text style={TaskDetailStyle.status}>
+              {t(`request.status.${task?.status}`)}
+            </Text>
+          </View>
           <View style={[TaskDetailStyle.row, { alignItems: 'flex-start' }]}>
             <View style={TaskDetailStyle.col}>
               <Text style={TaskDetailStyle.label}>{t('request.postedBy')}</Text>
@@ -142,15 +154,16 @@ const TaskDetail = (props: Props) => {
             <Text style={TaskDetailStyle.price}>
               {Intl.NumberFormat().format(task?.budget ?? 0)}₮
             </Text>
-            <View style={{ width: '100%' }}>
-              <CustomGradientButton
-                title={t('request.offerButton')}
-                onPress={() =>
-                  // TODO: fix this
-                  rootNavigation.navigate('CreateOffer', { taskId: task.id })
-                }
-              />
-            </View>
+            {task.customer.user.id !== user?.id && task?.status !== TaskStatus.ASSIGNED && (
+              <View style={{ width: '100%' }}>
+                <CustomGradientButton
+                  title={t('request.offerButton')}
+                  onPress={() =>
+                    rootNavigation.navigate('CreateOffer', { taskId: task.id })
+                  }
+                />
+              </View>
+            )}
           </View>
           <View style={TaskDetailStyle.detail}>
             <Text style={TaskDetailStyle.label}>{t('request.offerLabel')}</Text>
@@ -170,7 +183,13 @@ const TaskDetail = (props: Props) => {
               )}
               keyExtractor={(item, index) => item.id.toString()}
               renderItem={({ item }) => {
-                return <Offer task={task} offer={item} />;
+                return (
+                  <Offer
+                    onApprove={() => fetchTask()}
+                    task={task}
+                    offer={item}
+                  />
+                );
               }}
             />
           </View>

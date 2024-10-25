@@ -22,6 +22,7 @@ const HomeStyle = StyleSheet.create({
   },
   listContainer: {
     marginBottom: 8,
+    marginRight: -16
   },
   inputContainer: {
     marginBottom: 8,

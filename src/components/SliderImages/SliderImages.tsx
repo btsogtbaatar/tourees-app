@@ -25,6 +25,7 @@ const SliderImages = (props: SliderImagesProps) => {
         itemHeight={200}
         autoplay={true}
         loop={true}
+        vertical={false}
         lockScrollWhileSnapping={true}
         decelerationRate={0.25}
         inactiveSlideScale={1}
