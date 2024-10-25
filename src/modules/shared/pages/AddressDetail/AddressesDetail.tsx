@@ -98,7 +98,9 @@ const AddressesDetail = (props: AddressDetailProps) => {
       <FullHeightView>
         <ContainerView>
           <FormProvider {...form}>
-            <Text style={UserRequestStyle.label}>{t('addressDetail.label')}</Text>
+            <Text style={UserRequestStyle.label}>
+              {t('addressDetail.label')}
+            </Text>
             <TextItem
               hideAction={true}
               icon={
@@ -122,12 +124,12 @@ const AddressesDetail = (props: AddressDetailProps) => {
             />
             <AddressDetailItem addressType={AddressType.To} />
           </FormProvider>
+          <CustomGradientButton
+            disabled={!form.formState.isValid}
+            title={t('b_continue')}
+            onPress={onPress}
+          />
         </ContainerView>
-        <CustomGradientButton
-          disabled={!form.formState.isValid}
-          title={t('b_continue')}
-          onPress={onPress}
-        />
       </FullHeightView>
     </CustomSafeAreaView>
   );

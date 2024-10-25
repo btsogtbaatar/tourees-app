@@ -4,6 +4,7 @@ import { Address } from '../../modules/Shared/pages/AddressMapView/AddressMapVie
 import AddressMapViewStyle from '../../modules/Shared/pages/AddressMapView/AddressMapView.style';
 import { colors } from '../../theme';
 import { LocationCircleIcon } from '../Icon';
+import { Platform } from 'react-native';
 
 const DELTA = 0.005;
 export const DEFAULT_LAT = 47.92123;
@@ -37,7 +38,13 @@ const CustomMapOneMarker = (props: Readonly<CustomMapViewProps>) => {
         });
       }}
       onRegionChangeComplete={(region: Region, details: Details) => {
-        props.onRegionChangeComplete(region);
+        if (Platform.OS === 'android') {
+          if (details.isGesture === true) {
+            props.onRegionChangeComplete(region);
+          }
+        } else if (Platform.OS === 'ios') {
+          props.onRegionChangeComplete(region);
+        }
       }}>
       <Marker coordinate={latLng}>
         {

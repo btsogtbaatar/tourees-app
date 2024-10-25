@@ -12,6 +12,7 @@ const activateSocket = (token: string) => {
     connectHeaders: {
       Authorization: `Bearer ${token}`,
     },
+    forceBinaryWSFrames: true,
     debug: str => {
       console.log('debug console:', str);
     },
@@ -34,6 +35,7 @@ const disableSocket = () => {
   if (!client) {
     return;
   }
+  console.log('deactivating socket');
   client.deactivate();
   client = null;
 };
@@ -57,7 +59,6 @@ export function useStompConnection<T>(path: string, fn: (value: T) => void) {
     if (!client) {
       return;
     }
-    console.log('creating');
     if (ref.current) {
       return;
     }
