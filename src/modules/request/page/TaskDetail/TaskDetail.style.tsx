@@ -14,6 +14,15 @@ export const TaskDetailStyle = StyleSheet.create({
     ...Typography.textLarge,
     ...getFontWeight(FontWeight.bold),
   },
+  status: {
+    ...Typography.textRegular,
+    ...getFontWeight(FontWeight.bold),
+    color: colors.primaryGradient,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',

@@ -10,15 +10,8 @@ export enum TaskStatus {
   COMPLETED = 'COMPLETED',
   CANCELLED = 'CANCELLED',
 }
-export declare namespace TaskModel {
-  export enum TaskStatus {
-    NEW,
-    ASSIGNED,
-    IN_PROGRESS,
-    COMPLETED,
-    CANCELLED,
-  }
 
+export declare namespace TaskModel {
   export type OfferTask = {
     id: number;
     customer: User;

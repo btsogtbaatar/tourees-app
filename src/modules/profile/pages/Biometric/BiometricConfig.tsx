@@ -38,11 +38,16 @@ const BiometricConfig = () => {
           dispatch(disableBiometric());
         } else {
           dispatch(enableBiometric());
+          if (!userHasPin) {
+            navigation.navigate('CreatePin', {});
+          } else {
+            navigation.navigate('EnterPin', { authenticating: true });
+          }
         }
       },
     },
   ];
-  
+
   if (userHasPin === true) {
     biometricMenu.push({
       values: [t('biometric.changePin')],

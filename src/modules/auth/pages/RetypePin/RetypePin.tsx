@@ -35,7 +35,7 @@ const RetypePin = (props: RetypePinProps) => {
                 Keychain.ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
             })
               .then(() => {
-                setHasPin(true);
+                dispatch(setHasPin(true));
                 notifyMessage(t('successful'), t('pin.success'));
                 navigation.navigate('HomeTab', { screen: 'Profile' });
               })
@@ -52,7 +52,7 @@ const RetypePin = (props: RetypePinProps) => {
               Keychain.ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
           })
             .then(() => {
-              setHasPin(true);
+              dispatch(setHasPin(true));
               dispatch(enableBiometric());
               navigation.navigate('HomeTab', { screen: 'Home' });
             })

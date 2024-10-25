@@ -270,11 +270,13 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                     )}
                   </View>
                 </FormProvider>
-                <CustomGradientButton
-                  disabled={!form.formState.isValid}
-                  title={t('b_continue')}
-                  onPress={handleSubmit(onSubmit)}
-                />
+                <View style={UserRequestStyle.button}>
+                  <CustomGradientButton
+                    disabled={!form.formState.isValid}
+                    title={t('b_continue')}
+                    onPress={handleSubmit(onSubmit)}
+                  />
+                </View>
               </ContainerView>
             </ScrollView>
           </View>

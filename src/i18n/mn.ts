@@ -90,7 +90,7 @@ export default {
   },
   profile: {
     language: 'Хэл',
-    mongolia: 'Монгол',
+    language_label: 'Монгол',
     biometric: 'Биометрик',
     l_user_infomation: 'Ерөнхий мэдээлэл',
     l_my_offer_tasks: 'Миний санал үүсгэсэн таскууд',
@@ -100,6 +100,7 @@ export default {
     t_serviceterm: 'Үйлчилгээний нөхцөл',
     l_help: 'Тусламж',
     l_logout: 'Гарах',
+    l_service: 'Үйчилгээ нэмэх',
     seeProfile: 'Профайл харах',
     imageSuccess: {
       title: 'Амжилттай',
@@ -202,6 +203,7 @@ export default {
     description: 'Тайлбар',
     enterFields: 'Та доорх талбаруудад саналынхаа мэдээллүүдийг оруулна уу.',
     successCreate: 'Таны санал амжилттай илгээгдлээ.',
+    successOffer: 'Та саналыг амжилттай хүлээж авлаа.',
     successEdit: 'Таны санал амжилттай засагдлаа.',
     successApprove: 'Та саналыг амжилттай хүлээн авлаа.',
     notFound: 'Санал одоогоор байхгүй байна.',

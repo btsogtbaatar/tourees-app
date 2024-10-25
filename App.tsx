@@ -47,8 +47,6 @@ function App(): React.JSX.Element {
       iosClientId: process.env.GOOGLE_IOS_CLIENT_ID,
     });
 
-    i18n.changeLanguage('en');
-
     // Ignore API call errors
     LogBox.ignoreLogs([
       /^Possible unhandled promise rejection/,

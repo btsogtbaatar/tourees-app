@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { Theme } from 'react-native-calendars/src/types';
 import { FontWeight, getFontWeight, Typography } from '../../../../theme';
 import { colors } from '../../../../theme/colors';
+import { verticalScale } from '../../../../utilities';
 export const calendarTheme: Theme = {
   dayTextColor: colors.textColor,
   textSectionTitleColor: colors.gray700,
@@ -13,6 +14,9 @@ export const calendarTheme: Theme = {
 };
 
 const UserRequestStyle = StyleSheet.create({
+  flexOne: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     flexDirection: 'row',
@@ -57,6 +61,9 @@ const UserRequestStyle = StyleSheet.create({
     color: colors.primaryGradient,
     marginRight: 8,
   },
+  button: {
+    marginTop: verticalScale(12),
+  }
 });
 
 export default UserRequestStyle;

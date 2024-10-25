@@ -1,19 +1,25 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, SectionList, Text, View } from 'react-native';
+import {
+  FlatList,
+  RefreshControl,
+  ScrollView,
+  SectionList,
+  Text,
+  View,
+} from 'react-native';
 import { useSelector } from 'react-redux';
 import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
-import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import { SearchMdIcon } from '../../../../components/Icon';
 import ImageItem from '../../../../components/ImageItem/ImageItem';
-import Loading from '../../../../components/Loading/Loading';
 import TaskerServiceList from '../../../../components/TaskerServiceList/TaskerServiceList';
 import { useAppDispatch } from '../../../../context/app/store';
 import { useTaskerServiceFetch } from '../../../../hooks/useTaskerServiceFetch';
 import { colors } from '../../../../theme/colors';
+import { verticalScale } from '../../../../utilities';
 import { updateFirebaseToken } from '../../../Auth/services';
 import {
   selectAuthenticated,
@@ -26,28 +32,34 @@ import { getCategories as fetchCategories } from '../../services/category.servic
 import HomeStyle from './Home.style';
 
 const Home = () => {
-  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(true);
   const [categories, setCategories] = useState<SharedModel.Category[]>();
   const navigation = useNavigation();
   const { t } = useTranslation(undefined, { keyPrefix: 'home' });
   const isAuthenticated = useSelector(selectAuthenticated);
   const dispatch = useAppDispatch();
   const firebaseToken = useSelector(selectFirebaseToken);
+  const { filteredGroupedTaskService } = useTaskerServiceFetch();
 
   useEffect(() => {
     if (firebaseToken !== undefined && isAuthenticated === true) {
       updateFirebaseToken(firebaseToken);
     }
   }, [firebaseToken, isAuthenticated]);
-  const { filteredGroupedTaskService } = useTaskerServiceFetch();
+
+  const onRefresh = React.useCallback(() => {
+    getCateories();
+  }, []);
 
   const getCateories = () => {
+    setRefreshing(true);
+
     fetchCategories()
       .then((response: SharedModel.Pagination<SharedModel.Category>) => {
         setCategories(response.content);
       })
       .finally(() => {
-        setLoading(false);
+        setRefreshing(false);
       });
   };
 
@@ -63,10 +75,11 @@ const Home = () => {
 
   const renderSeparator = () => <View style={HomeStyle.divider} />;
 
-  return loading ? (
-    <Loading />
-  ) : (
-    <CustomSafeAreaView>
+  return (
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }>
       <ContainerView>
         <Text style={HomeStyle.title}>{t('category.question')}</Text>
         <View style={HomeStyle.inputContainer}>
@@ -120,7 +133,7 @@ const Home = () => {
             />
           </View>
         )}
-        <View>
+        <View style={{ marginTop: verticalScale(8) }}>
           {filteredGroupedTaskService && (
             <View style={HomeStyle.serviceSearchContainer}>
               <Text style={HomeStyle.title}>{t('services.question')}</Text>
@@ -138,6 +151,7 @@ const Home = () => {
             </View>
           )}
           <SectionList
+            scrollEnabled={false}
             sections={filteredGroupedTaskService}
             showsVerticalScrollIndicator={false}
             keyExtractor={(item, index) => item.name + index}
@@ -153,7 +167,7 @@ const Home = () => {
           />
         </View>
       </ContainerView>
-    </CustomSafeAreaView>
+    </ScrollView>
   );
 };
 

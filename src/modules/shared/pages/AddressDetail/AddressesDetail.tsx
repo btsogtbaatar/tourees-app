@@ -97,37 +97,41 @@ const AddressesDetail = (props: AddressDetailProps) => {
     <CustomSafeAreaView>
       <FullHeightView>
         <ContainerView>
-          <FormProvider {...form}>
-            <Text style={UserRequestStyle.label}>{t('addressDetail.label')}</Text>
-            <TextItem
-              hideAction={true}
-              icon={
-                <LocationCircleIcon
-                  color={colors.primaryGradient}
-                  style={UserRequestStyle.icon}
-                />
-              }
-              label={t('addressDetail.from')}
-            />
-            <AddressDetailItem addressType={AddressType.From} />
-            <TextItem
-              hideAction={true}
-              icon={
-                <LocationIcon
-                  color={colors.primaryGradient}
-                  style={UserRequestStyle.icon}
-                />
-              }
-              label={t('addressDetail.to')}
-            />
-            <AddressDetailItem addressType={AddressType.To} />
-          </FormProvider>
+          <View style={UserRequestStyle.flexOne}>
+            <FormProvider {...form}>
+              <Text style={UserRequestStyle.label}>
+                {t('addressDetail.label')}
+              </Text>
+              <TextItem
+                hideAction={true}
+                icon={
+                  <LocationCircleIcon
+                    color={colors.primaryGradient}
+                    style={UserRequestStyle.icon}
+                  />
+                }
+                label={t('addressDetail.from')}
+              />
+              <AddressDetailItem addressType={AddressType.From} />
+              <TextItem
+                hideAction={true}
+                icon={
+                  <LocationIcon
+                    color={colors.primaryGradient}
+                    style={UserRequestStyle.icon}
+                  />
+                }
+                label={t('addressDetail.to')}
+              />
+              <AddressDetailItem addressType={AddressType.To} />
+            </FormProvider>
+          </View>
+          <CustomGradientButton
+            disabled={!form.formState.isValid}
+            title={t('b_continue')}
+            onPress={onPress}
+          />
         </ContainerView>
-        <CustomGradientButton
-          disabled={!form.formState.isValid}
-          title={t('b_continue')}
-          onPress={onPress}
-        />
       </FullHeightView>
     </CustomSafeAreaView>
   );

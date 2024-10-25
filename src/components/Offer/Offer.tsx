@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../modules/Auth/slice/authSlice';
-import { TaskModel } from '../../modules/Request/entities/request.model';
+import { TaskModel, TaskStatus } from '../../modules/Request/entities/request.model';
 import { approveOffer } from '../../modules/Request/service/request.service';
 import { colors, Typography } from '../../theme';
 import { horizontalScale } from '../../utilities';
@@ -16,6 +16,7 @@ import { OfferStyle } from './Offer.style';
 export interface OfferProps {
   task: TaskModel.TaskResponse;
   offer: TaskModel.OfferResponse;
+  onApprove?: () => void;
 }
 
 export default function Offer(props: OfferProps) {
@@ -65,7 +66,7 @@ export default function Offer(props: OfferProps) {
             />
           </View>
         )}
-        {props.offer.contractor?.user.id === user?.id && (
+        {props.offer.contractor?.user.id === user?.id && props.task.status !== TaskStatus.ASSIGNED && (
           <View style={{ marginRight: horizontalScale(8) }}>
             <CustomGradientButton
               style={{
@@ -79,7 +80,7 @@ export default function Offer(props: OfferProps) {
             />
           </View>
         )}
-        {props.task.customer.user.id === user?.id && (
+        {props.task.customer.user.id === user?.id && props.task.status !== TaskStatus.ASSIGNED && (
           <CustomGradientButton
             style={{
               text: { ...Typography.textSmall, color: colors.white },
@@ -88,7 +89,8 @@ export default function Offer(props: OfferProps) {
             title={t('offer.approve')}
             onPress={() => {
               approveOffer(props.offer.id).then(() => {
-                notifyMessage(t('successful'), t('offer.successCreate'));
+                notifyMessage(t('successful'), t('offer.successOffer'));
+                props.onApprove && props.onApprove(); 
               });
             }}
           />
