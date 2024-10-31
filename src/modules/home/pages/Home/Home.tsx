@@ -81,6 +81,25 @@ const Home = () => {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
       <ContainerView>
+        {isAuthenticated === false && (
+          <View style={HomeStyle.bannerContainer}>
+            <View style={HomeStyle.bannerItem}>
+              <Banner
+                gradientColors={[colors.primaryGradient, colors.primary500]}
+                key={0}
+                title={t('login')}
+                onPress={() => navigation.navigate('Login')}
+              />
+            </View>
+            <View style={HomeStyle.bannerItem}>
+              <Banner
+                key={1}
+                title={t('signUp')}
+                onPress={() => navigation.navigate('Register')}
+              />
+            </View>
+          </View>
+        )}
         <Text style={HomeStyle.title}>{t('category.question')}</Text>
         <View style={HomeStyle.inputContainer}>
           <CustomInput
@@ -117,22 +136,6 @@ const Home = () => {
             )}
           />
         </View>
-        {!isAuthenticated && (
-          <Banner
-            key={0}
-            title={t('loginAsContractor')}
-            onPress={() => navigation.navigate('Login')}
-          />
-        )}
-        {!isAuthenticated && (
-          <View style={{ marginTop: 5 }}>
-            <Banner
-              key={1}
-              title={t('signUpAsContractor')}
-              onPress={() => navigation.navigate('Register')}
-            />
-          </View>
-        )}
         <View style={{ marginTop: verticalScale(8) }}>
           {filteredGroupedTaskService && (
             <View style={HomeStyle.serviceSearchContainer}>

@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native'
-import { colors, Typography } from '../../theme'
-import { verticalScale } from '../../utilities'
+import { StyleSheet } from 'react-native';
+import { colors, Typography } from '../../theme';
+import { verticalScale } from '../../utilities';
 
 export const CustomCurrencyInputStyle = StyleSheet.create({
   formController: {
@@ -14,5 +14,6 @@ export const CustomCurrencyInputStyle = StyleSheet.create({
     ...Typography.textExtraLarge,
     width: '100%',
     textAlign: 'center',
+    color: colors.gray700,
   },
-})
+});
