@@ -9,13 +9,14 @@ import BannerStyle from './Banner.style';
 interface BannerProps {
   title: string;
   onPress: () => void;
+  gradientColors?: string[];
 }
 
 const Banner = (props: BannerProps) => {
   return (
     <TouchableOpacity onPress={props.onPress}>
       <LinearGradient
-        colors={[colors.gray500, colors.dark700]}
+        colors={props.gradientColors ?? [colors.gray500, colors.dark700]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         locations={[0, 1]}

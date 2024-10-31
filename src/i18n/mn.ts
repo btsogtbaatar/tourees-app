@@ -123,8 +123,8 @@ export default {
       title: 'Үйлчилгээний төрлүүд',
       search: 'Хайх',
     },
-    loginAsContractor: 'Үйлчилгээ үзүүлэгчээр нэвтрэх',
-    signUpAsContractor: 'Үйлчилгээ үзүүлэгчээр бүртгүүлэх',
+    login: 'Нэвтрэх',
+    signUp: 'Бүртгүүлэх',
     services: {
       main: 'Үйлчилгээ',
       search: 'Үйлчилгээнээс хайх',
@@ -207,7 +207,7 @@ export default {
     successEdit: 'Таны санал амжилттай засагдлаа.',
     successApprove: 'Та саналыг амжилттай хүлээн авлаа.',
     notFound: 'Санал одоогоор байхгүй байна.',
-    chat: 'Чатлах', 
+    chat: 'Чатлах',
     edit: 'Засах',
   },
   biometric: {

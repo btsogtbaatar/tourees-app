@@ -5,7 +5,7 @@ import {
   getFontWeight,
   Typography,
 } from '../../../../theme';
-import { verticalScale } from '../../../../utilities/metrics';
+import { horizontalScale, verticalScale } from '../../../../utilities/metrics';
 
 const HomeStyle = StyleSheet.create({
   container: {
@@ -22,7 +22,7 @@ const HomeStyle = StyleSheet.create({
   },
   listContainer: {
     marginBottom: 8,
-    marginRight: -16
+    marginRight: -16,
   },
   inputContainer: {
     marginBottom: 8,
@@ -38,6 +38,14 @@ const HomeStyle = StyleSheet.create({
   },
   listContentContainer: {
     paddingBottom: verticalScale(150),
+  },
+  bannerContainer: {
+    flexDirection: 'row',
+    gap: horizontalScale(8),
+    marginBottom: verticalScale(8),
+  },
+  bannerItem: {
+    flex: 1,
   },
 });
 

@@ -120,162 +120,166 @@ function Register({ navigation }: RegisterProps) {
     <CustomSafeAreaView>
       <CustomKeyboardAvoidingView>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <ContainerView>
-            <View style={RegisterStyle.container}>
-              <View style={RegisterStyle.steps}>
-                <Steps currentStepIndex={1} totalSteps={3} />
-              </View>
-              <View style={RegisterStyle.tabController}>
-                <TabController
-                  firstTabLabel={t('i_email')}
-                  secondTabLabel={t('i_phone')}
-                  onSelectedTabChange={setAuthChannel}
-                />
-              </View>
-              <FormProvider {...form}>
-                <ScrollView>
-                  {authChannel === AuthChannel.Email && (
-                    <CustomFormInput
-                      label={t('login.email.label')}
-                      placeholder={t('login.email.placeholder')}
-                      name={'email'}
-                      keyboardType="email-address"
-                    />
-                  )}
-                  {authChannel === AuthChannel.Phone && (
-                    <CustomFormInput
-                      label={t('login.phone.label')}
-                      placeholder={t('login.phone.placeholder')}
-                      name={'phone'}
-                      keyboardType="phone-pad"
-                    />
-                  )}
-                  <View style={RegisterStyle.formController}>
-                    <CustomFormInput
-                      placeholder={t('l_username')}
-                      name={'username'}
-                      label={t('l_usernamelabel')}
-                    />
-                  </View>
-                  <View style={RegisterStyle.formController}>
-                    <CustomFormInput
-                      placeholder={t('form.firstName.label')}
-                      name={'firstName'}
-                      label={t('form.firstName.placeHolder')}
-                    />
-                  </View>
-                  <View style={RegisterStyle.formController}>
-                    <CustomFormInput
-                      placeholder={t('form.lastName.label')}
-                      name={'lastName'}
-                      label={t('form.lastName.placeHolder')}
-                    />
-                  </View>
-                  <View style={RegisterStyle.formController}>
-                    <Controller
-                      name="type"
-                      render={({ field: { onChange, value } }) => (
-                        <View style={RegisterStyle.type}>
-                          <CustomSelectionButton
-                            style={RegisterStyle.typeButtons}
-                            active={value === TaskerType.INDIVIDUAL}
-                            onPress={() => {
-                              onChange(TaskerType.INDIVIDUAL);
-                            }}>
-                            <UserIcon color={colors.gray300}  />
-                            <Text>
-                              {t(`tasker.type.${TaskerType.INDIVIDUAL}`)}
-                            </Text>
-                          </CustomSelectionButton>
-                          <CustomSelectionButton
-                            style={RegisterStyle.typeButtons}
-                            active={value === TaskerType.BUSINESS}
-                            onPress={() => {
-                              onChange(TaskerType.BUSINESS);
-                            }}>
-                            <BuildingIcon />
-                            <Text>
-                              {t(`tasker.type.${TaskerType.BUSINESS}`)}
-                            </Text>
-                          </CustomSelectionButton>
-                        </View>
-                      )}
-                    />
-                    {form.formState.errors.type && (
-                      <InputError error={form.formState.errors.type.message} />
-                    )}
-                  </View>
-                  <View style={RegisterStyle.formController}>
-                    <Controller
-                      name="profilePicture"
-                      render={({ field: { onChange } }) => (
-                        <ImageUploadButton
-                          limit={1}
-                          onImageSelection={images => {
-                            let image = images.pop();
-                            uploadFile(image).then(file => {
-                              onChange(file);
-                            });
-                          }}
-                          onDelete={index => {
-                            onChange(undefined);
-                          }}
-                        />
-                      )}
-                    />
-                    {form.formState.errors.profilePicture && (
-                      <InputError
-                        error={form.formState.errors.profilePicture.message}
+          <ScrollView>
+            <ContainerView>
+              <View style={RegisterStyle.container}>
+                <View style={RegisterStyle.steps}>
+                  <Steps currentStepIndex={1} totalSteps={3} />
+                </View>
+                <View style={RegisterStyle.tabController}>
+                  <TabController
+                    firstTabLabel={t('i_email')}
+                    secondTabLabel={t('i_phone')}
+                    onSelectedTabChange={setAuthChannel}
+                  />
+                </View>
+                <FormProvider {...form}>
+                  <ScrollView>
+                    {authChannel === AuthChannel.Email && (
+                      <CustomFormInput
+                        label={t('login.email.label')}
+                        placeholder={t('login.email.placeholder')}
+                        name={'email'}
+                        keyboardType="email-address"
                       />
                     )}
-                  </View>
-                  <View style={RegisterStyle.formController}>
-                    <Controller
-                      name="address"
-                      render={({ field: { onChange } }) => (
-                        <TextItem
-                          icon={
-                            <LocationCircleIcon
-                              color={colors.primaryGradient}
-                              width={20}
-                              height={20}
-                            />
-                          }
-                          label={
-                            address.displayName
-                              ? address.displayName
-                              : t('form.address.placeHolder')
-                          }
-                          buttonText={t('userRequest.address.edit')}
-                          onPress={() => {
-                            rootNavigation.navigate('AddressMapView', {
-                              prevAddress: address,
-                              title: t('form.address.label'),
-                              onGoBack: address => {
-                                const _address = { ...address };
-                                _address.displayName = getAddress(_address);
-                                setAddress(_address);
-                                onChange(_address.displayName);
-                              },
-                            });
-                          }}
-                        />
-                      )}
-                    />
-                    {form.formState.errors.address && (
-                      <InputError
-                        error={form.formState.errors.address.message}
+                    {authChannel === AuthChannel.Phone && (
+                      <CustomFormInput
+                        label={t('login.phone.label')}
+                        placeholder={t('login.phone.placeholder')}
+                        name={'phone'}
+                        keyboardType="phone-pad"
                       />
                     )}
-                  </View>
-                </ScrollView>
-              </FormProvider>
-            </View>
-            <CustomGradientButton
-              onPress={form.handleSubmit(onContinue)}
-              title={t('signUp.continue')}
-            />
-          </ContainerView>
+                    <View style={RegisterStyle.formController}>
+                      <CustomFormInput
+                        placeholder={t('l_username')}
+                        name={'username'}
+                        label={t('l_usernamelabel')}
+                      />
+                    </View>
+                    <View style={RegisterStyle.formController}>
+                      <CustomFormInput
+                        placeholder={t('form.firstName.label')}
+                        name={'firstName'}
+                        label={t('form.firstName.placeHolder')}
+                      />
+                    </View>
+                    <View style={RegisterStyle.formController}>
+                      <CustomFormInput
+                        placeholder={t('form.lastName.label')}
+                        name={'lastName'}
+                        label={t('form.lastName.placeHolder')}
+                      />
+                    </View>
+                    <View style={RegisterStyle.formController}>
+                      <Controller
+                        name="type"
+                        render={({ field: { onChange, value } }) => (
+                          <View style={RegisterStyle.type}>
+                            <CustomSelectionButton
+                              style={RegisterStyle.typeButtons}
+                              active={value === TaskerType.INDIVIDUAL}
+                              onPress={() => {
+                                onChange(TaskerType.INDIVIDUAL);
+                              }}>
+                              <UserIcon color={colors.gray300} />
+                              <Text>
+                                {t(`tasker.type.${TaskerType.INDIVIDUAL}`)}
+                              </Text>
+                            </CustomSelectionButton>
+                            <CustomSelectionButton
+                              style={RegisterStyle.typeButtons}
+                              active={value === TaskerType.BUSINESS}
+                              onPress={() => {
+                                onChange(TaskerType.BUSINESS);
+                              }}>
+                              <BuildingIcon />
+                              <Text>
+                                {t(`tasker.type.${TaskerType.BUSINESS}`)}
+                              </Text>
+                            </CustomSelectionButton>
+                          </View>
+                        )}
+                      />
+                      {form.formState.errors.type && (
+                        <InputError
+                          error={form.formState.errors.type.message}
+                        />
+                      )}
+                    </View>
+                    <View style={RegisterStyle.formController}>
+                      <Controller
+                        name="profilePicture"
+                        render={({ field: { onChange } }) => (
+                          <ImageUploadButton
+                            limit={1}
+                            onImageSelection={images => {
+                              let image = images.pop();
+                              uploadFile(image).then(file => {
+                                onChange(file);
+                              });
+                            }}
+                            onDelete={index => {
+                              onChange(undefined);
+                            }}
+                          />
+                        )}
+                      />
+                      {form.formState.errors.profilePicture && (
+                        <InputError
+                          error={form.formState.errors.profilePicture.message}
+                        />
+                      )}
+                    </View>
+                    <View style={RegisterStyle.formController}>
+                      <Controller
+                        name="address"
+                        render={({ field: { onChange } }) => (
+                          <TextItem
+                            icon={
+                              <LocationCircleIcon
+                                color={colors.primaryGradient}
+                                width={20}
+                                height={20}
+                              />
+                            }
+                            label={
+                              address.displayName
+                                ? address.displayName
+                                : t('form.address.placeHolder')
+                            }
+                            buttonText={t('userRequest.address.edit')}
+                            onPress={() => {
+                              rootNavigation.navigate('AddressMapView', {
+                                prevAddress: address,
+                                title: t('form.address.label'),
+                                onGoBack: address => {
+                                  const _address = { ...address };
+                                  _address.displayName = getAddress(_address);
+                                  setAddress(_address);
+                                  onChange(_address.displayName);
+                                },
+                              });
+                            }}
+                          />
+                        )}
+                      />
+                      {form.formState.errors.address && (
+                        <InputError
+                          error={form.formState.errors.address.message}
+                        />
+                      )}
+                    </View>
+                  </ScrollView>
+                </FormProvider>
+              </View>
+              <CustomGradientButton
+                onPress={form.handleSubmit(onContinue)}
+                title={t('signUp.continue')}
+              />
+            </ContainerView>
+          </ScrollView>
         </TouchableWithoutFeedback>
       </CustomKeyboardAvoidingView>
     </CustomSafeAreaView>

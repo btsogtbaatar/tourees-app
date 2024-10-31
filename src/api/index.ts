@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = '192.168.4.22:8080';
+const baseURL = '35.74.204.126:8080';
 const defaultUrl = `http://${baseURL}`;
 const imageUrl = `${defaultUrl}/file/resource/`;
 const brokerUrl = `ws://${baseURL}/ws/websocket`;

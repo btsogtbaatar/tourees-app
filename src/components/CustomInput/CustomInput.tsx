@@ -149,6 +149,7 @@ const CustomInput = forwardRef<CustomInputRef, CustomInputProps>(
                   ref={textInputRef}
                   onBlur={onBlur}
                   onFocus={onFocus}
+                  placeholderTextColor={colors.gray200}
                   multiline={props.numberOfLines ? true : false}
                   style={[
                     CustomInputStyle.input,

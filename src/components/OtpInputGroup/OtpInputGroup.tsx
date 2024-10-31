@@ -20,6 +20,7 @@ export default function OtpInputGroup(props: Readonly<OtpInputGroupProps>) {
           containerStyle: OtpInputGroupStyle.wrapper,
           pinCodeContainerStyle: OtpInputGroupStyle.digits,
           pinCodeTextStyle: {
+            color: colors.gray700,
             fontFamily: fontFamily,
           },
         }}
