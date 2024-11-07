@@ -1,8 +1,10 @@
 import { useNavigation } from '@react-navigation/core';
 import { useIsFocused } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { useSelector } from 'react-redux';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomImage from '../../../../components/CustomImage/CustomImage';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
@@ -10,16 +12,14 @@ import FullHeightView from '../../../../components/FullHeightView/FullHeightView
 import HeaderBar from '../../../../components/HeaderBar/HeaderBar';
 import { HeaderEditIcon } from '../../../../components/Icon';
 import RemarkTextView from '../../../../components/RemarkTextView/RemarkTextView';
+import { RootStackParamList } from '../../../../navigation/types';
 import { horizontalScale, moderateScale } from '../../../../utilities/metrics';
+import { selectUser } from '../../../Auth/slice/authSlice';
 import { ProfileModel } from '../../entities/profile.model';
 import { getProfile } from '../../service/profile.service';
 import { TaskerViewStyle } from './TaskerView.style';
-import { TaskerParamList } from '../../../../navigation/types';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { useSelector } from 'react-redux';
-import { selectUser } from '../../../Auth/slice/authSlice';
 
-type TaskerViewProps = NativeStackScreenProps<TaskerParamList, 'TaskerView'>;
+type TaskerViewProps = NativeStackScreenProps<RootStackParamList, 'TaskerView'>;
 
 const TaskerView = (props: TaskerViewProps) => {
   const { id } = props.route.params;
