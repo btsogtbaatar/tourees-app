@@ -15,6 +15,7 @@ interface FBLoginButtonProps {
 const FbLoginButton: React.FC<FBLoginButtonProps> = ({ onSuccess }) => {
   const { t } = useTranslation(undefined, { keyPrefix: 'login' });
   const handleLogin = () => {
+    LoginManager.setLoginBehavior('browser');
     LoginManager.logInWithPermissions(['public_profile', 'email']).then(
       result => {
         if (!result.isCancelled) {

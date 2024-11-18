@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
@@ -19,6 +19,7 @@ import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
 import { InformationFieldsStyle } from './InformationFields.style';
 import { colors } from '../../../../theme';
+import Geolocation from '@react-native-community/geolocation';
 
 const EmailField = () => {
   const { t } = useTranslation();
@@ -111,6 +112,14 @@ const AddressField = () => {
     const data = address.formattedAddress!.split(', ');
     return `${data[data.length - 3]}, ${data[data.length - 2]}`;
   };
+  useEffect(() => {
+    Geolocation.getCurrentPosition(position => {
+      const _address = { ...address };
+      _address.latitude = position.coords.latitude;
+      _address.longitude = position.coords.longitude;
+      setAddress(_address);
+    });
+  }, []);
   return (
     <Controller
       name="address"

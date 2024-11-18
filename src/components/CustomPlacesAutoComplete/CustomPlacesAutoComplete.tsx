@@ -52,7 +52,7 @@ export default function CustomPlacesAutoComplete(
       setSelectedPlace(undefined);
       setLoading(true);
 
-      getPlacesByText(text)
+      getPlacesByText(text, props.address)
         .then(setPlaces)
         .finally(() => setLoading(false));
     } else {
