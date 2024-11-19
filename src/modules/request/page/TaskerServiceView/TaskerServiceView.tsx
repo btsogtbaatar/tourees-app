@@ -16,6 +16,8 @@ import { colors } from '../../../../theme';
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { getTaskerServiceDetail } from '../../service/tasker.service';
 import TaskerServiceViewStyle from './TaskerServiceView.style';
+import { useSelector } from 'react-redux';
+import { selectAuthenticated } from '../../../Auth/slice/authSlice';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskerServiceView'>;
 const TaskerServiceView = (props: Props) => {
@@ -24,6 +26,7 @@ const TaskerServiceView = (props: Props) => {
   const [taskerService, setTaskerService] =
     useState<SharedModel.TaskerServiceModel>();
   const navigation = useNavigation();
+  const isAuthenticated = useSelector(selectAuthenticated);
 
   const getServiceDetail = () => {
     getTaskerServiceDetail(id).then((res: SharedModel.TaskerServiceModel) => {
@@ -39,6 +42,20 @@ const TaskerServiceView = (props: Props) => {
     if (lastName && firstName)
       return lastName.charAt(0).concat('.').concat(firstName);
     return '';
+  };
+
+  const onSubmit = () => {
+    if (isAuthenticated) {
+      navigation.navigate('Chat', {
+        id:
+          (taskerService?.contractor &&
+            taskerService?.contractor.user &&
+            taskerService?.contractor.user.id) ??
+          1,
+      });
+    } else {
+      navigation.navigate('Login');
+    }
   };
 
   return (
@@ -87,15 +104,7 @@ const TaskerServiceView = (props: Props) => {
         />
         <TouchableOpacity
           style={TaskerServiceViewStyle.contactContainer}
-          onPress={() => {
-            navigation.navigate('Chat', {
-              id:
-                (taskerService?.contractor &&
-                  taskerService?.contractor.user &&
-                  taskerService?.contractor.user.id) ??
-                1,
-            });
-          }}>
+          onPress={onSubmit}>
           <Text style={TaskerServiceViewStyle.contactText}>Contact Tasker</Text>
         </TouchableOpacity>
       </ContainerView>

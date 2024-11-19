@@ -44,4 +44,7 @@ export const RemarkListViewStyle = StyleSheet.create({
   marginVertical: {
     marginVertical: verticalScale(6),
   },
+  mTop16: {
+    marginTop: verticalScale(16),
+  },
 });

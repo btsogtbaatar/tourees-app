@@ -136,6 +136,7 @@ const RemarkListView = (props: RemarkListModalProps) => {
           })}
       </View>
       <CustomGradientButton
+        style={{ button: RemarkListViewStyle.mTop16 }}
         title={t('b_continue')}
         onPress={form.handleSubmit(onSubmit)}
       />
