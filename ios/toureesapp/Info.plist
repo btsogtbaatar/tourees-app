@@ -66,7 +66,7 @@
 		<key>NSCameraUsageDescription</key>
 		<string>Tourees app</string>
 		<key>NSFaceIDUsageDescription</key>
-		<string>Do you allow the app to use Face ID?</string>
+		<string>Do you allow the application to use the biometric authentication?</string>
 		<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 		<string>Do you allow the app to get your location?</string>
 		<key>NSLocationAlwaysUsageDescription</key>

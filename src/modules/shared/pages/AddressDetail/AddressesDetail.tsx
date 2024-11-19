@@ -4,7 +4,7 @@ import { t } from 'i18next';
 import React from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
@@ -95,44 +95,46 @@ const AddressesDetail = (props: AddressDetailProps) => {
 
   return (
     <CustomSafeAreaView>
-      <FullHeightView>
-        <ContainerView>
-          <View style={UserRequestStyle.flexOne}>
-            <FormProvider {...form}>
-              <Text style={UserRequestStyle.label}>
-                {t('addressDetail.label')}
-              </Text>
-              <TextItem
-                hideAction={true}
-                icon={
-                  <LocationCircleIcon
-                    color={colors.primaryGradient}
-                    style={UserRequestStyle.icon}
-                  />
-                }
-                label={t('addressDetail.from')}
-              />
-              <AddressDetailItem addressType={AddressType.From} />
-              <TextItem
-                hideAction={true}
-                icon={
-                  <LocationIcon
-                    color={colors.primaryGradient}
-                    style={UserRequestStyle.icon}
-                  />
-                }
-                label={t('addressDetail.to')}
-              />
-              <AddressDetailItem addressType={AddressType.To} />
-            </FormProvider>
-          </View>
-          <CustomGradientButton
-            disabled={!form.formState.isValid}
-            title={t('b_continue')}
-            onPress={onPress}
-          />
-        </ContainerView>
-      </FullHeightView>
+      <ScrollView>
+        <FullHeightView>
+          <ContainerView>
+            <View style={UserRequestStyle.flexOne}>
+              <FormProvider {...form}>
+                <Text style={UserRequestStyle.label}>
+                  {t('addressDetail.label')}
+                </Text>
+                <TextItem
+                  hideAction={true}
+                  icon={
+                    <LocationCircleIcon
+                      color={colors.primaryGradient}
+                      style={UserRequestStyle.icon}
+                    />
+                  }
+                  label={t('addressDetail.from')}
+                />
+                <AddressDetailItem addressType={AddressType.From} />
+                <TextItem
+                  hideAction={true}
+                  icon={
+                    <LocationIcon
+                      color={colors.primaryGradient}
+                      style={UserRequestStyle.icon}
+                    />
+                  }
+                  label={t('addressDetail.to')}
+                />
+                <AddressDetailItem addressType={AddressType.To} />
+              </FormProvider>
+            </View>
+            <CustomGradientButton
+              disabled={!form.formState.isValid}
+              title={t('b_continue')}
+              onPress={onPress}
+            />
+          </ContainerView>
+        </FullHeightView>
+      </ScrollView>
     </CustomSafeAreaView>
   );
 };

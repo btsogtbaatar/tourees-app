@@ -1,14 +1,17 @@
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import * as Keychain from 'react-native-keychain';
 import { useSelector } from 'react-redux';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
+import Loading from '../../../../components/Loading/Loading';
 import Pin from '../../../../components/Pin/Pin';
+import { useAppDispatch } from '../../../../context/app/store';
 import { RootStackParamList } from '../../../../navigation/types';
+import { storeCredentials } from '../../../../utilities/biometric';
+import { enableBiometric } from '../../../Shared/slice/preferenceSlice';
 import { tokenCredentials } from '../../services';
 import { selectUser } from '../../slice/authSlice';
 
@@ -18,27 +21,34 @@ const EnterPin = (props: EnterPinProps) => {
   const navigation = useNavigation();
   const user = useSelector(selectUser);
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit = (pin: string) => {
+    setLoading(true);
     let credentials = { username: user!.username, password: pin };
 
-    tokenCredentials(credentials).then(() => {
-      Keychain.setGenericPassword(credentials.username, credentials.password, {
-        service: 'tourees',
-        accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
+    tokenCredentials(credentials)
+      .then(() => {
+        storeCredentials(credentials.username, credentials.password)
+          .then(() => {
+            if (props.route.params.authenticating === true) {
+              dispatch(enableBiometric());
+              navigation.navigate('HomeTab', { screen: 'Home' });
+            } else {
+              navigation.navigate('CreatePin', { oldPin: pin });
+            }
+          })
+          .catch(_error => {
+            notifyMessage(t('error'), t('pin.errorSaving'));
+          })
+          .finally(() => setLoading(false));
       })
-        .then(() => {
-          if (props.route.params.authenticating === true) {
-            navigation.navigate('HomeTab', { screen: 'Home' });
-          } else {
-            navigation.navigate('CreatePin', { oldPin: pin });
-          }
-        })
-        .catch(_error => {
-          notifyMessage(t('error'), t('pin.errorSaving'));
-        });
-    });
   };
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <CustomKeyboardAvoidingView>

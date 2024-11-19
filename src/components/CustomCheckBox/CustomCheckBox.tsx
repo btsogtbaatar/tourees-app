@@ -1,9 +1,9 @@
 import React from 'react';
 import { TouchableOpacityProps, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { colors } from '../../theme';
 import { verticalScale } from '../../utilities';
 import { CheckIcon } from '../Icon';
-import { colors } from '../../theme';
 import CustomCheckBoxStyle from './CustomCheckBox.style';
 
 interface CustomCheckBox extends TouchableOpacityProps {
@@ -30,8 +30,8 @@ export default function CustomCheckBox(props: CustomCheckBox) {
         ) : (
           <View style={CustomCheckBoxStyle.inActive} />
         )}
+        {props?.children}
       </TouchableOpacity>
-      {props?.children}
     </View>
   );
 }

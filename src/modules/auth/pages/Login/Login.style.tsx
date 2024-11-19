@@ -11,7 +11,11 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: verticalScale(16),
     flexDirection: 'row',
-    gap: horizontalScale(16),
+    gap: horizontalScale(8),
+  },
+  banner: {
+    flex: 1,
+    marginTop: verticalScale(16),
   },
 });
 

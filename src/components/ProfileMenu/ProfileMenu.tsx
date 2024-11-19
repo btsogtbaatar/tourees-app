@@ -1,16 +1,15 @@
 import { useNavigation } from '@react-navigation/native';
-import { default as React } from 'react';
+import { default as React, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getSupportedBiometryType } from 'react-native-keychain';
 import { useSelector } from 'react-redux';
-import i18n from '../../../i18n';
 import { useAppDispatch } from '../../context/app/store';
+import useLanguage from '../../hooks/useLanguage';
 import { resetAuth, selectUser } from '../../modules/Auth/slice/authSlice';
-import {
-  changeLanguage,
-  selectLanguage,
-} from '../../modules/Shared/slice/preferenceSlice';
 import { colors } from '../../theme';
-import GroupedMenuList from '../GroupedMenuList/GroupedMenuList';
+import GroupedMenuList, {
+  FilledListProps,
+} from '../GroupedMenuList/GroupedMenuList';
 import {
   ChevronRightIcon,
   FaceId,
@@ -23,12 +22,13 @@ import {
 } from '../Icon';
 const ProfileMenu = () => {
   const { t } = useTranslation();
-  const language = useSelector(selectLanguage);
-  const navigation = useNavigation();
+  const { toggleLanguage } = useLanguage();
   const dispatch = useAppDispatch();
+  const navigation = useNavigation();
   const user = useSelector(selectUser);
+  const [profileMenus, setProfileMenus] = useState<FilledListProps[]>([]);
 
-  const profileMenus = [
+  const initialProfileMenus = [
     {
       key: 1,
       values: [t('profile.l_user_infomation')],
@@ -82,10 +82,7 @@ const ProfileMenu = () => {
       prefix: <GlobalIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
-        let selectedLanguage = language === 'mn' ? 'en' : 'mn';
-        i18n.changeLanguage(selectedLanguage).then(() => {
-          dispatch(changeLanguage(selectedLanguage));
-        });
+        toggleLanguage();
       },
     },
     {
@@ -100,6 +97,17 @@ const ProfileMenu = () => {
       },
     },
   ];
+
+  useEffect(() => {
+    getSupportedBiometryType().then(biometricType => {
+      if (biometricType === null) {
+        setProfileMenus(initialProfileMenus.filter(x => x.key !== 3));
+      } else {
+        setProfileMenus(initialProfileMenus);
+      }
+    });
+  }, []);
+
   return <GroupedMenuList listItems={profileMenus} />;
 };
 

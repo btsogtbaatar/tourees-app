@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
+import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import { SearchMdIcon } from '../../../../components/Icon';
 import ImageItem from '../../../../components/ImageItem/ImageItem';
 import TaskerServiceList from '../../../../components/TaskerServiceList/TaskerServiceList';
@@ -27,6 +28,8 @@ import {
 } from '../../../Auth/slice/authSlice';
 import { getUnreadNotificationCount } from '../../../Notification/services/notification.service';
 import { setUnreadNotificationCount } from '../../../Notification/slice/notificationSlice';
+import { createTask } from '../../../Request/service/request.service';
+import { clearDraft, selectDraft } from '../../../Request/slice/taskSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { getCategories as fetchCategories } from '../../services/category.service';
 import HomeStyle from './Home.style';
@@ -35,15 +38,16 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(true);
   const [categories, setCategories] = useState<SharedModel.Category[]>();
   const navigation = useNavigation();
-  const { t } = useTranslation(undefined, { keyPrefix: 'home' });
+  const { t } = useTranslation();
   const isAuthenticated = useSelector(selectAuthenticated);
   const dispatch = useAppDispatch();
   const firebaseToken = useSelector(selectFirebaseToken);
+  const taskDraft = useSelector(selectDraft);
   const { filteredGroupedTaskService, onSubmitSearch } =
     useTaskerServiceFetch();
 
   useEffect(() => {
-    if (firebaseToken !== undefined && isAuthenticated === true) {
+    if (firebaseToken && isAuthenticated) {
       updateFirebaseToken(firebaseToken);
     }
   }, [firebaseToken, isAuthenticated]);
@@ -75,6 +79,19 @@ const Home = () => {
     }
   }, []);
 
+  useEffect(() => {
+    if (taskDraft && isAuthenticated) {
+      createTask(taskDraft).then(() => {
+        notifyMessage(
+          t('userRequest.success.title'),
+          t('userRequest.success.message'),
+        );
+
+        dispatch(clearDraft());
+      });
+    }
+  }, [taskDraft, isAuthenticated]);
+
   const renderSeparator = () => <View style={HomeStyle.divider} />;
 
   return (
@@ -89,26 +106,26 @@ const Home = () => {
               <Banner
                 gradientColors={[colors.primaryGradient, colors.primary500]}
                 key={0}
-                title={t('login')}
+                title={t('home.login')}
                 onPress={() => navigation.navigate('Login')}
               />
             </View>
             <View style={HomeStyle.bannerItem}>
               <Banner
                 key={1}
-                title={t('signUp')}
+                title={t('home.signUp')}
                 onPress={() => navigation.navigate('Register')}
               />
             </View>
           </View>
         )}
-        <Text style={HomeStyle.title}>{t('category.question')}</Text>
+        <Text style={HomeStyle.title}>{t('home.category.question')}</Text>
         <View style={HomeStyle.inputContainer}>
           <CustomInput
-            placeholder={t('category.search')}
+            placeholder={t('home.category.search')}
             onPress={() => {
               navigation.navigate('SubCategoryList', {
-                title: t('category.title'),
+                title: t('home.category.title'),
               });
             }}
             icon={<SearchMdIcon style={{ color: colors.primaryGradient }} />}
@@ -141,10 +158,10 @@ const Home = () => {
         <View style={{ marginTop: verticalScale(8) }}>
           {filteredGroupedTaskService && (
             <View style={HomeStyle.serviceSearchContainer}>
-              <Text style={HomeStyle.title}>{t('services.question')}</Text>
+              <Text style={HomeStyle.title}>{t('home.services.question')}</Text>
               <View style={{ width: '40%' }}>
                 <CustomInput
-                  placeholder={t('services.search')}
+                  placeholder={t('home.services.search')}
                   onPress={() => {
                     navigation.navigate('TaskerServiceSearch', {});
                   }}

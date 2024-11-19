@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
-import * as Keychain from 'react-native-keychain';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
+import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import IconGradientButton from '../../../../components/CustomButton/IconGradientButton';
@@ -25,6 +25,10 @@ import {
 } from '../../../../components/SocialLoginButtons';
 import TabController from '../../../../components/TabController/TabController';
 import { colors } from '../../../../theme';
+import {
+  KeychainError,
+  retrieveCredentials,
+} from '../../../../utilities/biometric';
 import { verticalScale } from '../../../../utilities/metrics';
 import validations from '../../../../validations';
 import { selectBiometricEnabled } from '../../../Shared/slice/preferenceSlice';
@@ -58,7 +62,10 @@ export default function Login() {
         ? yup
             .string()
             .required(t('login.phone.errors.required'))
-            .matches(validations.phoneNumber, t('login.phone.errors.validation'))
+            .matches(
+              validations.phoneNumber,
+              t('login.phone.errors.validation'),
+            )
         : yup.string(),
   });
 
@@ -77,22 +84,30 @@ export default function Login() {
       .finally(() => setLoading(false));
   };
 
-  const onBiometicPress = async () => {
-    const credentials = await Keychain.getGenericPassword({
-      service: 'tourees',
-      accessControl: Keychain.ACCESS_CONTROL.BIOMETRY_ANY_OR_DEVICE_PASSCODE,
-    });
+  const onBiometicPress = () => {
+    retrieveCredentials()
+      .then(credentials => {
+        if (credentials) {
+          tokenCredentials({
+            username: credentials.username,
+            password: credentials.password,
+          }).then(() => {
+            navigation.navigate('HomeTab', { screen: 'Home' });
+          });
+        } else {
+          notifyMessage(t('error'), t('biometric.notSavedError'));
+        }
+      })
+      .catch(keyChainError => {
+        const error = keyChainError as KeychainError;
 
-    if (credentials) {
-      tokenCredentials({
-        username: credentials.username,
-        password: credentials.password,
-      }).then(() => {
-        navigation.navigate('HomeTab', { screen: 'Home' });
+        if (
+          !error.message.startsWith('code: 10') &&
+          !error.message.startsWith('code: 13')
+        ) {
+          notifyMessage(t('error'), error.message);
+        }
       });
-    } else {
-      notifyMessage(t('error'), t('biometric.notSavedError'));
-    }
   };
 
   const socialAuthentication = (socialToken: AuthModel.SocialToken) => {
@@ -163,6 +178,13 @@ export default function Login() {
                   <FbLoginButton onSuccess={socialAuthentication} />
                   <GoogleLoginButton onSuccess={socialAuthentication} />
                 </View>
+              </View>
+              <View style={styles.banner}>
+                <Banner
+                  key={1}
+                  title={t('home.signUp')}
+                  onPress={() => navigation.navigate('Register')}
+                />
               </View>
             </ContainerView>
           </FullHeightView>

@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native';
 import React, { useEffect } from 'react';
 
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
@@ -14,10 +14,10 @@ import { PersistGate } from 'redux-persist/integration/react';
 import './i18n';
 import { api } from './src/api';
 import { axiosInstance } from './src/api/interceptors';
-import RemoteNotification from './src/components/RemoteNotification/RemoteNotification';
 import store, { persistor } from './src/context/app/store';
 import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/navigation';
+import { RootStackParamList } from './src/navigation/types';
 
 import Geolocation from '@react-native-community/geolocation';
 
@@ -27,6 +27,13 @@ persistor.subscribe(() => {
 
 if (__DEV__) {
   require('./ReactotronConfig');
+}
+
+export const navigationRef =
+  React.createRef<NavigationContainerRef<RootStackParamList>>();
+
+export function navigate(name: string, params: any) {
+  navigationRef.current?.navigate(name, params);
 }
 
 function App(): React.JSX.Element {
@@ -73,8 +80,7 @@ function App(): React.JSX.Element {
       <PersistGate loading={null} persistor={persistor}>
         <GestureHandlerRootView style={{ flex: 1 }}>
           <SafeAreaProvider>
-            <NavigationContainer>
-              <RemoteNotification />
+            <NavigationContainer ref={navigationRef}>
               <ModalProvider>
                 <Route />
               </ModalProvider>

@@ -6,12 +6,15 @@ import { reactotron } from '../../../ReactotronConfig';
 
 import authSlice from '../../modules/Auth/slice/authSlice';
 import notificationSlice from '../../modules/Notification/slice/notificationSlice';
+import taskSlice from '../../modules/Request/slice/taskSlice';
 import preferenceSlice from '../../modules/Shared/slice/preferenceSlice';
 
+// TODO: Distinguish persistence slices
 const rootReducer = combineReducers({
   auth: authSlice,
   preference: preferenceSlice,
   notification: notificationSlice,
+  task: taskSlice,
 });
 
 const persistConfig = {

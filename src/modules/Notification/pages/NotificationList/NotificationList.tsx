@@ -1,13 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  View
-} from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { ActivityIndicator, FlatList, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
+import ContainerView from '../../../../components/ContainerView/ContainerView';
 import Notification from '../../../../components/Notification/Notification';
 import { useAppDispatch } from '../../../../context/app/store';
 import { colors } from '../../../../theme';
@@ -22,6 +20,17 @@ import {
   setUnreadNotificationCount,
 } from '../../slice/notificationSlice';
 import { NotificationListStyle } from './NotificationList.style';
+
+const Empty = () => {
+  const { t } = useTranslation();
+  return (
+    <ContainerView style={NotificationListStyle.emptyContainer}>
+      <Text style={NotificationListStyle.emptyText}>
+        {t('notification.notFound')}
+      </Text>
+    </ContainerView>
+  );
+};
 
 const NotificationList = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -80,7 +89,7 @@ const NotificationList = () => {
 
   const footerComponent = () => {
     return (
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <View style={NotificationListStyle.footerContainer}>
         {moreLoading ? (
           <ActivityIndicator color={colors.primaryGradient} size="large" />
         ) : null}
@@ -98,6 +107,7 @@ const NotificationList = () => {
         onEndReachedThreshold={0.1}
         ListFooterComponent={footerComponent}
         onRefresh={onRefresh}
+        ListEmptyComponent={() => <Empty />}
         renderItem={({ item }) => {
           return (
             <Notification
