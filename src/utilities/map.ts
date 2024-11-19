@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { LatLng } from 'react-native-maps';
 import { SharedModel } from '../modules/Shared/entities/shared.model';
+import i18n from '../../i18n';
 
 export const excludedTypes = [
   'administrative_area_level_1',
@@ -29,7 +30,7 @@ export async function getNearbyPlacesFromCoordinates(
       {
         excludedTypes: excludedTypes,
         maxResultCount: 10,
-        languageCode: 'mn',
+        languageCode: i18n.language,
         rankPreference: 'DISTANCE',
         locationRestriction: {
           circle: {
@@ -50,6 +51,7 @@ export async function getNearbyPlacesFromCoordinates(
 
 export async function getPlacesByText(
   text: string,
+  latlng: LatLng,
 ): Promise<SharedModel.Place[]> {
   if (text.length === 0) {
     return [];
@@ -63,18 +65,16 @@ export async function getPlacesByText(
       {
         textQuery: text,
         pageSize: 10,
-        languageCode: 'mn',
-        regionCode: 'mn',
+        languageCode: i18n.language,
         rankPreference: 'RELEVANCE',
         locationRestriction: {
-          rectangle: {
-            low: {
-              latitude: 41,
-              longitude: 87,
-            },
-            high: {
-              latitude: 52,
-              longitude: 120,
+          locationRestriction: {
+            circle: {
+              center: {
+                latitude: latlng.latitude,
+                longitude: latlng.longitude,
+              },
+              radius: 500,
             },
           },
         },

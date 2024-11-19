@@ -39,7 +39,7 @@ function RemarkList<T extends FieldValues>(props: RemarkListProps<T>) {
       setValue: setValue,
       name: name,
       value: value,
-      tags: tags,
+      tags: tags ? tags.filter(t => t.type === name) : [],
     });
   };
 

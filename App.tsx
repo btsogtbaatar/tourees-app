@@ -19,6 +19,8 @@ import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/navigation';
 import { RootStackParamList } from './src/navigation/types';
 
+import Geolocation from '@react-native-community/geolocation';
+
 persistor.subscribe(() => {
   axiosInstance(api);
 });
@@ -41,6 +43,12 @@ function App(): React.JSX.Element {
     if (!alert || !badge || !sound) {
       await PushNotification.requestPermissions();
     }
+  });
+  Geolocation.setRNConfiguration({
+    skipPermissionRequests: false,
+    authorizationLevel: 'whenInUse',
+    enableBackgroundLocationUpdates: false,
+    locationProvider: 'auto',
   });
 
   useEffect(() => {

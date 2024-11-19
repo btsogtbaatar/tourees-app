@@ -62,8 +62,8 @@ async function authenticate(token: AuthModel.Token): Promise<AuthModel.User> {
   let user: AuthModel.User = await introspect();
 
   store.dispatch(setUser(user));
-  if (user.profilePicture) store.dispatch(setProfileImage(user.profilePicture));
-
+  if (user.contractor && user.contractor?.profilePicture)
+    store.dispatch(setProfileImage(user.contractor.profilePicture));
   return user;
 }
 

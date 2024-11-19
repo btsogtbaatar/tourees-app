@@ -40,14 +40,6 @@ const ProfileMenu = () => {
     },
     {
       key: 2,
-      values: [t('profile.l_register_infomation')],
-      prefix: <UserCircleIcon />,
-      suffix: <ChevronRightIcon color={colors.gray700} />,
-      onPress: () => {
-        navigation.navigate('RegisterTasker', { profile: undefined });
-      },
-    },
-    {
       values: [t('profile.l_service')],
       prefix: <HelpCircleIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,

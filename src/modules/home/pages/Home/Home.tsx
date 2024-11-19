@@ -42,8 +42,9 @@ const Home = () => {
   const isAuthenticated = useSelector(selectAuthenticated);
   const dispatch = useAppDispatch();
   const firebaseToken = useSelector(selectFirebaseToken);
-  const { filteredGroupedTaskService } = useTaskerServiceFetch();
   const taskDraft = useSelector(selectDraft);
+  const { filteredGroupedTaskService, onSubmitSearch } =
+    useTaskerServiceFetch();
 
   useEffect(() => {
     if (firebaseToken && isAuthenticated) {
@@ -53,6 +54,7 @@ const Home = () => {
 
   const onRefresh = React.useCallback(() => {
     getCateories();
+    onSubmitSearch('');
   }, []);
 
   const getCateories = () => {

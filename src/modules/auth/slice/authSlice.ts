@@ -45,14 +45,22 @@ const authSlice = createSlice({
   },
 });
 
-export const { setToken, setUser, setHasPin, resetAuth, setFirebaseToken, setProfileImage } = authSlice.actions;
+export const {
+  setToken,
+  setUser,
+  setHasPin,
+  resetAuth,
+  setFirebaseToken,
+  setProfileImage,
+} = authSlice.actions;
 export default authSlice.reducer;
 
 export const selectAuthenticated = (state: RootState) =>
   state.auth.isAuthenticated;
 
 export const selectUser = (state: RootState) => state.auth.user;
-export const selectFirebaseToken = (state: RootState) => state.auth.firebaseToken;
+export const selectFirebaseToken = (state: RootState) =>
+  state.auth.firebaseToken;
 
 export const selectToken = (state: RootState) => state.auth.token;
 

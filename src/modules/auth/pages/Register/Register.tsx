@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
@@ -42,6 +42,7 @@ import { uploadFile } from '../../../Shared/services/shared.service';
 import { AuthChannel, AuthModel } from '../../entities';
 import { signUp } from '../../services';
 import { RegisterStyle } from './Register.style';
+import Geolocation from '@react-native-community/geolocation';
 
 type RegisterProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
@@ -56,6 +57,18 @@ function Register({ navigation }: RegisterProps) {
     latitude: DEFAULT_LAT,
     longitude: DEFAULT_LNG,
   });
+  useEffect(() => {
+    Geolocation.getCurrentPosition(
+      position => {
+        const _address = { ...address };
+        _address.latitude = position.coords.latitude;
+        _address.longitude = position.coords.longitude;
+        setAddress(_address);
+      },
+      error => {},
+      { maximumAge: 0 },
+    );
+  }, []);
   const schema = yup.object().shape({
     email:
       authChannel === AuthChannel.Email
