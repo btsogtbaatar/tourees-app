@@ -25,6 +25,7 @@ import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
 import { TaskSchema } from '../../../../validations/schema';
 import { selectAuthenticated } from '../../../Auth/slice/authSlice';
+import { SharedModel } from '../../../Shared/entities/shared.model';
 import { uploadFile } from '../../../Shared/services/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
 import { getLastTaskFromAddress } from '../../service/request.service';
@@ -197,10 +198,77 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       />
                     )}
                   </View>
-                  <View>
-                    <Text style={UserRequestStyle.label}>
-                      {t('userRequest.address.label')}
-                    </Text>
+                  {subCategory.locationType === null ||
+                  subCategory.locationType ===
+                    SharedModel.CategoryLocationType.Route ? (
+                    <View>
+                      <Text style={UserRequestStyle.label}>
+                        {t('userRequest.address.label')}
+                      </Text>
+                      <TextItem
+                        icon={
+                          <LocationCircleIcon
+                            color={colors.primaryGradient}
+                            style={UserRequestStyle.icon}
+                          />
+                        }
+                        label={
+                          addresses.from.address
+                            ? getFullAddress(addresses.from)
+                            : undefined
+                        }
+                        placeholder={t('userRequest.address.from')}
+                        buttonText={t('userRequest.address.edit')}
+                        onPress={() =>
+                          rootNavigation.navigate('AddressesMapView', {
+                            addresses: addresses,
+                            addressType: AddressType.From,
+                            onGoBack: _addresses => {
+                              form.setValue('addresses', [
+                                _addresses.from,
+                                _addresses.to,
+                              ]);
+
+                              form.trigger('addresses');
+
+                              setAddresses({ ..._addresses });
+                            },
+                          })
+                        }
+                      />
+                      <TextItem
+                        icon={
+                          <LocationIcon
+                            color={colors.primaryGradient}
+                            style={UserRequestStyle.icon}
+                          />
+                        }
+                        label={
+                          addresses.to.address
+                            ? getFullAddress(addresses.to)
+                            : undefined
+                        }
+                        placeholder={t('userRequest.address.to')}
+                        buttonText={t('userRequest.address.edit')}
+                        onPress={() =>
+                          rootNavigation.navigate('AddressesMapView', {
+                            addresses: addresses,
+                            addressType: AddressType.To,
+                            onGoBack: _addresses => {
+                              form.setValue('addresses', [
+                                _addresses.from,
+                                _addresses.to,
+                              ]);
+
+                              form.trigger('addresses');
+
+                              setAddresses({ ..._addresses });
+                            },
+                          })
+                        }
+                      />
+                    </View>
+                  ) : (
                     <TextItem
                       icon={
                         <LocationCircleIcon
@@ -216,59 +284,24 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       placeholder={t('userRequest.address.from')}
                       buttonText={t('userRequest.address.edit')}
                       onPress={() =>
-                        rootNavigation.navigate('AddressesMapView', {
-                          addresses: addresses,
-                          addressType: AddressType.From,
-                          onGoBack: _addresses => {
-                            form.setValue('addresses', [
-                              _addresses.from,
-                              _addresses.to,
-                            ]);
-
+                        rootNavigation.navigate('AddressMapView', {
+                          prevAddress: addresses.from,
+                          title: t('form.address.label'),
+                          onGoBack: address => {
+                            // TODO: improve
+                            form.setValue('addresses', [address, address]);
                             form.trigger('addresses');
-
-                            setAddresses({ ..._addresses });
+                            setAddresses({ from: address, to: address });
                           },
                         })
                       }
                     />
-                    <TextItem
-                      icon={
-                        <LocationIcon
-                          color={colors.primaryGradient}
-                          style={UserRequestStyle.icon}
-                        />
-                      }
-                      label={
-                        addresses.to.address
-                          ? getFullAddress(addresses.to)
-                          : undefined
-                      }
-                      placeholder={t('userRequest.address.to')}
-                      buttonText={t('userRequest.address.edit')}
-                      onPress={() =>
-                        rootNavigation.navigate('AddressesMapView', {
-                          addresses: addresses,
-                          addressType: AddressType.To,
-                          onGoBack: _addresses => {
-                            form.setValue('addresses', [
-                              _addresses.from,
-                              _addresses.to,
-                            ]);
-
-                            form.trigger('addresses');
-
-                            setAddresses({ ..._addresses });
-                          },
-                        })
-                      }
+                  )}
+                  {errors.addresses && (
+                    <InputError
+                      error={(errors.addresses as FieldError).message}
                     />
-                    {errors.addresses && (
-                      <InputError
-                        error={(errors.addresses as FieldError).message}
-                      />
-                    )}
-                  </View>
+                  )}
                 </FormProvider>
                 <View style={UserRequestStyle.button}>
                   <CustomGradientButton

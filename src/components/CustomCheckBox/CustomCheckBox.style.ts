@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { colors } from '../../theme';
-import { verticalScale } from '../../utilities';
+import { horizontalScale, verticalScale } from '../../utilities';
 
 const CustomCheckBoxStyle = StyleSheet.create({
   container: {
@@ -10,6 +10,9 @@ const CustomCheckBoxStyle = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
+    flexDirection: 'row',
+    gap: horizontalScale(8),
+    alignItems: 'center',
     paddingVertical: verticalScale(2),
   },
   active: {

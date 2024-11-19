@@ -1,9 +1,11 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { default as React } from 'react';
-import { Text } from 'react-native';
-import { FontWeight, getFontWeight, Typography } from '../../theme';
+import { Text, View } from 'react-native';
+import { Typography } from '../../theme';
 import { colors } from '../../theme/colors';
 import { LogoIcon } from '../Icon';
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
+import { CustomTabNavigatorStyle } from './CustomTabNavigator.style';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,16 +26,17 @@ export interface CustomTabNavigatorProps {
 const CustomTabNavigator = (props: CustomTabNavigatorProps) => {
   const headerTitle = (item: TabNavigationItem) => {
     if (item.route === 'Home') {
-      return <LogoIcon />;
+      return (
+        <View style={CustomTabNavigatorStyle.header}>
+          <View>
+            <LogoIcon />
+          </View>
+          <LanguageSwitcher />
+        </View>
+      );
     } else {
       return (
-        <Text
-          style={{
-            ...Typography.textRegular,
-            ...getFontWeight(FontWeight.bold),
-          }}>
-          {item.label}
-        </Text>
+        <Text style={CustomTabNavigatorStyle.headerLabel}>{item.label}</Text>
       );
     }
   };

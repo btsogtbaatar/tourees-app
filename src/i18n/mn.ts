@@ -395,4 +395,7 @@ export default {
     },
     onlineService: 'Онлайн үйлчилгээ',
   },
+  notification: {
+    notFound: 'Мэдэгдэл олдсонгүй.'
+  }
 };

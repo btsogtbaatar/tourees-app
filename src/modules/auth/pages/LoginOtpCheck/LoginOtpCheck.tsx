@@ -3,6 +3,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { getSupportedBiometryType } from 'react-native-keychain';
 import { useSelector } from 'react-redux';
 import CheckOtp from '../../../../components/CheckOtp/CheckOtp';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
@@ -35,11 +36,13 @@ export default function LoginOtpCheck(props: Readonly<LoginOtpCheckProps>) {
   const checkOtp = () => {
     if (value) {
       tokenOtp({ ...credentials, value }).then(() => {
-        if (dontShowBiometricConsent || biometricEnabled) {
-          navigation.navigate('HomeTab', { screen: 'Home' });
-        } else {
-          navigation.navigate('BiometricConsent');
-        }
+        getSupportedBiometryType().then(biometricType => {
+          if (biometricType && !dontShowBiometricConsent && !biometricEnabled) {
+            navigation.navigate('BiometricConsent');
+          } else {
+            navigation.navigate('HomeTab', { screen: 'Home' });
+          }
+        });
       });
     }
   };

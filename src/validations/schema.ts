@@ -35,6 +35,7 @@ export namespace TaskSchema {
         .required(i18n.t('userRequest.messages.timeRange.required')),
       addresses: yup
         .array()
+        // TODO: Make it dynamic
         .min(2)
         .required(i18n.t('userRequest.messages.addresses.required')),
       budget: yup.number(),

@@ -27,6 +27,7 @@ import { colors, Typography } from '../../../../theme';
 import { formatDate, formatTime } from '../../../../utilities/date';
 import { getImageUrl } from '../../../../utilities/image';
 import { selectUser } from '../../../Auth/slice/authSlice';
+import { SharedModel } from '../../../Shared/entities/shared.model';
 import { TaskModel, TaskStatus } from '../../entities/request.model';
 import { getTask } from '../../service/request.service';
 import { TaskDetailStyle } from './TaskDetail.style';
@@ -92,17 +93,22 @@ const TaskDetail = (props: Props) => {
               </Text>
             </View>
           </View>
-          <View style={TaskDetailStyle.row}>
-            <LocationIcon height={24} width={24} color={colors.gray700} />
-            <View style={TaskDetailStyle.col}>
-              <Text style={TaskDetailStyle.label}>
-                {t('request.requestDeliveryAddress')}
-              </Text>
-              <Text style={TaskDetailStyle.text}>
-                {task?.addresses[1].address}
-              </Text>
+          {/* TODO: Fix this */}
+          {(task.subCategory.locationType === null ||
+            task.subCategory.locationType ===
+              SharedModel.CategoryLocationType.Route) && (
+            <View style={TaskDetailStyle.row}>
+              <LocationIcon height={24} width={24} color={colors.gray700} />
+              <View style={TaskDetailStyle.col}>
+                <Text style={TaskDetailStyle.label}>
+                  {t('request.requestDeliveryAddress')}
+                </Text>
+                <Text style={TaskDetailStyle.text}>
+                  {task?.addresses[1].address}
+                </Text>
+              </View>
             </View>
-          </View>
+          )}
           <View style={TaskDetailStyle.row}>
             <CalendarIcon height={24} width={24} color={colors.gray700} />
             <View style={TaskDetailStyle.col}>
@@ -154,16 +160,19 @@ const TaskDetail = (props: Props) => {
             <Text style={TaskDetailStyle.price}>
               {Intl.NumberFormat().format(task?.budget ?? 0)}₮
             </Text>
-            {task.customer.user.id !== user?.id && task?.status !== TaskStatus.ASSIGNED && (
-              <View style={{ width: '100%' }}>
-                <CustomGradientButton
-                  title={t('request.offerButton')}
-                  onPress={() =>
-                    rootNavigation.navigate('CreateOffer', { taskId: task.id })
-                  }
-                />
-              </View>
-            )}
+            {task.customer.user.id !== user?.id &&
+              task?.status !== TaskStatus.ASSIGNED && (
+                <View style={{ width: '100%' }}>
+                  <CustomGradientButton
+                    title={t('request.offerButton')}
+                    onPress={() =>
+                      rootNavigation.navigate('CreateOffer', {
+                        taskId: task.id,
+                      })
+                    }
+                  />
+                </View>
+              )}
           </View>
           <View style={TaskDetailStyle.detail}>
             <Text style={TaskDetailStyle.label}>{t('request.offerLabel')}</Text>

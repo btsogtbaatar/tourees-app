@@ -44,6 +44,12 @@ export namespace SharedModel {
     image?: SharedModel.File;
   };
 
+  export enum CategoryLocationType {
+    Route = 'ROUTE',
+    SingleLocation = 'SINGLE_LOCATION',
+    Remote = 'REMOTE',
+  }
+
   export type SubCategory = {
     id: number;
     name: string;
@@ -51,6 +57,7 @@ export namespace SharedModel {
     parentCategory: Category;
     description?: string;
     instruction: string;
+    locationType: CategoryLocationType;
   };
 
   export type SubCategoryFilter = {
