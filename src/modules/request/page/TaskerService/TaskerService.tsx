@@ -29,7 +29,10 @@ import {
 } from '../../../../components/Icon/index';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import TextItem from '../../../../components/TextItem/TextItem';
-import { RootStackParamList, TaskerServiceParamList } from '../../../../navigation/types';
+import {
+  RootStackParamList,
+  TaskerServiceParamList,
+} from '../../../../navigation/types';
 import { colors } from '../../../../theme/colors';
 import { Typography } from '../../../../theme/typography';
 import {
@@ -45,6 +48,7 @@ import CategorySelector from './CategorySelector';
 import SubCategorySelector from './SubCategorySelector';
 import { TaskerServiceStyle } from './TaskerService.style';
 import RemarkList from '../../../../components/RemarkList/RemarkList';
+import Geolocation from '@react-native-community/geolocation';
 
 type TaskerServiceProps = NativeStackScreenProps<
   TaskerServiceParamList,
@@ -89,6 +93,14 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
     setSelectedTimeRange(value);
     console.log('Selected Time Range:', value);
   };
+  useEffect(() => {
+    Geolocation.getCurrentPosition(position => {
+      const _address = { ...address };
+      _address.latitude = position.coords.latitude;
+      _address.longitude = position.coords.longitude;
+      setAddress(_address);
+    });
+  }, []);
 
   const timeRanges = [
     {

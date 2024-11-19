@@ -19,6 +19,8 @@ import store, { persistor } from './src/context/app/store';
 import { ModalProvider } from './src/context/modal/modal.context';
 import Route from './src/navigation';
 
+import Geolocation from '@react-native-community/geolocation';
+
 persistor.subscribe(() => {
   axiosInstance(api);
 });
@@ -35,6 +37,12 @@ function App(): React.JSX.Element {
       await PushNotification.requestPermissions();
     }
   });
+  Geolocation.setRNConfiguration({
+    skipPermissionRequests: false,
+    authorizationLevel: 'whenInUse',
+    enableBackgroundLocationUpdates: false,
+    locationProvider: 'auto',
+  });
 
   useEffect(() => {
     Geocoder.init(process.env.GOOGLE_API_KEY!);
@@ -48,9 +56,7 @@ function App(): React.JSX.Element {
     });
 
     // Ignore API call errors
-    LogBox.ignoreLogs([
-      /^Possible unhandled promise rejection/,
-    ]);
+    LogBox.ignoreLogs([/^Possible unhandled promise rejection/]);
     LogBox.ignoreLogs([
       /^no valid “aps-environment” entitlement string found for application/,
     ]);

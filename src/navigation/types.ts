@@ -7,7 +7,7 @@ import {
   AddressType,
   ServiceTag,
   TaskerServiceModel,
-  TaskModel
+  TaskModel,
 } from '../modules/Request/entities/request.model';
 import {
   FormField,
@@ -63,8 +63,8 @@ export type RootStackParamList = {
   EnterPin: { authenticating: boolean };
   RetypePin: { pin: string; oldPin?: string };
   TaskBudget: { task: TaskModel.TaskRequest };
-  CreateOffer: { taskId?: number, id?: number };
-  EditOffer: { taskId?: number, id?: number };
+  CreateOffer: { taskId?: number; id?: number };
+  EditOffer: { taskId?: number; id?: number };
   MyOfferTasks: undefined;
   Photos: { images: string[]; index: number };
   RegistrationInformation: undefined;
