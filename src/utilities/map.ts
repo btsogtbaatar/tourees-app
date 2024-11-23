@@ -38,7 +38,7 @@ export async function getNearbyPlacesFromCoordinates(
               latitude: latLng.latitude,
               longitude: latLng.longitude,
             },
-            radius: 50,
+            radius: 500,
           },
         },
       },
@@ -67,15 +67,13 @@ export async function getPlacesByText(
         pageSize: 10,
         languageCode: i18n.language,
         rankPreference: 'RELEVANCE',
-        locationRestriction: {
-          locationRestriction: {
-            circle: {
-              center: {
-                latitude: latlng.latitude,
-                longitude: latlng.longitude,
-              },
-              radius: 500,
+        locationBias: {
+          circle: {
+            center: {
+              latitude: latlng.latitude,
+              longitude: latlng.longitude,
             },
+            radius: 50000,
           },
         },
       },

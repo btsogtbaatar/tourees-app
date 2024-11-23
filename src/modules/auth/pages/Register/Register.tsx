@@ -65,7 +65,9 @@ function Register({ navigation }: RegisterProps) {
         _address.longitude = position.coords.longitude;
         setAddress(_address);
       },
-      error => {},
+      error => {
+        console.log(error);
+      },
       { maximumAge: 0 },
     );
   }, []);

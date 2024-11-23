@@ -30,6 +30,7 @@ import { AddressType, TaskModel } from '../../entities/request.model';
 import { getLastTaskFromAddress } from '../../service/request.service';
 import UserRequestStyle from './UserRequest.style';
 import Geolocation from '@react-native-community/geolocation';
+import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 
 type UserRequestProps = NativeStackScreenProps<
   RootStackParamList,
@@ -55,14 +56,19 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
     },
   });
   useEffect(() => {
-    Geolocation.getCurrentPosition(position => {
-      const _addresses = { ...addresses };
-      _addresses.from.latitude = position.coords.latitude;
-      _addresses.from.longitude = position.coords.longitude;
-      _addresses.to.latitude = position.coords.latitude;
-      _addresses.to.longitude = position.coords.longitude;
-      setAddresses(_addresses);
-    });
+    Geolocation.getCurrentPosition(
+      position => {
+        const _addresses = { ...addresses };
+        _addresses.from.latitude = position.coords.latitude;
+        _addresses.from.longitude = position.coords.longitude;
+        _addresses.to.latitude = position.coords.latitude;
+        _addresses.to.longitude = position.coords.longitude;
+        setAddresses(_addresses);
+      },
+      error => {
+        notifyMessage(t('error'), error.message);
+      },
+    );
   }, []);
   useEffect(() => {
     if (isAuthenticated) {

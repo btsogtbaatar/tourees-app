@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useTranslation } from 'react-i18next';
-import { LogBox } from 'react-native';
+import { LogBox, Platform } from 'react-native';
 import { Settings } from 'react-native-fbsdk-next';
 import Geocoder from 'react-native-geocoding';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -37,12 +37,21 @@ function App(): React.JSX.Element {
       await PushNotification.requestPermissions();
     }
   });
-  Geolocation.setRNConfiguration({
-    skipPermissionRequests: false,
-    authorizationLevel: 'whenInUse',
-    enableBackgroundLocationUpdates: false,
-    locationProvider: 'auto',
-  });
+  if (Platform.OS === 'ios') {
+    Geolocation.setRNConfiguration({
+      skipPermissionRequests: false,
+      authorizationLevel: 'whenInUse',
+      enableBackgroundLocationUpdates: false,
+      locationProvider: 'auto',
+    });
+  } else if (Platform.OS === 'android') {
+    Geolocation.setRNConfiguration({
+      skipPermissionRequests: false,
+      authorizationLevel: 'whenInUse',
+      enableBackgroundLocationUpdates: false,
+      locationProvider: 'playServices',
+    });
+  }
 
   useEffect(() => {
     Geocoder.init(process.env.GOOGLE_API_KEY!);
