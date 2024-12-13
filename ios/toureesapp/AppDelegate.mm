@@ -1,5 +1,8 @@
+#import <UserNotifications/UserNotifications.h>
+#import <RNCPushNotificationIOS.h>
+
 #import "AppDelegate.h"
-// #import <Firebase.h>
+#import <Firebase.h>
 #import <GoogleMaps/GoogleMaps.h>
 
 #import <React/RCTBundleURLProvider.h>
@@ -9,14 +12,12 @@
 #import <FBSDKCoreKit/FBSDKCoreKit-Swift.h>
 
 #import <GoogleSignIn/GoogleSignIn.h>
-#import <UserNotifications/UserNotifications.h>
-#import <RNCPushNotificationIOS.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  // [FIRApp configure];
+  [FIRApp configure];
   self.moduleName = @"toureesapp";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
@@ -26,6 +27,10 @@
 
   [[FBSDKApplicationDelegate sharedInstance] application:application
                        didFinishLaunchingWithOptions:launchOptions];
+
+
+  UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+  center.delegate = self;
                       
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Image,
   ImageBackground,
@@ -25,7 +25,6 @@ export interface CustomImageProps extends ImageProps {
 const CustomImage = (props: CustomImageProps) => {
   const uriSource = props.source as ImageURISource;
   const requireSource = props.source as ImageRequireSource;
-  const [showPreview, setShowPreview] = useState(false);
 
   const token = useSelector(selectToken);
   const isAuthenticated = useSelector(selectAuthenticated);

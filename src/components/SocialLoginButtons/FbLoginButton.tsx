@@ -4,7 +4,7 @@ import { Text, TouchableOpacity } from 'react-native';
 import { AccessToken, LoginManager } from 'react-native-fbsdk-next';
 import { AuthModel, SocialType } from '../../modules/Auth/entities';
 import { Typography } from '../../theme';
-import { notifyMessage } from '../CustomToast/CustomToast';
+import { toastError } from '../../utilities/toast';
 import { FacebookIcon } from '../Icon';
 import styles from './SocialLoginButton.style';
 
@@ -30,7 +30,7 @@ const FbLoginButton: React.FC<FBLoginButtonProps> = ({ onSuccess }) => {
         }
       },
       error => {
-        notifyMessage(t('socialError.title'), error);
+        toastError(error);
       },
     );
   };

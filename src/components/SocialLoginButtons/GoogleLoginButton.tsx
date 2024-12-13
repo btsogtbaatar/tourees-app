@@ -10,7 +10,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { AuthModel, SocialType } from '../../modules/Auth/entities';
 import { Typography } from '../../theme';
-import { notifyMessage } from '../CustomToast/CustomToast';
+import { toastError } from '../../utilities/toast';
 import { GoogleIcon } from '../Icon';
 
 interface GoogleLoginButtonProps {
@@ -31,14 +31,12 @@ const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ onSuccess }) => {
       if (isErrorWithCode(error)) {
         switch (error.code) {
           case statusCodes.IN_PROGRESS:
-            notifyMessage(
-              t('socialError.title'),
+            toastError(
               t('socialError.waitPrevious'),
             );
             return;
           case statusCodes.PLAY_SERVICES_NOT_AVAILABLE:
-            notifyMessage(
-              t('socialError.title'),
+            toastError(
               t('socialError.playServiceUnvailable'),
             );
             return;
@@ -46,7 +44,7 @@ const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ onSuccess }) => {
             return;
         }
       }
-      notifyMessage(t('socialError.title'), error);
+      toastError(t('socialError.title'), error);
     }
   };
 

@@ -29,6 +29,8 @@ export default {
   l_dismissLabel: 'Ойлголоо',
   l_submitLabel: 'Ок',
   l_date: 'Өдөр, цагийг оруулна уу.',
+  notSupportedPlatform: 'Платформыг дэмжих боломжгүй байна.',
+  locationPermissionDenied: 'Та location service - ээ асаана уу.',
   signUp: {
     hello: 'Сайн байна уу?',
     welcome_seed: 'Та Сийд платформд тавтай морил.',
@@ -215,10 +217,11 @@ export default {
     doNotShowAgain: 'Дахин харуулахгүй байх',
     accept: 'Тийм',
     decline: 'Үгүй',
-    notSavedError: 'Биометрик мэдээллийг хадгалагдаагүй байна.',
+    noCredentials: 'Биометрик мэдээллийг хадгалагдаагүй байна.',
     enable: 'Биометрик идэвхжүүлэх',
     disable: 'Биометрикийг унтраах',
     changePin: 'Пин өөрчлөх',
+    notSupported: 'Таны утас биометрик мэдээллийг дэмждэггүй.',
   },
   pin: {
     createPin: 'Та цаашид нэвтрэхдээ ашиглах 4 оронтой пин кодоо оруулна уу.',
@@ -396,6 +399,6 @@ export default {
     onlineService: 'Онлайн үйлчилгээ',
   },
   notification: {
-    notFound: 'Мэдэгдэл олдсонгүй.'
-  }
+    notFound: 'Мэдэгдэл олдсонгүй.',
+  },
 };

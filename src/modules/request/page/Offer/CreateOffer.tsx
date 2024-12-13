@@ -8,9 +8,9 @@ import CustomCurrencyInput from '../../../../components/CustomInput/CustomCurren
 import CustomInput from '../../../../components/CustomInput/CustomInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
+import { toastSuccess } from '../../../../utilities/toast';
 import { TaskModel } from '../../entities/request.model';
 import {
   createOffer,
@@ -49,7 +49,7 @@ const CreateOffer = (props: CreateOfferProps | EditOfferProps) => {
         taskId: props.route.params.taskId!,
       }).then(() => {
         props.navigation.goBack();
-        notifyMessage(t('successful'), t('offer.successCreate'));
+        toastSuccess(t('offer.successCreate'));
       });
     } else {
       updateOffer({
@@ -58,7 +58,7 @@ const CreateOffer = (props: CreateOfferProps | EditOfferProps) => {
         description: description,
       }).then(() => {
         props.navigation.goBack();
-        notifyMessage(t('successful'), t('offer.successEdit'));
+        toastSuccess(t('offer.successEdit'));
       });
     }
   };

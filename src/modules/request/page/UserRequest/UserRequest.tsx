@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import Geolocation from '@react-native-community/geolocation';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
@@ -23,6 +24,9 @@ import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUpl
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
+import {
+  toastError
+} from '../../../../utilities/toast';
 import { TaskSchema } from '../../../../validations/schema';
 import { selectAuthenticated } from '../../../Auth/slice/authSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
@@ -30,8 +34,6 @@ import { uploadFile } from '../../../Shared/services/shared.service';
 import { AddressType, TaskModel } from '../../entities/request.model';
 import { getLastTaskFromAddress } from '../../service/request.service';
 import UserRequestStyle from './UserRequest.style';
-import Geolocation from '@react-native-community/geolocation';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 
 type UserRequestProps = NativeStackScreenProps<
   RootStackParamList,
@@ -67,7 +69,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
         setAddresses(_addresses);
       },
       error => {
-        notifyMessage(t('error'), error.message);
+        toastError(error.message);
       },
     );
   }, []);

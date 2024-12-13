@@ -2,10 +2,7 @@ import { api } from '../../../api';
 import { SharedModel } from '../../Shared/entities/shared.model';
 import { ServiceTag, TaskerServiceModel } from '../entities/request.model';
 
-
-export function createTaskerService(
-  payload: TaskerServiceModel,
-) {
+export function createTaskerService(payload: TaskerServiceModel) {
   return api.post('/tasker/service', payload);
 }
 export function getTags(): Promise<ServiceTag[]> {
@@ -24,6 +21,12 @@ export function fetchTaskerServices(
     name: filter?.name,
   };
   return api.get('/tasker/service', { params });
+}
+
+export function fetchCreatedTaskerServices(): Promise<
+  SharedModel.TaskerServiceModel[]
+> {
+  return api.get('/tasker/service/created/');
 }
 export function getTaskerServiceDetail(
   id: number,

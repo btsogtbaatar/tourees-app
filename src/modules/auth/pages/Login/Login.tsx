@@ -14,7 +14,6 @@ import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { FaceId } from '../../../../components/Icon';
@@ -30,6 +29,7 @@ import {
   retrieveCredentials,
 } from '../../../../utilities/biometric';
 import { verticalScale } from '../../../../utilities/metrics';
+import { toastError } from '../../../../utilities/toast';
 import validations from '../../../../validations';
 import { selectBiometricEnabled } from '../../../Shared/slice/preferenceSlice';
 import { AuthChannel, AuthModel } from '../../entities';
@@ -94,19 +94,11 @@ export default function Login() {
           }).then(() => {
             navigation.navigate('HomeTab', { screen: 'Home' });
           });
-        } else {
-          notifyMessage(t('error'), t('biometric.notSavedError'));
         }
       })
       .catch(keyChainError => {
         const error = keyChainError as KeychainError;
-
-        if (
-          !error.message.startsWith('code: 10') &&
-          !error.message.startsWith('code: 13')
-        ) {
-          notifyMessage(t('error'), error.message);
-        }
+        toastError(error.message);
       });
   };
 

@@ -1,10 +1,13 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import _, { debounce } from 'lodash';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  fetchCreatedTaskerServices,
+  fetchTaskerServices,
+} from '../modules/Request/service/tasker.service';
 import {
   SharedModel,
   TaskerServiceSortType,
 } from '../modules/Shared/entities/shared.model';
-import { fetchTaskerServices } from '../modules/Request/service/tasker.service';
-import _, { debounce } from 'lodash';
 
 export function useTaskerServiceFetch(subCategoryId?: number) {
   const [taskerServices, setTaskerServices] = useState<
@@ -15,11 +18,16 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
   });
   const [loading, setLoading] = useState<boolean>(false);
   const [sortValue, setSortValue] = useState<string>('');
+  const [createdTaskerServices, setCreatedTaskerServices] =
+    useState<SharedModel.TaskerServiceModel[]>();
 
   useEffect(() => {
     getTaskerServices(filter);
+    getCreatedTaskerServices();
+
     return () => {
       setTaskerServices([]);
+      setCreatedTaskerServices([]);
     };
   }, []);
 
@@ -31,6 +39,12 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
       })
       .value();
     return groupedTaskerService;
+  };
+
+  const getCreatedTaskerServices = () => {
+    fetchCreatedTaskerServices().then(x => {
+      setCreatedTaskerServices(x);
+    });
   };
 
   const getTaskerServices = (_filter: SharedModel.TaskerServiceFilter) => {
@@ -75,5 +89,8 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
     loading: loading,
     onSubmitSort: onSubmitSort,
     sortValue: sortValue,
+    createdTaskerServices,
+    getCreatedTaskerServices,
+    setCreatedTaskerServices,
   };
 }
