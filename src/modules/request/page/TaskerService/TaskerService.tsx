@@ -1,12 +1,13 @@
 import { BottomSheetMethods } from '@gorhom/bottom-sheet';
 import { yupResolver } from '@hookform/resolvers/yup';
+import Geolocation from '@react-native-community/geolocation';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { debounce } from 'lodash';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Controller, FieldError, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import * as yup from 'yup';
 import Calendar from '../../../../components/Calendar/CalendarTasker';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
@@ -19,7 +20,6 @@ import {
 } from '../../../../components/CustomMapView/CustomMapView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import CustomSlider from '../../../../components/CustomSlider/CustomSlider';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import InputError from '../../../../components/FormError/FormError';
 import {
   LocationCircleIcon,
@@ -28,13 +28,14 @@ import {
   SunSetIcon,
 } from '../../../../components/Icon/index';
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
+import RemarkList from '../../../../components/RemarkList/RemarkList';
 import TextItem from '../../../../components/TextItem/TextItem';
 import {
-  RootStackParamList,
-  TaskerServiceParamList,
+  TaskerServiceParamList
 } from '../../../../navigation/types';
 import { colors } from '../../../../theme/colors';
 import { Typography } from '../../../../theme/typography';
+import { toastSuccess } from '../../../../utilities/toast';
 import {
   getCategories as fetchCategories,
   getSubCategories,
@@ -42,13 +43,11 @@ import {
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
 import { uploadFile } from '../../../Shared/services/shared.service';
-import { TaskerServiceModel, ServiceTag } from '../../entities/request.model';
+import { ServiceTag, TaskerServiceModel } from '../../entities/request.model';
 import { createTaskerService, getTags } from '../../service/tasker.service';
 import CategorySelector from './CategorySelector';
 import SubCategorySelector from './SubCategorySelector';
 import { TaskerServiceStyle } from './TaskerService.style';
-import RemarkList from '../../../../components/RemarkList/RemarkList';
-import Geolocation from '@react-native-community/geolocation';
 
 type TaskerServiceProps = NativeStackScreenProps<
   TaskerServiceParamList,
@@ -220,8 +219,7 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
       timeRange: selectedTimeRange,
     };
     createTaskerService(payload).then(() => {
-      notifyMessage(
-        t('service.success.title'),
+      toastSuccess(
         t('service.success.message'),
         () => {
           rootNavigation.navigate('HomeTab', { screen: 'Home' });

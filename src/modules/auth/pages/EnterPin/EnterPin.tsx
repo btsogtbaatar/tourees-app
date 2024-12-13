@@ -5,12 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import Loading from '../../../../components/Loading/Loading';
 import Pin from '../../../../components/Pin/Pin';
 import { useAppDispatch } from '../../../../context/app/store';
 import { RootStackParamList } from '../../../../navigation/types';
 import { storeCredentials } from '../../../../utilities/biometric';
+import { toastError } from '../../../../utilities/toast';
 import { enableBiometric } from '../../../Shared/slice/preferenceSlice';
 import { tokenCredentials } from '../../services';
 import { selectUser } from '../../slice/authSlice';
@@ -40,7 +40,7 @@ const EnterPin = (props: EnterPinProps) => {
             }
           })
           .catch(_error => {
-            notifyMessage(t('error'), t('pin.errorSaving'));
+            toastError(t('pin.errorSaving'));
           })
           .finally(() => setLoading(false));
       })

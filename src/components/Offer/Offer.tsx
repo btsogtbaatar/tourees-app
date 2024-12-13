@@ -8,9 +8,9 @@ import { TaskModel, TaskStatus } from '../../modules/Request/entities/request.mo
 import { approveOffer } from '../../modules/Request/service/request.service';
 import { colors, Typography } from '../../theme';
 import { horizontalScale } from '../../utilities';
+import { toastSuccess } from '../../utilities/toast';
 import CustomGradientButton from '../CustomButton/CustomGradientButton';
 import CustomImage from '../CustomImage/CustomImage';
-import { notifyMessage } from '../CustomToast/CustomToast';
 import { OfferStyle } from './Offer.style';
 
 export interface OfferProps {
@@ -92,7 +92,7 @@ export default function Offer(props: OfferProps) {
             title={t('offer.approve')}
             onPress={() => {
               approveOffer(props.offer.id).then(() => {
-                notifyMessage(t('successful'), t('offer.successOffer'));
+                toastSuccess(t('offer.successOffer'));
                 props.onApprove && props.onApprove(); 
               });
             }}

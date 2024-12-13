@@ -1,46 +1,61 @@
+import { Platform } from 'react-native';
 import {
   ACCESS_CONTROL,
   ACCESSIBLE,
-  AUTHENTICATION_TYPE,
   getGenericPassword,
   getSupportedBiometryType,
   setGenericPassword,
-  STORAGE_TYPE,
 } from 'react-native-keychain';
+import i18n from '../../i18n';
 
-const serviceName = 'tourees';
-
-// Store credentials with biometric protection
 export async function storeCredentials(username: string, password: string) {
-  // Check biometric availability
   const biometryType = await getSupportedBiometryType();
 
-  // Handle biometric requirement
   if (!biometryType) {
-    throw new Error('Biometric authentication is required but not available');
+    throw new Error(i18n.t('biometric.notSupported'));
   }
 
-  await setGenericPassword(username, password, {
-    service: serviceName,
-    accessControl: ACCESS_CONTROL.DEVICE_PASSCODE,
-    accessible: ACCESSIBLE.WHEN_PASSCODE_SET_THIS_DEVICE_ONLY,
-    storage: STORAGE_TYPE.RSA,
-    authenticationType: AUTHENTICATION_TYPE.BIOMETRICS,
-  });
+  try {
+    await setGenericPassword(username, password, {
+      accessControl: ACCESS_CONTROL.BIOMETRY_CURRENT_SET,
+      accessible: ACCESSIBLE.WHEN_UNLOCKED_THIS_DEVICE_ONLY,
+    });
+  } catch (error) {
+    throw new Error(i18n.t('pin.errorSaving'));
+  }
 }
 
-export type KeychainError = {
-  message: string;
-};
+export class KeychainError extends Error {
+  code: number;
+  constructor(code: number, message: string) {
+    super(message);
+    this.code = code;
+  }
+}
 
-// Retrieve credentials (will trigger biometric prompt)
 export async function retrieveCredentials() {
-  const credentials = await getGenericPassword({
-    service: serviceName,
-  });
+  let credentials = null;
 
-  if (!credentials) {
-    throw new Error('Credentials are null.');
+  try {
+    credentials = await getGenericPassword();
+  } catch (error) {
+    const keychainError = error as KeychainError;
+
+    if (Platform.OS === 'ios') {
+      if (keychainError.code != -128) {
+        throw keychainError;
+      }
+    } else if (Platform.OS === 'android') {
+      if (
+        !keychainError.message.startsWith('code: 10') &&
+        !keychainError.message.startsWith('code: 13')
+      ) {
+        throw keychainError;
+      }
+    } else {
+      // Unsupported platform
+      throw new Error(i18n.t('notSupportedPlatform'));
+    }
   }
 
   return credentials;

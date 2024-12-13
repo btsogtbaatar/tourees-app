@@ -5,12 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import Loading from '../../../../components/Loading/Loading';
 import Pin from '../../../../components/Pin/Pin';
 import { useAppDispatch } from '../../../../context/app/store';
 import { RootStackParamList } from '../../../../navigation/types';
 import { storeCredentials } from '../../../../utilities/biometric';
+import { toastError, toastSuccess } from '../../../../utilities/toast';
 import { enableBiometric } from '../../../Shared/slice/preferenceSlice';
 import { createPin, updatePin } from '../../services';
 import { hasPin, selectUser, setHasPin } from '../../slice/authSlice';
@@ -35,11 +35,11 @@ const RetypePin = (props: RetypePinProps) => {
             storeCredentials(user!.username, pin)
               .then(() => {
                 dispatch(setHasPin(true));
-                notifyMessage(t('successful'), t('pin.success'));
+                toastSuccess(t('pin.success'));
                 navigation.navigate('HomeTab', { screen: 'Profile' });
               })
               .catch(_error => {
-                notifyMessage(t('error'), t('pin.errorSaving'));
+                toastError(t('pin.errorSaving'));
               })
               .finally(() => setLoading(false));
           },
@@ -53,13 +53,13 @@ const RetypePin = (props: RetypePinProps) => {
               navigation.navigate('HomeTab', { screen: 'Home' });
             })
             .catch(_error => {
-              notifyMessage(t('error'), t('pin.errorSaving'));
+              toastError(t('pin.errorSaving'));
             })
             .finally(() => setLoading(false));
         });
       }
     } else {
-      notifyMessage(t('error'), t('pin.mismatch'));
+      toastError(t('pin.mismatch'));
     }
   };
 

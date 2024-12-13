@@ -8,9 +8,9 @@ import i18n from '../../../../../i18n';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { RootStackParamList } from '../../../../navigation/types';
+import { toastError } from '../../../../utilities/toast';
 import validations from '../../../../validations';
 import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import InformationFields from '../../components/InformationFields/InformationFields';
@@ -84,7 +84,7 @@ function UpdateInformation(prop: UpdateInformationProps) {
         prop.navigation.goBack();
       })
       .catch(e => {
-        notifyMessage(t('login.socialError.title'), e.message);
+        toastError(e.message);
       });
   };
   return (

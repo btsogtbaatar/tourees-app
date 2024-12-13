@@ -9,9 +9,9 @@ import CustomGradientButton from '../../../../components/CustomButton/CustomGrad
 import CustomCurrencyInput from '../../../../components/CustomInput/CustomCurrencyInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import { useAppDispatch } from '../../../../context/app/store';
 import { RootStackParamList } from '../../../../navigation/types';
+import { toastSuccess } from '../../../../utilities/toast';
 import { selectAuthenticated } from '../../../Auth/slice/authSlice';
 import { createTask } from '../../service/request.service';
 import { saveDraft } from '../../slice/taskSlice';
@@ -32,8 +32,7 @@ const TaskBudget = (props: TaskBudgetProps) => {
 
     if (isAuthenticated) {
       createTask(task).then(() => {
-        notifyMessage(
-          t('userRequest.success.title'),
+        toastSuccess(
           t('userRequest.success.message'),
         );
         rootNavigation.navigate('HomeTab', { screen: 'Home' });

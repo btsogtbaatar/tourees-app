@@ -39,9 +39,6 @@ const authSlice = createSlice({
       state.user = undefined;
       state.profile = undefined;
     },
-    setFirebaseToken: (state, action: PayloadAction<string>) => {
-      state.firebaseToken = action.payload;
-    },
   },
 });
 
@@ -50,7 +47,6 @@ export const {
   setUser,
   setHasPin,
   resetAuth,
-  setFirebaseToken,
   setProfileImage,
 } = authSlice.actions;
 export default authSlice.reducer;

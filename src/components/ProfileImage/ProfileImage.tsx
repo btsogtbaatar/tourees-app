@@ -18,8 +18,8 @@ import { ProfileModel } from '../../modules/Profile/entities/profile.model';
 import { uploadProfile } from '../../modules/Profile/services/profile.service';
 import { uploadFile } from '../../modules/Shared/services/shared.service';
 import { horizontalScale } from '../../utilities';
+import { toastSuccess } from '../../utilities/toast';
 import CustomImage from '../CustomImage/CustomImage';
-import { notifyMessage } from '../CustomToast/CustomToast';
 import { HeaderEditIcon, UserCircleIcon } from '../Icon';
 import { ImageSource } from '../ImageUploadButton/ImageUploadButton';
 import AvatarModal from './AvatarModal';
@@ -58,10 +58,10 @@ const ProfileImage = () => {
         uploadProfile(profilePicture).then(() => {
           dispatchModal({ type: actions.HIDE });
 
-          notifyMessage(
-            t('profile.imageSuccess.title'),
+          toastSuccess(
             t('profile.imageSuccess.message'),
           );
+
           dispatch(setProfileImage(file));
         });
       });

@@ -1,8 +1,8 @@
 import { Client, StompSubscription } from '@stomp/stompjs';
-import { getEnv } from '../../../api';
-import { useSelector } from 'react-redux';
-import { selectAuthenticated, selectToken } from '../../Auth/slice/authSlice';
 import { useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux';
+import { getEnv } from '../../../api';
+import { selectAuthenticated, selectToken } from '../../Auth/slice/authSlice';
 
 let client: Client | null;
 
@@ -14,19 +14,19 @@ const activateSocket = (token: string) => {
     },
     forceBinaryWSFrames: true,
     debug: str => {
-      console.log('debug console:', str);
+      // console.log('debug console:', str);
     },
     onConnect: str => {
-      console.log('connection successful:', str);
+      // console.log('connection successful:', str);
     },
     onStompError: e => {
-      console.log('Stomp error:', e);
+      // console.log('Stomp error:', e);
     },
     onWebSocketError: e => {
-      console.log('socket error:', e);
+      // console.log('socket error:', e);
     },
     onWebSocketClose: e => {
-      console.log('socket closed message:', e);
+      // console.log('socket closed message:', e);
     },
   });
   client.activate();

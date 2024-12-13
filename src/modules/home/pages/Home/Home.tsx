@@ -13,21 +13,16 @@ import { useSelector } from 'react-redux';
 import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
-import { notifyMessage } from '../../../../components/CustomToast/CustomToast';
 import { SearchMdIcon } from '../../../../components/Icon';
 import ImageItem from '../../../../components/ImageItem/ImageItem';
 import TaskerServiceList from '../../../../components/TaskerServiceList/TaskerServiceList';
 import { useAppDispatch } from '../../../../context/app/store';
+import useNotification from '../../../../hooks/useNotification';
 import { useTaskerServiceFetch } from '../../../../hooks/useTaskerServiceFetch';
 import { colors } from '../../../../theme/colors';
 import { verticalScale } from '../../../../utilities';
-import { updateFirebaseToken } from '../../../Auth/services';
-import {
-  selectAuthenticated,
-  selectFirebaseToken,
-} from '../../../Auth/slice/authSlice';
-import { getUnreadNotificationCount } from '../../../Notification/services/notification.service';
-import { setUnreadNotificationCount } from '../../../Notification/slice/notificationSlice';
+import { toastSuccess } from '../../../../utilities/toast';
+import { selectAuthenticated } from '../../../Auth/slice/authSlice';
 import { createTask } from '../../../Request/service/request.service';
 import { clearDraft, selectDraft } from '../../../Request/slice/taskSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
@@ -41,23 +36,17 @@ const Home = () => {
   const { t } = useTranslation();
   const isAuthenticated = useSelector(selectAuthenticated);
   const dispatch = useAppDispatch();
-  const firebaseToken = useSelector(selectFirebaseToken);
   const taskDraft = useSelector(selectDraft);
   const { filteredGroupedTaskService, onSubmitSearch } =
     useTaskerServiceFetch();
-
-  useEffect(() => {
-    if (firebaseToken && isAuthenticated) {
-      updateFirebaseToken(firebaseToken);
-    }
-  }, [firebaseToken, isAuthenticated]);
+  useNotification();
 
   const onRefresh = React.useCallback(() => {
-    getCateories();
+    getCategories();
     onSubmitSearch('');
   }, []);
 
-  const getCateories = () => {
+  const getCategories = () => {
     setRefreshing(true);
 
     fetchCategories()
@@ -70,22 +59,13 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getCateories();
-
-    if (isAuthenticated) {
-      getUnreadNotificationCount().then(res => {
-        dispatch(setUnreadNotificationCount(res));
-      });
-    }
+    getCategories();
   }, []);
 
   useEffect(() => {
     if (taskDraft && isAuthenticated) {
       createTask(taskDraft).then(() => {
-        notifyMessage(
-          t('userRequest.success.title'),
-          t('userRequest.success.message'),
-        );
+        toastSuccess(t('userRequest.success.message'));
 
         dispatch(clearDraft());
       });

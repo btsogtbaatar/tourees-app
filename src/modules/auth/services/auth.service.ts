@@ -52,7 +52,6 @@ export async function socialCustomerAuthenticate(
   socialToken: AuthModel.SocialToken,
 ): Promise<AuthModel.User> {
   let token: AuthModel.Token = await socialAuthenticate(socialToken);
-  console.log('Token resp:', token);
   return await authenticate(token);
 }
 
