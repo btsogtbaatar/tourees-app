@@ -111,10 +111,11 @@ function useNotification() {
     const topics: string[] = [];
     let unsubscribeMessage = null;
 
-    if (createdTaskerServices && isAuthenticated) {
+    if (createdTaskerServices && isAuthenticated && permisionGranted) {
       refreshNotifications();
 
       unsubscribeMessage = messaging().onMessage(message => {
+        console.log('🚀 ~ onMessaging ~ message:', message);
         localNotification(message);
         refreshNotifications();
       });
@@ -142,7 +143,7 @@ function useNotification() {
       });
       unsubscribeMessage && unsubscribeMessage();
     };
-  }, [createdTaskerServices, isAuthenticated]);
+  }, [createdTaskerServices, isAuthenticated, permisionGranted]);
 
   return null;
 }

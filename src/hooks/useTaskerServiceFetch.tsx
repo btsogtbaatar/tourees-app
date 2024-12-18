@@ -1,5 +1,7 @@
 import _, { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectAuthenticated } from '../modules/Auth/slice/authSlice';
 import {
   fetchCreatedTaskerServices,
   fetchTaskerServices,
@@ -20,16 +22,22 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
   const [sortValue, setSortValue] = useState<string>('');
   const [createdTaskerServices, setCreatedTaskerServices] =
     useState<SharedModel.TaskerServiceModel[]>();
+  const isAuthenticated = useSelector(selectAuthenticated);
 
   useEffect(() => {
     getTaskerServices(filter);
-    getCreatedTaskerServices();
 
     return () => {
       setTaskerServices([]);
       setCreatedTaskerServices([]);
     };
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      getCreatedTaskerServices();
+    }
+  }, [isAuthenticated]);
 
   const groupTaskServiceSubCategory = () => {
     const groupedTaskerService = _.chain(taskerServices)
