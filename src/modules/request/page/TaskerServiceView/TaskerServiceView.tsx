@@ -17,12 +17,14 @@ import { SharedModel } from '../../../Shared/entities/shared.model';
 import { getTaskerServiceDetail } from '../../service/tasker.service';
 import TaskerServiceViewStyle from './TaskerServiceView.style';
 import { useSelector } from 'react-redux';
-import { selectAuthenticated } from '../../../Auth/slice/authSlice';
+import { selectAuthenticated, selectUser } from '../../../Auth/slice/authSlice';
+import { getConversationId } from '../../../Shared/services/shared.service';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TaskerServiceView'>;
 const TaskerServiceView = (props: Props) => {
   const { id } = props.route.params;
   const { t } = useTranslation();
+  const user = useSelector(selectUser);
   const [taskerService, setTaskerService] =
     useState<SharedModel.TaskerServiceModel>();
   const navigation = useNavigation();
@@ -46,13 +48,14 @@ const TaskerServiceView = (props: Props) => {
 
   const onSubmit = () => {
     if (isAuthenticated) {
-      navigation.navigate('Chat', {
-        id:
-          (taskerService?.contractor &&
-            taskerService?.contractor.user &&
-            taskerService?.contractor.user.id) ??
-          1,
-      });
+      getConversationId(taskerService?.contractor.user.id!).then(
+        conversation => {
+          console.log('conversation', conversation);
+          navigation.navigate('Chat', {
+            id: conversation.id,
+          });
+        },
+      );
     } else {
       navigation.navigate('Login');
     }
@@ -102,11 +105,15 @@ const TaskerServiceView = (props: Props) => {
             taskerService?.timeRange.start + ' ' + taskerService?.timeRange.end
           }
         />
-        <TouchableOpacity
-          style={TaskerServiceViewStyle.contactContainer}
-          onPress={onSubmit}>
-          <Text style={TaskerServiceViewStyle.contactText}>Contact Tasker</Text>
-        </TouchableOpacity>
+        {user?.id !== taskerService?.contractor.user.id && (
+          <TouchableOpacity
+            style={TaskerServiceViewStyle.contactContainer}
+            onPress={onSubmit}>
+            <Text style={TaskerServiceViewStyle.contactText}>
+              Contact Tasker
+            </Text>
+          </TouchableOpacity>
+        )}
       </ContainerView>
     </CustomSafeAreaView>
   );

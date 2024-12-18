@@ -82,7 +82,6 @@ export declare namespace TaskModel {
     contractor: {
       user: AuthModel.User;
     };
-    conversation: Conversation;
   };
   export type User = {
     id: number;

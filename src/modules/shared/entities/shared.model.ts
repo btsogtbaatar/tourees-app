@@ -1,6 +1,10 @@
+import { number } from 'yup';
 import { AuthModel } from '../../Auth/entities';
 import { Address } from '../pages/AddressMapView/AddressesMapView';
 export namespace SharedModel {
+  export type ConversationID = {
+    id: number;
+  };
   export type Pagination<T> = {
     content: T[];
     pageable: Pageable;
