@@ -4,6 +4,7 @@ import { ImageSource } from '../../../components/ImageUploadButton/ImageUploadBu
 import { SharedModel } from '../entities/shared.model';
 import store from '../../../context/app/store';
 import { TaskModel } from '../../Request/entities/request.model';
+import { number } from 'yup';
 
 export function uploadFile(file: any): Promise<SharedModel.File> {
   const formData = new FormData();
@@ -36,4 +37,10 @@ export function uploadFiles(files: ImageSource[]): Promise<SharedModel.File[]> {
     });
   }
   return Promise.resolve([]);
+}
+export function getConversationId(
+  id: number,
+): Promise<SharedModel.ConversationID> {
+  console.log('id', id);
+  return api.get(`/conversation/user/${id}`);
 }

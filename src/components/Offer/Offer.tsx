@@ -4,7 +4,10 @@ import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../../modules/Auth/slice/authSlice';
-import { TaskModel, TaskStatus } from '../../modules/Request/entities/request.model';
+import {
+  TaskModel,
+  TaskStatus,
+} from '../../modules/Request/entities/request.model';
 import { approveOffer } from '../../modules/Request/service/request.service';
 import { colors, Typography } from '../../theme';
 import { horizontalScale } from '../../utilities';
@@ -12,6 +15,7 @@ import { toastSuccess } from '../../utilities/toast';
 import CustomGradientButton from '../CustomButton/CustomGradientButton';
 import CustomImage from '../CustomImage/CustomImage';
 import { OfferStyle } from './Offer.style';
+import { getConversationId } from '../../modules/Shared/services/shared.service';
 
 export interface OfferProps {
   task: TaskModel.TaskResponse;
@@ -23,7 +27,19 @@ export default function Offer(props: OfferProps) {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const user = useSelector(selectUser);
-
+  const onNavigate = () => {
+    getConversationId(
+      props.task.customer.user.id === user?.id
+        ? props.offer.contractor.user.id!
+        : props.task.customer.user.id!,
+    )
+      .then(conversation => {
+        console.log('conversation', conversation);
+        navigation.navigate('Chat', {
+          id: conversation.id,
+        });
+      });
+  };
   return (
     <View style={OfferStyle.container}>
       <View style={OfferStyle.body}>
@@ -61,43 +77,41 @@ export default function Offer(props: OfferProps) {
                 button: OfferStyle.smallButton,
               }}
               title={t('offer.chat')}
-              onPress={() => {
-                navigation.navigate('Chat', {
-                  id: props.offer.conversation.id,
-                });
-              }}
+              onPress={onNavigate}
             />
           </View>
         )}
-        {props.offer.contractor?.user.id === user?.id && props.task.status !== TaskStatus.ASSIGNED && (
-          <View style={{ marginRight: horizontalScale(8) }}>
+        {props.offer.contractor?.user.id === user?.id &&
+          props.task.status !== TaskStatus.ASSIGNED && (
+            <View style={{ marginRight: horizontalScale(8) }}>
+              <CustomGradientButton
+                style={{
+                  text: { ...Typography.textSmall, color: colors.white },
+                  button: OfferStyle.smallButton,
+                }}
+                title={t('offer.edit')}
+                onPress={() => {
+                  navigation.navigate('EditOffer', { id: props.offer.id });
+                }}
+              />
+            </View>
+          )}
+        {props.task.customer.user.id === user?.id &&
+          props.task.status !== TaskStatus.ASSIGNED && (
             <CustomGradientButton
               style={{
                 text: { ...Typography.textSmall, color: colors.white },
                 button: OfferStyle.smallButton,
               }}
-              title={t('offer.edit')}
+              title={t('offer.approve')}
               onPress={() => {
-                navigation.navigate('EditOffer', { id: props.offer.id });
+                approveOffer(props.offer.id).then(() => {
+                  toastSuccess(t('offer.successOffer'));
+                  props.onApprove && props.onApprove();
+                });
               }}
             />
-          </View>
-        )}
-        {props.task.customer.user.id === user?.id && props.task.status !== TaskStatus.ASSIGNED && (
-          <CustomGradientButton
-            style={{
-              text: { ...Typography.textSmall, color: colors.white },
-              button: OfferStyle.smallButton,
-            }}
-            title={t('offer.approve')}
-            onPress={() => {
-              approveOffer(props.offer.id).then(() => {
-                toastSuccess(t('offer.successOffer'));
-                props.onApprove && props.onApprove(); 
-              });
-            }}
-          />
-        )}
+          )}
       </View>
     </View>
   );
