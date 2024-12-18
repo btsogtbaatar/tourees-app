@@ -15,8 +15,13 @@ import Route from './src/navigation';
 
 PushNotification.configure({
   onNotification: function (notification) {
-    navigate(notification.data.path, notification.data.data);
+    console.log('🚀 ~ notification:', notification);
+
+    if (notification.userInteraction) {
+      navigate(notification.data.path, notification.data.data);
+    }
   },
+
   requestPermissions: false,
 });
 

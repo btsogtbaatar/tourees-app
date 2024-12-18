@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const baseURL = 'localhost:8080';
-// const baseURL = 'dv3427era6fzn.cloudfront.net';
-const defaultUrl = `http://${baseURL}`;
+// const baseURL = '192.168.7.166:8080';
+const baseURL = 'dv3427era6fzn.cloudfront.net';
+const defaultUrl = `https://${baseURL}`;
 const imageUrl = `${defaultUrl}/file/resource/`;
 const brokerUrl = `ws://${baseURL}/ws/websocket`;
 
