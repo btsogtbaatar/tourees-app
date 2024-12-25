@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-// const baseURL = '192.168.7.166:8080';
+// const baseURL = '192.168.0.37:8080';
 const baseURL = 'dv3427era6fzn.cloudfront.net';
 const defaultUrl = `https://${baseURL}`;
 const imageUrl = `${defaultUrl}/file/resource/`;
-const brokerUrl = `ws://${baseURL}/ws/websocket`;
+const brokerUrl = `wss://${baseURL}/ws/websocket`;
 
 export const getEnv = () => {
   return {

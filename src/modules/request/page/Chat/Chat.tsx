@@ -34,6 +34,7 @@ const Chat = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [lastPage, setLastPage] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
+  console.log('Chat -> user', user);
   const fetchPage = (
     page: number,
     callback: (value: TaskModel.Message[]) => void,
