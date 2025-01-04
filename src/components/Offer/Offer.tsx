@@ -27,18 +27,18 @@ export default function Offer(props: OfferProps) {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const user = useSelector(selectUser);
+  console.log(props.offer);
   const onNavigate = () => {
     getConversationId(
       props.task.customer.user.id === user?.id
         ? props.offer.contractor.user.id!
         : props.task.customer.user.id!,
-    )
-      .then(conversation => {
-        console.log('conversation', conversation);
-        navigation.navigate('Chat', {
-          id: conversation.id,
-        });
+    ).then(conversation => {
+      console.log('conversation', conversation);
+      navigation.navigate('Chat', {
+        id: conversation.id,
       });
+    });
   };
   return (
     <View style={OfferStyle.container}>
@@ -47,7 +47,7 @@ export default function Offer(props: OfferProps) {
           <CustomImage
             style={OfferStyle.image}
             source={
-              props.offer.contractor.user.profilePicture
+              props.offer?.contractor?.user?.profilePicture
                 ? {
                     uri: props.offer.contractor.user.profilePicture.url,
                   }
