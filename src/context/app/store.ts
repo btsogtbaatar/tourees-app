@@ -3,11 +3,10 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { persistReducer, persistStore } from 'redux-persist';
 import { reactotron } from '../../../ReactotronConfig';
-
 import authSlice from '../../modules/Auth/slice/authSlice';
+import preferenceSlice from '../../modules/Shared/slice/preferenceSlice';
 import notificationSlice from '../../modules/Notification/slice/notificationSlice';
 import taskSlice from '../../modules/Request/slice/taskSlice';
-import preferenceSlice from '../../modules/Shared/slice/preferenceSlice';
 
 // TODO: Distinguish persistence slices
 const rootReducer = combineReducers({

@@ -10,12 +10,17 @@ const activateSocket = (token: string) => {
   client = new Client({
     brokerURL: getEnv().BROKER_URL,
     connectHeaders: {
+      Upgrade: 'websocket',
+      Connection: 'Upgrade',
+      'Sec-WebSocket-Version': '13',
       Authorization: `Bearer ${token}`,
     },
     forceBinaryWSFrames: true,
+    appendMissingNULLonIncoming: true,
     debug: str => {
       // console.log('debug console:', str);
     },
+
     onConnect: str => {
       // console.log('connection successful:', str);
     },
