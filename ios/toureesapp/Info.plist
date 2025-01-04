@@ -65,16 +65,18 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Your photo library allows you to upload pictures of tasks.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Tourees app</string>
+	<string>Your camera allows you to take pictures of tasks and upload them.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Do you allow the application to use the biometric authentication?</string>
+	<string>We need access to Face ID to securely authenticate your account.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Do you allow the app to get your location?</string>
+	<string>We use your location to find the nearest addresses and display them on the map.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Do you allow the app to get your location?</string>
+	<string>We use your location to find the nearest addresses and display them on the map.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Do you allow the app to get your location?</string>
+	<string>We use your location to find the nearest addresses and display them on the map.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Nunito-Italic-VariableFont_wght.ttf</string>
