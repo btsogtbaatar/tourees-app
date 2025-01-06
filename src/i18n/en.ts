@@ -107,6 +107,16 @@ export default {
       message: 'Picture changed successfully.',
     },
     l_setup_profile: 'Edit Profile',
+    remark: 'Description',
+    remarkDuplicatedError: 'Entered value is duplicated.',
+    validation: {
+      tagLine: {
+        required: 'Please enter a tagline.',
+      },
+      description: {
+        required: 'Please enter a description.',
+      },
+    },
   },
   tab: {
     tabHome: 'Home',

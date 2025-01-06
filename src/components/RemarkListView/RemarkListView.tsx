@@ -54,11 +54,18 @@ const RemarkListView = (props: RemarkListModalProps) => {
   const onSubmit = (values: TaskerModel.RemarkRequest) => {
     if (values && values.remark && values.remark.trim() !== '') {
       if (listData) {
-        if (listData.filter(item => item === values.remark).length === 0) {
+        if (
+          listData.filter(
+            item => item.toUpperCase() === values.remark?.toUpperCase(),
+          ).length === 0 &&
+          tags?.filter(
+            t => t.value.toUpperCase() === values.remark?.toUpperCase(),
+          ).length === 0
+        ) {
           setValue(name, [...listData, values.remark]);
           setDuplicateError('');
         } else {
-          setDuplicateError(t('remark.remarkDuplicatedError'));
+          setDuplicateError(t('profile.remarkDuplicatedError'));
           return;
         }
       } else {
