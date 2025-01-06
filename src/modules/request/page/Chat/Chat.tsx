@@ -70,10 +70,9 @@ const Chat = (props: Props) => {
       setState(value);
     });
     getConversation(id).then(data => {
-      if (data.contractor.id !== user?.id) {
-        setProfile(data.contractor);
-      } else {
-        setProfile(data.customer);
+      const participant = data.participants.find(p => p.id !== user?.id);
+      if (participant) {
+        setProfile(participant);
       }
     });
   }, []);

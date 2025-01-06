@@ -94,8 +94,7 @@ export declare namespace TaskModel {
     id: number;
     customerLastSeen: Moment;
     contractorLastSeen: Moment;
-    contractor: User;
-    customer: User;
+    participants: User[];
   };
 
   export type Chat = {
