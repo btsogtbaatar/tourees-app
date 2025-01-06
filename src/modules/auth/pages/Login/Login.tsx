@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -39,6 +39,9 @@ import {
   tokenCredentials,
 } from '../../services';
 import styles from './Login.style';
+import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
+import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
+import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
 
 export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -76,7 +79,9 @@ export default function Login() {
 
   const onSubmit = (credentials: AuthModel.Credentials) => {
     setLoading(true);
-
+    if (authChannel === AuthChannel.Phone) {
+      credentials.phoneNumber = countryCode + credentials.phoneNumber;
+    }
     sendOtp(credentials)
       .then(() => {
         navigation.navigate('LoginOtpCheck', { credentials });
@@ -104,7 +109,6 @@ export default function Login() {
 
   const socialAuthentication = (socialToken: AuthModel.SocialToken) => {
     setLoading(true);
-
     socialCustomerAuthenticate(socialToken)
       .then(() => {
         navigation.navigate('HomeTab', {
@@ -113,7 +117,8 @@ export default function Login() {
       })
       .finally(() => setLoading(false));
   };
-
+  const [countryCode, setCountryCode] = useState<string>('+1');
+  const bottomSheetRef = useRef<any>(null);
   if (loading) {
     return <Loading />;
   }
@@ -142,11 +147,11 @@ export default function Login() {
                     />
                   )}
                   {authChannel === AuthChannel.Phone && (
-                    <CustomFormInput
-                      label={t('login.phone.label')}
-                      placeholder={t('login.phone.placeholder')}
-                      name={'phoneNumber'}
-                      keyboardType="phone-pad"
+                    <PhoneNumberInput
+                      countryCode={countryCode}
+                      openModal={() => {
+                        bottomSheetRef.current?.expand();
+                      }}
                     />
                   )}
                   <View style={styles.buttonContainer}>
@@ -181,6 +186,18 @@ export default function Login() {
             </ContainerView>
           </FullHeightView>
         </CustomTouchableWithoutFeedback>
+        <CustomBottomSheet
+          ref={bottomSheetRef}
+          snapPoints={['50%']}
+          enableDynamicSizing={false}
+          enablePanDownToClose={true}>
+          <Flags
+            onChange={val => {
+              setCountryCode(val);
+              bottomSheetRef.current?.close();
+            }}
+          />
+        </CustomBottomSheet>
       </CustomKeyboardAvoidingView>
     </CustomSafeAreaView>
   );

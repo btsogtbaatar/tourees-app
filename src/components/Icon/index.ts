@@ -53,6 +53,9 @@ import UserCircleIcon from '../../../assets/icons/user-circle.svg';
 import UserIcon from '../../../assets/icons/user.svg';
 import VectorIcon from '../../../assets/icons/vector-logo.svg';
 import XCircleIcon from '../../../assets/icons/x-circle.svg';
+import USFlag from '../../../assets/flags/US.svg';
+import MNFlag from '../../../assets/flags/MN.svg';
+import TWFlag from '../../../assets/flags/TW.svg';
 
 export {
   ArrowLeftIcon,
@@ -61,7 +64,9 @@ export {
   BuildingIcon,
   CalendarIcon,
   CameraIcon,
-  CheckIcon, ChevronDownIcon, ChevronRightIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
   CircleIcon,
   ClockIcon,
   ClockRewindIcon,
@@ -77,14 +82,20 @@ export {
   HelpCircleIcon,
   HomeActiveIcon,
   HomeIcon,
-  ImagePlaceHolderIcon, LaptopIcon, LocationCircleGrayIcon,
+  ImagePlaceHolderIcon,
+  LaptopIcon,
+  LocationCircleGrayIcon,
   LocationCircleIcon,
   LocationIcon,
   LogoIcon,
   LogoMini,
   LogoMiniBorder,
   LogoutIcon,
-  MailIcon, MessagePlusSquareIcon, MoonIcon, PasscodeIcon, PassportIcon,
+  MailIcon,
+  MessagePlusSquareIcon,
+  MoonIcon,
+  PasscodeIcon,
+  PassportIcon,
   PhoneIcon,
   PlusIcon,
   SearchMdIcon,
@@ -101,6 +112,8 @@ export {
   UserCircleIcon,
   UserIcon,
   VectorIcon,
-  XCircleIcon
+  XCircleIcon,
+  USFlag,
+  MNFlag,
+  TWFlag,
 };
-

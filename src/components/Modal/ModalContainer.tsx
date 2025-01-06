@@ -41,8 +41,7 @@ const ModalContainer = ({
           ? { justifyContent: 'center', margin: horizontalScale(16) }
           : { justifyContent: 'flex-end', margin: 0 }
       }
-      avoidKeyboard
-    >
+      avoidKeyboard>
       {children ?? <></>}
     </Modal>
   );

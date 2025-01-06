@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   FlatList,
@@ -28,6 +28,8 @@ import { clearDraft, selectDraft } from '../../../Request/slice/taskSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
 import { getCategories as fetchCategories } from '../../services/category.service';
 import HomeStyle from './Home.style';
+import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
+import CustomBottomScrollViewSheet from '../../../../components/CustomBottomSheetScrollView/CustomBottomSheetScrollView';
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(true);
@@ -37,6 +39,7 @@ const Home = () => {
   const isAuthenticated = useSelector(selectAuthenticated);
   const dispatch = useAppDispatch();
   const taskDraft = useSelector(selectDraft);
+  const bottomSheetRef = useRef<any>(null);
   const { filteredGroupedTaskService, onSubmitSearch } =
     useTaskerServiceFetch();
   useNotification();
@@ -169,6 +172,15 @@ const Home = () => {
           />
         </View>
       </ContainerView>
+
+      <CustomBottomSheet
+        ref={bottomSheetRef}
+        snapPoints={['50%', '100%']}
+        enablePanDownToClose>
+        <CustomBottomScrollViewSheet>
+          <Text>Hello!</Text>
+        </CustomBottomScrollViewSheet>
+      </CustomBottomSheet>
     </ScrollView>
   );
 };

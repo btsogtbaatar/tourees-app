@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import Geolocation from '@react-native-community/geolocation';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
@@ -35,7 +35,7 @@ import Steps from '../../../../components/Steps/Steps';
 import TabController from '../../../../components/TabController/TabController';
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
-import { colors } from '../../../../theme';
+import { colors, Typography } from '../../../../theme';
 import validations from '../../../../validations';
 import { SharedModel, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
@@ -43,6 +43,11 @@ import { uploadFile } from '../../../Shared/services/shared.service';
 import { AuthChannel, AuthModel } from '../../entities';
 import { signUp } from '../../services';
 import { RegisterStyle } from './Register.style';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
+import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
+import CustomBottomScrollViewSheet from '../../../../components/CustomBottomSheetScrollView/CustomBottomSheetScrollView';
+import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
 
 type RegisterProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
@@ -79,7 +84,7 @@ function Register({ navigation }: RegisterProps) {
             .required(t('login.email.errors.required'))
             .matches(validations.email, t('login.email.errors.validation'))
         : yup.string(),
-    phone:
+    phoneNumber:
       authChannel === AuthChannel.Phone
         ? yup
             .string()
@@ -106,28 +111,36 @@ function Register({ navigation }: RegisterProps) {
     mode: 'onChange',
     resolver: yupResolver(schema),
   });
+  const [countryCode, setCountryCode] = useState<string>('+1');
 
   const onContinue = (values: AuthModel.RegisterRequest) => {
     if (AuthChannel.Email === authChannel) {
       values.phoneNumber = '';
     } else if (AuthChannel.Phone === authChannel) {
+      values.phoneNumber = countryCode + values.phoneNumber;
       values.email = '';
     }
     setLoading(true);
+    console.log('values', values);
     signUp(values)
       .then((response: AuthModel.User) => {
         navigation.navigate('RegisterOtpCheck', {
           registration: response,
         });
       })
+      .catch(error => {
+        console.log(error);
+      })
       .finally(() => {
         setLoading(false);
       });
   };
+
   const getAddress = (address: Address) => {
     const data = address.formattedAddress!.split(', ');
     return `${data[data.length - 3]}, ${data[data.length - 2]}`;
   };
+  const bottomSheetRef = useRef<any>(null);
   if (loading) {
     return <Loading />;
   }
@@ -159,11 +172,11 @@ function Register({ navigation }: RegisterProps) {
                       />
                     )}
                     {authChannel === AuthChannel.Phone && (
-                      <CustomFormInput
-                        label={t('login.phone.label')}
-                        placeholder={t('login.phone.placeholder')}
-                        name={'phone'}
-                        keyboardType="phone-pad"
+                      <PhoneNumberInput
+                        countryCode={countryCode}
+                        openModal={() => {
+                          bottomSheetRef.current?.expand();
+                        }}
                       />
                     )}
                     <View style={RegisterStyle.formController}>
@@ -231,9 +244,13 @@ function Register({ navigation }: RegisterProps) {
                             limit={1}
                             onImageSelection={images => {
                               let image = images.pop();
-                              uploadFile(image).then(file => {
-                                onChange(file);
-                              });
+                              uploadFile(image)
+                                .then(file => {
+                                  onChange(file);
+                                })
+                                .catch(error => {
+                                  console.log('upload error', error);
+                                });
                             }}
                             onDelete={index => {
                               onChange(undefined);
@@ -296,6 +313,18 @@ function Register({ navigation }: RegisterProps) {
             </ContainerView>
           </ScrollView>
         </TouchableWithoutFeedback>
+        <CustomBottomSheet
+          ref={bottomSheetRef}
+          snapPoints={['50%']}
+          enableDynamicSizing={false}
+          enablePanDownToClose={true}>
+          <Flags
+            onChange={val => {
+              setCountryCode(val);
+              bottomSheetRef.current?.close();
+            }}
+          />
+        </CustomBottomSheet>
       </CustomKeyboardAvoidingView>
     </CustomSafeAreaView>
   );
