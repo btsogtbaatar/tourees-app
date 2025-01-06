@@ -32,7 +32,7 @@ export default {
     hello: 'Hello?',
     welcome_seed: 'Welcome to the Seed platform.',
     understand: 'Understood',
-    login: 'Log in',
+    login: 'Login',
     continue: 'Continue',
   },
   form: {
@@ -75,13 +75,13 @@ export default {
   tasker: {
     type: {
       INDIVIDUAL: 'Individual',
-      BUSINESS: 'Business',
+      BUSINESS: 'Company',
     },
     education: 'Education',
     specialities: 'Specialties',
     languages: 'Languages',
     rank: 'Rank',
-    portfolio: 'Portfolio',
+    portfolio: 'Work portfolio',
     workingType: {
       name: 'Working Type',
       ONLINE: 'Online',
@@ -110,22 +110,22 @@ export default {
   },
   tab: {
     tabHome: 'Home',
-    tabMyTasks: 'My Tasks',
-    tabBrowseTasks: 'Tasks',
+    tabMyTasks: 'My requests',
+    tabBrowseTasks: 'Requests',
     tabProfile: 'Settings',
   },
   home: {
     category: {
-      question: 'What service do you want to receive?',
-      title: 'Types of Services',
+      question: 'Create a request for service',
+      title: 'Available service categories',
       search: 'Search',
     },
     loginAsContractor: 'Log in as Service Provider',
     signUpAsContractor: 'Sign up as Service Provider',
     services: {
       main: 'Events and wedding services',
-      search: 'Services search',
-      question: 'Browse listed services',
+      search: 'Search',
+      question: 'Explore available services',
     },
   },
   subCategoryList: {
@@ -158,7 +158,7 @@ export default {
   },
   request: {
     requestNewMessage:
-      'Your request has been successfully registered, we will connect you with a suitable contractor shortly. If you wish to cancel, please contact the operator immediately!',
+      'Your request has been successfully registered, we will connect you with a suitable provider shortly. If you wish to cancel, please contact the operator immediately!',
     logoTitle: 'Seed Bot',
     operatorCall: 'Contact Operator',
     requestOperatorMessage:
@@ -174,10 +174,10 @@ export default {
     requestImages: 'Upload Image',
     requestImageWarning: 'Please upload an image',
     requestEdit: 'Edit',
-    requestDestinationAddress: 'Pickup Location',
+    requestDestinationAddress: 'Location',
     requestDeliveryAddress: 'Drop-off Location',
     requestCreate: 'Create Request',
-    requestDeliveryDate: 'Select Delivery Date',
+    requestDeliveryDate: 'Select preferred date',
     offer: 'offer',
     status: {
       NEW: 'New',
@@ -186,7 +186,7 @@ export default {
       COMPLETED: 'Completed',
       CANCELLED: 'Cancelled',
     },
-    postedBy: 'Request created by',
+    postedBy: 'Created by',
     date: 'Request Date',
     images: 'Images',
     price: 'Request Price',
@@ -217,9 +217,9 @@ export default {
   },
   userRequest: {
     enterBudget:
-      'Please enter the price for the task you are creating in the field below.',
+      'Please enter the price for the request you are creating in the field below.',
     success: {
-      title: 'Successful',
+      title: 'Thank you',
       message: 'Your request has been successfully created.',
     },
     address: {
@@ -300,14 +300,14 @@ export default {
     home: 'Home',
     login: 'Log in',
     register: 'Sign up',
-    category: 'Types of Services',
+    category: 'Category',
     address: 'Select Address',
     request: 'Request',
-    taskerProfile: 'Tasker',
+    taskerProfile: 'Provider',
     biometric: 'Biometric',
     createPin: 'Create Pin',
     retypePin: 'Retype Pin',
-    taskBudget: 'Task Price',
+    taskBudget: 'Request Budget',
     createOffer: 'Create Offer',
     registrationInformation: 'Registration Information',
     updateInformation: 'Update Information',

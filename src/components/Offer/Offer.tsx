@@ -9,13 +9,12 @@ import {
   TaskStatus,
 } from '../../modules/Request/entities/request.model';
 import { approveOffer } from '../../modules/Request/service/request.service';
+import { getConversationId } from '../../modules/Shared/services/shared.service';
 import { colors, Typography } from '../../theme';
-import { horizontalScale } from '../../utilities';
 import { toastSuccess } from '../../utilities/toast';
 import CustomGradientButton from '../CustomButton/CustomGradientButton';
 import CustomImage from '../CustomImage/CustomImage';
 import { OfferStyle } from './Offer.style';
-import { getConversationId } from '../../modules/Shared/services/shared.service';
 
 export interface OfferProps {
   task: TaskModel.TaskResponse;
@@ -63,38 +62,33 @@ export default function Offer(props: OfferProps) {
           {Intl.NumberFormat().format(props.offer.price ?? 0)}₮
         </Text>
       </View>
-
-      <Text style={OfferStyle.description} numberOfLines={3}>
+      <Text style={OfferStyle.description} numberOfLines={2}>
         {props.offer.description}
       </Text>
       <View style={OfferStyle.bottom}>
         {(props.task.customer.user.id === user?.id ||
           props.offer.contractor.user.id === user?.id) && (
-          <View style={{ marginRight: horizontalScale(8) }}>
+          <CustomGradientButton
+            style={{
+              text: { ...Typography.textSmall, color: colors.white },
+              button: OfferStyle.smallButton,
+            }}
+            title={t('offer.chat')}
+            onPress={onNavigate}
+          />
+        )}
+        {props.offer.contractor?.user.id === user?.id &&
+          props.task.status !== TaskStatus.ASSIGNED && (
             <CustomGradientButton
               style={{
                 text: { ...Typography.textSmall, color: colors.white },
                 button: OfferStyle.smallButton,
               }}
-              title={t('offer.chat')}
-              onPress={onNavigate}
+              title={t('offer.edit')}
+              onPress={() => {
+                navigation.navigate('EditOffer', { id: props.offer.id });
+              }}
             />
-          </View>
-        )}
-        {props.offer.contractor?.user.id === user?.id &&
-          props.task.status !== TaskStatus.ASSIGNED && (
-            <View style={{ marginRight: horizontalScale(8) }}>
-              <CustomGradientButton
-                style={{
-                  text: { ...Typography.textSmall, color: colors.white },
-                  button: OfferStyle.smallButton,
-                }}
-                title={t('offer.edit')}
-                onPress={() => {
-                  navigation.navigate('EditOffer', { id: props.offer.id });
-                }}
-              />
-            </View>
           )}
         {props.task.customer.user.id === user?.id &&
           props.task.status !== TaskStatus.ASSIGNED && (

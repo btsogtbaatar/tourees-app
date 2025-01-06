@@ -26,16 +26,18 @@ export const OfferStyle = StyleSheet.create({
     alignItems: 'center',
     gap: horizontalScale(12),
   },
-  price: {
+  price: {  
     ...Typography.textRegular,
     ...getFontWeight(FontWeight.bold),
   },
   bottom: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    gap: horizontalScale(8),
   },
   smallButton: {
     height: verticalScale(30),
+    borderRadius: verticalScale(12),
   },
   image: {
     width: 50,

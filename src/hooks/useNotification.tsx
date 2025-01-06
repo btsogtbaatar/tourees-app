@@ -7,6 +7,7 @@ import { PermissionsAndroid, Platform } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { useSelector } from 'react-redux';
 import store from '../context/app/store';
+import { updateFirebaseToken } from '../modules/Auth/services';
 import { selectAuthenticated } from '../modules/Auth/slice/authSlice';
 import {
   getNotificationList,
@@ -100,6 +101,22 @@ function useNotification() {
       toastError(t('notSupportedPlatform'));
     }
   };
+
+  const registerToken = () => {
+    messaging()
+      .getToken()
+      .then(token => {
+        updateFirebaseToken(token).then(x =>
+          console.log('Updated firebase token successfully!'),
+        );
+      });
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      registerToken();
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     createChannelIfNotExists();
