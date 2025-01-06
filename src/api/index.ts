@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-// const baseURL = '192.168.0.37:8080';
+// const baseURL = '192.168.1.69:8080';
 const baseURL = 'dv3427era6fzn.cloudfront.net';
 const defaultUrl = `https://${baseURL}`;
 const imageUrl = `${defaultUrl}/file/resource/`;

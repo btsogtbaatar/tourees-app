@@ -18,20 +18,20 @@ const activateSocket = (token: string) => {
     forceBinaryWSFrames: true,
     appendMissingNULLonIncoming: true,
     debug: str => {
-      // console.log('debug console:', str);
+      console.log('debug console:', str);
     },
 
     onConnect: str => {
-      // console.log('connection successful:', str);
+      console.log('connection successful:', str);
     },
     onStompError: e => {
-      // console.log('Stomp error:', e);
+      console.log('Stomp error:', e);
     },
     onWebSocketError: e => {
-      // console.log('socket error:', e);
+      console.log('socket error:', e);
     },
     onWebSocketClose: e => {
-      // console.log('socket closed message:', e);
+      console.log('socket closed message:', e);
     },
   });
   client.activate();

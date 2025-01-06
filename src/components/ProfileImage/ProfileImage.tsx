@@ -35,8 +35,8 @@ const ProfileImage = () => {
     // await Camera.requestCameraPermission();
     await launchCamera({
       mediaType: 'photo',
-      maxHeight: 300,
-      maxWidth: 300,
+      maxHeight: 1024,
+      maxWidth: 1024,
       includeBase64: false,
     }).then(res => {
       uploadProfileImage(res);
@@ -58,9 +58,7 @@ const ProfileImage = () => {
         uploadProfile(profilePicture).then(() => {
           dispatchModal({ type: actions.HIDE });
 
-          toastSuccess(
-            t('profile.imageSuccess.message'),
-          );
+          toastSuccess(t('profile.imageSuccess.message'));
 
           dispatch(setProfileImage(file));
         });

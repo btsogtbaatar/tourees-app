@@ -65,7 +65,7 @@ export function getTask(id: number): Promise<TaskModel.TaskResponse> {
 export async function getLastTaskFromAddress(): Promise<
   TaskModel.Address | undefined
 > {
-  let page = await getTasks(1, 1);
+  let page = await getMyTasks(1, 1);
 
   if (
     page.content.length > 0 &&
