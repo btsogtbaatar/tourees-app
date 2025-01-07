@@ -110,7 +110,15 @@ export default {
     },
     l_setup_profile: 'Профайл засах',
     remark: 'Тайлбар',
-    remarkDuplicatedError: 'Тайлбар давхардаж байна.',
+    remarkDuplicatedError: 'Оруулсан утга давхардаж байна.',
+    validation: {
+      tagLine: {
+        required: 'Гарчиг оруулна уу.',
+      },
+      description: {
+        required: 'Тайлбар оруулна уу.',
+      },
+    },
   },
   tab: {
     tabHome: 'Нүүр',
@@ -337,6 +345,7 @@ export default {
     chat: 'Чат',
     myOfferTasks: 'Миний санал үүсгэсэн таскууд',
     photos: 'Зурагууд',
+    listingDetail: 'Үйлчилгээний дэлгэрэнгүй',
   },
   taskBudget: {
     submit: 'Хадгалах',

@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Text, View } from 'react-native';
+import { ScrollView, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import AboutTaskerProfile from '../../../../components/AboutTaskerProfile/AboutTaskerProfile';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
@@ -64,57 +64,63 @@ const TaskerServiceView = (props: Props) => {
   return (
     <CustomSafeAreaView>
       {taskerService?.files && <SliderImages images={taskerService.files} />}
-      <ContainerView>
-        <Text style={TaskerServiceViewStyle.nameStyle}>
-          {taskerService?.name}
-        </Text>
-        {taskerService?.address ? (
-          <View style={TaskerServiceViewStyle.addressStyle}>
-            <LocationIcon color={colors.primaryGradient} />
-            <Text>{taskerService?.address.displayName}</Text>
-          </View>
-        ) : (
-          <View>
+      <ScrollView>
+        <ContainerView>
+          <Text style={TaskerServiceViewStyle.nameStyle}>
+            {taskerService?.name}
+          </Text>
+          {taskerService?.address ? (
             <View style={TaskerServiceViewStyle.addressStyle}>
-              <LaptopIcon color={colors.primaryGradient} />
-              <Text>{t('service.onlineService')}</Text>
+              <LocationIcon color={colors.primaryGradient} />
+              <Text>{taskerService?.address.displayName}</Text>
             </View>
-          </View>
-        )}
-        <CustomCurrencyView amount={taskerService?.price} />
+          ) : (
+            <View>
+              <View style={TaskerServiceViewStyle.addressStyle}>
+                <LaptopIcon color={colors.primaryGradient} />
+                <Text>{t('service.onlineService')}</Text>
+              </View>
+            </View>
+          )}
+          <CustomCurrencyView amount={taskerService?.price} />
 
-        <TouchableOpacity style={TaskerServiceViewStyle.packageContainer}>
-          <Text style={TaskerServiceViewStyle.contactText}>View Packages</Text>
-        </TouchableOpacity>
-        {taskerService?.contractor && taskerService?.contractor.user && (
-          <AboutTaskerProfile
-            name={renderName(
-              taskerService.contractor.user.lastName,
-              taskerService.contractor.user.firstName,
-            )}
-            imageUrl={taskerService.contractor.profilePicture?.url}
-          />
-        )}
-        <RemarkTextView
-          label={'description'}
-          text={taskerService?.description}
-        />
-        <RemarkTextView
-          label={'Availability'}
-          text={
-            taskerService?.timeRange.start + ' ' + taskerService?.timeRange.end
-          }
-        />
-        {user?.id !== taskerService?.contractor.user.id && (
-          <TouchableOpacity
-            style={TaskerServiceViewStyle.contactContainer}
-            onPress={onSubmit}>
+          <TouchableOpacity style={TaskerServiceViewStyle.packageContainer}>
             <Text style={TaskerServiceViewStyle.contactText}>
-              Contact Tasker
+              View Packages
             </Text>
           </TouchableOpacity>
-        )}
-      </ContainerView>
+          {taskerService?.contractor && taskerService?.contractor.user && (
+            <AboutTaskerProfile
+              name={renderName(
+                taskerService.contractor.user.lastName,
+                taskerService.contractor.user.firstName,
+              )}
+              imageUrl={taskerService.contractor.profilePicture?.url}
+            />
+          )}
+          <RemarkTextView
+            label={'description'}
+            text={taskerService?.description}
+          />
+          <RemarkTextView
+            label={'Availability'}
+            text={
+              taskerService?.timeRange.start +
+              ' ' +
+              taskerService?.timeRange.end
+            }
+          />
+          {user?.id !== taskerService?.contractor.user.id && (
+            <TouchableOpacity
+              style={TaskerServiceViewStyle.contactContainer}
+              onPress={onSubmit}>
+              <Text style={TaskerServiceViewStyle.contactText}>
+                Contact Tasker
+              </Text>
+            </TouchableOpacity>
+          )}
+        </ContainerView>
+      </ScrollView>
     </CustomSafeAreaView>
   );
 };

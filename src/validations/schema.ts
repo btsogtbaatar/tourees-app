@@ -47,10 +47,10 @@ export namespace TaskSchema {
     yup.object({
       tagLine: yup
         .string()
-        .required(i18n.t('userRequest.messages.addresses.required')),
+        .required(i18n.t('profile.validation.tagLine.required')),
       description: yup
         .string()
-        .required(i18n.t('userRequest.messages.addresses.required')),
+        .required(i18n.t('profile.validation.description.required')),
       educations: remarkSchema,
       specialities: remarkSchema,
       languages: remarkSchema,
