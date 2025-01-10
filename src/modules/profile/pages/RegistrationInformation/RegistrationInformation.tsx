@@ -78,14 +78,14 @@ const RegistrationInformation = () => {
       },
     },
     {
-      values: [t('b_phonenumber'), replaceDots(user?.phoneNumber)],
+      values: [t('b_phonenumber'), replaceDots(user?.phoneNumber?.lineNumber)],
       prefix: <PhoneIcon />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
         navigation.navigate('UpdateInformation', {
           field: FormField.PHONE,
           defaultValues: {
-            phoneNumber: user?.phoneNumber ? user?.phoneNumber : '',
+            phoneNumber: user?.phoneNumber ? user?.phoneNumber : {},
           },
         });
       },

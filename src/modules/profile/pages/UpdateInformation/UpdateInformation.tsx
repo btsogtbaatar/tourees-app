@@ -16,6 +16,9 @@ import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import InformationFields from '../../components/InformationFields/InformationFields';
 import { Schema } from '../../model/registration.model';
 import { patchInformation } from '../../service/profile.service';
+import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
+import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
+import { useRef } from 'react';
 
 type UpdateInformationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -47,12 +50,18 @@ function getScema(field: FormField): yup.ObjectSchema<Schema> {
     case FormField.PHONE:
       return yup.object().shape({
         phoneNumber: yup
-          .string()
-          .required(i18n.t('login.phone.errors.required'))
-          .matches(
-            validations.phoneNumber,
-            i18n.t('login.phone.errors.validation'),
-          ),
+          .object()
+          .shape({
+            countryCode: yup.string().required(),
+            lineNumber: yup
+              .string()
+              .required(i18n.t('login.phone.errors.required'))
+              .matches(
+                validations.phoneNumber,
+                i18n.t('login.phone.errors.validation'),
+              ),
+          })
+          .required(i18n.t('login.phone.errors.required')),
       });
     case FormField.ADDRESS:
       return yup.object().shape({
@@ -87,13 +96,19 @@ function UpdateInformation(prop: UpdateInformationProps) {
         toastError(e.message);
       });
   };
+  const bottomSheetRef = useRef<any>(null);
   return (
     <CustomSafeAreaView>
       <FullHeightView>
         <ContainerView>
           <View style={{ marginBottom: 20 }}>
             <FormProvider {...form}>
-              <InformationFields field={field} />
+              <InformationFields
+                field={field}
+                openModal={() => {
+                  bottomSheetRef.current?.expand();
+                }}
+              />
             </FormProvider>
           </View>
           <CustomGradientButton
@@ -102,6 +117,21 @@ function UpdateInformation(prop: UpdateInformationProps) {
             onPress={form.handleSubmit(handleSubmit)}
           />
         </ContainerView>
+        <CustomBottomSheet
+          ref={bottomSheetRef}
+          snapPoints={['50%']}
+          enableDynamicSizing={false}
+          enablePanDownToClose={true}>
+          <Flags
+            onChange={val => {
+              form.setValue('phoneNumber', {
+                ...form.getValues('phoneNumber'),
+                countryCode: val,
+              });
+              bottomSheetRef.current?.close();
+            }}
+          />
+        </CustomBottomSheet>
       </FullHeightView>
     </CustomSafeAreaView>
   );

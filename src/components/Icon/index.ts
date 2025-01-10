@@ -56,6 +56,7 @@ import XCircleIcon from '../../../assets/icons/x-circle.svg';
 import USFlag from '../../../assets/flags/US.svg';
 import MNFlag from '../../../assets/flags/MN.svg';
 import TWFlag from '../../../assets/flags/TW.svg';
+import WWFlag from '../../../assets/flags/WW.svg';
 
 export {
   ArrowLeftIcon,
@@ -116,4 +117,5 @@ export {
   USFlag,
   MNFlag,
   TWFlag,
+  WWFlag,
 };

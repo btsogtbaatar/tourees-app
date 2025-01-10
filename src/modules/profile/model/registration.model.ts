@@ -1,3 +1,4 @@
+import { AuthModel } from '../../Auth/entities';
 import { TaskerType } from '../../Shared/entities/shared.model';
 
 export type FullName = {
@@ -11,7 +12,7 @@ export type Email = {
   email: string;
 };
 export type Phone = {
-  phoneNumber: string;
+  phoneNumber: AuthModel.PhoneNumber;
 };
 export type Address = {
   address: string;
