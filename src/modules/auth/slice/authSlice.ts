@@ -33,7 +33,7 @@ const authSlice = createSlice({
     setHasPin: (state, action: PayloadAction<boolean>) => {
       state.user!.hasPin = action.payload;
     },
-    resetAuth: state => {
+    logout: state => {
       state.isAuthenticated = false;
       state.token = undefined;
       state.user = undefined;
@@ -46,7 +46,7 @@ export const {
   setToken,
   setUser,
   setHasPin,
-  resetAuth,
+  logout,
   setProfileImage,
 } = authSlice.actions;
 export default authSlice.reducer;

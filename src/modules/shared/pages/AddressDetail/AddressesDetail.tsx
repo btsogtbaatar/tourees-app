@@ -18,6 +18,7 @@ import { colors } from '../../../../theme';
 import { TaskSchema } from '../../../../validations/schema';
 import { AddressType } from '../../../Request/entities/request.model';
 import UserRequestStyle from '../../../Request/page/UserRequest/UserRequest.style';
+import { SharedModel } from '../../entities/shared.model';
 import AddressDetailStyle from './AddressDetail.style';
 
 interface AddressDetailItemProps {
@@ -64,6 +65,7 @@ type AddressDetailProps = NativeStackScreenProps<
 
 const AddressesDetail = (props: AddressDetailProps) => {
   const { t } = useTranslation();
+  const { locationType, addresses, onGoBack } = props.route.params;
 
   const schema = yup.object().shape({
     from: TaskSchema.addressDetailSchema,
@@ -72,22 +74,32 @@ const AddressesDetail = (props: AddressDetailProps) => {
 
   const form = useForm({
     resolver: yupResolver(schema),
-    defaultValues: props.route.params.addresses,
+    defaultValues: addresses,
   });
 
   const onPress = () => {
-    form.handleSubmit(addresses => {
-      props.route.params.onGoBack({
-        ...props.route.params.addresses,
-        from: {
-          ...props.route.params.addresses.from,
-          ...addresses.from,
-        },
-        to: {
-          ...props.route.params.addresses.to,
-          ...addresses.to,
-        },
-      });
+    form.handleSubmit(_addresses => {
+      if (locationType === SharedModel.CategoryLocationType.Route) {
+        onGoBack({
+          ...addresses,
+          from: {
+            ...addresses.from,
+            ..._addresses.from,
+          },
+          to: {
+            ...addresses.to,
+            ..._addresses.to,
+          },
+        });
+      } else {
+        onGoBack({
+          ...addresses,
+          from: {
+            ...addresses.from,
+            ..._addresses.from,
+          },
+        });
+      }
 
       props.navigation.goBack();
     })();
@@ -100,31 +112,37 @@ const AddressesDetail = (props: AddressDetailProps) => {
           <ContainerView>
             <View style={UserRequestStyle.flexOne}>
               <FormProvider {...form}>
-                <Text style={UserRequestStyle.label}>
-                  {t('addressDetail.label')}
-                </Text>
-                <TextItem
-                  hideAction={true}
-                  icon={
-                    <LocationCircleIcon
-                      color={colors.primaryGradient}
-                      style={UserRequestStyle.icon}
-                    />
-                  }
-                  label={t('addressDetail.from')}
-                />
+                <View>
+                  <Text style={UserRequestStyle.label}>
+                    {t('addressDetail.label')}
+                  </Text>
+                  <TextItem
+                    hideAction={true}
+                    icon={
+                      <LocationCircleIcon
+                        color={colors.primaryGradient}
+                        style={UserRequestStyle.icon}
+                      />
+                    }
+                    label={t('addressDetail.from')}
+                  />
+                </View>
                 <AddressDetailItem addressType={AddressType.From} />
-                <TextItem
-                  hideAction={true}
-                  icon={
-                    <LocationIcon
-                      color={colors.primaryGradient}
-                      style={UserRequestStyle.icon}
+                {locationType === SharedModel.CategoryLocationType.Route && (
+                  <View>
+                    <TextItem
+                      hideAction={true}
+                      icon={
+                        <LocationIcon
+                          color={colors.primaryGradient}
+                          style={UserRequestStyle.icon}
+                        />
+                      }
+                      label={t('addressDetail.to')}
                     />
-                  }
-                  label={t('addressDetail.to')}
-                />
-                <AddressDetailItem addressType={AddressType.To} />
+                    <AddressDetailItem addressType={AddressType.To} />
+                  </View>
+                )}
               </FormProvider>
             </View>
             <CustomGradientButton

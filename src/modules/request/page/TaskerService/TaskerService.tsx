@@ -349,6 +349,7 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
                             onPress={() => {
                               if (inPerson) {
                                 rootNavigation.navigate('AddressMapView', {
+                                  detail: false,
                                   prevAddress: address,
                                   title: t('form.address.label'),
                                   onGoBack: (address: any) => {

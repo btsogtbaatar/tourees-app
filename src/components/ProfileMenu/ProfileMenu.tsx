@@ -5,7 +5,7 @@ import { getSupportedBiometryType } from 'react-native-keychain';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../context/app/store';
 import useLanguage from '../../hooks/useLanguage';
-import { resetAuth, selectUser } from '../../modules/Auth/slice/authSlice';
+import { logout, selectUser } from '../../modules/Auth/slice/authSlice';
 import { colors } from '../../theme';
 import GroupedMenuList, {
   FilledListProps,
@@ -92,7 +92,7 @@ const ProfileMenu = () => {
       suffix: <ChevronRightIcon color={colors.primary500} />,
       color: colors.primary500,
       onPress: () => {
-        dispatch(resetAuth());
+        dispatch(logout());
         navigation.navigate('HomeTab', { screen: 'Home' });
       },
     },
