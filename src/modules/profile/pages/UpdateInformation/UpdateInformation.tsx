@@ -1,12 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import * as yup from 'yup';
 import i18n from '../../../../../i18n';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
+import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { RootStackParamList } from '../../../../navigation/types';
@@ -47,12 +50,18 @@ function getScema(field: FormField): yup.ObjectSchema<Schema> {
     case FormField.PHONE:
       return yup.object().shape({
         phoneNumber: yup
-          .string()
-          .required(i18n.t('login.phone.errors.required'))
-          .matches(
-            validations.phoneNumber,
-            i18n.t('login.phone.errors.validation'),
-          ),
+          .object()
+          .shape({
+            countryCode: yup.string().required(),
+            lineNumber: yup
+              .string()
+              .required(i18n.t('login.phone.errors.required'))
+              .matches(
+                validations.phoneNumber,
+                i18n.t('login.phone.errors.validation'),
+              ),
+          })
+          .required(i18n.t('login.phone.errors.required')),
       });
     case FormField.ADDRESS:
       return yup.object().shape({
@@ -71,6 +80,7 @@ function getScema(field: FormField): yup.ObjectSchema<Schema> {
 }
 
 function UpdateInformation(prop: UpdateInformationProps) {
+  const insets = useSafeAreaInsets();
   const { field, defaultValues } = prop.route.params;
   const { t } = useTranslation();
   const form = useForm({
@@ -87,13 +97,19 @@ function UpdateInformation(prop: UpdateInformationProps) {
         toastError(e.message);
       });
   };
+  const bottomSheetRef = useRef<any>(null);
   return (
     <CustomSafeAreaView>
       <FullHeightView>
         <ContainerView>
           <View style={{ marginBottom: 20 }}>
             <FormProvider {...form}>
-              <InformationFields field={field} />
+              <InformationFields
+                field={field}
+                openModal={() => {
+                  bottomSheetRef.current?.expand();
+                }}
+              />
             </FormProvider>
           </View>
           <CustomGradientButton
@@ -102,6 +118,22 @@ function UpdateInformation(prop: UpdateInformationProps) {
             onPress={form.handleSubmit(handleSubmit)}
           />
         </ContainerView>
+        <CustomBottomSheet
+          ref={bottomSheetRef}
+          snapPoints={['50%']}
+          bottomInset={insets.bottom * -1}
+          enableDynamicSizing={false}
+          enablePanDownToClose={true}>
+          <Flags
+            onChange={val => {
+              form.setValue('phoneNumber', {
+                ...form.getValues('phoneNumber'),
+                countryCode: val,
+              });
+              bottomSheetRef.current?.close();
+            }}
+          />
+        </CustomBottomSheet>
       </FullHeightView>
     </CustomSafeAreaView>
   );

@@ -10,6 +10,7 @@ import {
   DEFAULT_LAT,
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapView';
+import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
 import {
   BuildingIcon,
   LocationCircleIcon,
@@ -29,17 +30,6 @@ const EmailField = () => {
       placeholder={t('login.email.placeholder')}
       name={'email'}
       keyboardType="email-address"
-    />
-  );
-};
-const PhoneField = () => {
-  const { t } = useTranslation();
-  return (
-    <CustomFormInput
-      label={t('login.phone.label')}
-      placeholder={t('login.phone.placeholder')}
-      name={'phoneNumber'}
-      keyboardType="phone-pad"
     />
   );
 };
@@ -148,8 +138,9 @@ const AddressField = () => {
 };
 type Fields = {
   field: FormField;
+  openModal: () => void;
 };
-const InformationFields = ({ field }: Fields) => {
+const InformationFields = ({ field, openModal }: Fields) => {
   switch (field) {
     case FormField.NAME:
       return <FullNameField />;
@@ -158,7 +149,7 @@ const InformationFields = ({ field }: Fields) => {
     case FormField.EMAIL:
       return <EmailField />;
     case FormField.PHONE:
-      return <PhoneField />;
+      return <PhoneNumberInput openModal={openModal} />;
     case FormField.ADDRESS:
       return <AddressField />;
     case FormField.TYPE:
