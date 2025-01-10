@@ -8,7 +8,7 @@ export enum AuthChannel {
 export declare module AuthModel {
   export type RegisterRequest = {
     email?: string;
-    phoneNumber?: string;
+    phoneNumber?: PhoneNumber;
     username: string;
   };
   export type Contractor = {
@@ -40,16 +40,19 @@ export declare module AuthModel {
     username: string;
     password: string;
   };
-
+  export type PhoneNumber = {
+    countryCode?: string;
+    lineNumber?: string;
+  };
   export type Credentials = {
     email?: string;
-    phoneNumber?: string;
+    phoneNumber?: PhoneNumber;
   };
 
-  export class  User {
+  export class User {
     id?: number;
     email?: string;
-    phoneNumber?: string;
+    phoneNumber?: PhoneNumber;
     username: string;
     firstName?: string;
     lastName?: string;

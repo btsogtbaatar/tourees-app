@@ -9,13 +9,9 @@ import FormError from '../FormError/FormError';
 
 interface PhoneNumberInputProps {
   openModal: () => void;
-  countryCode: string;
 }
 
-const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
-  openModal,
-  countryCode,
-}) => {
+const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({ openModal }) => {
   const { t } = useTranslation();
   const form = useFormContext();
 
@@ -51,15 +47,15 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
             paddingHorizontal: 8,
           }}
           onPress={openModal}>
-          <Flag code={countryCode} size={18} />
-          <Text style={Typography.textSmaller}>{countryCode}</Text>
+          <Flag code={value?.countryCode} size={18} />
+          <Text style={Typography.textSmaller}>{value?.countryCode}</Text>
         </TouchableOpacity>
         <View style={{ flex: 1 }}>
           <CustomInput
             label={t('login.phone.label')}
             placeholder={t('login.phone.placeholder')}
-            value={value}
-            onChangeText={text => onChange(text)}
+            value={value?.lineNumber}
+            onChangeText={text => onChange({ ...value, lineNumber: text })}
             keyboardType="phone-pad"
           />
         </View>

@@ -28,7 +28,7 @@ const Profile = () => {
             <ProfileImage />
             <View style={styles.mt16}>
               <Text style={styles.titleMail}>
-                {user?.email ?? user?.phoneNumber}
+                {user?.email ?? user?.phoneNumber?.lineNumber}
               </Text>
             </View>
           </View>

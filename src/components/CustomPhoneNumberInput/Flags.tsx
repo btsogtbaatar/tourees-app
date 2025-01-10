@@ -2,13 +2,13 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { colors, Typography } from '../../theme';
 import { moderateScale, verticalScale } from '../../utilities';
 import { FlatList } from 'react-native-gesture-handler';
-import { MNFlag, TWFlag, USFlag } from '../Icon';
+import { MNFlag, TWFlag, USFlag, WWFlag } from '../Icon';
 const flags = [
   { label: 'US', value: '+1' },
   { label: 'MN', value: '+976' },
   { label: 'TW', value: '+886' },
 ];
-export const Flag = ({ code, size }: { code: string; size?: number }) => {
+export const Flag = ({ code, size }: { code?: string; size?: number }) => {
   if (!size) size = 24;
   switch (code) {
     case '+1':
@@ -18,7 +18,7 @@ export const Flag = ({ code, size }: { code: string; size?: number }) => {
     case '+886':
       return <TWFlag size={size} width={size} />;
     default:
-      return <USFlag size={size} width={size} />;
+      return <WWFlag size={size} width={size} />;
   }
 };
 const Flags = ({ onChange }: { onChange: (code: string) => void }) => {

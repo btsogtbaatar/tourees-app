@@ -51,7 +51,6 @@ export default function Login() {
     AuthChannel.Email,
   );
   const biometricEnabled = useSelector(selectBiometricEnabled);
-
   const schema = yup.object().shape({
     email:
       authChannel === AuthChannel.Email
@@ -63,13 +62,22 @@ export default function Login() {
     phoneNumber:
       authChannel === AuthChannel.Phone
         ? yup
-            .string()
+            .object()
+            .shape({
+              countryCode: yup.string().required(),
+              lineNumber: yup
+                .string()
+                .required(t('login.phone.errors.required'))
+                .matches(
+                  validations.phoneNumber,
+                  t('login.phone.errors.validation'),
+                ),
+            })
             .required(t('login.phone.errors.required'))
-            .matches(
-              validations.phoneNumber,
-              t('login.phone.errors.validation'),
-            )
-        : yup.string(),
+        : yup.object().shape({
+            countryCode: yup.string(),
+            lineNumber: yup.string(),
+          }),
   });
 
   const form = useForm({
@@ -79,9 +87,6 @@ export default function Login() {
 
   const onSubmit = (credentials: AuthModel.Credentials) => {
     setLoading(true);
-    if (authChannel === AuthChannel.Phone) {
-      credentials.phoneNumber = countryCode + credentials.phoneNumber;
-    }
     sendOtp(credentials)
       .then(() => {
         navigation.navigate('LoginOtpCheck', { credentials });
@@ -117,7 +122,6 @@ export default function Login() {
       })
       .finally(() => setLoading(false));
   };
-  const [countryCode, setCountryCode] = useState<string>('+1');
   const bottomSheetRef = useRef<any>(null);
   if (loading) {
     return <Loading />;
@@ -148,7 +152,6 @@ export default function Login() {
                   )}
                   {authChannel === AuthChannel.Phone && (
                     <PhoneNumberInput
-                      countryCode={countryCode}
                       openModal={() => {
                         bottomSheetRef.current?.expand();
                       }}
@@ -193,7 +196,10 @@ export default function Login() {
           enablePanDownToClose={true}>
           <Flags
             onChange={val => {
-              setCountryCode(val);
+              form.setValue('phoneNumber', {
+                ...form.getValues('phoneNumber'),
+                countryCode: val,
+              });
               bottomSheetRef.current?.close();
             }}
           />
