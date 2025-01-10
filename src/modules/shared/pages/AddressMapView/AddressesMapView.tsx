@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { LatLng, Region } from 'react-native-maps';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomMapView from '../../../../components/CustomMapView/CustomMapView';
 import AddressCard from '../../../../components/CustomPlacesAutoComplete/AddressCard';
@@ -18,7 +17,7 @@ type AddressMapViewProps = NativeStackScreenProps<
   'AddressesMapView'
 >;
 
-export type Addresses = {
+export type RouteAddresses = {
   from: Address;
   to: Address;
 };
@@ -33,16 +32,15 @@ export type Address = {
 } & LatLng;
 
 export default function AddressesMapView(props: Readonly<AddressMapViewProps>) {
-  const insets = useSafeAreaInsets();
   const [addressType, setAddressType] = useState<AddressType | undefined>(
     props.route.params.addressType,
   );
-  const [addresses, setAddresses] = useState<Addresses>(
+  const [addresses, setAddresses] = useState<RouteAddresses>(
     props.route.params.addresses,
   );
   const { t } = useTranslation();
 
-  const getAddress = (_addresses: Addresses) => {
+  const getAddress = (_addresses: RouteAddresses) => {
     if (addressType === AddressType.From) {
       return addresses.from;
     } else {
@@ -125,8 +123,7 @@ export default function AddressesMapView(props: Readonly<AddressMapViewProps>) {
 
   return (
     <View style={AddressMapViewStyle.container}>
-      <View
-        style={[AddressMapViewStyle.controllerContainer, { top: insets.top }]}>
+      <View style={AddressMapViewStyle.controllerContainer}>
         <View style={AddressMapViewStyle.addressContainer}>
           <View style={AddressMapViewStyle.left}>
             <AddressCard
@@ -159,8 +156,9 @@ export default function AddressesMapView(props: Readonly<AddressMapViewProps>) {
         title={t('b_continue')}
         onPress={() =>
           props.navigation.navigate('AddressesDetail', {
+            locationType: SharedModel.CategoryLocationType.Route,
             addresses: addresses,
-            onGoBack: (_addresses: Addresses) => {
+            onGoBack: (_addresses: RouteAddresses) => {
               props.route.params.onGoBack({ ..._addresses });
               props.navigation.goBack();
             },

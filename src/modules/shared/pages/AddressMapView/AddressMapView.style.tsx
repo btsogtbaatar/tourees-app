@@ -12,9 +12,10 @@ const AddressMapViewStyle = StyleSheet.create({
   },
 
   controllerContainer: {
+    top: 0,
     marginHorizontal: 16,
     zIndex: 1,
-    position: 'absolute',
+    position: 'absolute', 
     width: '100%',
   },
   addressContainer: {

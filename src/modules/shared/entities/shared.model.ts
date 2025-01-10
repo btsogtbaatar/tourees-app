@@ -1,4 +1,3 @@
-import { number } from 'yup';
 import { AuthModel } from '../../Auth/entities';
 import { Address } from '../pages/AddressMapView/AddressesMapView';
 export namespace SharedModel {
@@ -128,6 +127,12 @@ export namespace SharedModel {
   export type TaskerServiceFilter = {
     name?: string;
     subCategoryId?: number;
+  };
+
+  export type ToureesError = {
+    code: string;
+    message: string;
+    details: any;
   };
 }
 export enum TaskerType {

@@ -31,6 +31,7 @@ export default {
   l_date: 'Өдөр, цагийг оруулна уу.',
   notSupportedPlatform: 'Платформыг дэмжих боломжгүй байна.',
   locationPermissionDenied: 'Та location service - ээ асаана уу.',
+  tokenExpiredError: 'Хугацаа дууссан байна. Дахин нэвтрэнэ үү.',
   signUp: {
     hello: 'Сайн байна уу?',
     welcome_seed: 'Та Сийд платформд тавтай морил.',

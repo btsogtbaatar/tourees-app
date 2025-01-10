@@ -1,12 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import * as yup from 'yup';
 import i18n from '../../../../../i18n';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
+import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
 import { RootStackParamList } from '../../../../navigation/types';
@@ -16,9 +19,6 @@ import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import InformationFields from '../../components/InformationFields/InformationFields';
 import { Schema } from '../../model/registration.model';
 import { patchInformation } from '../../service/profile.service';
-import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
-import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
-import { useRef } from 'react';
 
 type UpdateInformationProps = NativeStackScreenProps<
   RootStackParamList,
@@ -80,6 +80,7 @@ function getScema(field: FormField): yup.ObjectSchema<Schema> {
 }
 
 function UpdateInformation(prop: UpdateInformationProps) {
+  const insets = useSafeAreaInsets();
   const { field, defaultValues } = prop.route.params;
   const { t } = useTranslation();
   const form = useForm({
@@ -120,6 +121,7 @@ function UpdateInformation(prop: UpdateInformationProps) {
         <CustomBottomSheet
           ref={bottomSheetRef}
           snapPoints={['50%']}
+          bottomInset={insets.bottom * -1}
           enableDynamicSizing={false}
           enablePanDownToClose={true}>
           <Flags

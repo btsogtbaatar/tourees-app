@@ -1,3 +1,4 @@
+import Geolocation from '@react-native-community/geolocation';
 import { useNavigation } from '@react-navigation/native';
 import { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
@@ -9,18 +10,17 @@ import {
   DEFAULT_LAT,
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapView';
+import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
 import {
   BuildingIcon,
   LocationCircleIcon,
   UserIcon,
 } from '../../../../components/Icon';
 import TextItem from '../../../../components/TextItem/TextItem';
+import { colors } from '../../../../theme';
 import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
 import { InformationFieldsStyle } from './InformationFields.style';
-import { colors } from '../../../../theme';
-import Geolocation from '@react-native-community/geolocation';
-import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
 
 const EmailField = () => {
   const { t } = useTranslation();
@@ -120,6 +120,7 @@ const AddressField = () => {
           buttonText={t('userRequest.address.edit')}
           onPress={() => {
             rootNavigation.navigate('AddressMapView', {
+              detail: false,
               prevAddress: address,
               title: t('form.address.label'),
               onGoBack: address => {

@@ -4,15 +4,19 @@ import React, { useRef, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 import Banner from '../../../../components/Banner/Banner';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import IconGradientButton from '../../../../components/CustomButton/IconGradientButton';
 import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
+import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
+import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import CustomTouchableWithoutFeedback from '../../../../components/CustomTouchableWithoutFeedback/CustomTouchableWithoutFeedback';
 import FullHeightView from '../../../../components/FullHeightView/FullHeightView';
@@ -39,14 +43,12 @@ import {
   tokenCredentials,
 } from '../../services';
 import styles from './Login.style';
-import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
-import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
-import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
 
 export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const navigation = useNavigation();
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
   const [authChannel, setAuthChannel] = useState<AuthChannel>(
     AuthChannel.Email,
   );
@@ -189,22 +191,23 @@ export default function Login() {
             </ContainerView>
           </FullHeightView>
         </CustomTouchableWithoutFeedback>
-        <CustomBottomSheet
-          ref={bottomSheetRef}
-          snapPoints={['50%']}
-          enableDynamicSizing={false}
-          enablePanDownToClose={true}>
-          <Flags
-            onChange={val => {
-              form.setValue('phoneNumber', {
-                ...form.getValues('phoneNumber'),
-                countryCode: val,
-              });
-              bottomSheetRef.current?.close();
-            }}
-          />
-        </CustomBottomSheet>
       </CustomKeyboardAvoidingView>
+      <CustomBottomSheet
+        ref={bottomSheetRef}
+        snapPoints={['50%']}
+        bottomInset={insets.bottom * -1}
+        enableDynamicSizing={false}
+        enablePanDownToClose={true}>
+        <Flags
+          onChange={val => {
+            form.setValue('phoneNumber', {
+              ...form.getValues('phoneNumber'),
+              countryCode: val,
+            });
+            bottomSheetRef.current?.close();
+          }}
+        />
+      </CustomBottomSheet>
     </CustomSafeAreaView>
   );
 }

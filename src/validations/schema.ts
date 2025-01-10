@@ -16,7 +16,9 @@ export namespace TaskSchema {
     floor: yup.string(),
     apartment: yup.string(),
   });
-  export const taskRequestSchema: yup.ObjectSchema<TaskModel.TaskRequest> =
+  export const taskRequestSchema = (
+    minAddressCount: number,
+  ): yup.ObjectSchema<TaskModel.TaskRequest> =>
     yup.object({
       name: yup.string().required(i18n.t('userRequest.messages.name.required')),
       description: yup
@@ -35,8 +37,7 @@ export namespace TaskSchema {
         .required(i18n.t('userRequest.messages.timeRange.required')),
       addresses: yup
         .array()
-        // TODO: Make it dynamic
-        .min(2)
+        .min(minAddressCount)
         .required(i18n.t('userRequest.messages.addresses.required')),
       budget: yup.number(),
     });

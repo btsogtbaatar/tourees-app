@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import * as yup from 'yup';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
+import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
 import CustomGradientButton from '../../../../components/CustomButton/CustomGradientButton';
 import CustomSelectionButton from '../../../../components/CustomButton/CustomSelectionButton';
 import CustomFormInput from '../../../../components/CustomInput/CustomFormInput';
@@ -22,6 +23,8 @@ import {
   DEFAULT_LAT,
   DEFAULT_LNG,
 } from '../../../../components/CustomMapView/CustomMapOneMarker';
+import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
+import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
 import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
 import InputError from '../../../../components/FormError/FormError';
 import {
@@ -35,7 +38,7 @@ import Steps from '../../../../components/Steps/Steps';
 import TabController from '../../../../components/TabController/TabController';
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
-import { colors, Typography } from '../../../../theme';
+import { colors } from '../../../../theme';
 import validations from '../../../../validations';
 import { SharedModel, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
@@ -43,9 +46,6 @@ import { uploadFile } from '../../../Shared/services/shared.service';
 import { AuthChannel, AuthModel } from '../../entities';
 import { signUp } from '../../services';
 import { RegisterStyle } from './Register.style';
-import PhoneNumberInput from '../../../../components/CustomPhoneNumberInput/PhoneNumberInput';
-import { CustomBottomSheet } from '../../../../components/CustomBottomSheet/CustomBottomSheet';
-import Flags from '../../../../components/CustomPhoneNumberInput/Flags';
 
 type RegisterProps = NativeStackScreenProps<RootStackParamList, 'Register'>;
 
@@ -288,6 +288,7 @@ function Register({ navigation }: RegisterProps) {
                             buttonText={t('userRequest.address.edit')}
                             onPress={() => {
                               rootNavigation.navigate('AddressMapView', {
+                                detail: false,
                                 prevAddress: address,
                                 title: t('form.address.label'),
                                 onGoBack: address => {

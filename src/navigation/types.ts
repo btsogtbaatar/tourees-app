@@ -15,7 +15,7 @@ import {
 } from '../modules/Shared/entities/shared.model';
 import {
   Address,
-  Addresses,
+  RouteAddresses,
 } from '../modules/Shared/pages/AddressMapView/AddressesMapView';
 import { ProfileModel } from '../modules/Tasker/entities/profile.model';
 
@@ -44,18 +44,20 @@ export type RootStackParamList = {
     status?: string;
   };
   AddressesMapView: {
-    addresses: Addresses;
+    addresses: RouteAddresses;
     addressType: AddressType;
-    onGoBack: (addresses: Addresses) => void;
+    onGoBack: (addresses: RouteAddresses) => void;
   };
   AddressMapView: {
+    detail: boolean;
     prevAddress: Address;
     title: string;
     onGoBack: (addresses: Address) => void;
   };
   AddressesDetail: {
-    addresses: Addresses;
-    onGoBack: (addresses: Addresses) => void;
+    locationType: SharedModel.CategoryLocationType;
+    addresses: RouteAddresses;
+    onGoBack: (addresses: RouteAddresses) => void;
   };
   BiometricConsent: undefined;
   BiometricConfig: undefined;

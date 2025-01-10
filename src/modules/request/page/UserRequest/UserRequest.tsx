@@ -24,9 +24,7 @@ import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUpl
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
-import {
-  toastError
-} from '../../../../utilities/toast';
+import { toastError } from '../../../../utilities/toast';
 import { TaskSchema } from '../../../../validations/schema';
 import { selectAuthenticated } from '../../../Auth/slice/authSlice';
 import { SharedModel } from '../../../Shared/entities/shared.model';
@@ -73,6 +71,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
       },
     );
   }, []);
+
   useEffect(() => {
     if (isAuthenticated) {
       getLastTaskFromAddress().then(fromAddress => {
@@ -81,6 +80,8 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
             ..._addresses,
             from: fromAddress,
           }));
+
+          form.setValue('addresses', [fromAddress]);
         }
       });
     }
@@ -93,7 +94,13 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
   };
 
   const form = useForm<TaskModel.TaskRequest>({
-    resolver: yupResolver(TaskSchema.taskRequestSchema),
+    resolver: yupResolver(
+      TaskSchema.taskRequestSchema(
+        subCategory.locationType === SharedModel.CategoryLocationType.Route
+          ? 2
+          : 1,
+      ),
+    ),
     defaultValues: {
       subCategory: {
         id: subCategory.id,
@@ -216,9 +223,8 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       />
                     )}
                   </View>
-                  {subCategory.locationType === null ||
-                  subCategory.locationType ===
-                    SharedModel.CategoryLocationType.Route ? (
+                  {subCategory.locationType ===
+                  SharedModel.CategoryLocationType.Route ? (
                     <View>
                       <Text style={UserRequestStyle.label}>
                         {t('userRequest.address.label')}
@@ -303,6 +309,7 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                       buttonText={t('userRequest.address.edit')}
                       onPress={() =>
                         rootNavigation.navigate('AddressMapView', {
+                          detail: true,
                           prevAddress: addresses.from,
                           title: t('form.address.label'),
                           onGoBack: address => {

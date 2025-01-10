@@ -31,6 +31,14 @@ export function navigate(name: string, params: string) {
   if (navigationRef.isReady()) navigationRef.navigate(name, JSON.parse(params));
 }
 
+export function reset(name: string) {
+  if (navigationRef.isReady())
+    navigationRef.reset({
+      index: 0,
+      routes: [{ name }],
+    });
+}
+
 function App(): React.JSX.Element {
   return (
     <Provider store={store}>
