@@ -6,19 +6,21 @@ import { useEffect, useState } from 'react';
 import { PermissionsAndroid, Platform } from 'react-native';
 import PushNotification from 'react-native-push-notification';
 import { useSelector } from 'react-redux';
-import store from '../context/app/store';
-import { updateFirebaseToken } from '../modules/Auth/services';
-import { selectAuthenticated } from '../modules/Auth/slice/authSlice';
+import store from '../../context/app/store';
+import { useTaskerServiceFetch } from '../../hooks/useTaskerServiceFetch';
+import { updateFirebaseToken } from '../../modules/Auth/services';
+import {
+  selectAuthenticated
+} from '../../modules/Auth/slice/authSlice';
 import {
   getNotificationList,
   getUnreadNotificationCount,
-} from '../modules/Notification/services/notification.service';
+} from '../../modules/Notification/services/notification.service';
 import {
   setNotifications,
   setUnreadNotificationCount,
-} from '../modules/Notification/slice/notificationSlice';
-import { toastError } from '../utilities/toast';
-import { useTaskerServiceFetch } from './useTaskerServiceFetch';
+} from '../../modules/Notification/slice/notificationSlice';
+import { toastError } from '../../utilities/toast';
 
 export const refreshNotifications = () => {
   getNotificationList(1).then(res =>
@@ -30,8 +32,7 @@ export const refreshNotifications = () => {
   });
 };
 
-// TODO: Fix duplicated subscription
-function useNotification() {
+function RemoteNotification() {
   const isAuthenticated = useSelector(selectAuthenticated);
   const { createdTaskerServices } = useTaskerServiceFetch();
   const [permisionGranted, setPermisionGranted] = useState(false);
@@ -132,8 +133,13 @@ function useNotification() {
       refreshNotifications();
 
       unsubscribeMessage = messaging().onMessage(message => {
+        const chatFocused = store.getState().auth.isChatFocused;
         console.log('🚀 ~ onMessaging ~ message:', message);
-        localNotification(message);
+
+        if (!chatFocused) {
+          localNotification(message);
+        }
+
         refreshNotifications();
       });
 
@@ -165,4 +171,4 @@ function useNotification() {
   return null;
 }
 
-export default useNotification;
+export default RemoteNotification;

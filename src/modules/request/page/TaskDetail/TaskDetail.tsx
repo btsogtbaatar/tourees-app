@@ -24,6 +24,7 @@ import Loading from '../../../../components/Loading/Loading';
 import Offer from '../../../../components/Offer/Offer';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors, Typography } from '../../../../theme';
+import { getFullAddress } from '../../../../utilities';
 import { formatDate, formatTime } from '../../../../utilities/date';
 import { getImageUrl } from '../../../../utilities/image';
 import { selectUser } from '../../../Auth/slice/authSlice';
@@ -89,14 +90,13 @@ const TaskDetail = (props: Props) => {
                 {t('request.requestDestinationAddress')}
               </Text>
               <Text style={TaskDetailStyle.text}>
-                {task?.addresses[0].address}
+                {getFullAddress(task?.addresses[0])}
               </Text>
             </View>
           </View>
           {/* TODO: Fix this */}
-          {(task.subCategory.locationType === null ||
-            task.subCategory.locationType ===
-              SharedModel.CategoryLocationType.Route) && (
+          {task.subCategory.locationType ===
+            SharedModel.CategoryLocationType.Route && (
             <View style={TaskDetailStyle.row}>
               <LocationIcon height={24} width={24} color={colors.gray700} />
               <View style={TaskDetailStyle.col}>
@@ -104,7 +104,7 @@ const TaskDetail = (props: Props) => {
                   {t('request.requestDeliveryAddress')}
                 </Text>
                 <Text style={TaskDetailStyle.text}>
-                  {task?.addresses[1].address}
+                  {getFullAddress(task?.addresses[1])}
                 </Text>
               </View>
             </View>

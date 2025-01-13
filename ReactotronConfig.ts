@@ -6,7 +6,7 @@ import { reactotronRedux } from 'reactotron-redux';
 export const reactotron = Reactotron.setAsyncStorageHandler(AsyncStorage)
   .configure({
     name: 'Tourees Demo',
-    host: '192.168.1.69',
+    // host: '192.168.1.69',
   }) // controls connection & communication settings
   .useReactNative() // add all built-in react native plugins
   .use(reactotronRedux())

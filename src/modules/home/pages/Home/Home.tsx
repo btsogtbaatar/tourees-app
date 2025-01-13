@@ -15,9 +15,9 @@ import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomInput from '../../../../components/CustomInput/CustomInput';
 import { SearchMdIcon } from '../../../../components/Icon';
 import ImageItem from '../../../../components/ImageItem/ImageItem';
+import RemoteNotification from '../../../../components/RemoteNotification/RemoteNotification';
 import TaskerServiceList from '../../../../components/TaskerServiceList/TaskerServiceList';
 import { useAppDispatch } from '../../../../context/app/store';
-import useNotification from '../../../../hooks/useNotification';
 import { useTaskerServiceFetch } from '../../../../hooks/useTaskerServiceFetch';
 import { colors } from '../../../../theme/colors';
 import { verticalScale } from '../../../../utilities';
@@ -40,7 +40,6 @@ const Home = () => {
   const bottomSheetRef = useRef<any>(null);
   const { filteredGroupedTaskService, onSubmitSearch } =
     useTaskerServiceFetch();
-  useNotification();
 
   const onRefresh = React.useCallback(() => {
     getCategories();
@@ -80,6 +79,7 @@ const Home = () => {
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
+      <RemoteNotification />
       <ContainerView>
         {isAuthenticated === false && (
           <View style={HomeStyle.bannerContainer}>

@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { LatLng } from 'react-native-maps';
-import { SharedModel } from '../modules/Shared/entities/shared.model';
 import i18n from '../../i18n';
+import { TaskModel } from '../modules/Request/entities/request.model';
+import { SharedModel } from '../modules/Shared/entities/shared.model';
 
 export const excludedTypes = [
   'administrative_area_level_1',
@@ -83,4 +84,22 @@ export async function getPlacesByText(
     );
 
   return response.data?.places ? response.data.places : [];
+}
+
+export function getFullAddress(address?: TaskModel.Address) {
+  let _address = address?.address;
+
+  if (address?.apartment) {
+    _address = `${address?.apartment}, ${_address}`;
+  }
+
+  if (address?.floor) {
+    _address = `${address?.floor} ${i18n.t('userRequest.address.floor')}, ${_address}`;
+  }
+
+  if (address?.unit) {
+    _address = `${address?.unit} ${i18n.t('userRequest.address.unit')}, ${_address}`;
+  }
+
+  return _address;
 }

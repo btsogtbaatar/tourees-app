@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { horizontalScale, verticalScale } from '../../../../utilities';
 import { colors } from '../../../../theme';
+import { horizontalScale, verticalScale } from '../../../../utilities';
 
 const styles = StyleSheet.create({
   userCardContainer: {
@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     padding: verticalScale(12),
     backgroundColor: colors.placeColor,
     borderRadius: 16,
-    marginTop: verticalScale(16),
   },
   messageHeaderContainer: {
     flexDirection: 'row',
