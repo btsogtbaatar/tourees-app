@@ -53,16 +53,19 @@ const RemarkListView = (props: RemarkListModalProps) => {
 
   const onSubmit = (values: TaskerModel.RemarkRequest) => {
     if (values && values.remark && values.remark.trim() !== '') {
+      let tagValue = tags?.find(
+        val => val.value.toUpperCase() === values.remark?.toUpperCase(),
+      );
       if (listData) {
         if (
           listData.filter(
             item => item.toUpperCase() === values.remark?.toUpperCase(),
-          ).length === 0 &&
-          tags?.filter(
-            t => t.value.toUpperCase() === values.remark?.toUpperCase(),
           ).length === 0
         ) {
-          setValue(name, [...listData, values.remark]);
+          setValue(name, [
+            ...listData,
+            tagValue ? tagValue.value : values.remark,
+          ]);
           setDuplicateError('');
         } else {
           setDuplicateError(t('profile.remarkDuplicatedError'));
@@ -70,7 +73,8 @@ const RemarkListView = (props: RemarkListModalProps) => {
         }
       } else {
         setDuplicateError('');
-        setValue(name, [values.remark]);
+
+        setValue(name, [tagValue ? tagValue.value : values.remark]);
       }
     }
     props.navigation.goBack();
