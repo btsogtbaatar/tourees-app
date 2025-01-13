@@ -39,12 +39,9 @@ const authSlice = createSlice({
     },
     logout: state => defaultState,
     focusChat: state => {
-      console.log('focus chat');
-      
       state.isChatFocused = true;
     },
     unfocusChat: state => {
-      console.log('UNfocus chat');
       state.isChatFocused = false;
     },
   },

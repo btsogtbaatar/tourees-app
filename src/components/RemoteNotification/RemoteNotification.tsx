@@ -10,8 +10,7 @@ import store from '../../context/app/store';
 import { useTaskerServiceFetch } from '../../hooks/useTaskerServiceFetch';
 import { updateFirebaseToken } from '../../modules/Auth/services';
 import {
-  isChatFocused,
-  selectAuthenticated,
+  selectAuthenticated
 } from '../../modules/Auth/slice/authSlice';
 import {
   getNotificationList,
@@ -36,7 +35,6 @@ export const refreshNotifications = () => {
 function RemoteNotification() {
   const isAuthenticated = useSelector(selectAuthenticated);
   const { createdTaskerServices } = useTaskerServiceFetch();
-  const chatFocused = useSelector(isChatFocused);
   const [permisionGranted, setPermisionGranted] = useState(false);
 
   const channelId = 'default';
@@ -135,11 +133,8 @@ function RemoteNotification() {
       refreshNotifications();
 
       unsubscribeMessage = messaging().onMessage(message => {
+        const chatFocused = store.getState().auth.isChatFocused;
         console.log('🚀 ~ onMessaging ~ message:', message);
-        console.log(
-          '🚀 ~ messaging ~ chatFocused:',
-          chatFocused,
-        );
 
         if (!chatFocused) {
           localNotification(message);
