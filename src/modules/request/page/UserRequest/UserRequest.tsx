@@ -24,6 +24,7 @@ import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUpl
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
+import { getFullAddress } from '../../../../utilities';
 import { toastError } from '../../../../utilities/toast';
 import { TaskSchema } from '../../../../validations/schema';
 import { selectAuthenticated } from '../../../Auth/slice/authSlice';
@@ -112,24 +113,6 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
     handleSubmit,
     formState: { errors },
   } = form;
-
-  const getFullAddress = (address?: TaskModel.Address) => {
-    let _address = address?.address;
-
-    if (address?.apartment) {
-      _address = `${address?.apartment}, ${_address}`;
-    }
-
-    if (address?.floor) {
-      _address = `${address?.floor} ${t('userRequest.address.floor')}, ${_address}`;
-    }
-
-    if (address?.unit) {
-      _address = `${address?.unit} ${t('userRequest.address.unit')}, ${_address}`;
-    }
-
-    return _address;
-  };
 
   return (
     <CustomSafeAreaView style={{ backgroundColor: colors.white }}>

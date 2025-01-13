@@ -1,4 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { uniqueId } from 'lodash';
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import { FlatList, View } from 'react-native';
@@ -6,9 +7,18 @@ import { useSelector } from 'react-redux';
 import ContainerView from '../../../../components/ContainerView/ContainerView';
 import CustomDivider from '../../../../components/CustomDivider/CustomDivider';
 import CustomKeyboardAvoidingView from '../../../../components/CustomKeyboardAvoidingView/CustomKeyboardAvoidingView';
+import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
+import { ImageSource } from '../../../../components/ImageUploadButton/ImageUploadButton';
+import { useAppDispatch } from '../../../../context/app/store';
 import { RootStackParamList } from '../../../../navigation/types';
-import { selectUser } from '../../../Auth/slice/authSlice';
+import {
+  focusChat,
+  selectUser,
+  unfocusChat
+} from '../../../Auth/slice/authSlice';
+import { useStompConnection } from '../../../Shared/hooks';
 import InputSection from '../../component/InputSection/InputSection';
+import MessageWidget from '../../component/MessageWidget/MessageWidget';
 import SpeechBubble from '../../component/SpeechBubble/SpeechBubble';
 import TimeSeparator from '../../component/TimeSeparator/TimeSeparator';
 import { SeparatorType, TaskModel } from '../../entities/request.model';
@@ -18,11 +28,6 @@ import {
   getConversation,
   sendChat,
 } from '../../service/chat.service';
-import { useStompConnection } from '../../../Shared/hooks';
-import CustomSafeAreaView from '../../../../components/CustomSafeAreaView/CustomSafeAreaView';
-import { ImageSource } from '../../../../components/ImageUploadButton/ImageUploadButton';
-import { uniqueId } from 'lodash';
-import MessageWidget from '../../component/MessageWidget/MessageWidget';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Chat'>;
 
@@ -34,6 +39,16 @@ const Chat = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [lastPage, setLastPage] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(focusChat());
+    
+    return () => {
+      dispatch(unfocusChat());
+    };
+  }, []);
+
   const fetchPage = (
     page: number,
     callback: (value: TaskModel.Message[]) => void,

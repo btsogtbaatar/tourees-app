@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as yup from 'yup';
 import i18n from '../../../../../i18n';
 import ContainerView from '../../../../components/ContainerView/ContainerView';

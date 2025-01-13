@@ -29,7 +29,7 @@ export const axiosInstance = (api: AxiosInstance) => {
         if (store.getState().auth.isAuthenticated) {
           store.dispatch(logout());
           toastError(i18n.t('tokenExpiredError'));
-          reset('Login');
+          reset('Home');
         }
       } else if (error.response?.data) {
         toastError(error.response.data.message);
