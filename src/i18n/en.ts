@@ -125,8 +125,8 @@ export default {
     tabProfile: 'Settings',
   },
   home: {
-    login: 'Нэвтрэх',
-    signUp: 'Бүртгүүлэх',
+    login: 'Login',
+    signUp: 'Sign up',
     category: {
       question: 'Create a request for service',
       title: 'Available service categories',
