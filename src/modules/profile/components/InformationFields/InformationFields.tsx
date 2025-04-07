@@ -21,6 +21,7 @@ import { colors } from '../../../../theme';
 import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import { Address } from '../../../Shared/pages/AddressMapView/AddressMapView';
 import { InformationFieldsStyle } from './InformationFields.style';
+import { reverseGeocode } from '../../../../utilities';
 
 const EmailField = () => {
   const { t } = useTranslation();
@@ -97,37 +98,51 @@ const AddressField = () => {
   const [address, setAddress] = useState<Address>({
     latitude: DEFAULT_LAT,
     longitude: DEFAULT_LNG,
+    displayName: '',
   });
   const getAddress = (address: Address) => {
     const data = address.formattedAddress!.split(', ');
-    return `${data[data.length - 3]}, ${data[data.length - 2]}`;
+    return `${data[data.length - 3]}, ${data[data.length - 2]}, ${
+      address.country
+    }`;
   };
   useEffect(() => {
-    Geolocation.getCurrentPosition(position => {
+    Geolocation.getCurrentPosition(async position => {
       const _address = { ...address };
       _address.latitude = position.coords.latitude;
       _address.longitude = position.coords.longitude;
+      _address.country = await reverseGeocode(
+        _address.latitude,
+        _address.longitude,
+      );
+      _address.displayName = getAddress(_address);
       setAddress(_address);
     });
   }, []);
   return (
     <Controller
       name="address"
+      defaultValue={address}
       render={({ field: { onChange, value } }) => (
         <TextItem
           icon={<LocationCircleIcon width={20} height={20} />}
-          label={value ? value : t('form.address.placeHolder')}
+          label={value?.displayName || t('form.address.placeHolder')}
           buttonText={t('userRequest.address.edit')}
           onPress={() => {
             rootNavigation.navigate('AddressMapView', {
               detail: false,
               prevAddress: address,
               title: t('form.address.label'),
-              onGoBack: address => {
-                const _address = { ...address };
+              onGoBack: async updatedAddress => {
+                const _address = { ...updatedAddress };
+                const countryName = await reverseGeocode(
+                  _address.latitude,
+                  _address.longitude,
+                );
+                _address.country = countryName;
                 _address.displayName = getAddress(_address);
                 setAddress(_address);
-                onChange(_address.displayName);
+                onChange(_address);
               },
             });
           }}

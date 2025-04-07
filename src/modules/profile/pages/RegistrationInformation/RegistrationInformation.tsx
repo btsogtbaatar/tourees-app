@@ -91,14 +91,21 @@ const RegistrationInformation = () => {
       },
     },
     {
-      values: [t('form.address.label'), replaceDots(user?.contractor?.address)],
+      values: [
+        t('form.address.label'),
+        replaceDots(   typeof user?.contractor?.address === 'object' && user?.contractor?.address !== null
+        ? user?.contractor?.address?.displayName || ''
+        : ''),
+      ],
       prefix: <LocationIcon color={colors.gray700} />,
       suffix: <ChevronRightIcon color={colors.gray700} />,
       onPress: () => {
         navigation.navigate('UpdateInformation', {
           field: FormField.ADDRESS,
           defaultValues: {
-            address: user?.contractor?.address ? user?.contractor?.address : '',
+            address: user?.contractor?.address ?? {
+              displayName: '',
+            },
           },
         });
       },

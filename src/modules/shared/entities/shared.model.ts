@@ -79,6 +79,7 @@ export namespace SharedModel {
     shortFormattedAddress: string;
     formattedAddress?: string;
     displayName: DisplayName;
+    country:string
   };
 
   export type DisplayName = {
