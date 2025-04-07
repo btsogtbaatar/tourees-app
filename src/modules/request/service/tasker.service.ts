@@ -19,6 +19,7 @@ export function fetchTaskerServices(
     size,
     subCategoryId: filter?.subCategoryId,
     name: filter?.name,
+    country: filter?.country,
   };
   return api.get('/tasker/service', { params });
 }

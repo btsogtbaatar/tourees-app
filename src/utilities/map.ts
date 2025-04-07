@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { LatLng } from 'react-native-maps';
+import Geocoder from 'react-native-geocoding';
 import i18n from '../../i18n';
 import { TaskModel } from '../modules/Request/entities/request.model';
 import { SharedModel } from '../modules/Shared/entities/shared.model';
@@ -94,12 +95,33 @@ export function getFullAddress(address?: TaskModel.Address) {
   }
 
   if (address?.floor) {
-    _address = `${address?.floor} ${i18n.t('userRequest.address.floor')}, ${_address}`;
+    _address = `${address?.floor} ${i18n.t(
+      'userRequest.address.floor',
+    )}, ${_address}`;
   }
 
   if (address?.unit) {
-    _address = `${address?.unit} ${i18n.t('userRequest.address.unit')}, ${_address}`;
+    _address = `${address?.unit} ${i18n.t(
+      'userRequest.address.unit',
+    )}, ${_address}`;
   }
 
   return _address;
 }
+
+export const reverseGeocode = async (lat: number, lng: number) => {
+  try {
+    const res = await Geocoder.from(lat, lng);
+    const addressComponents = res.results[0]?.address_components;
+    let country = '';
+    for (const component of addressComponents) {
+      if (component.types.includes('country')) {
+        country = component.long_name;
+        break;
+      }
+    }
+    return country;
+  } catch (err) {
+    console.error('Reverse geocoding failed:', err);
+  }
+};

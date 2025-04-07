@@ -25,6 +25,7 @@ export type RouteAddresses = {
 export type Address = {
   name?: AddressType;
   displayName?: string;
+  country?: string;
   address?: string;
   unit?: string;
   floor?: string;

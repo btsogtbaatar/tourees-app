@@ -20,6 +20,7 @@ type AddressMapViewProps = NativeStackScreenProps<
 >;
 export type Address = {
   displayName?: string;
+  country?: string;
   address?: string;
   unit?: string;
   floor?: string;

@@ -1,6 +1,8 @@
 import _, { debounce } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import Geolocation from '@react-native-community/geolocation';
+import { reverseGeocode } from '../utilities';
 import { selectAuthenticated } from '../modules/Auth/slice/authSlice';
 import {
   fetchCreatedTaskerServices,
@@ -16,8 +18,11 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
     SharedModel.TaskerServiceModel[]
   >([]);
   const [filter, setFilter] = useState<SharedModel.TaskerServiceFilter>({
-    subCategoryId: subCategoryId,
+    subCategoryId: subCategoryId || undefined,
+    name: '',
+    country: '',
   });
+  const [country, setCountry] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
   const [sortValue, setSortValue] = useState<string>('');
   const [createdTaskerServices, setCreatedTaskerServices] =
@@ -25,12 +30,19 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
   const isAuthenticated = useSelector(selectAuthenticated);
 
   useEffect(() => {
-    getTaskerServices(filter);
-
-    return () => {
-      setTaskerServices([]);
-      setCreatedTaskerServices([]);
-    };
+    Geolocation.getCurrentPosition(
+      async position => {
+        const { latitude, longitude } = position.coords;
+        const countryName = await reverseGeocode(latitude, longitude);
+        setCountry(countryName);
+      },
+      error => console.warn(error.message),
+      {
+        enableHighAccuracy: true,
+        timeout: 15000,
+        maximumAge: 10000,
+      },
+    );
   }, []);
 
   useEffect(() => {
@@ -38,6 +50,22 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
       getCreatedTaskerServices();
     }
   }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (country) {
+      setFilter(prev => ({ ...prev, country }));
+    }
+  }, [country]);
+
+  useEffect(() => {
+    if (filter.country) {
+      getTaskerServices(filter);
+    }
+    return () => {
+      setTaskerServices([]);
+      setCreatedTaskerServices([]);
+    };
+  }, [filter]);
 
   const groupTaskServiceSubCategory = () => {
     const groupedTaskerService = _.chain(taskerServices)
@@ -55,24 +83,30 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
     });
   };
 
-  const getTaskerServices = (_filter: SharedModel.TaskerServiceFilter) => {
-    setFilter(_filter);
-    setLoading(true);
-    fetchTaskerServices(_filter)
-      .then(
-        (response: SharedModel.Pagination<SharedModel.TaskerServiceModel>) => {
-          setTaskerServices(response.content);
-          setLoading(false);
-        },
-      )
-      .catch(() => {
-        setLoading(false);
-      });
-  };
+  const getTaskerServices = useCallback(
+    (filter: SharedModel.TaskerServiceFilter) => {
+      setLoading(true);
+      fetchTaskerServices(filter)
+        .then(
+          (
+            response: SharedModel.Pagination<SharedModel.TaskerServiceModel>,
+          ) => {
+            setTaskerServices(response.content);
+            setLoading(false);
+          },
+        )
+        .catch(() => setLoading(false));
+    },
+    [],
+  );
 
   const onSubmitSearch = (text: string) => {
     setSortValue('');
-    handler({ ...filter, name: text });
+    setFilter(prev => {
+      const updatedFilter = { ...prev, name: text };
+      handler(updatedFilter);
+      return updatedFilter;
+    });
   };
 
   const onSubmitSort = (type: string) => {
@@ -88,7 +122,9 @@ export function useTaskerServiceFetch(subCategoryId?: number) {
     setTaskerServices(sortData);
   };
 
-  const handler = useCallback(debounce(getTaskerServices, 500), []);
+  const handler = useCallback(debounce(getTaskerServices, 500), [
+    getTaskerServices,
+  ]);
 
   return {
     taskerServices,

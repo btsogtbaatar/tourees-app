@@ -127,6 +127,7 @@ export namespace SharedModel {
   export type TaskerServiceFilter = {
     name?: string;
     subCategoryId?: number;
+    country?: string;
   };
 
   export type ToureesError = {
