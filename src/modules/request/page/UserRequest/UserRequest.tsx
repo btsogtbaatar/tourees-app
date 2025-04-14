@@ -24,7 +24,7 @@ import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUpl
 import TextItem from '../../../../components/TextItem/TextItem';
 import { RootStackParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme';
-import { getFullAddress } from '../../../../utilities';
+import { getFullAddress, reverseGeocode } from '../../../../utilities';
 import { toastError } from '../../../../utilities/toast';
 import { TaskSchema } from '../../../../validations/schema';
 import { selectAuthenticated } from '../../../Auth/slice/authSlice';
@@ -50,21 +50,32 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
       name: AddressType.From,
       latitude: DEFAULT_LAT,
       longitude: DEFAULT_LNG,
+      country: '',
     },
     to: {
       name: AddressType.To,
       latitude: DEFAULT_LAT,
       longitude: DEFAULT_LNG,
+      country: '',
     },
   });
   useEffect(() => {
     Geolocation.getCurrentPosition(
-      position => {
+      async position => {
         const _addresses = { ...addresses };
         _addresses.from.latitude = position.coords.latitude;
         _addresses.from.longitude = position.coords.longitude;
         _addresses.to.latitude = position.coords.latitude;
         _addresses.to.longitude = position.coords.longitude;
+
+        const countryNameFrom = await reverseGeocode(
+          _addresses.from.latitude,
+          _addresses.from.longitude,
+        );
+
+        if (countryNameFrom) {
+          _addresses.from.country = countryNameFrom;
+        }
         setAddresses(_addresses);
       },
       error => {
@@ -230,14 +241,23 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                           rootNavigation.navigate('AddressesMapView', {
                             addresses: addresses,
                             addressType: AddressType.From,
-                            onGoBack: _addresses => {
+                            onGoBack: async _addresses => {
+                              const countryNameFrom = await reverseGeocode(
+                                
+                                _addresses.from.latitude,
+                                _addresses.from.longitude,
+                              );
+
+                              if (countryNameFrom) {
+                                _addresses.from.country = countryNameFrom;
+                                _addresses.to.country = countryNameFrom;
+                              }
                               form.setValue('addresses', [
                                 _addresses.from,
                                 _addresses.to,
                               ]);
-
                               form.trigger('addresses');
-
+                             
                               setAddresses({ ..._addresses });
                             },
                           })
@@ -261,12 +281,23 @@ function UserRequest({ route }: Readonly<UserRequestProps>) {
                           rootNavigation.navigate('AddressesMapView', {
                             addresses: addresses,
                             addressType: AddressType.To,
-                            onGoBack: _addresses => {
+                            onGoBack: async _addresses => {
+                              const countryNameFrom = await reverseGeocode(
+                                _addresses.from.latitude,
+                                _addresses.from.longitude,
+                              );
+
+                              if (countryNameFrom) {
+                                _addresses.from.country = countryNameFrom;
+                                _addresses.to.country = countryNameFrom;
+                             
+                              }
+                              
                               form.setValue('addresses', [
                                 _addresses.from,
                                 _addresses.to,
                               ]);
-
+                              
                               form.trigger('addresses');
 
                               setAddresses({ ..._addresses });
