@@ -18,7 +18,7 @@ import { toastError } from '../../../../utilities/toast';
 import validations from '../../../../validations';
 import { FormField, TaskerType } from '../../../Shared/entities/shared.model';
 import InformationFields from '../../components/InformationFields/InformationFields';
-import { Schema } from '../../model/registration.model';
+import { Address, Schema } from '../../model/registration.model';
 import { patchInformation } from '../../service/profile.service';
 
 type UpdateInformationProps = NativeStackScreenProps<
@@ -66,7 +66,10 @@ function getScema(field: FormField): yup.ObjectSchema<Schema> {
       });
     case FormField.ADDRESS:
       return yup.object().shape({
-        address: yup.string().required(i18n.t('form.address.errors.required')),
+        address: yup.object().shape({
+          displayName: yup.string().required('Display name is required'),
+          country: yup.string().required('Country is required'),
+        }),
       });
     case FormField.TYPE:
       return yup.object().shape({
@@ -97,7 +100,7 @@ function UpdateInformation(prop: UpdateInformationProps) {
       .catch(e => {
         toastError(e.message);
       });
-  };
+  }; 
   const bottomSheetRef = useRef<any>(null);
   return (
     <CustomSafeAreaView>

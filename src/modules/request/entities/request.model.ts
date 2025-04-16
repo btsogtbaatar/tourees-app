@@ -56,6 +56,7 @@ export declare namespace TaskModel {
     address?: string;
     latitude: number;
     longitude: number;
+    country?: string;
   } & AddressDetail;
 
   export type AddressDetail = {

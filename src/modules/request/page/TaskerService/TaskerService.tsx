@@ -30,9 +30,7 @@ import {
 import ImageUploadButton from '../../../../components/ImageUploadButton/ImageUploadButton';
 import RemarkList from '../../../../components/RemarkList/RemarkList';
 import TextItem from '../../../../components/TextItem/TextItem';
-import {
-  TaskerServiceParamList
-} from '../../../../navigation/types';
+import { TaskerServiceParamList } from '../../../../navigation/types';
 import { colors } from '../../../../theme/colors';
 import { Typography } from '../../../../theme/typography';
 import { toastSuccess } from '../../../../utilities/toast';
@@ -48,6 +46,7 @@ import { createTaskerService, getTags } from '../../service/tasker.service';
 import CategorySelector from './CategorySelector';
 import SubCategorySelector from './SubCategorySelector';
 import { TaskerServiceStyle } from './TaskerService.style';
+import { reverseGeocode } from '../../../../utilities';
 
 type TaskerServiceProps = NativeStackScreenProps<
   TaskerServiceParamList,
@@ -93,10 +92,14 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
     console.log('Selected Time Range:', value);
   };
   useEffect(() => {
-    Geolocation.getCurrentPosition(position => {
+    Geolocation.getCurrentPosition(async position => {
       const _address = { ...address };
       _address.latitude = position.coords.latitude;
       _address.longitude = position.coords.longitude;
+      _address.country = await reverseGeocode(
+        _address.latitude,
+        _address.longitude,
+      );
       setAddress(_address);
     });
   }, []);
@@ -219,12 +222,9 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
       timeRange: selectedTimeRange,
     };
     createTaskerService(payload).then(() => {
-      toastSuccess(
-        t('service.success.message'),
-        () => {
-          rootNavigation.navigate('HomeTab', { screen: 'Home' });
-        },
-      );
+      toastSuccess(t('service.success.message'), () => {
+        rootNavigation.navigate('HomeTab', { screen: 'Home' });
+      });
     });
   };
 
@@ -241,7 +241,9 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
 
   const getAddress = (address: Address) => {
     const data = address.address!.split(', ');
-    return `${data[data.length - 2]}, ${data[data.length - 1]}`;
+    return `${data[data.length - 2]}, ${data[data.length - 1]},${
+      address.country
+    }`;
   };
 
   return (
@@ -352,9 +354,17 @@ function TaskerService({ route }: Readonly<TaskerServiceProps>) {
                                   detail: false,
                                   prevAddress: address,
                                   title: t('form.address.label'),
-                                  onGoBack: (address: any) => {
+                                  onGoBack: async (address: any) => {
                                     const _address = { ...address };
+
+                                    const countryName = await reverseGeocode(
+                                      _address.latitude,
+                                      _address.longitude,
+                                    );
+                                    _address.country = countryName;
                                     _address.displayName = getAddress(_address);
+                                    setAddress(_address);
+                                    onChange(_address);
                                     setAddress(_address);
                                     onChange(_address);
                                   },

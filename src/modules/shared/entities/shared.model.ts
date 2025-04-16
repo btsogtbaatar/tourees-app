@@ -79,6 +79,7 @@ export namespace SharedModel {
     shortFormattedAddress: string;
     formattedAddress?: string;
     displayName: DisplayName;
+    country:string
   };
 
   export type DisplayName = {
@@ -127,6 +128,7 @@ export namespace SharedModel {
   export type TaskerServiceFilter = {
     name?: string;
     subCategoryId?: number;
+    country?: string;
   };
 
   export type ToureesError = {

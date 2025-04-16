@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import Geolocation from '@react-native-community/geolocation';
+import { reverseGeocode } from '../../../../utilities';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import React, { useEffect, useRef, useState } from 'react';
@@ -111,7 +112,10 @@ function Register({ navigation }: RegisterProps) {
       .mixed<TaskerType>()
       .oneOf(Object.values(TaskerType))
       .required(t('form.taskerType.errors.required')),
-    address: yup.string().required(t('form.address.errors.required')),
+    address: yup.object().shape({
+      displayName: yup.string().required('Display name is required'),
+      country: yup.string().required('Country is required'),
+    }),
   });
 
   const form = useForm({
@@ -143,7 +147,9 @@ function Register({ navigation }: RegisterProps) {
 
   const getAddress = (address: Address) => {
     const data = address.formattedAddress!.split(', ');
-    return `${data[data.length - 3]}, ${data[data.length - 2]}`;
+    return `${data[data.length - 3]}, ${data[data.length - 2]},${
+      address.country
+    }`;
   };
   const bottomSheetRef = useRef<any>(null);
   if (loading) {
@@ -291,11 +297,16 @@ function Register({ navigation }: RegisterProps) {
                                 detail: false,
                                 prevAddress: address,
                                 title: t('form.address.label'),
-                                onGoBack: address => {
+                                onGoBack: async address => {
                                   const _address = { ...address };
+                                  const countryName = await reverseGeocode(
+                                    _address.latitude,
+                                    _address.longitude,
+                                  );
+                                  _address.country = countryName;
                                   _address.displayName = getAddress(_address);
                                   setAddress(_address);
-                                  onChange(_address.displayName);
+                                  onChange(_address);
                                 },
                               });
                             }}
