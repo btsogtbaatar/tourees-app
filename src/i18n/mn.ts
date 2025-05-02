@@ -32,6 +32,7 @@ export default {
   notSupportedPlatform: 'Платформыг дэмжих боломжгүй байна.',
   locationPermissionDenied: 'Та location service - ээ асаана уу.',
   tokenExpiredError: 'Хугацаа дууссан байна. Дахин нэвтрэнэ үү.',
+  km: 'км',
   signUp: {
     hello: 'Сайн байна уу?',
     welcome_seed: 'Та Сийд платформд тавтай морил.',
@@ -70,6 +71,8 @@ export default {
     profile: {
       label: 'Зураг',
       placeHolder: 'Зураг',
+      uploadPhoto: 'Зураг оруулах',
+      takePhoto: 'Зураг авах',
       errors: { required: 'Зураг оруулна уу', validation: 'Зураг оруулна уу' },
     },
   },

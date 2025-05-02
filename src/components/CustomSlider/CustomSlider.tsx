@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { View, Text, PanResponder, Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { Dimensions, PanResponder, Text, View } from 'react-native';
 import CustomSliderStyles from './CustomSlider.style';
 
 const { width } = Dimensions.get('window');
@@ -10,7 +10,7 @@ const CustomSlider = ({
   maxDistance,
   initialDistance,
   step,
-  onChange
+  onChange,
 }) => {
   const { t } = useTranslation();
   const [distance, setDistance] = useState(initialDistance);
@@ -25,10 +25,15 @@ const CustomSlider = ({
       },
       onPanResponderMove: (evt, gestureState) => {
         const moveXPosition = gestureState.moveX - thumbWidth / 2;
-        const boundedMoveX = Math.max(0, Math.min(moveXPosition, sliderWidth - thumbWidth));
+        const boundedMoveX = Math.max(
+          0,
+          Math.min(moveXPosition, sliderWidth - thumbWidth),
+        );
 
         const rawDistance = Math.round(
-          (boundedMoveX / (sliderWidth - thumbWidth)) * (maxDistance - minDistance) + minDistance
+          (boundedMoveX / (sliderWidth - thumbWidth)) *
+            (maxDistance - minDistance) +
+            minDistance,
         );
 
         const newDistance = Math.round(rawDistance / step) * step;
@@ -46,7 +51,10 @@ const CustomSlider = ({
   return (
     <View style={CustomSliderStyles.container}>
       <Text style={CustomSliderStyles.label}>
-        {t('service.distance')}: {distance >= displayThreshold ? '100+' : `${distance} км`}
+        {t('service.distance')}:{' '}
+        {distance >= displayThreshold
+          ? '100+'
+          : `${distance} ${t('km')}`}
       </Text>
       <View style={CustomSliderStyles.sliderContainer}>
         <View style={[CustomSliderStyles.sliderTrack, { width: sliderWidth }]}>
