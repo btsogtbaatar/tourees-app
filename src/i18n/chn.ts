@@ -152,11 +152,13 @@ export default {
     apartmentLabel: '公寓號碼',
     apartmentPlaceholder: '例如：公寓 2',
     floorLabel: '樓層',
+  },
+  request: {
+    requestNewMessage:
       '您的請求已成功登記，我們將盡快為您匹配合適的服務提供者。若您希望取消，請立即聯繫客服！',
     logoTitle: '聊天',
     operatorCall: '聯繫客服',
-    requestOperatorMessage:
-      '已經指派您的請求。 Bold將會盡快聯繫您，請稍待。',
+    requestOperatorMessage: '已經指派您的請求。 Bold將會盡快聯繫您，請稍待。',
     requestDone: '完成',
     requestDetailMsg: '請求的詳細資訊',
     requestDetail: '詳細描述',
@@ -210,8 +212,7 @@ export default {
     mismatch: 'PIN 碼不符合。',
   },
   userRequest: {
-    enterBudget:
-      '請在下方欄位輸入您正在建立的請求價格。',
+    enterBudget: '請在下方欄位輸入您正在建立的請求價格。',
     success: {
       title: '謝謝您',
       message: '您的請求已經成功創建',
