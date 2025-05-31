@@ -5,7 +5,7 @@ export default {
   l_username: '您的姓名',
   b_email: '電子郵件',
   b_phonenumber: '電話',
-  l_emaillabel: '您的電子郵件',
+  l_emaillabel: '您的電子郵件地址',
   l_usernamelabel: '使用者名稱',
   l_usernametitle: '您將能使用此名稱登入。',
   i_email: '電子郵件',
@@ -19,13 +19,13 @@ export default {
   m_email: '請正確輸入您的電子郵件。',
   m_phone: '請輸入您的電話號碼。',
   t_home: '首頁',
-  myTask: '我的任務',
+  myTask: '請求',
   l_register_infomation: '註冊資訊',
   l_history: '歷史紀錄',
   l_ebarimt: '電子收據',
   l_help: '幫助',
   l_logout: '登出',
-  l_dismissLabel: '確定',
+  l_dismissLabel: '收到',
   l_submitLabel: '確定',
   l_date: '請輸入日期和時間。',
   signUp: {
@@ -85,7 +85,7 @@ export default {
     workingType: {
       name: '工作類型',
       ONLINE: '線上',
-      PHYSICALLY: '親自',
+      PHYSICALLY: '面對面',
     },
     tagLine: '標語',
     description: '描述',
@@ -107,6 +107,16 @@ export default {
       message: '圖片更換成功。',
     },
     l_setup_profile: '編輯個人資料',
+    remark: '描述',
+    remarkDuplicatedError: '已重複輸入資料。',
+    validation: {
+      tagLine: {
+        required: '請輸入標語',
+      },
+      description: {
+        required: '請輸入描述',
+      },
+    },
   },
   tab: {
     tabHome: '首頁',
@@ -115,6 +125,8 @@ export default {
     tabProfile: '設置',
   },
   home: {
+    login: '登入',
+    signUp: '註冊',
     category: {
       question: '建立服務請求',
       title: '可用的服務類別',
@@ -139,7 +151,7 @@ export default {
   addressMapView: {
     autoComplete: {
       placeholder: '請輸入您想要搜尋的地址。',
-      loading: '加載中...',
+      loading: '加載中......',
       notFound: '未找到地址。',
     },
     continue: '繼續',
@@ -152,19 +164,23 @@ export default {
     apartmentLabel: '公寓號碼',
     apartmentPlaceholder: '例如：公寓 2',
     floorLabel: '樓層',
+    unitLabel: '室',
+    unitPlaceholder: '例如: 106',
+    floorPlaceholder: '例如: 3',
   },
   request: {
     requestNewMessage:
-      '您的請求已成功登記，我們將盡快為您匹配合適的服務提供者。若您希望取消，請立即聯繫客服！',
-    logoTitle: '聊天',
+      '您的請求已經成功註冊，我們將會盡快為您與合適的服務提供者配對。如果您希望取消，請盡速聯繫客服。',
+    logoTitle: 'Seed機器人',
     operatorCall: '聯繫客服',
-    requestOperatorMessage: '已經指派您的請求。 Bold將會盡快聯繫您，請稍待。',
+    requestOperatorMessage:
+      '已經指派您的請求。 Bold將會盡快聯繫您，請稍待。',
     requestDone: '完成',
     requestDetailMsg: '請求的詳細資訊',
     requestDetail: '詳細描述',
     requestName: '名稱',
     requestNamePlaceholder: '例如：市內搬家',
-    requestDetailWarning: '請提供詳細描述！',
+    requestDetailWarning: '請提供詳細描述。',
     requestAddress: '地址',
     requestAddressMsg: '請輸入您的地址。',
     requestImages: '上傳圖片',
@@ -204,7 +220,7 @@ export default {
     notSavedError: '未保存生物識別資訊。',
   },
   pin: {
-    createPin: '請輸入 4 位數的 PIN 碼，以便將來登入。',
+    createPin: '請輸入 4 位數的 PIN 碼，以供日後登入使用。',
     enterPin: '請輸入您的 PIN 碼。',
     errorSaving: '保存 PIN 碼時發生錯誤。',
     continue: '繼續',
@@ -212,22 +228,23 @@ export default {
     mismatch: 'PIN 碼不符合。',
   },
   userRequest: {
-    enterBudget: '請在下方欄位輸入您正在建立的請求價格。',
+    enterBudget:
+      '請在下方欄位輸入您正在此次請求的價格。',
     success: {
       title: '謝謝您',
-      message: '您的請求已經成功創建',
+      message: '您的請求已經成功建立。',
     },
     address: {
       label: '地址資訊',
-      from: 'Pickup Location',
-      to: 'Drop-off Location',
+      from: '取貨地點',
+      to: '送達地點',
       edit: '編輯',
       floor: '樓層',
       unit: '室',
     },
     messages: {
       name: {
-        required: '請輸入服務名稱',
+        required: '請輸入服務名稱。',
       },
       description: {
         required: '請輸入描述。',
@@ -250,7 +267,7 @@ export default {
       label: '電子郵件地址',
       placeholder: 'example@email.com',
       errors: {
-        required: '請輸入您的電子郵件地址',
+        required: '請輸入您的電子郵件地址。',
         validation: '請輸入有效的電子郵件地址',
       },
     },
@@ -260,14 +277,14 @@ export default {
       label: '電話號碼',
       placeholder: '88888888',
       errors: {
-        required: '請輸入您的電話號碼',
+        required: '請輸入您的電話號碼。',
         validation: '請輸入有效的電話號碼',
       },
     },
     socialError: {
       title: '錯誤',
       waitPrevious: '請等待您的上一個請求完成。',
-      playServiceUnvailable: '請下載Please download Play service.',
+      playServiceUnvailable: '請下載Play服務。',
     },
     check: {
       label: '檢查',
@@ -302,7 +319,7 @@ export default {
     biometric: '生物識別',
     createPin: '建立Pin碼',
     retypePin: '重新輸入Pin碼',
-    taskBudget: '請求預算',
+    taskBudget: '請求的預算',
     createOffer: '建立報價',
     registrationInformation: '註冊資訊',
     updateInformation: '更新資訊',
@@ -323,7 +340,7 @@ export default {
     price: '服務價格',
     timeRange: '可用服務',
     online: '線上',
-    inPerson: '親自',
+    inPerson: '面對面',
     distance: '服務範圍',
     autoMsg: '自動訊息',
     success: {
@@ -337,8 +354,8 @@ export default {
       searchCategory: '搜尋',
     },
     errors: {
-      priceEmpty: '請輸入服務價格！',
-      priceValid: '請輸入有效的金額！',
+      priceEmpty: '請輸入服務價格。',
+      priceValid: '請輸入有效的金額。',
     },
     validation: {
       required: '此欄位為必填',
@@ -357,7 +374,7 @@ export default {
       customError: '無效值',
     },
     status: {
-      new: '新！',
+      new: '新!',
     },
     sort: {
       name: '排序方式',
